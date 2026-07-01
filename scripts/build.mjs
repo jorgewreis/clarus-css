@@ -16,14 +16,14 @@ const cssOutDir = path.join(distDir, "css");
 const jsOutDir = path.join(distDir, "js");
 
 const cssEntries = [
-  { entry: "layout-entry.scss", outName: "layout" },
-  { entry: "forms-entry.scss", outName: "forms" },
-  { entry: "components-entry.scss", outName: "components" },
-  { entry: "utilities-entry.scss", outName: "helpers" },
+  { entryPath: path.join(entriesDir, "layout-entry.scss"), outName: "layout" },
+  { entryPath: path.join(entriesDir, "forms-entry.scss"), outName: "forms" },
+  { entryPath: path.join(entriesDir, "components-entry.scss"), outName: "components" },
+  { entryPath: path.join(entriesDir, "utilities-entry.scss"), outName: "helpers" },
+  { entryPath: path.join(scssDir, "clarus.scss"), outName: "clarus" },
 ];
 
-async function buildCss({ entry, outName }) {
-  const entryPath = path.join(entriesDir, entry);
+async function buildCss({ entryPath, outName }) {
   const compiled = sass.compile(entryPath, {
     loadPaths: [scssDir],
     sourceMap: true,

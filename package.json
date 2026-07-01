@@ -25,8 +25,9 @@
     "*.css",
     "dist/**/*.css"
   ],
-  "style": "dist/css/layout.css",
+  "style": "dist/css/clarus.css",
   "exports": {
+    ".": "./dist/css/clarus.css",
     "./scss": "./scss/clarus.scss",
     "./scss/*": "./scss/*",
     "./layout.css": "./dist/css/layout.css",

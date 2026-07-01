@@ -157,6 +157,10 @@ forma isolada (com variáveis, reset e dark mode funcionando). Esses arquivos
 são exclusivos do processo de build e não substituem `scss/clarus.scss` como
 entrada pública para quem deseja o bundle completo.
 
+`scss/clarus.scss` também é compilado diretamente para `dist/css/clarus.css`
+(+ `.min.css`), como opção de import único para quem não precisa da distribuição
+granular. É esse bundle que o campo `style` do `package.json` aponta por padrão.
+
 Os nomes em `scss/entries/` usam o sufixo `-entry` (ex: `layout-entry.scss`)
 para evitar colisão com os módulos de mesmo nome (`@use "layout"` dentro de
 `scss/layout.scss` causaria um loop de importação).
