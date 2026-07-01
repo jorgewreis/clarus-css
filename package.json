@@ -1,0 +1,49 @@
+{
+  "name": "clarus-css",
+  "version": "0.1.0",
+  "description": "A modern, minimal CSS framework for building interfaces with HTML, CSS, and vanilla JavaScript.",
+  "keywords": [
+    "css",
+    "framework",
+    "ui",
+    "frontend",
+    "html",
+    "vanilla-js",
+    "bootstrap"
+  ],
+  "homepage": "https://github.com/jorgewreis/clarus-css#readme",
+  "bugs": {
+    "url": "https://github.com/jorgewreis/clarus-css/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgewreis/clarus-css.git"
+  },
+  "license": "MIT",
+  "author": "Jorge Reis",
+  "sideEffects": [
+    "*.css",
+    "assets/**/*.css"
+  ],
+  "style": "assets/css/layout.css",
+  "exports": {
+    "./layout.css": "./assets/css/layout.css",
+    "./forms.css": "./assets/css/forms.css",
+    "./components.css": "./assets/css/components.css",
+    "./helpers.css": "./assets/css/helpers.css"
+  },
+  "files": [
+    "assets/css",
+    "docs",
+    "mockup",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"No tests configured yet\"",
+    "prepublishOnly": "npm test"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
