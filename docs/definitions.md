@@ -217,7 +217,6 @@ Apesar das decisões principais estarem firmadas, ainda precisam ser definidos e
 - Paleta de cores oficial.
 - Família tipográfica final.
 - Convenção exata de nomes de classes.
-- Estrutura definitiva dos arquivos SCSS.
 - API JavaScript dos componentes interativos.
 - Ordem de implementação dos componentes.
 - Estratégia de testes visuais e funcionais.
@@ -226,9 +225,7 @@ Apesar das decisões principais estarem firmadas, ainda precisam ser definidos e
 
 O próximo marco do projeto é transformar estas definições em uma estrutura técnica inicial:
 
-1. Criar ou ajustar `package.json`.
-2. Definir a arquitetura SCSS.
-3. Criar pipeline de build.
-4. Organizar `dist`.
-5. Documentar instalação e uso inicial no `README.md`.
-6. Implementar layout, grid, utilitários e formulários como base da versão inicial.
+1. Criar pipeline de build.
+2. Organizar `dist`.
+3. Documentar instalação e uso inicial no `README.md`.
+4. Implementar layout, grid, utilitários e formulários como base da versão inicial.

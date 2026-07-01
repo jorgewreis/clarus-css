@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "selector-class-pattern": null,
+    "scss/at-use-no-unnamespaced": null,
+    "import-notation": "url",
+    "color-hex-length": "long",
+    "declaration-block-no-redundant-longhand-properties": null,
+    "scss/dollar-variable-empty-line-before": null,
+    "scss/at-if-no-null": null
+  }
+}

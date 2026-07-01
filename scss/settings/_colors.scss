@@ -1,0 +1,23 @@
+$color-white: #ffffff !default;
+$color-black: #000000 !default;
+
+$color-primary: #1a73e8 !default;
+$color-success: #1fca7a !default;
+$color-warning: #f9ab00 !default;
+$color-danger: #d93025 !default;
+$color-info: #1a73e8 !default;
+
+$color-gray-100: #f8f9fa !default;
+$color-gray-200: #e9ecef !default;
+$color-gray-300: #ced4da !default;
+$color-gray-500: #bbbbbb !default;
+$color-gray-600: #777777 !default;
+$color-gray-900: #202124 !default;
+
+$theme-colors: (
+  primary: $color-primary,
+  success: $color-success,
+  warning: $color-warning,
+  danger: $color-danger,
+  info: $color-info
+) !default;

@@ -1,0 +1,9 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+}
+
+.modal.show {
+  display: flex;
+}

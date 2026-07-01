@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "../settings" as *;
+
+@mixin media-breakpoint-up($name) {
+  $min: map.get($breakpoints, $name);
+
+  @if $min == null {
+    @error "Unknown breakpoint `#{$name}`.";
+  }
+
+  @if $min == 0 {
+    @content;
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+}
+
+@mixin focus-ring($color: var(--clarus-color-primary)) {
+  outline: none;
+  border-color: $color;
+  box-shadow: 0 0 5px 2px color-mix(in srgb, #{$color} 20%, transparent);
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

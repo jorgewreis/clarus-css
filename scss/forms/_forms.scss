@@ -1,0 +1,99 @@
+@use "../settings" as *;
+@use "../tools" as *;
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 10px;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.form-label {
+  width: 120px;
+  margin-left: 8px;
+  margin-bottom: 2px;
+  color: var(--clarus-color-muted);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-regular;
+
+  @include truncate;
+}
+
+.form-text {
+  width: 120px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: var(--clarus-radius-sm);
+  color: $color-gray-500;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+
+  @include truncate;
+}
+
+.form-control {
+  height: 38px;
+  padding: 0 7px;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+}
+
+.form-control::placeholder {
+  color: $color-gray-500;
+}
+
+.form-control:focus {
+  @include focus-ring;
+}
+
+.form-control:disabled {
+  color: $color-gray-500;
+  background-color: $color-gray-200;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.form-control-sm {
+  height: 30px;
+  font-size: $font-size-xs;
+}
+
+.form-control-lg {
+  height: 46px;
+  font-size: $font-size-md;
+}
+
+.form-size-sm {
+  width: 120px;
+}
+
+.form-size-md {
+  width: 180px;
+}
+
+.form-size-lg {
+  width: 240px;
+}
+
+.form-size-xl {
+  width: 300px;
+}
+
+.form-size-xxl {
+  width: 360px;
+}

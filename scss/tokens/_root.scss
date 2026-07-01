@@ -1,0 +1,22 @@
+@use "../settings" as *;
+
+:root {
+  --clarus-color-white: #{$color-white};
+  --clarus-color-black: #{$color-black};
+  --clarus-color-primary: #{$color-primary};
+  --clarus-color-success: #{$color-success};
+  --clarus-color-warning: #{$color-warning};
+  --clarus-color-danger: #{$color-danger};
+  --clarus-color-info: #{$color-info};
+  --clarus-color-text: #{$color-gray-900};
+  --clarus-color-muted: #{$color-gray-600};
+  --clarus-color-border: #{$color-gray-300};
+  --clarus-color-surface: #{$color-white};
+  --clarus-color-subtle: #{$color-gray-100};
+  --clarus-font-sans: #{$font-family-sans};
+  --clarus-font-mono: #{$font-family-mono};
+  --clarus-line-height-base: #{$line-height-base};
+  --clarus-radius-sm: #{$radius-sm};
+  --clarus-radius-md: #{$radius-md};
+  --clarus-radius-lg: #{$radius-lg};
+}

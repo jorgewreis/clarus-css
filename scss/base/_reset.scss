@@ -1,0 +1,16 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: var(--clarus-line-height-base);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+}

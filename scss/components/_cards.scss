@@ -1,0 +1,7 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-lg);
+  background-color: var(--clarus-color-surface);
+}

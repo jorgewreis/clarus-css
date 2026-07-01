@@ -23,27 +23,51 @@
   "author": "Jorge Reis",
   "sideEffects": [
     "*.css",
-    "assets/**/*.css"
+    "dist/**/*.css"
   ],
-  "style": "assets/css/layout.css",
+  "style": "dist/css/layout.css",
   "exports": {
-    "./layout.css": "./assets/css/layout.css",
-    "./forms.css": "./assets/css/forms.css",
-    "./components.css": "./assets/css/components.css",
-    "./helpers.css": "./assets/css/helpers.css"
+    "./scss": "./scss/clarus.scss",
+    "./scss/*": "./scss/*",
+    "./layout.css": "./dist/css/layout.css",
+    "./forms.css": "./dist/css/forms.css",
+    "./components.css": "./dist/css/components.css",
+    "./helpers.css": "./dist/css/helpers.css",
+    "./js": "./dist/js/clarus.js"
   },
   "files": [
-    "assets/css",
+    "dist",
+    "scss",
+    "js",
     "docs",
     "mockup",
     "LICENSE",
     "README.md"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && node scripts/build.mjs",
+    "watch": "node scripts/watch.mjs",
+    "lint:scss": "stylelint \"scss/**/*.scss\"",
+    "lint": "npm run lint:scss",
     "test": "echo \"No tests configured yet\"",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm run build && npm test"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.2",
+    "chokidar": "^5.0.0",
+    "cssnano": "^8.0.2",
+    "esbuild": "^0.28.1",
+    "postcss": "^8.5.16",
+    "rimraf": "^6.1.3",
+    "sass": "^1.101.0",
+    "stylelint": "^17.14.0",
+    "stylelint-config-standard-scss": "^17.0.0"
   }
 }

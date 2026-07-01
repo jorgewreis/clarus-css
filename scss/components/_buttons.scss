@@ -1,0 +1,12 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-white);
+  background-color: var(--clarus-color-primary);
+  cursor: pointer;
+}

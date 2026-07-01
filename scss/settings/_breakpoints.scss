@@ -1,0 +1,24 @@
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+$column-max-widths: (
+  sm: 120px,
+  md: 240px,
+  lg: 360px,
+  xl: 480px,
+  xxl: 560px
+) !default;

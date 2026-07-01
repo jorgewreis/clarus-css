@@ -1,0 +1,91 @@
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import fs from "node:fs/promises";
+import * as sass from "sass";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import * as esbuild from "esbuild";
+
+const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const scssDir = path.join(rootDir, "scss");
+const entriesDir = path.join(scssDir, "entries");
+const jsDir = path.join(rootDir, "js");
+const distDir = path.join(rootDir, "dist");
+const cssOutDir = path.join(distDir, "css");
+const jsOutDir = path.join(distDir, "js");
+
+const cssEntries = [
+  { entry: "layout-entry.scss", outName: "layout" },
+  { entry: "forms-entry.scss", outName: "forms" },
+  { entry: "components-entry.scss", outName: "components" },
+  { entry: "utilities-entry.scss", outName: "helpers" },
+];
+
+async function buildCss({ entry, outName }) {
+  const entryPath = path.join(entriesDir, entry);
+  const compiled = sass.compile(entryPath, {
+    loadPaths: [scssDir],
+    sourceMap: true,
+    sourceMapIncludeSources: true,
+    style: "expanded",
+  });
+
+  const expanded = await postcss([autoprefixer]).process(compiled.css, {
+    from: entryPath,
+    to: path.join(cssOutDir, `${outName}.css`),
+    map: { prev: compiled.sourceMap, inline: false },
+  });
+
+  await fs.writeFile(path.join(cssOutDir, `${outName}.css`), `${expanded.css}\n/*# sourceMappingURL=${outName}.css.map */\n`);
+  await fs.writeFile(path.join(cssOutDir, `${outName}.css.map`), JSON.stringify(expanded.map));
+
+  const minified = await postcss([autoprefixer, cssnano]).process(compiled.css, {
+    from: entryPath,
+    to: path.join(cssOutDir, `${outName}.min.css`),
+    map: { prev: compiled.sourceMap, inline: false },
+  });
+
+  await fs.writeFile(path.join(cssOutDir, `${outName}.min.css`), `${minified.css}\n/*# sourceMappingURL=${outName}.min.css.map */\n`);
+  await fs.writeFile(path.join(cssOutDir, `${outName}.min.css.map`), JSON.stringify(minified.map));
+}
+
+async function buildJs() {
+  const entryPath = path.join(jsDir, "clarus.js");
+
+  await esbuild.build({
+    entryPoints: [entryPath],
+    outfile: path.join(jsOutDir, "clarus.js"),
+    bundle: true,
+    format: "iife",
+    globalName: "Clarus",
+    sourcemap: true,
+    target: ["es2018"],
+  });
+
+  await esbuild.build({
+    entryPoints: [entryPath],
+    outfile: path.join(jsOutDir, "clarus.min.js"),
+    bundle: true,
+    format: "iife",
+    globalName: "Clarus",
+    sourcemap: true,
+    minify: true,
+    target: ["es2018"],
+  });
+}
+
+async function run() {
+  await fs.mkdir(cssOutDir, { recursive: true });
+  await fs.mkdir(jsOutDir, { recursive: true });
+
+  await Promise.all(cssEntries.map(buildCss));
+  await buildJs();
+
+  console.log("Build concluído em dist/");
+}
+
+run().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
