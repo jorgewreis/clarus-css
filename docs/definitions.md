@@ -225,5 +225,4 @@ Apesar das decisões principais estarem firmadas, ainda precisam ser definidos e
 
 O próximo marco do projeto é transformar estas definições em uma estrutura técnica inicial:
 
-1. Documentar instalação e uso inicial no `README.md`.
-2. Implementar layout, grid, utilitários e formulários como base da versão inicial.
+1. Implementar layout, grid, utilitários e formulários como base da versão inicial.
