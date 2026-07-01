@@ -1,25 +1,24 @@
+@use "sass:math";
 @use "../settings" as *;
 @use "../tools" as *;
 
-.row,
-.row-fluid {
+$grid-columns: 12;
+
+.row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  margin-top: calc(var(--clarus-gutter-y) * -1);
+  margin-right: calc(var(--clarus-gutter-x) / -2);
+  margin-left: calc(var(--clarus-gutter-x) / -2);
+}
+
+.row > * {
+  margin-top: var(--clarus-gutter-y);
+  padding-right: calc(var(--clarus-gutter-x) / 2);
+  padding-left: calc(var(--clarus-gutter-x) / 2);
 }
 
 .row-fluid {
-  width: 100%;
-}
-
-.col,
-.col-sm,
-.col-md,
-.col-lg,
-.col-xl,
-.col-xxl {
-  display: flex;
-  flex-direction: column;
   width: 100%;
 }
 
@@ -27,10 +26,24 @@
   width: 100%;
 }
 
-@each $breakpoint, $width in $column-max-widths {
+@each $breakpoint, $min in $breakpoints {
+  $infix: breakpoint-infix($breakpoint);
+
   @include media-breakpoint-up($breakpoint) {
-    .col-#{$breakpoint} {
-      max-width: $width;
+    .col#{$infix} {
+      flex: 1 0 0%;
+    }
+
+    .col#{$infix}-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    @for $i from 1 through $grid-columns {
+      .col#{$infix}-#{$i} {
+        flex: 0 0 auto;
+        width: math.percentage(math.div($i, $grid-columns));
+      }
     }
   }
 }

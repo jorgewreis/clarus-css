@@ -11,19 +11,31 @@
 </head>
 <body>
 
-    <div class="container-fluid p-2 gy-2">
-        <div class="row-fluid gx-2">
+    <div class="container p-2">
+        <!-- Grid numerada de 12 colunas, com gutter via .g-3 -->
+        <div class="row g-3">
+            <div class="col-md-8 p-2">col-md-8</div>
+            <div class="col-md-4 p-2">col-md-4</div>
+        </div>
+        <div class="row g-3 mt-3">
+            <div class="col-4 p-2">col-4</div>
+            <div class="col-4 p-2">col-4</div>
+            <div class="col-4 p-2">col-4</div>
+        </div>
+
+        <!-- Colunas de largura igual automática -->
+        <div class="row gx-2 mt-3">
             <div class="col-sm p-2">col 1</div>
             <div class="col-md p-2">col 2</div>
             <div class="col p-2">col 3</div>
         </div>
-        <div class="row row-fluid justify-content-start">
+        <div class="row row-fluid justify-content-start mt-3">
             <div class="col col-fluid p-2">col 1</div>
         </div>
     </div>
 
     <div class="container-fluid p-2">
-        <div class="form-row mt-3 gx-2">
+        <div class="form-row mt-3 gap-x-2">
             <div class="form-col">
                 <label for="input-text" class="form-label form-size-md">Nome completo</label>
                 <input type="text" class="form-control form-size-xxl" id="input-text" placeholder="Enter text" value="Jorge Reis">
@@ -31,7 +43,6 @@
             </div>
         </div>
     </div>
-    
 
 </body>
 </html>

@@ -1,43 +1,52 @@
-.align-items-start {
-  align-items: flex-start;
-}
+@use "../settings" as *;
+@use "../tools" as *;
 
-.align-items-center {
-  align-items: center;
-}
+@each $breakpoint, $min in $breakpoints {
+  $infix: breakpoint-infix($breakpoint);
 
-.align-items-end {
-  align-items: flex-end;
-}
+  @include media-breakpoint-up($breakpoint) {
+    .align-items#{$infix}-start {
+      align-items: flex-start;
+    }
 
-.justify-content-start {
-  justify-content: flex-start;
-}
+    .align-items#{$infix}-center {
+      align-items: center;
+    }
 
-.justify-content-center {
-  justify-content: center;
-}
+    .align-items#{$infix}-end {
+      align-items: flex-end;
+    }
 
-.justify-content-end {
-  justify-content: flex-end;
-}
+    .justify-content#{$infix}-start {
+      justify-content: flex-start;
+    }
 
-.justify-content-around {
-  justify-content: space-around;
-}
+    .justify-content#{$infix}-center {
+      justify-content: center;
+    }
 
-.justify-content-between {
-  justify-content: space-between;
-}
+    .justify-content#{$infix}-end {
+      justify-content: flex-end;
+    }
 
-.align-self-start {
-  align-self: flex-start;
-}
+    .justify-content#{$infix}-around {
+      justify-content: space-around;
+    }
 
-.align-self-center {
-  align-self: center;
-}
+    .justify-content#{$infix}-between {
+      justify-content: space-between;
+    }
 
-.align-self-end {
-  align-self: flex-end;
+    .align-self#{$infix}-start {
+      align-self: flex-start;
+    }
+
+    .align-self#{$infix}-center {
+      align-self: center;
+    }
+
+    .align-self#{$infix}-end {
+      align-self: flex-end;
+    }
+  }
 }

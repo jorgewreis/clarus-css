@@ -88,7 +88,7 @@ O escopo inicial inclui:
 - Layout e containers.
 - Grid baseado em Flexbox.
 - Utilitários de espaçamento, display, alinhamento, visibilidade e tipografia.
-- Formulários e campos de entrada.
+- Formulários e campos de entrada (incluindo validação visual, select customizado e upload de arquivo estilizado).
 - Botões.
 - Cards.
 - Alertas.
@@ -209,6 +209,10 @@ As seguintes decisões estão definidas:
 - Distribuição: npm desde o início.
 - Licença: MIT.
 - Tom do projeto: técnico, estratégico e com posicionamento de produto.
+- Convenção de nomenclatura de classes: definida na seção 19.
+- API JavaScript dos componentes interativos: definida na seção 20.
+- Ordem de implementação dos componentes: definida na seção 21.
+- Estratégia de testes visuais e funcionais: definida na seção 22.
 
 ## 18. Pontos a Definir Posteriormente
 
@@ -216,12 +220,111 @@ Apesar das decisões principais estarem firmadas, ainda precisam ser definidos e
 
 - Paleta de cores oficial.
 - Família tipográfica final.
-- Convenção exata de nomes de classes.
-- API JavaScript dos componentes interativos.
-- Ordem de implementação dos componentes.
-- Estratégia de testes visuais e funcionais.
 
-## 19. Próximo Marco
+## 19. Convenção de Nomenclatura de Classes
+
+- Sem prefixo global: as classes seguem o padrão Bootstrap já em uso (`.btn`,
+  `.card`, `.container`), sem prefixo `clarus-`.
+- Variantes de cor/estilo por sufixo direto: `.btn-primary`, `.alert-danger`,
+  `.badge-success`, seguindo os nomes já usados em `$theme-colors`
+  (`scss/settings/_colors.scss`).
+- Tamanhos por sufixo `-sm`/`-lg` consistente em todos os componentes que
+  tiverem variação de tamanho (botões, badges, cards, inputs), generalizando
+  o padrão já usado em `.form-control-sm`/`.form-control-lg`.
+- Estados controlados por JavaScript usam classes `is-*` (`.is-open`,
+  `.is-active`, `.is-expanded`), nunca atributos `data-state` customizados.
+- Utilitários mantêm abreviações curtas estilo Bootstrap (`.d-flex`, `.mt-3`,
+  `.gx-2`, `.p-2`), como já implementado em `scss/utilities/`.
+- Responsividade em utilitários e grid segue sempre o formato fixo
+  `{propriedade}-{breakpoint}-{valor}` (ex.: `.col-md-6`, `.d-md-none`,
+  `.mt-lg-3`).
+
+## 20. API JavaScript dos Componentes Interativos
+
+- Inicialização sempre automática via atributo HTML (ex.:
+  `data-clarus="modal" data-target="#meuModal"`), sem exigir `new` manual
+  para o uso básico — alinhado com "uso direto em HTML sem build" (seção 7).
+- Toda instância criada automaticamente continua acessível para controle
+  programático via método estático de recuperação (ex.:
+  `Clarus.Modal.getInstance(el)`), permitindo chamar seus métodos sem
+  precisar instanciar manualmente.
+- Namespace global único: `window.Clarus`, com cada componente como
+  propriedade (`Clarus.Modal`, `Clarus.Tooltip`, `Clarus.Dropdown`, etc.),
+  em vez de globais separados.
+- API de instância padronizada para todo componente interativo: `.show()`,
+  `.hide()`, `.toggle()`, `.dispose()`.
+- Comunicação com a aplicação via eventos DOM customizados (ex.:
+  `clarus:modal:shown`, `clarus:tab:changed`), disparados com
+  `CustomEvent` nativo — sem exigir callbacks de construtor.
+- Acessibilidade (ARIA, foco, teclado) é requisito obrigatório da API desde
+  a v0.1 para todo componente interativo, não um extra a ser adicionado
+  depois.
+- Além do bundle único (`dist/js/clarus.js`), haverá import granular por
+  componente (ex.: `import { Modal } from "clarus-css/js/modal"`), para uso
+  com bundlers.
+
+## 21. Ordem de Implementação dos Componentes
+
+Critério de priorização: dependência técnica primeiro (o que outros
+componentes reaproveitam é implementado antes), respeitando que todo
+componente 100% CSS (sem JavaScript) seja concluído antes de iniciar os que
+exigem JavaScript.
+
+**Fase A — Componentes CSS-only, por dependência técnica:**
+
+1. Botões — reaproveitados por cards, alertas, modal e navbar.
+2. Badges — pequeno e reaproveitado por cards, navbar e tabelas.
+3. Alertas — formaliza o padrão de variante de cor de estado
+   (success/warning/danger/info) que badges e tabelas também usam.
+4. Cards — combina botões, badges e tipografia base num contêiner.
+5. Tabelas — reaproveita as cores de estado definidas em alertas/badges.
+6. Navbar (versão estática, sem dropdown/collapse) — reaproveita botões e
+   badges.
+7. Paginação — reaproveita o padrão de item ativo/desabilitado dos botões.
+8. Breadcrumbs — mais simples, sem dependência de outros componentes.
+9. Formulários avançados, parte CSS-only: estados de validação
+   (`.is-valid`/`.is-invalid`, reaproveitando as cores de estado de
+   alertas/badges) e upload de arquivo estilizado (label + input nativo
+   oculto).
+
+**Fase B — Infraestrutura JS compartilhada (antes de qualquer componente
+interativo):**
+
+1. Posicionamento/overlay — usado por dropdown, tooltip e modal.
+2. Foco e teclado (focus trap + tecla Escape) — usado por modal e
+   dropdown.
+3. Transição/collapse — usado por accordion, tabs e toast.
+
+**Fase C — Componentes com JS, por dependência técnica:**
+
+1. Dropdown — consumidor mais simples da infraestrutura de posicionamento.
+2. Tooltip — reaproveita a mesma infraestrutura de posicionamento do
+   dropdown, com show/hide por hover/focus.
+3. Modal — reaproveita posicionamento e foco/teclado; mais complexo que
+   dropdown/tooltip.
+4. Select customizado (formulários avançados) — é um dropdown aplicado a
+   um campo de formulário; depende do dropdown já existir.
+5. Accordion — reaproveita a infraestrutura de transição/collapse.
+6. Tabs — reaproveita o mesmo padrão de alternância de painel do
+   accordion.
+7. Toast — reaproveita a infraestrutura de transição/collapse e adiciona
+   timers de auto-dismiss.
+
+## 22. Estratégia de Testes Visuais e Funcionais
+
+- Teste visual (regressão de CSS): Playwright com comparação de
+  screenshots, rodando local e no CI já existente — sem dependência de
+  serviço externo pago.
+- Teste funcional de JavaScript: Vitest com `jsdom`, cobrindo estado,
+  atributos ARIA e eventos disparados por cada componente interativo.
+- Os arquivos em `mockup/*.html` são as fixtures oficiais dos testes
+  visuais — cada componente/grupo implementado ganha (ou já usa) um mockup
+  dedicado, mantido atualizado.
+- Testes (visuais e funcionais) rodam automaticamente no GitHub Actions a
+  cada push/PR, como um novo step em `.github/workflows/ci.yml`, além do
+  lint e build já existentes.
+
+## 23. Próximo Marco
 
 O próximo marco do projeto é transformar estas definições em uma estrutura técnica inicial:
 

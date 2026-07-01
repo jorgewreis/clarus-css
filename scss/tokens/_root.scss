@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../settings" as *;
 
 :root {
@@ -19,4 +20,6 @@
   --clarus-radius-sm: #{$radius-sm};
   --clarus-radius-md: #{$radius-md};
   --clarus-radius-lg: #{$radius-lg};
+  --clarus-gutter-x: #{map.get($spacers, 4)};
+  --clarus-gutter-y: 0px;
 }

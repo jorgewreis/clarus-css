@@ -17,6 +17,14 @@
   }
 }
 
+@function breakpoint-infix($name) {
+  @if $name == xs {
+    @return "";
+  }
+
+  @return "-#{$name}";
+}
+
 @mixin focus-ring($color: var(--clarus-color-primary)) {
   outline: none;
   border-color: $color;
