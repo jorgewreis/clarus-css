@@ -1,5 +1,37 @@
+@use "../settings" as *;
+
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
   list-style: none;
+  font-size: $font-size-sm;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--clarus-color-muted);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--clarus-color-muted);
+  content: "/";
+}
+
+.breadcrumb-item a {
+  color: var(--clarus-color-primary);
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: var(--clarus-color-text);
 }

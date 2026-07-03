@@ -58,3 +58,8 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Componente Navbar (`scss/components/_navbar.scss`): `.navbar-brand`,
   `.navbar-nav`, `.nav-link` (com estados `.active`/`.disabled`), versão
   estática (sem dropdown/collapse).
+- Componente Paginação (`scss/components/_pagination.scss`): `.page-link`,
+  estados `.active`/`.disabled`, reaproveitando `color-contrast()` da
+  Fase 1.
+- Componente Breadcrumbs (`scss/components/_breadcrumbs.scss`):
+  `.breadcrumb-item`, separador via `::before`, estado `.active`.

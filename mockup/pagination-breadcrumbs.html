@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Pagination & Breadcrumbs</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <ol class="breadcrumb mb-3">
+            <li class="breadcrumb-item"><a href="#">Início</a></li>
+            <li class="breadcrumb-item"><a href="#">Categoria</a></li>
+            <li class="breadcrumb-item active">Produto atual</li>
+        </ol>
+
+        <ul class="pagination">
+            <li class="page-item disabled"><a href="#" class="page-link">«</a></li>
+            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item active"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">»</a></li>
+        </ul>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <ol class="breadcrumb mb-3">
+            <li class="breadcrumb-item"><a href="#">Início</a></li>
+            <li class="breadcrumb-item"><a href="#">Categoria</a></li>
+            <li class="breadcrumb-item active">Produto atual</li>
+        </ol>
+
+        <ul class="pagination">
+            <li class="page-item disabled"><a href="#" class="page-link">«</a></li>
+            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item active"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">»</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

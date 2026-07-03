@@ -345,11 +345,14 @@ Mockup: `mockup/tables-navbar.html`.
 
 ### Fase 5 — Paginação e Breadcrumbs
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Paginação reaproveita o padrão de item ativo/desabilitado dos botões.
 Breadcrumbs é mais simples, sem dependência de outros componentes — ambos
-são auxiliares de navegação, agrupados por afinidade funcional.
+são auxiliares de navegação, agrupados por afinidade funcional. Entregue:
+`.page-link` com estados `.active`/`.disabled` (reaproveitando
+`color-contrast()`); `.breadcrumb-item` com separador via `::before` e
+estado `.active`.
 
 Mockup: `mockup/pagination-breadcrumbs.html`.
 
@@ -451,7 +454,7 @@ cada fase, seção 21):
 | 3 | Fase 2 | Badges, Alertas | ✅ Concluído |
 | 4 | Fase 3 | Cards | ✅ Concluído |
 | 5 | Fase 4 | Tabelas, Navbar | ✅ Concluído |
-| 6 | Fase 5 | Paginação, Breadcrumbs | ⬜ Pendente |
+| 6 | Fase 5 | Paginação, Breadcrumbs | ✅ Concluído |
 | 7 | Fase 6 | Formulários avançados (CSS-only) | ⬜ Pendente |
 | 8 | Fase 7 | Infraestrutura JS compartilhada | ⬜ Pendente |
 | 9 | Fase 8 | Dropdown, Tooltip | ⬜ Pendente |
