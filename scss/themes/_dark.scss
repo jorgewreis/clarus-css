@@ -1,7 +1,15 @@
+@use "sass:color";
+@use "../settings" as *;
+
 [data-theme="dark"] {
   --clarus-color-text: #f1f3f4;
   --clarus-color-muted: #bdc1c6;
   --clarus-color-border: #3c4043;
   --clarus-color-surface: #202124;
   --clarus-color-subtle: #2b2c2f;
+
+  @each $name, $color in $theme-colors {
+    --clarus-alert-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
+    --clarus-alert-#{$name}-text: #{color.mix($color, $color-white, 70%)};
+  }
 }

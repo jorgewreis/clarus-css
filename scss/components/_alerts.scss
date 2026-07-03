@@ -1,5 +1,18 @@
+@use "../settings" as *;
+
 .alert {
   padding: 12px 16px;
   border: 1px solid var(--clarus-color-border);
+  border-left: 5px solid var(--clarus-color-border);
   border-radius: var(--clarus-radius-md);
+  color: var(--clarus-color-text);
+  font-size: $font-size-sm;
+}
+
+@each $name, $color in $theme-colors {
+  .alert-#{$name} {
+    color: var(--clarus-alert-#{$name}-text);
+    background-color: var(--clarus-alert-#{$name}-bg);
+    border-color: var(--clarus-alert-#{$name}-text);
+  }
 }

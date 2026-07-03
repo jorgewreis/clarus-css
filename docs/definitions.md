@@ -299,12 +299,16 @@ Mockup: `mockup/buttons.html`.
 
 ### Fase 2 — Badges e Alertas
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Badges é pequeno e reaproveitado por cards, navbar e tabelas. Alertas
 formaliza o padrão de variante de cor de estado (success/warning/danger/info)
 que badges e tabelas também usam — os dois ficam juntos por definirem, em
-conjunto, esse padrão de cor de estado.
+conjunto, esse padrão de cor de estado. Entregue: badges sólidos com
+tamanhos (`.badge-sm`/`.badge-lg`); alertas com fundo tintado por estado
+(`.alert-*`), via tokens `--clarus-alert-*-bg`/`-text` com suporte a dark
+mode; funções `tint-color()`/`shade-color()`
+(`scss/tools/_mixins.scss`).
 
 Mockup: `mockup/badges-alerts.html`.
 
@@ -432,7 +436,7 @@ cada fase, seção 21):
 | --- | --- | --- | --- |
 | 1 | — | Base da versão inicial (layout, grid, utilitários, formulários) | ✅ Concluído |
 | 2 | Fase 1 | Botões | ✅ Concluído |
-| 3 | Fase 2 | Badges, Alertas | ⬜ Pendente |
+| 3 | Fase 2 | Badges, Alertas | ✅ Concluído |
 | 4 | Fase 3 | Cards | ⬜ Pendente |
 | 5 | Fase 4 | Tabelas, Navbar | ⬜ Pendente |
 | 6 | Fase 5 | Paginação, Breadcrumbs | ⬜ Pendente |

@@ -27,3 +27,12 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   hover/active/focus/disabled.
 - Função `color-contrast()` (`scss/tools/_mixins.scss`), que escolhe texto
   branco ou preto por cor de fundo com base no contraste WCAG (mínimo 4.5:1).
+- Componente Badges (`scss/components/_badges.scss`): variantes sólidas por
+  cor de estado (`.badge-primary/success/warning/danger/info`) e tamanhos
+  (`.badge-sm`/`.badge-lg`).
+- Componente Alertas (`scss/components/_alerts.scss`): variantes tintadas
+  por cor de estado (`.alert-primary/success/warning/danger/info`), com
+  tokens `--clarus-alert-*-bg`/`-text` (`scss/tokens/_root.scss`,
+  sobrescritos no dark mode em `scss/themes/_dark.scss`).
+- Funções `tint-color()`/`shade-color()` (`scss/tools/_mixins.scss`), para
+  gerar variações claras/escuras de uma cor base.
