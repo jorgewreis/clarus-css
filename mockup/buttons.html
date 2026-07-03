@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Buttons</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        [data-theme="dark"].theme-panel {
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-panel">
+        <h2 class="fs-lg fw-medium">Claro</h2>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Neutro</p>
+        <button type="button" class="btn">Botão</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Sólidos</p>
+        <button type="button" class="btn btn-primary mr-2">Primary</button>
+        <button type="button" class="btn btn-success mr-2">Success</button>
+        <button type="button" class="btn btn-warning mr-2">Warning</button>
+        <button type="button" class="btn btn-danger mr-2">Danger</button>
+        <button type="button" class="btn btn-info">Info</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Outline</p>
+        <button type="button" class="btn btn-outline-primary mr-2">Primary</button>
+        <button type="button" class="btn btn-outline-success mr-2">Success</button>
+        <button type="button" class="btn btn-outline-warning mr-2">Warning</button>
+        <button type="button" class="btn btn-outline-danger mr-2">Danger</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Tamanhos</p>
+        <button type="button" class="btn btn-primary btn-sm mr-2">Small</button>
+        <button type="button" class="btn btn-primary mr-2">Default</button>
+        <button type="button" class="btn btn-primary btn-lg">Large</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Desabilitado</p>
+        <button type="button" class="btn btn-primary mr-2" disabled>Button disabled</button>
+        <a href="#" class="btn btn-primary disabled" aria-disabled="true">Link disabled</a>
+    </div>
+
+    <div class="theme-panel" data-theme="dark">
+        <h2 class="fs-lg fw-medium">Escuro</h2>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Neutro</p>
+        <button type="button" class="btn">Botão</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Sólidos</p>
+        <button type="button" class="btn btn-primary mr-2">Primary</button>
+        <button type="button" class="btn btn-success mr-2">Success</button>
+        <button type="button" class="btn btn-warning mr-2">Warning</button>
+        <button type="button" class="btn btn-danger mr-2">Danger</button>
+        <button type="button" class="btn btn-info">Info</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Outline</p>
+        <button type="button" class="btn btn-outline-primary mr-2">Primary</button>
+        <button type="button" class="btn btn-outline-success mr-2">Success</button>
+        <button type="button" class="btn btn-outline-warning mr-2">Warning</button>
+        <button type="button" class="btn btn-outline-danger mr-2">Danger</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Tamanhos</p>
+        <button type="button" class="btn btn-primary btn-sm mr-2">Small</button>
+        <button type="button" class="btn btn-primary mr-2">Default</button>
+        <button type="button" class="btn btn-primary btn-lg">Large</button>
+
+        <p class="fs-sm fw-medium mt-3 mb-1">Desabilitado</p>
+        <button type="button" class="btn btn-primary mr-2" disabled>Button disabled</button>
+        <a href="#" class="btn btn-primary disabled" aria-disabled="true">Link disabled</a>
+    </div>
+
+</body>
+</html>

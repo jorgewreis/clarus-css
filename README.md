@@ -71,7 +71,8 @@ aprendizado:
 - Formulários: `.form-row`, `.form-col`, `.form-label`, `.form-control`, `.form-text`.
 - Componentes: `.btn`, `.card`, `.alert`, `.badge`, `.navbar`, `.modal`, etc.
 - Utilitários: `.d-*` (display), `.m-*`/`.p-*` (espaçamento), `.g-*` (gap),
-  `.justify-content-*`/`.align-items-*` (flex), `.visible`/`.invisible`.
+  `.justify-content-*`/`.align-items-*` (flex), `.visible`/`.invisible`,
+  `.text-*`/`.fw-*`/`.fs-*`/`.font-*` (tipografia).
 
 ## Sistema de grid
 

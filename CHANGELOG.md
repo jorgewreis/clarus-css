@@ -18,3 +18,12 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   cada um em versão expandida e minificada com source maps.
 - Lint de SCSS via stylelint.
 - CI no GitHub Actions (lint + build).
+- Utilitários de tipografia (`text-*`, `fw-*`, `fs-*`, `font-*`) em
+  `scss/utilities/_typography.scss`.
+- Estado `:read-only` em `.form-control`.
+- Componente Botões (`scss/components/_buttons.scss`): variantes sólidas e
+  outline por cor de estado (`.btn-primary/success/warning/danger/info`,
+  `.btn-outline-*`), tamanhos (`.btn-sm`/`.btn-lg`) e estados de
+  hover/active/focus/disabled.
+- Função `color-contrast()` (`scss/tools/_mixins.scss`), que escolhe texto
+  branco ou preto por cor de fundo com base no contraste WCAG (mínimo 4.5:1).

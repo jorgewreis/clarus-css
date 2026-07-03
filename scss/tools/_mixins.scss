@@ -1,4 +1,6 @@
 @use "sass:map";
+@use "sass:math";
+@use "sass:color";
 @use "../settings" as *;
 
 @mixin media-breakpoint-up($name) {
@@ -36,4 +38,32 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@function linearize-channel($value) {
+  $c: math.div($value, 255);
+
+  @if $c <= 0.0393 {
+    @return math.div($c, 12.92);
+  }
+
+  @return math.pow(math.div($c + 0.055, 1.055), 2.4);
+}
+
+@function relative-luminance($color) {
+  $r: linearize-channel(color.channel($color, "red", $space: rgb));
+  $g: linearize-channel(color.channel($color, "green", $space: rgb));
+  $b: linearize-channel(color.channel($color, "blue", $space: rgb));
+
+  @return (0.2126 * $r) + (0.7152 * $g) + (0.0722 * $b);
+}
+
+@function color-contrast($background, $min-contrast: 4.5) {
+  $contrast-with-white: math.div(1.05, relative-luminance($background) + 0.05);
+
+  @if $contrast-with-white >= $min-contrast {
+    @return $color-white;
+  }
+
+  @return $color-black;
 }

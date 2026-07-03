@@ -268,47 +268,130 @@ Apesar das decisões principais estarem firmadas, ainda precisam ser definidos e
 Critério de priorização: dependência técnica primeiro (o que outros
 componentes reaproveitam é implementado antes), respeitando que todo
 componente 100% CSS (sem JavaScript) seja concluído antes de iniciar os que
-exigem JavaScript.
+exigem JavaScript. A ordem abaixo é subdividida em **10 fases**, cada uma
+tratada como um marco independente (ver seção 23) — fases menores facilitam
+entrega incremental e validação visual a cada etapa.
 
-**Fase A — Componentes CSS-only, por dependência técnica:**
+**Regra obrigatória de mockup por fase:** ao concluir uma fase, toda
+funcionalidade CSS nova introduzida nela deve ganhar um exemplo demonstrativo
+em `mockup/` (arquivo novo ou atualização de um existente), seguindo o
+padrão já usado em `mockup/layout.html` — HTML puro consumindo os arquivos
+gerados em `dist/css/`. Isso reforça, por fase, a regra geral já definida na
+seção 22 ("cada componente/grupo implementado ganha um mockup dedicado,
+mantido atualizado") e o fluxo de evolução de `docs/scss-architecture.md`.
+Fases que não introduzem classes CSS novas diretamente (caso da Fase 7,
+infraestrutura JS) podem usar o mockup como harness de teste manual do
+comportamento, sem exigir novas classes visuais.
 
-1. Botões — reaproveitados por cards, alertas, modal e navbar.
-2. Badges — pequeno e reaproveitado por cards, navbar e tabelas.
-3. Alertas — formaliza o padrão de variante de cor de estado
-   (success/warning/danger/info) que badges e tabelas também usam.
-4. Cards — combina botões, badges e tipografia base num contêiner.
-5. Tabelas — reaproveita as cores de estado definidas em alertas/badges.
-6. Navbar (versão estática, sem dropdown/collapse) — reaproveita botões e
-   badges.
-7. Paginação — reaproveita o padrão de item ativo/desabilitado dos botões.
-8. Breadcrumbs — mais simples, sem dependência de outros componentes.
-9. Formulários avançados, parte CSS-only: estados de validação
-   (`.is-valid`/`.is-invalid`, reaproveitando as cores de estado de
-   alertas/badges) e upload de arquivo estilizado (label + input nativo
-   oculto).
+### Fase 1 — Botões
 
-**Fase B — Infraestrutura JS compartilhada (antes de qualquer componente
-interativo):**
+**Status:** ✅ Concluído.
+
+Reaproveitados por cards, alertas, modal e navbar; primeiro componente por
+ser o de maior reaproveitamento técnico. Entregue: variantes sólidas e
+outline por cor de estado (`.btn-primary/success/warning/danger/info`,
+`.btn-outline-*`), tamanhos (`.btn-sm`/`.btn-lg`), estados de
+hover/active/focus/disabled, e a função `color-contrast()`
+(`scss/tools/_mixins.scss`) para garantir contraste WCAG AA em cada
+variante.
+
+Mockup: `mockup/buttons.html`.
+
+### Fase 2 — Badges e Alertas
+
+**Status:** ⬜ Pendente.
+
+Badges é pequeno e reaproveitado por cards, navbar e tabelas. Alertas
+formaliza o padrão de variante de cor de estado (success/warning/danger/info)
+que badges e tabelas também usam — os dois ficam juntos por definirem, em
+conjunto, esse padrão de cor de estado.
+
+Mockup: `mockup/badges-alerts.html`.
+
+### Fase 3 — Cards
+
+**Status:** ⬜ Pendente.
+
+Combina botões, badges e tipografia base num contêiner; primeiro componente
+de composição, por isso isolado em fase própria.
+
+Mockup: `mockup/cards.html`.
+
+### Fase 4 — Tabelas e Navbar
+
+**Status:** ⬜ Pendente.
+
+Tabelas reaproveita as cores de estado definidas em alertas/badges. Navbar
+(versão estática, sem dropdown/collapse) reaproveita botões e badges — ambos
+são componentes de exibição de conteúdo/estrutura de página.
+
+Mockup: `mockup/tables-navbar.html`.
+
+### Fase 5 — Paginação e Breadcrumbs
+
+**Status:** ⬜ Pendente.
+
+Paginação reaproveita o padrão de item ativo/desabilitado dos botões.
+Breadcrumbs é mais simples, sem dependência de outros componentes — ambos
+são auxiliares de navegação, agrupados por afinidade funcional.
+
+Mockup: `mockup/pagination-breadcrumbs.html`.
+
+### Fase 6 — Formulários avançados (CSS-only)
+
+**Status:** ⬜ Pendente.
+
+Estados de validação (`.is-valid`/`.is-invalid`, reaproveitando as cores de
+estado de alertas/badges) e upload de arquivo estilizado (label + input
+nativo oculto). É o último componente 100% CSS antes de iniciar
+infraestrutura JavaScript (Fase 7).
+
+Mockup: `mockup/forms-advanced.html`.
+
+### Fase 7 — Infraestrutura JS compartilhada
+
+**Status:** ⬜ Pendente.
+
+Pré-requisito de qualquer componente interativo, sem componente visual
+próprio:
 
 1. Posicionamento/overlay — usado por dropdown, tooltip e modal.
-2. Foco e teclado (focus trap + tecla Escape) — usado por modal e
-   dropdown.
+2. Foco e teclado (focus trap + tecla Escape) — usado por modal e dropdown.
 3. Transição/collapse — usado por accordion, tabs e toast.
 
-**Fase C — Componentes com JS, por dependência técnica:**
+Mockup: `mockup/js-foundation.html` (harness manual de posicionamento, foco
+e transição, sem componente final).
 
-1. Dropdown — consumidor mais simples da infraestrutura de posicionamento.
-2. Tooltip — reaproveita a mesma infraestrutura de posicionamento do
-   dropdown, com show/hide por hover/focus.
-3. Modal — reaproveita posicionamento e foco/teclado; mais complexo que
-   dropdown/tooltip.
-4. Select customizado (formulários avançados) — é um dropdown aplicado a
-   um campo de formulário; depende do dropdown já existir.
-5. Accordion — reaproveita a infraestrutura de transição/collapse.
-6. Tabs — reaproveita o mesmo padrão de alternância de painel do
-   accordion.
-7. Toast — reaproveita a infraestrutura de transição/collapse e adiciona
-   timers de auto-dismiss.
+### Fase 8 — Dropdown e Tooltip
+
+**Status:** ⬜ Pendente.
+
+Dropdown é o consumidor mais simples da infraestrutura de posicionamento.
+Tooltip reaproveita a mesma infraestrutura, com show/hide por hover/focus —
+os dois são os primeiros componentes JS por serem os mais simples.
+
+Mockup: `mockup/dropdown-tooltip.html`.
+
+### Fase 9 — Modal e Select customizado
+
+**Status:** ⬜ Pendente.
+
+Modal reaproveita posicionamento e foco/teclado; mais complexo que
+dropdown/tooltip. Select customizado (formulários avançados) é um dropdown
+aplicado a um campo de formulário — depende do dropdown já existir (Fase 8).
+
+Mockup: `mockup/modal-select.html`.
+
+### Fase 10 — Accordion, Tabs e Toast
+
+**Status:** ⬜ Pendente.
+
+Todos reaproveitam a infraestrutura de transição/collapse (Fase 7): Accordion
+e Tabs compartilham o mesmo padrão de alternância de painel; Toast reaproveita
+a mesma infraestrutura e adiciona timers de auto-dismiss. Última fase do
+escopo inicial de componentes (seção 9).
+
+Mockup: `mockup/accordion-tabs-toast.html`.
 
 ## 22. Estratégia de Testes Visuais e Funcionais
 
@@ -324,8 +407,40 @@ interativo):**
   cada push/PR, como um novo step em `.github/workflows/ci.yml`, além do
   lint e build já existentes.
 
-## 23. Próximo Marco
+## 23. Marcos do Projeto
 
-O próximo marco do projeto é transformar estas definições em uma estrutura técnica inicial:
+O projeto transforma estas definições em uma estrutura técnica através de
+marcos sequenciais. Cada marco tem escopo fechado, é validado com
+`npm run lint` + `npm run build`, e — a partir do Marco 2 — entrega também um
+mockup demonstrativo em `mockup/` (regra detalhada na seção 21).
 
-1. Implementar layout, grid, utilitários e formulários como base da versão inicial.
+### Marco 1 — Base da versão inicial (concluído)
+
+Layout, grid, utilitários (display, flex, spacing, visibility, tipografia) e
+formulários básicos (controles, tamanhos, estados de foco/desabilitado/
+leitura) como fundação da versão inicial.
+
+### Marcos 2 a 11 — Componentes (Fases 1 a 10)
+
+Cada uma das 10 fases definidas na seção 21 corresponde a um marco próprio,
+na mesma ordem (dependência técnica primeiro, CSS-only antes de JS). Esta
+tabela é o checklist oficial de progresso do projeto — atualizar a coluna
+Status ao concluir cada marco (mesmo status também replicado no cabeçalho de
+cada fase, seção 21):
+
+| Marco | Fase (seção 21) | Escopo | Status |
+| --- | --- | --- | --- |
+| 1 | — | Base da versão inicial (layout, grid, utilitários, formulários) | ✅ Concluído |
+| 2 | Fase 1 | Botões | ✅ Concluído |
+| 3 | Fase 2 | Badges, Alertas | ⬜ Pendente |
+| 4 | Fase 3 | Cards | ⬜ Pendente |
+| 5 | Fase 4 | Tabelas, Navbar | ⬜ Pendente |
+| 6 | Fase 5 | Paginação, Breadcrumbs | ⬜ Pendente |
+| 7 | Fase 6 | Formulários avançados (CSS-only) | ⬜ Pendente |
+| 8 | Fase 7 | Infraestrutura JS compartilhada | ⬜ Pendente |
+| 9 | Fase 8 | Dropdown, Tooltip | ⬜ Pendente |
+| 10 | Fase 9 | Modal, Select customizado | ⬜ Pendente |
+| 11 | Fase 10 | Accordion, Tabs, Toast | ⬜ Pendente |
+
+Ao concluir o Marco 11, todo o escopo inicial de componentes (seção 9) e a
+ordem de implementação (seção 21) estarão entregues.

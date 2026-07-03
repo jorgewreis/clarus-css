@@ -8,6 +8,7 @@
     <!-- STYLES IMPORT -->
     <link rel="stylesheet" href="../dist/css/layout.css">
     <link rel="stylesheet" href="../dist/css/forms.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
 </head>
 <body>
 
@@ -42,6 +43,20 @@
                 <span class="form-text form-size-xxl info">This is a valid text input field.</span>
             </div>
         </div>
+        <div class="form-row mt-3 gap-x-2">
+            <div class="form-col">
+                <label for="input-readonly" class="form-label form-size-md">Somente leitura</label>
+                <input type="text" class="form-control form-size-xxl" id="input-readonly" value="Valor fixo" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid p-2 mt-3">
+        <!-- Utilitários de tipografia -->
+        <p class="text-center fw-medium fs-lg">Texto centralizado, peso medium, fonte lg</p>
+        <p class="text-uppercase fs-sm">texto em uppercase, fonte sm</p>
+        <p class="text-truncate" style="max-width: 200px;">Texto longo o suficiente para ser truncado com reticências</p>
+        <p class="font-mono fs-md">Texto em fonte monoespaçada</p>
     </div>
 
 </body>

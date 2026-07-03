@@ -1,0 +1,62 @@
+@use "../settings" as *;
+@use "../tools" as *;
+
+.text-start {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-truncate {
+  @include truncate;
+}
+
+.fw-regular {
+  font-weight: $font-weight-regular;
+}
+
+.fw-medium {
+  font-weight: $font-weight-medium;
+}
+
+.fs-xs {
+  font-size: $font-size-xs;
+}
+
+.fs-sm {
+  font-size: $font-size-sm;
+}
+
+.fs-md {
+  font-size: $font-size-md;
+}
+
+.fs-lg {
+  font-size: $font-size-lg;
+}
+
+.font-sans {
+  font-family: var(--clarus-font-sans);
+}
+
+.font-mono {
+  font-family: var(--clarus-font-mono);
+}

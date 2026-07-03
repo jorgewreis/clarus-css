@@ -68,6 +68,11 @@
   pointer-events: none;
 }
 
+.form-control:read-only {
+  background-color: var(--clarus-color-subtle);
+  cursor: default;
+}
+
 .form-control-sm {
   height: 30px;
   font-size: $font-size-xs;
