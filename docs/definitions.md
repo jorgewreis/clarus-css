@@ -320,9 +320,12 @@ Combina botões, badges e tipografia base num contêiner; primeiro componente
 de composição, por isso isolado em fase própria. Entregue:
 `.card-header`/`.card-body`/`.card-footer`, `.card-title`/`.card-subtitle`/
 `.card-text`, tamanhos (`.card-sm`/`.card-lg`), variante `.card-header` com
-título + botão de fechar (`.btn-close`, reaproveitável em modal/toast), e
+título + botão de fechar (`.btn-close`, reaproveitável em modal/toast),
 utilitários de sombra (`.shadow-sm`/`.shadow`/`.shadow-lg`,
-`scss/utilities/_shadow.scss`) para elevação do card.
+`scss/utilities/_shadow.scss`) para elevação do card, `.card-clickable` +
+`.stretched-link` (card inteiro clicável/focável sem aninhar elementos
+interativos) e `.card-horizontal` (eixo em linha, com raio/borda do
+header/footer ajustados para a lateral).
 
 Mockup: `mockup/cards.html`.
 

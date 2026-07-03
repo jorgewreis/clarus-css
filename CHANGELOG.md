@@ -46,3 +46,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   em cards, e futuramente em modal/toast.
 - `.card-header` agora suporta título + botão de fechar alinhados nas
   pontas (layout flex com `justify-content: space-between`).
+- `.card-clickable` + `.stretched-link`: torna o card inteiro clicável e
+  focável via um único link, sem aninhar elementos interativos.
+- `.card-horizontal`: inverte o eixo do card para linha, com raio e borda
+  do header/footer ajustados para a lateral.
