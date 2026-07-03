@@ -50,3 +50,11 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   focável via um único link, sem aninhar elementos interativos.
 - `.card-horizontal`: inverte o eixo do card para linha, com raio e borda
   do header/footer ajustados para a lateral.
+- Componente Tabelas (`scss/components/_tables.scss`): `.table-striped`,
+  `.table-hover`, `.table-bordered`, `.table-borderless`, `.table-sm`,
+  `.table-responsive` e variantes de cor de estado
+  (`.table-primary/success/warning/danger/info`), reaproveitando os
+  tokens `--clarus-alert-*-bg`/`-text` da Fase 2.
+- Componente Navbar (`scss/components/_navbar.scss`): `.navbar-brand`,
+  `.navbar-nav`, `.nav-link` (com estados `.active`/`.disabled`), versão
+  estática (sem dropdown/collapse).

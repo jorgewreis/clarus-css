@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Tables & Navbar</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <nav class="navbar mb-3">
+            <a href="#" class="navbar-brand">Clarus</a>
+            <ul class="navbar-nav">
+                <li><a href="#" class="nav-link active">Início</a></li>
+                <li><a href="#" class="nav-link">Projetos <span class="badge badge-primary badge-sm">3</span></a></li>
+                <li><a href="#" class="nav-link disabled">Configurações</a></li>
+            </ul>
+            <button type="button" class="btn btn-primary btn-sm">Entrar</button>
+        </nav>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Projeto</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Landing page</td>
+                        <td>Jorge</td>
+                        <td>Em andamento</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>API de pagamentos</td>
+                        <td>Equipe backend</td>
+                        <td>Concluído</td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>Migração de banco</td>
+                        <td>Equipe infra</td>
+                        <td>Bloqueado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table class="table table-sm table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qtd.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>table-sm + table-bordered</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <nav class="navbar mb-3">
+            <a href="#" class="navbar-brand">Clarus</a>
+            <ul class="navbar-nav">
+                <li><a href="#" class="nav-link active">Início</a></li>
+                <li><a href="#" class="nav-link">Projetos <span class="badge badge-primary badge-sm">3</span></a></li>
+                <li><a href="#" class="nav-link disabled">Configurações</a></li>
+            </ul>
+            <button type="button" class="btn btn-primary btn-sm">Entrar</button>
+        </nav>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Projeto</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Landing page</td>
+                        <td>Jorge</td>
+                        <td>Em andamento</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>API de pagamentos</td>
+                        <td>Equipe backend</td>
+                        <td>Concluído</td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>Migração de banco</td>
+                        <td>Equipe infra</td>
+                        <td>Bloqueado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table class="table table-sm table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qtd.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>table-sm + table-bordered</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -331,11 +331,15 @@ Mockup: `mockup/cards.html`.
 
 ### Fase 4 — Tabelas e Navbar
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Tabelas reaproveita as cores de estado definidas em alertas/badges. Navbar
 (versão estática, sem dropdown/collapse) reaproveita botões e badges — ambos
-são componentes de exibição de conteúdo/estrutura de página.
+são componentes de exibição de conteúdo/estrutura de página. Entregue:
+`.table-striped`/`.table-hover`/`.table-bordered`/`.table-borderless`/
+`.table-sm`/`.table-responsive` e variantes de cor de estado (reaproveitando
+os tokens `--clarus-alert-*` da Fase 2); `.navbar-brand`/`.navbar-nav`/
+`.nav-link` (com `.active`/`.disabled`, sem toggle JS).
 
 Mockup: `mockup/tables-navbar.html`.
 
@@ -446,7 +450,7 @@ cada fase, seção 21):
 | 2 | Fase 1 | Botões | ✅ Concluído |
 | 3 | Fase 2 | Badges, Alertas | ✅ Concluído |
 | 4 | Fase 3 | Cards | ✅ Concluído |
-| 5 | Fase 4 | Tabelas, Navbar | ⬜ Pendente |
+| 5 | Fase 4 | Tabelas, Navbar | ✅ Concluído |
 | 6 | Fase 5 | Paginação, Breadcrumbs | ⬜ Pendente |
 | 7 | Fase 6 | Formulários avançados (CSS-only) | ⬜ Pendente |
 | 8 | Fase 7 | Infraestrutura JS compartilhada | ⬜ Pendente |
