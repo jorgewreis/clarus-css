@@ -28,6 +28,7 @@
 @mixin focus-ring($color: var(--clarus-color-primary)) {
   outline: none;
   border-color: $color;
+  box-shadow: 0 0 5px 2px $color;
   box-shadow: 0 0 5px 2px color-mix(in srgb, #{$color} 20%, transparent);
 }
 

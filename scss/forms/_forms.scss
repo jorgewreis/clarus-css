@@ -35,7 +35,7 @@
   margin-top: 4px;
   padding: 4px 8px;
   border-radius: var(--clarus-radius-sm);
-  color: $color-gray-500;
+  color: var(--clarus-color-muted);
   font-size: $font-size-xs;
   font-weight: $font-weight-regular;
 
@@ -54,7 +54,7 @@
 }
 
 .form-control::placeholder {
-  color: $color-gray-500;
+  color: var(--clarus-color-muted);
 }
 
 .form-control:focus {
@@ -62,8 +62,8 @@
 }
 
 .form-control:disabled {
-  color: $color-gray-500;
-  background-color: $color-gray-200;
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-subtle);
   opacity: 0.4;
   pointer-events: none;
 }
