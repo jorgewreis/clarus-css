@@ -7,6 +7,9 @@
   --clarus-color-border: #3c4043;
   --clarus-color-surface: #202124;
   --clarus-color-subtle: #2b2c2f;
+  --clarus-shadow-sm: 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 40%);
+  --clarus-shadow-md: 0 6px 12px rgb(0 0 0 / 55%), 0 3px 6px rgb(0 0 0 / 45%);
+  --clarus-shadow-lg: 0 15px 30px rgb(0 0 0 / 60%), 0 6px 12px rgb(0 0 0 / 50%);
 
   @each $name, $color in $theme-colors {
     --clarus-alert-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};

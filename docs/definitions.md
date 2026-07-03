@@ -319,7 +319,10 @@ Mockup: `mockup/badges-alerts.html`.
 Combina botões, badges e tipografia base num contêiner; primeiro componente
 de composição, por isso isolado em fase própria. Entregue:
 `.card-header`/`.card-body`/`.card-footer`, `.card-title`/`.card-subtitle`/
-`.card-text`, tamanhos (`.card-sm`/`.card-lg`).
+`.card-text`, tamanhos (`.card-sm`/`.card-lg`), variante `.card-header` com
+título + botão de fechar (`.btn-close`, reaproveitável em modal/toast), e
+utilitários de sombra (`.shadow-sm`/`.shadow`/`.shadow-lg`,
+`scss/utilities/_shadow.scss`) para elevação do card.
 
 Mockup: `mockup/cards.html`.
 

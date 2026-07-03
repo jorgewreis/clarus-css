@@ -67,3 +67,32 @@
   padding: 0 16px;
   font-size: $font-size-lg;
 }
+
+.btn-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-muted);
+  background-color: transparent;
+  font-size: $font-size-md;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn-close::before {
+  content: "\00d7";
+}
+
+.btn-close:hover {
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-subtle);
+}
+
+.btn-close:focus {
+  @include focus-ring;
+}

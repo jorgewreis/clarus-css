@@ -39,3 +39,10 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Componente Cards (`scss/components/_cards.scss`): `.card-header`,
   `.card-body`, `.card-footer`, `.card-title`, `.card-subtitle`,
   `.card-text` e tamanhos (`.card-sm`/`.card-lg`).
+- Utilitários de sombra (`.shadow-sm`/`.shadow`/`.shadow-lg`) em
+  `scss/utilities/_shadow.scss`, com tokens `--clarus-shadow-*`
+  (`scss/tokens/_root.scss`) e override para dark mode.
+- Componente `.btn-close` (`scss/components/_buttons.scss`), reaproveitável
+  em cards, e futuramente em modal/toast.
+- `.card-header` agora suporta título + botão de fechar alinhados nas
+  pontas (layout flex com `justify-content: space-between`).
