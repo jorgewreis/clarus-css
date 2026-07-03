@@ -314,10 +314,12 @@ Mockup: `mockup/badges-alerts.html`.
 
 ### Fase 3 — Cards
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Combina botões, badges e tipografia base num contêiner; primeiro componente
-de composição, por isso isolado em fase própria.
+de composição, por isso isolado em fase própria. Entregue:
+`.card-header`/`.card-body`/`.card-footer`, `.card-title`/`.card-subtitle`/
+`.card-text`, tamanhos (`.card-sm`/`.card-lg`).
 
 Mockup: `mockup/cards.html`.
 
@@ -437,7 +439,7 @@ cada fase, seção 21):
 | 1 | — | Base da versão inicial (layout, grid, utilitários, formulários) | ✅ Concluído |
 | 2 | Fase 1 | Botões | ✅ Concluído |
 | 3 | Fase 2 | Badges, Alertas | ✅ Concluído |
-| 4 | Fase 3 | Cards | ⬜ Pendente |
+| 4 | Fase 3 | Cards | ✅ Concluído |
 | 5 | Fase 4 | Tabelas, Navbar | ⬜ Pendente |
 | 6 | Fase 5 | Paginação, Breadcrumbs | ⬜ Pendente |
 | 7 | Fase 6 | Formulários avançados (CSS-only) | ⬜ Pendente |

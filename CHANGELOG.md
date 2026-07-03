@@ -36,3 +36,6 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   sobrescritos no dark mode em `scss/themes/_dark.scss`).
 - Funções `tint-color()`/`shade-color()` (`scss/tools/_mixins.scss`), para
   gerar variações claras/escuras de uma cor base.
+- Componente Cards (`scss/components/_cards.scss`): `.card-header`,
+  `.card-body`, `.card-footer`, `.card-title`, `.card-subtitle`,
+  `.card-text` e tamanhos (`.card-sm`/`.card-lg`).

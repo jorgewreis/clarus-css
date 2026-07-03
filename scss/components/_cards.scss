@@ -1,7 +1,68 @@
+@use "../settings" as *;
+
 .card {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--clarus-color-border);
   border-radius: var(--clarus-radius-lg);
   background-color: var(--clarus-color-surface);
+}
+
+.card-header,
+.card-body,
+.card-footer {
+  padding: 16px;
+}
+
+.card-header {
+  border-bottom: 1px solid var(--clarus-color-border);
+  background-color: var(--clarus-color-subtle);
+}
+
+.card-header:first-child {
+  border-radius: calc(var(--clarus-radius-lg) - 1px) calc(var(--clarus-radius-lg) - 1px) 0 0;
+}
+
+.card-footer {
+  border-top: 1px solid var(--clarus-color-border);
+  background-color: var(--clarus-color-subtle);
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(var(--clarus-radius-lg) - 1px) calc(var(--clarus-radius-lg) - 1px);
+}
+
+.card-title {
+  margin: 0 0 4px;
+  color: var(--clarus-color-text);
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+}
+
+.card-subtitle {
+  margin: 0 0 8px;
+  color: var(--clarus-color-muted);
+  font-size: $font-size-sm;
+}
+
+.card-text {
+  margin: 0 0 8px;
+  color: var(--clarus-color-text);
+  font-size: $font-size-md;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-sm .card-header,
+.card-sm .card-body,
+.card-sm .card-footer {
+  padding: 10px;
+}
+
+.card-lg .card-header,
+.card-lg .card-body,
+.card-lg .card-footer {
+  padding: 24px;
 }
