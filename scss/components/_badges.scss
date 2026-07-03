@@ -5,8 +5,8 @@
   display: inline-flex;
   align-items: center;
   min-height: 20px;
-  padding: 2px 8px 0 8px;
-  border-radius: 4px;
+  padding: 2px 8px 0;
+  border-radius: var(--clarus-radius-sm);
   color: var(--clarus-color-text);
   background-color: var(--clarus-color-subtle);
   font-size: $font-size-xs;
