@@ -26,9 +26,15 @@
   --clarus-shadow-sm: 0 1px 3px rgb(0 0 0 / 15%), 0 1px 2px rgb(0 0 0 / 10%);
   --clarus-shadow-md: 0 6px 12px rgb(0 0 0 / 15%), 0 3px 6px rgb(0 0 0 / 10%);
   --clarus-shadow-lg: 0 15px 30px rgb(0 0 0 / 18%), 0 6px 12px rgb(0 0 0 / 12%);
+  --clarus-tooltip-bg: #{$color-gray-900};
+  --clarus-tooltip-text: #{$color-white};
 
   @each $name, $color in $theme-colors {
     --clarus-alert-#{$name}-bg: #{tint-color($color)};
     --clarus-alert-#{$name}-text: #{shade-color($color)};
+  }
+
+  @each $name, $bg in $theme-bg-colors {
+    --clarus-feedback-#{$name}-bg: #{$bg};
   }
 }

@@ -1,18 +1,41 @@
 $color-white: #ffffff !default;
 $color-black: #000000 !default;
 
-$color-primary: #1a73e8 !default;
-$color-success: #1fca7a !default;
-$color-warning: #f9ab00 !default;
-$color-danger: #d93025 !default;
-$color-info: #1a73e8 !default;
+$color-primary: #4f46e5 !default;
+$color-success: #1bc559 !default;
+$color-warning: #f0b40e !default;
+$color-danger: #dc263e !default;
+$color-info: #8ba2c4 !default;
 
-$color-gray-100: #f8f9fa !default;
-$color-gray-200: #e9ecef !default;
-$color-gray-300: #ced4da !default;
-$color-gray-500: #bbbbbb !default;
-$color-gray-600: #777777 !default;
-$color-gray-900: #202124 !default;
+// Tons de fundo derivados de $theme-colors por mistura com branco a 12%
+// (color.mix($cor, white, 12%)), consistentes entre si em claridade e
+// saturação — os valores manuais anteriores variavam de quase-branco
+// (success/warning/info) a um tom bem mais saturado/escuro (danger).
+$bg-color-primary: #eae9fc !default;
+$bg-color-success: #fdfffe !default;
+$bg-color-warning: #fdf6e2 !default;
+$bg-color-danger: #fdf8f9 !default;
+$bg-color-info: #f1f4f8 !default;
+
+$theme-bg-colors: (
+  primary: $bg-color-primary,
+  success: $bg-color-success,
+  warning: $bg-color-warning,
+  danger: $bg-color-danger,
+  info: $bg-color-info
+) !default;
+
+// Escala neutra "Indigo autoral" (docs/definitions.md, seção 18.1): 9 degraus
+// completos na mesma progressão de luminância usada nos tons de estado acima.
+$color-gray-100: #f8fafc !default;
+$color-gray-200: #f1f5f9 !default;
+$color-gray-300: #e2e8f0 !default;
+$color-gray-400: #cbd5e1 !default;
+$color-gray-500: #94a3b8 !default;
+$color-gray-600: #64748b !default;
+$color-gray-700: #475569 !default;
+$color-gray-800: #334155 !default;
+$color-gray-900: #1e293b !default;
 
 $theme-colors: (
   primary: $color-primary,

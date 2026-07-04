@@ -1,4 +1,84 @@
+@use "../settings" as *;
+@use "../tools" as *;
+
 .dropdown {
   position: relative;
   display: inline-flex;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 6px;
+  vertical-align: middle;
+  content: "";
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  display: none;
+  min-width: 180px;
+  margin: 0;
+  padding: 6px 0;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-md);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  box-shadow: var(--clarus-shadow-md);
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  color: var(--clarus-color-text);
+  background-color: transparent;
+  font-size: $font-size-md;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-subtle);
+  outline: none;
+}
+
+.dropdown-item.active {
+  color: color-contrast($color-primary);
+  background-color: var(--clarus-color-primary);
+}
+
+.dropdown-item.disabled {
+  color: var(--clarus-color-muted);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 6px 0;
+  border: none;
+  background-color: var(--clarus-color-border);
+}
+
+.dropdown-header {
+  padding: 4px 16px;
+  color: var(--clarus-color-muted);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
 }

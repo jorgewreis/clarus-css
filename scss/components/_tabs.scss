@@ -2,3 +2,21 @@
   display: flex;
   border-bottom: 1px solid var(--clarus-color-border);
 }
+
+.tabs .nav-link {
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--clarus-radius-sm) var(--clarus-radius-sm) 0 0;
+}
+
+.tabs .nav-link.active {
+  border-bottom-color: var(--clarus-color-primary);
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .tab-pane.active {
+  display: block;
+}

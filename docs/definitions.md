@@ -110,15 +110,22 @@ O escopo pode ser implementado em etapas, mas o documento assume que todos esses
 
 O Clarus CSS deve oferecer suporte nativo a dark mode desde a primeira versão.
 
-A paleta de cores ainda será escolhida posteriormente, mas a arquitetura deve estar preparada para temas claros e escuros por meio de CSS Custom Properties.
+A paleta de cores oficial é a "Indigo autoral" (`primary #4F46E5`,
+`success #1BC559`, `warning #F0B40E`, `danger #DC263E`, `info #8BA2C4`,
+com escala neutra própria de 9 degraus), definida na seção 18.1. A
+arquitetura já está preparada para temas claros e escuros por meio de CSS
+Custom Properties.
 
 A customização deve permitir que usuários alterem cores, espaçamentos, tipografia e estados visuais sem reescrever o framework inteiro.
 
 ## 11. Tipografia
 
-O projeto usará Google Fonts como fonte oficial de tipografia.
-
-A família tipográfica final ainda será definida, mas a decisão estratégica é usar uma fonte externa com boa legibilidade, aparência moderna e compatibilidade com interfaces web de uso geral.
+A família tipográfica oficial é a Plus Jakarta Sans (heading e body),
+definida na seção 18.2, escolhida por boa legibilidade, aparência moderna e
+compatibilidade com interfaces web de uso geral. Os arquivos da fonte são
+distribuídos self-hosted junto ao próprio pacote (sem dependência de
+serviços externos como fonts.googleapis.com em tempo de execução), alinhado
+à stack definida na seção 6.
 
 ## 12. Documentação
 
@@ -203,7 +210,8 @@ As seguintes decisões estão definidas:
 - Sistema de layout: Flexbox.
 - Breakpoints: próximos ao padrão Bootstrap.
 - Identidade visual: minimalista e moderna.
-- Tipografia: Google Fonts.
+- Paleta de cores: "Indigo autoral", definida na seção 18.1.
+- Tipografia: Plus Jakarta Sans, self-hosted, definida na seção 18.2.
 - Dark mode: nativo desde a primeira versão.
 - Documentação inicial: Markdown no GitHub.
 - Distribuição: npm desde o início.
@@ -214,12 +222,50 @@ As seguintes decisões estão definidas:
 - Ordem de implementação dos componentes: definida na seção 21.
 - Estratégia de testes visuais e funcionais: definida na seção 22.
 
-## 18. Pontos a Definir Posteriormente
+## 18. Paleta de Cores e Tipografia
 
-Apesar das decisões principais estarem firmadas, ainda precisam ser definidos em documentos específicos:
+As duas pendências desta seção (antes "a definir posteriormente") foram decididas.
 
-- Paleta de cores oficial.
-- Família tipográfica final.
+### 18.1 Paleta de cores oficial
+
+Opção "Indigo autoral": paleta própria, escolhida por diferenciar o Clarus
+tanto do azul característico do Bootstrap quanto da paleta do Material
+Design do Google (esta última usada até então como placeholder em
+`scss/settings/_colors.scss`), reforçando o posicionamento de identidade
+visual própria (seção 4).
+
+- Cores de estado:
+  - `primary`: `#4F46E5`
+  - `success`: `#1BC559`
+  - `warning`: `#F0B40E`
+  - `danger`: `#DC263E`
+  - `info`: `#8BA2C4`
+- `info` passa a ser uma cor distinta de `primary`, corrigindo a duplicidade
+  que existia antes desta implementação (`$color-primary` e `$color-info`
+  com o mesmo valor).
+- Escala neutra com 9 degraus cheios (100 a 900, sem lacunas), já
+  implementada em `scss/settings/_colors.scss`: `#F8FAFC`, `#F1F5F9`,
+  `#E2E8F0`, `#CBD5E1`, `#94A3B8`, `#64748B`, `#475569`, `#334155`,
+  `#1E293B`.
+- Variantes de `primary`/`success`/`warning`/`danger`/`info` para o dark
+  mode já implementadas em `scss/themes/_dark.scss` (token
+  `--clarus-color-#{nome}`, recalculado via `color.mix()` com um peso por
+  cor no mapa `$dark-color-weights`); `alert-*-bg`/`-text` continuam
+  recalculados à parte para o tema escuro.
+
+### 18.2 Família tipográfica final
+
+Plus Jakarta Sans para heading e body (família única), mantendo Source Code
+Pro no monoespaçado (`$font-family-mono`, sem alteração).
+
+- Os arquivos da fonte (`.woff2`, licença OFL) já são self-hosted, distribuídos
+  junto ao pacote em `assets/fonts/plus-jakarta-sans/` (incluindo o
+  `OFL.txt` da fonte, requisito da licença), com `@font-face` declarado em
+  `scss/base/_typography.scss` no lugar do antigo `@import
+  url("https://fonts.googleapis.com/...")` — cumprindo a meta de
+  "dependência externa zero em tempo de execução" (seção 6) para a fonte
+  principal. O monoespaçado (Source Code Pro) permanece via `@import` do
+  Google Fonts, sem alteração, conforme decidido acima.
 
 ## 19. Convenção de Nomenclatura de Classes
 
@@ -358,18 +404,24 @@ Mockup: `mockup/pagination-breadcrumbs.html`.
 
 ### Fase 6 — Formulários avançados (CSS-only)
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Estados de validação (`.is-valid`/`.is-invalid`, reaproveitando as cores de
 estado de alertas/badges) e upload de arquivo estilizado (label + input
 nativo oculto). É o último componente 100% CSS antes de iniciar
-infraestrutura JavaScript (Fase 7).
+infraestrutura JavaScript (Fase 7). Entregue: `.form-control.is-valid`/
+`.is-invalid` (borda e anel de foco em `--clarus-color-success`/`-danger`),
+`.valid-feedback`/`.invalid-feedback` (texto exibido via seletor de irmão
+adjacente, sem JavaScript); `.file-upload`/`.file-input`/`.file-label`
+(input nativo ocultado por `clip-path` mantendo foco/teclado, rótulo
+estilizado via `<label for>`), com tamanhos (`.file-label-sm`/`-lg`) e
+estado desabilitado.
 
 Mockup: `mockup/forms-advanced.html`.
 
 ### Fase 7 — Infraestrutura JS compartilhada
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Pré-requisito de qualquer componente interativo, sem componente visual
 próprio:
@@ -378,37 +430,118 @@ próprio:
 2. Foco e teclado (focus trap + tecla Escape) — usado por modal e dropdown.
 3. Transição/collapse — usado por accordion, tabs e toast.
 
+Entregue em `js/core/` (ES modules, sem dependências externas): `positioning.js`
+(`computePosition()`/`applyPosition()`, com flip automático para o lado
+oposto e clamp dentro da viewport); `overlay.js` (`lockScroll()`/
+`unlockScroll()` com compensação de scrollbar e contagem de referências para
+overlays aninhados, `onClickOutside()`); `focus.js` (`createFocusTrap()` com
+ciclo Tab/Shift+Tab, `onEscapeKey()`); `transition.js` (`collapse()`/
+`expand()` animando `height` via `transitionend`, respeitando
+`prefers-reduced-motion`). Reexportado como `Clarus.core` pelo bundle único
+(`js/clarus.js` → `dist/js/clarus.js`) e também importável de forma granular
+(`clarus-css/js/core/positioning`, etc.), alinhado com a API JavaScript
+definida na seção 20.
+
 Mockup: `mockup/js-foundation.html` (harness manual de posicionamento, foco
 e transição, sem componente final).
 
 ### Fase 8 — Dropdown e Tooltip
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Dropdown é o consumidor mais simples da infraestrutura de posicionamento.
 Tooltip reaproveita a mesma infraestrutura, com show/hide por hover/focus —
-os dois são os primeiros componentes JS por serem os mais simples.
+os dois são os primeiros componentes JS por serem os mais simples. Entregue:
+`.dropdown-toggle`/`.dropdown-menu`/`.dropdown-item`/`.dropdown-divider`/
+`.dropdown-header` (`scss/components/_dropdown.scss`); `.tooltip`/
+`.tooltip-inner`/`.tooltip-arrow` com 4 posicionamentos (`scss/components/_tooltips.scss`),
+usando os novos tokens `--clarus-tooltip-bg`/`-text` (invertidos no dark
+mode). `js/dropdown.js` e `js/tooltip.js` seguem a API da seção 20:
+auto-init via `data-clarus="dropdown"`/`"tooltip"`, `Clarus.Dropdown`/
+`Clarus.Tooltip` com `getInstance()`, `.show()`/`.hide()`/`.toggle()`/
+`.dispose()`, eventos `clarus:dropdown:shown`/`-hidden` e
+`clarus:tooltip:shown`/`-hidden`. Dropdown adiciona navegação por
+ArrowUp/ArrowDown entre itens e fecha ao clicar em um item, fora do menu ou
+com Escape (foco retorna ao toggle); Tooltip mostra/esconde por
+hover/foco/blur e Escape, com `aria-describedby` ligando o elemento de
+referência ao tooltip. Novo `js/core/register.js` (`autoInit()`/
+`createInstanceRegistry()`) generaliza esse padrão de inicialização/registro
+de instância para os próximos componentes interativos.
+
+`computePosition()` (`js/core/positioning.js`) ganhou a opção `align`
+(`"start"`/`"center"`/`"end"`) para o eixo cruzado, além do `placement`
+existente — usada pelo Dropdown via `data-align` no toggle (padrão
+`"start"`: borda esquerda do menu alinhada à borda esquerda do botão, como
+no Bootstrap). O offset do Dropdown em relação ao toggle caiu de 8px para
+4px, e `.dropdown-menu` ganhou `position: absolute` explícito no CSS base
+(antes só era aplicado via JS no `show()`), corrigindo uma medição incorreta
+de largura: sem isso, o menu era medido ainda como bloco normal (ocupando a
+largura inteira do `body`) antes do JS aplicar a posição, quebrando o
+cálculo de alinhamento `start`/`end`.
 
 Mockup: `mockup/dropdown-tooltip.html`.
 
 ### Fase 9 — Modal e Select customizado
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Modal reaproveita posicionamento e foco/teclado; mais complexo que
 dropdown/tooltip. Select customizado (formulários avançados) é um dropdown
 aplicado a um campo de formulário — depende do dropdown já existir (Fase 8).
 
+Entregue: `.modal`/`.modal-dialog`/`.modal-content`/`.modal-header`/
+`.modal-title`/`.modal-body`/`.modal-footer` (`scss/components/_modal.scss`),
+com tamanhos `.modal-sm`/`.modal-lg` no `.modal-dialog`. `js/modal.js`
+(`Clarus.Modal`) reaproveita a infraestrutura da Fase 7: `lockScroll()`
+enquanto aberto, `createFocusTrap()` no `.modal-dialog`, `onEscapeKey()` e
+`onClickOutside()` para fechar (foco retorna ao gatilho); dismiss via
+qualquer elemento com `data-dismiss="modal"`; `data-backdrop="static"` no
+`.modal` desativa fechar por Escape/clique fora. Select customizado
+(`js/select.js`, `Clarus.Select`) gera a marcação (`.form-select` +
+`.dropdown-menu`/`.dropdown-item` por `<option>`) a partir de um `<select>`
+nativo (`data-clarus="select"`, oculto mas mantido em sincronia para
+submissão de formulário) e **compõe uma instância de `Dropdown` por cima**
+— reaproveitando 100% do posicionamento, navegação por setas e fechamento
+já entregues na Fase 8, em vez de duplicar essa lógica. Seleção atualiza o
+`<select>` nativo e dispara `change` nativo (compatibilidade com listeners
+externos) além de `clarus:select:changed`. ARIA usa `role="listbox"`/
+`"option"`/`aria-selected` (não `"menu"`/`"menuitem"` herdado do Dropdown),
+por serem semânticas mais corretas para este caso de uso. Tamanhos via
+`data-size="sm"/"lg"` no `<select>` (`.form-select-sm`/`-lg`, novo em
+`scss/forms/_forms.scss`).
+
 Mockup: `mockup/modal-select.html`.
 
 ### Fase 10 — Accordion, Tabs e Toast
 
-**Status:** ⬜ Pendente.
+**Status:** ✅ Concluído.
 
 Todos reaproveitam a infraestrutura de transição/collapse (Fase 7): Accordion
 e Tabs compartilham o mesmo padrão de alternância de painel; Toast reaproveita
 a mesma infraestrutura e adiciona timers de auto-dismiss. Última fase do
 escopo inicial de componentes (seção 9).
+
+Entregue: **Accordion** (`.accordion`/`.accordion-item`/`.accordion-header`/
+`.accordion-button`/`.accordion-collapse`/`.accordion-body`,
+`scss/components/_accordion.scss`) — `js/accordion.js` usa `collapse()`/
+`expand()` de `Clarus.core` para animar a altura de cada painel; só um
+painel aberto por vez por padrão (`data-multiple="true"` permite vários).
+**Tabs** (`.tabs`/`.tab-content`/`.tab-pane`, `scss/components/_tabs.scss`,
+reaproveitando `.nav-link` já existente da Navbar/Fase 4 com um indicador de
+sublinhado escopado a `.tabs`) — `js/tabs.js` alterna `.active` no link e no
+painel correspondente, com navegação por ArrowLeft/ArrowRight/Home/End
+(`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`, `tabindex` roving),
+disparando `clarus:tab:changed`. **Toast**
+(`.toast-container`/`.toast`/`.toast-header`/`.toast-body`, variantes de
+cor de estado via `.toast-#{nome}`, `scss/components/_toasts.scss`) —
+`js/toast.js` usa `expand()`/`collapse()` para mostrar/esconder, com timer
+de auto-dismiss configurável (`data-delay`, `data-autohide="false"` para
+desativar) e dismiss via `data-dismiss="toast"`; instâncias são criadas no
+auto-init mas só ficam visíveis quando `.show()` é chamado (tipicamente após
+alguma ação), via `Clarus.Toast.getInstance(el).show()`.
+
+Com esta fase, todos os 10 marcos de componentes da seção 21 (e o escopo
+inicial de componentes da seção 9) estão entregues.
 
 Mockup: `mockup/accordion-tabs-toast.html`.
 
@@ -455,11 +588,11 @@ cada fase, seção 21):
 | 4 | Fase 3 | Cards | ✅ Concluído |
 | 5 | Fase 4 | Tabelas, Navbar | ✅ Concluído |
 | 6 | Fase 5 | Paginação, Breadcrumbs | ✅ Concluído |
-| 7 | Fase 6 | Formulários avançados (CSS-only) | ⬜ Pendente |
-| 8 | Fase 7 | Infraestrutura JS compartilhada | ⬜ Pendente |
-| 9 | Fase 8 | Dropdown, Tooltip | ⬜ Pendente |
-| 10 | Fase 9 | Modal, Select customizado | ⬜ Pendente |
-| 11 | Fase 10 | Accordion, Tabs, Toast | ⬜ Pendente |
+| 7 | Fase 6 | Formulários avançados (CSS-only) | ✅ Concluído |
+| 8 | Fase 7 | Infraestrutura JS compartilhada | ✅ Concluído |
+| 9 | Fase 8 | Dropdown, Tooltip | ✅ Concluído |
+| 10 | Fase 9 | Modal, Select customizado | ✅ Concluído |
+| 11 | Fase 10 | Accordion, Tabs, Toast | ✅ Concluído |
 
 Ao concluir o Marco 11, todo o escopo inicial de componentes (seção 9) e a
 ordem de implementação (seção 21) estarão entregues.

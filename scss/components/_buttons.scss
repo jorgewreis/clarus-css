@@ -69,9 +69,7 @@
 }
 
 .btn-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   width: 20px;
   height: 20px;
   padding: 0;
@@ -79,13 +77,26 @@
   border-radius: var(--clarus-radius-sm);
   color: var(--clarus-color-muted);
   background-color: transparent;
-  font-size: $font-size-md;
-  line-height: 1;
   cursor: pointer;
 }
 
+.btn-close::before,
+.btn-close::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background-color: currentcolor;
+  content: "";
+}
+
 .btn-close::before {
-  content: "\00d7";
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.btn-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .btn-close:hover {

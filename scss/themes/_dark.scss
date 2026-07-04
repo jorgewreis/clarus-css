@@ -1,5 +1,20 @@
 @use "sass:color";
+@use "sass:map";
 @use "../settings" as *;
+
+// Peso (% da cor original mantida, ver color.mix()) de cada cor de estado no
+// tema escuro. O limite de cada uma é o quanto dá pra clarear em direção ao
+// branco antes de virar o texto branco/preto que color-contrast() já
+// pré-calculou para os preenchimentos sólidos (botões, badges) no tema claro
+// — passar do limite deixaria esse texto ilegível. `info` não tem margem
+// segura e fica sem alteração (100%).
+$dark-color-weights: (
+  primary: 86%,
+  success: 65%,
+  warning: 65%,
+  danger: 95%,
+  info: 100%
+) !default;
 
 [data-theme="dark"] {
   --clarus-color-text: #f1f3f4;
@@ -10,9 +25,13 @@
   --clarus-shadow-sm: 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 40%);
   --clarus-shadow-md: 0 6px 12px rgb(0 0 0 / 55%), 0 3px 6px rgb(0 0 0 / 45%);
   --clarus-shadow-lg: 0 15px 30px rgb(0 0 0 / 60%), 0 6px 12px rgb(0 0 0 / 50%);
+  --clarus-tooltip-bg: #{$color-gray-100};
+  --clarus-tooltip-text: #{$color-gray-900};
 
   @each $name, $color in $theme-colors {
+    --clarus-color-#{$name}: #{color.mix($color, $color-white, map.get($dark-color-weights, $name))};
     --clarus-alert-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
     --clarus-alert-#{$name}-text: #{color.mix($color, $color-white, 70%)};
+    --clarus-feedback-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
   }
 }

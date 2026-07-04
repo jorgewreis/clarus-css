@@ -34,16 +34,20 @@
     "./forms.css": "./dist/css/forms.css",
     "./components.css": "./dist/css/components.css",
     "./helpers.css": "./dist/css/helpers.css",
-    "./js": "./dist/js/clarus.js"
+    "./js": "./dist/js/clarus.js",
+    "./js/*": "./js/*.js"
   },
   "files": [
+    "assets",
     "dist",
     "scss",
     "js",
-    "docs",
+    "docs/definitions.md",
+    "docs/scss-architecture.md",
     "mockup",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=18"

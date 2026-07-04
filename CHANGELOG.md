@@ -63,3 +63,127 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   Fase 1.
 - Componente Breadcrumbs (`scss/components/_breadcrumbs.scss`):
   `.breadcrumb-item`, separador via `::before`, estado `.active`.
+- Infraestrutura JS compartilhada (`js/core/`), pré-requisito dos
+  componentes interativos das próximas fases, sem dependências externas:
+  `positioning.js` (`computePosition()`/`applyPosition()`, com flip
+  automático e clamp na viewport); `overlay.js` (`lockScroll()`/
+  `unlockScroll()` com compensação de scrollbar e contagem de referências,
+  `onClickOutside()`); `focus.js` (`createFocusTrap()` com ciclo
+  Tab/Shift+Tab, `onEscapeKey()`); `transition.js` (`collapse()`/
+  `expand()` animando `height`, respeitando `prefers-reduced-motion`).
+  Reexportado como `Clarus.core` pelo bundle único e importável de forma
+  granular (`clarus-css/js/core/*`).
+- Componente Dropdown (`scss/components/_dropdown.scss`, `js/dropdown.js`):
+  `.dropdown-toggle`/`.dropdown-menu`/`.dropdown-item`/`.dropdown-divider`/
+  `.dropdown-header`; posicionamento via `Clarus.core` com flip automático e
+  alinhamento configurável (`data-align="start"`/`"center"`/`"end"`, padrão
+  `"start"`), navegação por ArrowUp/ArrowDown, fecha com clique fora/em um
+  item/Escape (foco retorna ao toggle). Primeiro componente a seguir a API
+  JS da seção 20: auto-init via `data-clarus="dropdown"`, `Clarus.Dropdown`
+  com `getInstance()`/`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+  `clarus:dropdown:shown`/`-hidden`.
+- `computePosition()` (`js/core/positioning.js`) ganhou a opção `align`
+  para o eixo cruzado (usada pelo Dropdown acima), além do `placement`
+  já existente.
+- Componente Tooltip (`scss/components/_tooltips.scss`, `js/tooltip.js`):
+  `.tooltip`/`.tooltip-inner`/`.tooltip-arrow` com 4 posicionamentos
+  (top/bottom/left/right) e novos tokens `--clarus-tooltip-bg`/`-text`
+  (invertidos no dark mode); show/hide por hover/foco/blur e Escape,
+  `aria-describedby` ligando referência e tooltip; mesma API JS do
+  Dropdown (`Clarus.Tooltip`, `data-clarus="tooltip"`, eventos
+  `clarus:tooltip:shown`/`-hidden`).
+- `js/core/register.js` (`autoInit()`/`createInstanceRegistry()`):
+  generaliza o padrão de auto-inicialização via `data-clarus` e registro de
+  instância (`getInstance()`) para os próximos componentes interativos.
+- Componente Modal (`scss/components/_modal.scss`, `js/modal.js`):
+  `.modal`/`.modal-dialog`/`.modal-content`/`.modal-header`/`.modal-title`/
+  `.modal-body`/`.modal-footer`, tamanhos `.modal-sm`/`.modal-lg`. Reaproveita
+  a infraestrutura da Fase 7: `lockScroll()` enquanto aberto,
+  `createFocusTrap()`, fecha com Escape/clique fora (foco volta ao
+  gatilho) ou `data-dismiss="modal"`; `data-backdrop="static"` desativa
+  fechar por Escape/clique fora. Segue a mesma API JS de Dropdown/Tooltip
+  (`Clarus.Modal`, `data-clarus="modal"`, eventos
+  `clarus:modal:shown`/`-hidden`).
+- Select customizado (`js/select.js`, `Clarus.Select`): gera a marcação
+  (`.form-select` + `.dropdown-menu`/`.dropdown-item` por `<option>`) a
+  partir de um `<select>` nativo (`data-clarus="select"`, oculto mas
+  sincronizado para submissão de formulário) e compõe uma instância de
+  `Dropdown` por cima, reaproveitando posicionamento/navegação/fechamento
+  da Fase 8 em vez de duplicar essa lógica; dispara `change` nativo e
+  `clarus:select:changed` ao selecionar. Novo `.form-select`/
+  `.form-select-sm`/`-lg` em `scss/forms/_forms.scss`.
+- Componente Accordion (`scss/components/_accordion.scss`, `js/accordion.js`):
+  `.accordion`/`.accordion-item`/`.accordion-header`/`.accordion-button`/
+  `.accordion-collapse`/`.accordion-body`. Reaproveita `collapse()`/
+  `expand()` de `Clarus.core` (Fase 7) para animar a altura de cada painel;
+  só um painel aberto por vez por padrão (`data-multiple="true"` permite
+  vários); segue a API JS da seção 20 (`Clarus.Accordion`,
+  `data-clarus="accordion"`, eventos `clarus:accordion:shown`/`-hidden`).
+- Componente Tabs (`scss/components/_tabs.scss`, `js/tabs.js`):
+  `.tabs`/`.tab-content`/`.tab-pane`, reaproveitando `.nav-link` (Navbar,
+  Fase 4) com indicador de sublinhado escopado a `.tabs`. Navegação por
+  ArrowLeft/ArrowRight/Home/End (`role="tablist"`/`"tab"`/`"tabpanel"`,
+  `aria-selected`, `tabindex` roving), disparando `clarus:tab:changed`
+  (`Clarus.Tabs`, `data-clarus="tabs"`).
+- Componente Toast (`scss/components/_toasts.scss`, `js/toast.js`):
+  `.toast-container`/`.toast`/`.toast-header`/`.toast-body`, variantes de
+  cor de estado (`.toast-#{nome}`, reaproveitando os tokens
+  `--clarus-alert-*-bg`/`-text` da Fase 2). Reaproveita `expand()`/
+  `collapse()` de `Clarus.core` para mostrar/esconder, com timer de
+  auto-dismiss configurável (`data-delay`, `data-autohide="false"` para
+  desativar) e dismiss via `data-dismiss="toast"`; segue a API JS da seção
+  20 (`Clarus.Toast`, `data-clarus="toast"`, eventos
+  `clarus:toast:shown`/`-hidden`).
+- Formulários avançados (`scss/forms/_forms.scss`): estados de validação
+  `.form-control.is-valid`/`.is-invalid` (borda e anel de foco em
+  `--clarus-color-success`/`-danger`) com `.valid-feedback`/
+  `.invalid-feedback` (exibidos via seletor de irmão adjacente, sem
+  JavaScript); upload de arquivo estilizado `.file-upload`/`.file-input`/
+  `.file-label` (input nativo ocultado via `clip-path`, mantendo foco e
+  navegação por teclado), com tamanhos (`.file-label-sm`/`-lg`) e estado
+  desabilitado.
+- Paleta de cores oficial "Indigo autoral" (`docs/definitions.md`, seção
+  18.1) em `scss/settings/_colors.scss`: `primary #4F46E5`, `success
+  #1BC559`, `warning #F0B40E`, `danger #DC263E`, `info #8BA2C4`; escala
+  neutra completada para 9 degraus cheios (`$color-gray-100` a
+  `$color-gray-900`).
+- Variantes de `primary`/`success`/`warning`/`danger`/`info` para o dark
+  mode (`scss/themes/_dark.scss`, token `--clarus-color-#{nome}`, via
+  `color.mix()` com peso por cor em `$dark-color-weights`).
+- Tipografia principal Plus Jakarta Sans self-hosted (`docs/definitions.md`,
+  seção 18.2): arquivos `.woff2` (licença OFL) em
+  `assets/fonts/plus-jakarta-sans/`, com `@font-face` em
+  `scss/base/_typography.scss` no lugar do `@import` do Google Fonts,
+  cumprindo a meta de dependência externa zero em tempo de execução para a
+  fonte principal (Source Code Pro, no monoespaçado, mantida via Google
+  Fonts).
+
+### Fixed
+
+- Duplicidade entre `$color-primary` e `$color-info` (mesmo valor de azul)
+  em `scss/settings/_colors.scss`, corrigida pela nova paleta "Indigo
+  autoral".
+- `.dropdown-menu` sem `position: absolute` no CSS base (só era aplicado
+  via JS no `show()`): a medição de largura acontecia com o menu ainda como
+  bloco normal (ocupando a largura inteira do `body`), quebrando o cálculo
+  de alinhamento `start`/`end`. Corrigido em
+  `scss/components/_dropdown.scss`.
+- Texto solto (`<h2>`/`<p>` sem cor própria) invisível no painel escuro de
+  vários mockups (`badges-alerts.html`, `buttons.html`, `forms-advanced.html`,
+  `dropdown-tooltip.html`): `[data-theme="dark"].theme-panel` só definia
+  `background-color`, nunca `color` — o texto herdava o valor já resolvido
+  de `color` do `body` (calculado no tema claro), que não é reavaliado só
+  por redefinir a custom property num elemento descendente.
+- Tooltip/Dropdown não invertiam para o tema escuro quando o elemento de
+  referência estava dentro de um wrapper com `data-theme="dark"` (em vez de
+  no `<html>`): como `js/tooltip.js`/`js/dropdown.js` reanexam o elemento
+  flutuante a `document.body`, ele saía do escopo do wrapper e sempre usava
+  os tokens do tema claro. Agora ambos copiam o `data-theme` do ancestral
+  mais próximo do elemento de referência/toggle para o elemento flutuante a
+  cada `show()`.
+- `.btn-close` (`scss/components/_buttons.scss`): o "×" (glifo `\00d7`)
+  centralizado por flexbox não ficava opticamente centrado no botão, por
+  depender da métrica vertical do glifo na fonte. Substituído por duas
+  barras via `::before`/`::after`, giradas ±45° e centralizadas por
+  `transform: translate(-50%, -50%)` a partir do centro absoluto do
+  botão — centralização exata, independente de fonte.

@@ -6,11 +6,14 @@ HTML, CSS e JavaScript nativo — sem dependências externas em tempo de execuç
 Combina componentes prontos (no estilo Bootstrap) com classes utilitárias,
 grid baseado em Flexbox e customização via CSS Custom Properties.
 
-> **Status:** versão inicial (`0.1.0`) em desenvolvimento ativo. O grid, os
-> utilitários e os formulários já têm estilos funcionais; a maioria dos
-> componentes (`buttons`, `cards`, `modal`, etc.) ainda está em estágio de
-> esqueleto básico e será expandida nas próximas versões. Veja
-> [`docs/definitions.md`](docs/definitions.md) para o roadmap completo.
+> **Status:** escopo inicial completo (`0.1.x`). Layout, grid, utilitários,
+> formulários (incluindo validação visual, select customizado e upload de
+> arquivo) e todos os componentes previstos para a primeira versão —
+> botões, cards, alertas, badges, tabelas, navbar, dropdown, modal,
+> accordion, tabs, tooltips, toasts, paginação e breadcrumbs — já estão
+> implementados, com dark mode nativo e API JavaScript consistente entre os
+> componentes interativos. Veja [`docs/definitions.md`](docs/definitions.md)
+> para o histórico de decisões e o detalhamento de cada fase.
 
 ## Instalação
 
@@ -90,6 +93,51 @@ Layout e containers, grid, formulários, botões, cards, alertas, badges,
 tabelas, navbar, dropdown, modal, accordion, tabs, tooltips, toasts,
 paginação e breadcrumbs. O escopo completo está descrito em
 [`docs/definitions.md`](docs/definitions.md#9-escopo-inicial-de-componentes).
+
+## Componentes interativos (JavaScript)
+
+Dropdown, Tooltip, Modal, Select customizado, Accordion, Tabs e Toast usam a
+mesma API, sem exigir `new` manual para o uso básico:
+
+```html
+<button type="button" class="btn btn-primary" data-clarus="modal" data-target="#meuModal">
+  Abrir modal
+</button>
+
+<div class="modal" id="meuModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Título</h3>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">Conteúdo do modal.</div>
+    </div>
+  </div>
+</div>
+```
+
+Basta incluir `dist/js/clarus.js` (ou `clarus.min.js`) — a inicialização é
+automática via `data-clarus="<componente>"`. Cada instância continua
+acessível para controle programático:
+
+```js
+const modalEl = document.getElementById("meuModal");
+Clarus.Modal.getInstance(modalEl).show();
+```
+
+API padronizada em todo componente interativo: `.show()`, `.hide()`,
+`.toggle()`, `.dispose()`, além de eventos DOM customizados
+(`clarus:modal:shown`, `clarus:tab:changed`, etc.). Também é possível
+importar cada componente individualmente para uso com bundlers:
+
+```js
+import { Modal } from "clarus-css/js/modal";
+```
+
+Detalhes de cada componente (atributos, eventos, exemplos) estão nos
+arquivos `mockup/*.html` e no histórico de decisões em
+[`docs/definitions.md`](docs/definitions.md#20-api-javascript-dos-componentes-interativos).
 
 ## Customização por variáveis
 
