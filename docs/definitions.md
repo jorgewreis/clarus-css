@@ -559,6 +559,12 @@ Mockup: `mockup/accordion-tabs-toast.html`.
   cada push/PR, como um novo step em `.github/workflows/ci.yml`, além do
   lint e build já existentes.
 
+**Status desta seção (identificado em review, 2026-07-04):** a estratégia
+acima está decidida, mas nada dela foi implementado ainda — `npm test`
+continua sendo um `echo` no-op, e `ci.yml` só roda lint + build. Toda a
+validação feita até a v0.1.2 foi manual (Playwright ad-hoc por sessão, sem
+suíte versionada). O plano de implementação está na seção 24.
+
 ## 23. Marcos do Projeto
 
 O projeto transforma estas definições em uma estrutura técnica através de
@@ -593,6 +599,91 @@ cada fase, seção 21):
 | 9 | Fase 8 | Dropdown, Tooltip | ✅ Concluído |
 | 10 | Fase 9 | Modal, Select customizado | ✅ Concluído |
 | 11 | Fase 10 | Accordion, Tabs, Toast | ✅ Concluído |
+| 12 | Fase 11/12 (seção 24) | Testes automatizados (Vitest + Playwright) | ⬜ Pendente |
 
 Ao concluir o Marco 11, todo o escopo inicial de componentes (seção 9) e a
-ordem de implementação (seção 21) estarão entregues.
+ordem de implementação (seção 21) estarão entregues — o que já aconteceu.
+O Marco 12 (seção 24) fecha a lacuna entre a estratégia de testes decidida
+na seção 22 e o que de fato está implementado.
+
+## 24. Plano de Testes Automatizados e Gaps Remanescentes
+
+Levantamento feito em review completo do projeto (2026-07-04), comparando o
+que está definido neste documento com o que está de fato implementado.
+Nenhum item desta seção está implementado ainda — é um plano, não um
+registro de entrega (ao contrário das seções 18-21).
+
+### 24.1 Fase 11 — Testes funcionais (Vitest + jsdom)
+
+Cobre o requisito de "teste funcional de JavaScript" da seção 22.
+
+1. Dependências novas: `vitest`, `jsdom` (ou `happy-dom`); script
+   `"test": "vitest run"` em `package.json`, substituindo o `echo` atual.
+2. Um arquivo de teste por módulo de `js/core/`: `positioning` (flip e
+   `align` start/center/end), `overlay` (contagem de referências de
+   `lockScroll`/`unlockScroll`, `onClickOutside` ignorando o clique que
+   abriu), `focus` (ciclo Tab/Shift+Tab, `onEscapeKey`), `transition`
+   (resolução da Promise de `collapse()`/`expand()`, `prefers-reduced-motion`).
+3. Um arquivo de teste por componente (`dropdown`, `tooltip`, `modal`,
+   `select`, `accordion`, `tabs`, `toast`): estado (`isOpen`), atributos
+   ARIA (`aria-expanded`, `aria-selected`, `aria-controls`, etc.), eventos
+   `clarus:*` disparados, e o contrato de instância (`getInstance()`,
+   `.show()`/`.hide()`/`.toggle()`/`.dispose()` limpando listeners).
+4. Regressões já encontradas nesta sessão (bug do `.toast` com
+   `display: none` fixo, bug do `data-theme` não herdado em elementos
+   reanexados a `document.body`) viram casos de teste explícitos, para não
+   voltarem silenciosamente.
+
+### 24.2 Fase 12 — Testes visuais (Playwright)
+
+Cobre o requisito de "teste visual (regressão de CSS)" da seção 22, usando
+os arquivos em `mockup/*.html` como fixtures oficiais (já é a convenção
+usada manualmente durante todo o desenvolvimento das Fases 6-10).
+
+1. Dependência nova: `@playwright/test`, com `playwright.config.mjs`
+   apontando para os arquivos `mockup/*.html` via `file://` (sem precisar
+   de servidor HTTP).
+2. Screenshot de baseline (claro + escuro) para cada mockup, versionado em
+   `tests/visual/__screenshots__/`.
+3. Testes de interação mínimos por componente interativo (abrir/fechar
+   dropdown, modal, accordion, tabs, toast), reaproveitando os roteiros já
+   validados manualmente nesta sessão (foco, Escape, clique fora,
+   navegação por teclado) como asserções automatizadas em vez de checagem
+   ad-hoc.
+
+### 24.3 Integração no CI
+
+Atualizar `.github/workflows/ci.yml`:
+
+1. Adicionar `npx playwright install --with-deps chromium` antes dos
+   testes.
+2. Novo step "Testes funcionais" (`npm test`, agora rodando Vitest de
+   verdade).
+3. Novo step "Testes visuais" (`npx playwright test`), com upload do
+   diff de screenshots como artefato em caso de falha.
+4. Lint e build continuam como estão hoje.
+
+### 24.4 Outros gaps identificados (não bloqueantes)
+
+Itens menores, encontrados no mesmo review, que não fazem parte da
+estratégia de testes mas vale registrar:
+
+- **Tipos TypeScript (`.d.ts`)** para a API JS (`Clarus.*`, opções de cada
+  componente) — melhora a experiência de quem usa bundler/TS; não exigido
+  por nenhuma seção deste documento, mas é prática comum em pacotes JS
+  modernos.
+- **Referência consolidada de API por componente** (tabela de atributos
+  `data-*`, eventos `clarus:*` e métodos por componente): hoje essa
+  informação está espalhada entre `mockup/*.html`, o README e a prosa das
+  seções 20/21. Um `docs/components-api.md` fecharia essa lacuna sem
+  duplicar o que já existe.
+- `package.json` tem `description` em inglês enquanto o resto do projeto é
+  em português — inconsistência cosmética, não funcional.
+- Prática de versionamento: o bump de `0.1.1` para `0.1.2` (v0.1.2) foi de
+  patch mesmo adicionando 5 componentes novos (Fases 6-10). Daqui em
+  diante, adição de funcionalidade nova numa linha `0.x` deveria
+  preferencialmente ser bump de minor (`0.2.0`), reservando patch para
+  correções — mais alinhado com o espírito do Semantic Versioning citado
+  na seção 16.
+- Templates de issue/PR e metadata do repositório GitHub (topics,
+  descrição) — polimento de produto open source, não bloqueante.

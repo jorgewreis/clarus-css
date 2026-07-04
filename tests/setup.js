@@ -1,0 +1,30 @@
+import { vi } from "vitest";
+
+// jsdom não implementa matchMedia; várias partes de js/core/ (prefers-reduced-motion) dependem dele.
+window.matchMedia =
+  window.matchMedia ||
+  vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }));
+
+// jsdom não faz layout: offsetParent é sempre null, o que zeraria getFocusableElements()
+// (js/core/focus.js) mesmo para elementos visíveis no teste. Aproxima "tem offsetParent"
+// como "está anexado ao DOM", que é o suficiente para os testes de foco.
+Object.defineProperty(HTMLElement.prototype, "offsetParent", {
+  configurable: true,
+  get() {
+    return this.isConnected ? document.body : null;
+  },
+});
+
+// Viewport determinístico para os cálculos de posicionamento (js/core/positioning.js).
+Object.defineProperty(document.documentElement, "clientWidth", { configurable: true, value: 1024 });
+Object.defineProperty(document.documentElement, "clientHeight", { configurable: true, value: 768 });
+
+// jsdom só expõe requestAnimationFrame com pretendToBeVisual; garante um fallback
+// para js/core/transition.js funcionar independente da configuração do ambiente.
+window.requestAnimationFrame = window.requestAnimationFrame || ((callback) => setTimeout(() => callback(Date.now()), 16));
+window.cancelAnimationFrame = window.cancelAnimationFrame || ((id) => clearTimeout(id));

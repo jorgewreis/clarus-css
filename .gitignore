@@ -2,6 +2,11 @@ node_modules/
 dist/
 *.log
 
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+
 # Projeto padroniza em npm (ver CONTRIBUTING.md); evita lockfile duplicado.
 pnpm-lock.yaml
 pnpm-workspace.yaml

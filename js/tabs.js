@@ -49,19 +49,20 @@ export class Tabs {
   }
 
   _handleKeydown(event) {
-    const currentIndex = this.tabs.indexOf(document.activeElement);
+    const enabledTabs = this.tabs.filter((tab) => !tab.classList.contains("disabled"));
+    const currentIndex = enabledTabs.indexOf(document.activeElement);
     if (currentIndex === -1) return;
 
     let nextIndex = null;
-    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % this.tabs.length;
-    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + this.tabs.length) % this.tabs.length;
+    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % enabledTabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + enabledTabs.length) % enabledTabs.length;
     else if (event.key === "Home") nextIndex = 0;
-    else if (event.key === "End") nextIndex = this.tabs.length - 1;
+    else if (event.key === "End") nextIndex = enabledTabs.length - 1;
 
     if (nextIndex === null) return;
 
     event.preventDefault();
-    const nextTab = this.tabs[nextIndex];
+    const nextTab = enabledTabs[nextIndex];
     nextTab.focus();
     this.show(nextTab);
   }

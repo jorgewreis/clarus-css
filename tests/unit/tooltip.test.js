@@ -1,0 +1,110 @@
+import { describe, it, expect, afterEach, vi } from "vitest";
+import { Tooltip } from "../../js/tooltip.js";
+
+function buildTooltip(attrs = "") {
+  const el = document.createElement("button");
+  el.setAttribute("title", "Texto do tooltip");
+  if (attrs) el.setAttribute("data-placement", attrs);
+  document.body.appendChild(el);
+
+  return { el, tooltip: new Tooltip(el) };
+}
+
+describe("Tooltip", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("lança erro se o elemento não tiver título", () => {
+    const el = document.createElement("button");
+    document.body.appendChild(el);
+
+    expect(() => new Tooltip(el)).toThrow();
+  });
+
+  it("remove o atributo title nativo (evita o tooltip duplo do navegador)", () => {
+    const { el } = buildTooltip();
+    expect(el.hasAttribute("title")).toBe(false);
+  });
+
+  it("cria o elemento .tooltip em document.body, ligado por aria-describedby", () => {
+    const { el } = buildTooltip();
+    const tooltipEl = document.querySelector(".tooltip");
+
+    expect(tooltipEl).not.toBeNull();
+    expect(tooltipEl.parentElement).toBe(document.body);
+    expect(tooltipEl.getAttribute("role")).toBe("tooltip");
+    expect(el.getAttribute("aria-describedby")).toBe(tooltipEl.id);
+  });
+
+  it("getInstance() retorna a instância criada", () => {
+    const { el, tooltip } = buildTooltip();
+    expect(Tooltip.getInstance(el)).toBe(tooltip);
+  });
+
+  it("mouseenter mostra e mouseleave esconde", () => {
+    const { el, tooltip } = buildTooltip();
+
+    el.dispatchEvent(new MouseEvent("mouseenter"));
+    expect(tooltip.tooltipEl.classList.contains("show")).toBe(true);
+
+    el.dispatchEvent(new MouseEvent("mouseleave"));
+    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+  });
+
+  it("focus mostra e blur esconde", () => {
+    const { el, tooltip } = buildTooltip();
+
+    el.dispatchEvent(new FocusEvent("focus"));
+    expect(tooltip.tooltipEl.classList.contains("show")).toBe(true);
+
+    el.dispatchEvent(new FocusEvent("blur"));
+    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+  });
+
+  it("Escape esconde o tooltip quando aberto", () => {
+    const { el, tooltip } = buildTooltip();
+    tooltip.show();
+
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+
+    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+  });
+
+  it("dispara clarus:tooltip:shown e clarus:tooltip:hidden", () => {
+    const { el, tooltip } = buildTooltip();
+    const shownHandler = vi.fn();
+    const hiddenHandler = vi.fn();
+    el.addEventListener("clarus:tooltip:shown", shownHandler);
+    el.addEventListener("clarus:tooltip:hidden", hiddenHandler);
+
+    tooltip.show();
+    expect(shownHandler).toHaveBeenCalledTimes(1);
+
+    tooltip.hide();
+    expect(hiddenHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it("copia o data-theme do ancestral mais próximo do elemento de referência", () => {
+    const themedWrapper = document.createElement("div");
+    themedWrapper.setAttribute("data-theme", "dark");
+    document.body.appendChild(themedWrapper);
+
+    const el = document.createElement("button");
+    el.setAttribute("title", "Texto");
+    themedWrapper.appendChild(el);
+
+    const tooltip = new Tooltip(el);
+    tooltip.show();
+
+    expect(tooltip.tooltipEl.getAttribute("data-theme")).toBe("dark");
+  });
+
+  it("dispose() remove o elemento do DOM e o registro da instância", () => {
+    const { el, tooltip } = buildTooltip();
+    tooltip.dispose();
+
+    expect(document.querySelector(".tooltip")).toBeNull();
+    expect(Tooltip.getInstance(el)).toBeUndefined();
+  });
+});
