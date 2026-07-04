@@ -104,7 +104,7 @@ O escopo inicial inclui:
 - Paginação.
 - Breadcrumbs.
 
-O escopo pode ser implementado em etapas, mas o documento assume que todos esses grupos fazem parte da visão inicial do produto.
+Todos os grupos acima estão implementados e compõem a versão inicial do produto — detalhes de cada um na seção 21.
 
 ## 10. Temas e Customização
 
@@ -219,8 +219,8 @@ As seguintes decisões estão definidas:
 - Tom do projeto: técnico, estratégico e com posicionamento de produto.
 - Convenção de nomenclatura de classes: definida na seção 19.
 - API JavaScript dos componentes interativos: definida na seção 20.
-- Ordem de implementação dos componentes: definida na seção 21.
-- Estratégia de testes visuais e funcionais: definida na seção 22.
+- Catálogo e arquitetura dos componentes: detalhado na seção 21.
+- Testes automatizados (funcionais e visuais): detalhados na seção 22.
 
 ## 18. Paleta de Cores e Tipografia
 
@@ -309,381 +309,214 @@ Pro no monoespaçado (`$font-family-mono`, sem alteração).
   componente (ex.: `import { Modal } from "clarus-css/js/modal"`), para uso
   com bundlers.
 
-## 21. Ordem de Implementação dos Componentes
+## 21. Componentes do Framework
 
-Critério de priorização: dependência técnica primeiro (o que outros
-componentes reaproveitam é implementado antes), respeitando que todo
-componente 100% CSS (sem JavaScript) seja concluído antes de iniciar os que
-exigem JavaScript. A ordem abaixo é subdividida em **10 fases**, cada uma
-tratada como um marco independente (ver seção 23) — fases menores facilitam
-entrega incremental e validação visual a cada etapa.
+Esta seção documenta, por grupo de componente, as classes CSS, tokens e
+módulos JavaScript entregues pelo framework — a referência funcional
+completa da versão atual. Todo componente/grupo tem um mockup dedicado em
+`mockup/` (HTML puro consumindo os arquivos gerados em `dist/css/`/
+`dist/js/`), usado tanto como exemplo de uso quanto como fixture dos testes
+visuais (seção 22).
 
-**Regra obrigatória de mockup por fase:** ao concluir uma fase, toda
-funcionalidade CSS nova introduzida nela deve ganhar um exemplo demonstrativo
-em `mockup/` (arquivo novo ou atualização de um existente), seguindo o
-padrão já usado em `mockup/layout.html` — HTML puro consumindo os arquivos
-gerados em `dist/css/`. Isso reforça, por fase, a regra geral já definida na
-seção 22 ("cada componente/grupo implementado ganha um mockup dedicado,
-mantido atualizado") e o fluxo de evolução de `docs/scss-architecture.md`.
-Fases que não introduzem classes CSS novas diretamente (caso da Fase 7,
-infraestrutura JS) podem usar o mockup como harness de teste manual do
-comportamento, sem exigir novas classes visuais.
+### Botões
 
-### Fase 1 — Botões
-
-**Status:** ✅ Concluído.
-
-Reaproveitados por cards, alertas, modal e navbar; primeiro componente por
-ser o de maior reaproveitamento técnico. Entregue: variantes sólidas e
-outline por cor de estado (`.btn-primary/success/warning/danger/info`,
-`.btn-outline-*`), tamanhos (`.btn-sm`/`.btn-lg`), estados de
-hover/active/focus/disabled, e a função `color-contrast()`
-(`scss/tools/_mixins.scss`) para garantir contraste WCAG AA em cada
-variante.
+Variantes sólidas e outline por cor de estado
+(`.btn-primary/success/warning/danger/info`, `.btn-outline-*`), tamanhos
+(`.btn-sm`/`.btn-lg`) e estados de hover/active/focus/disabled. A função
+`color-contrast()` (`scss/tools/_mixins.scss`) garante contraste WCAG AA em
+cada variante — reaproveitada por cards, alertas, modal e navbar.
 
 Mockup: `mockup/buttons.html`.
 
-### Fase 2 — Badges e Alertas
+### Badges e Alertas
 
-**Status:** ✅ Concluído.
-
-Badges é pequeno e reaproveitado por cards, navbar e tabelas. Alertas
-formaliza o padrão de variante de cor de estado (success/warning/danger/info)
-que badges e tabelas também usam — os dois ficam juntos por definirem, em
-conjunto, esse padrão de cor de estado. Entregue: badges sólidos com
-tamanhos (`.badge-sm`/`.badge-lg`); alertas com fundo tintado por estado
-(`.alert-*`), via tokens `--clarus-alert-*-bg`/`-text` com suporte a dark
-mode; funções `tint-color()`/`shade-color()`
-(`scss/tools/_mixins.scss`).
+Badges sólidos com tamanhos (`.badge-sm`/`.badge-lg`), reaproveitados por
+cards, navbar e tabelas. Alertas com fundo tintado por estado (`.alert-*`),
+via tokens `--clarus-alert-*-bg`/`-text` com suporte a dark mode, usando as
+funções `tint-color()`/`shade-color()` (`scss/tools/_mixins.scss`). Os dois
+componentes compartilham o mesmo padrão de variante de cor de estado
+(success/warning/danger/info), também usado por tabelas.
 
 Mockup: `mockup/badges-alerts.html`.
 
-### Fase 3 — Cards
+### Cards
 
-**Status:** ✅ Concluído.
-
-Combina botões, badges e tipografia base num contêiner; primeiro componente
-de composição, por isso isolado em fase própria. Entregue:
+Combina botões, badges e tipografia base num contêiner:
 `.card-header`/`.card-body`/`.card-footer`, `.card-title`/`.card-subtitle`/
-`.card-text`, tamanhos (`.card-sm`/`.card-lg`), variante `.card-header` com
-título + botão de fechar (`.btn-close`, reaproveitável em modal/toast),
-utilitários de sombra (`.shadow-sm`/`.shadow`/`.shadow-lg`,
-`scss/utilities/_shadow.scss`) para elevação do card, `.card-clickable` +
-`.stretched-link` (card inteiro clicável/focável sem aninhar elementos
-interativos) e `.card-horizontal` (eixo em linha, com raio/borda do
-header/footer ajustados para a lateral).
+`.card-text`, tamanhos (`.card-sm`/`.card-lg`). O `.card-header` suporta a
+variante título + botão de fechar (`.btn-close`, reaproveitável em
+modal/toast). Utilitários de sombra (`.shadow-sm`/`.shadow`/`.shadow-lg`,
+`scss/utilities/_shadow.scss`) dão elevação ao card. `.card-clickable` +
+`.stretched-link` tornam o card inteiro clicável/focável sem aninhar
+elementos interativos; `.card-horizontal` muda o eixo para linha, ajustando
+raio/borda do header/footer para a lateral.
 
 Mockup: `mockup/cards.html`.
 
-### Fase 4 — Tabelas e Navbar
+### Tabelas e Navbar
 
-**Status:** ✅ Concluído.
+Tabelas: `.table-striped`/`.table-hover`/`.table-bordered`/
+`.table-borderless`/`.table-sm`/`.table-responsive` e variantes de cor de
+estado, reaproveitando os tokens `--clarus-alert-*` de Badges e Alertas.
 
-Tabelas reaproveita as cores de estado definidas em alertas/badges. Navbar
-(versão estática, sem dropdown/collapse) reaproveita botões e badges — ambos
-são componentes de exibição de conteúdo/estrutura de página. Entregue:
-`.table-striped`/`.table-hover`/`.table-bordered`/`.table-borderless`/
-`.table-sm`/`.table-responsive` e variantes de cor de estado (reaproveitando
-os tokens `--clarus-alert-*` da Fase 2); `.navbar-brand`/`.navbar-nav`/
-`.nav-link` (com `.active`/`.disabled`, sem toggle JS).
+Navbar (versão estática, sem dropdown/collapse próprio — a combinação com
+Dropdown é feita compondo os dois componentes): `.navbar-brand`/
+`.navbar-nav`/`.nav-link`, com estados `.active`/`.disabled`, reaproveitando
+botões e badges para o conteúdo interno.
 
 Mockup: `mockup/tables-navbar.html`.
 
-### Fase 5 — Paginação e Breadcrumbs
+### Paginação e Breadcrumbs
 
-**Status:** ✅ Concluído.
-
-Paginação reaproveita o padrão de item ativo/desabilitado dos botões.
-Breadcrumbs é mais simples, sem dependência de outros componentes — ambos
-são auxiliares de navegação, agrupados por afinidade funcional. Entregue:
-`.page-link` com estados `.active`/`.disabled` (reaproveitando
-`color-contrast()`); `.breadcrumb-item` com separador via `::before` e
-estado `.active`.
+Paginação: `.page-link` com estados `.active`/`.disabled`, reaproveitando
+`color-contrast()` (mesma função dos botões) para garantir contraste.
+Breadcrumbs: `.breadcrumb-item` com separador via `::before` e estado
+`.active`. Ambos são auxiliares de navegação, sem JavaScript.
 
 Mockup: `mockup/pagination-breadcrumbs.html`.
 
-### Fase 6 — Formulários avançados (CSS-only)
+### Formulários Avançados
 
-**Status:** ✅ Concluído.
+Estados de validação: `.form-control.is-valid`/`.is-invalid` (borda e anel
+de foco em `--clarus-color-success`/`-danger`, reaproveitando as cores de
+estado de alertas/badges), com `.valid-feedback`/`.invalid-feedback`
+exibidos via seletor de irmão adjacente, sem JavaScript.
 
-Estados de validação (`.is-valid`/`.is-invalid`, reaproveitando as cores de
-estado de alertas/badges) e upload de arquivo estilizado (label + input
-nativo oculto). É o último componente 100% CSS antes de iniciar
-infraestrutura JavaScript (Fase 7). Entregue: `.form-control.is-valid`/
-`.is-invalid` (borda e anel de foco em `--clarus-color-success`/`-danger`),
-`.valid-feedback`/`.invalid-feedback` (texto exibido via seletor de irmão
-adjacente, sem JavaScript); `.file-upload`/`.file-input`/`.file-label`
-(input nativo ocultado por `clip-path` mantendo foco/teclado, rótulo
-estilizado via `<label for>`), com tamanhos (`.file-label-sm`/`-lg`) e
-estado desabilitado.
+Upload de arquivo estilizado: `.file-upload`/`.file-input`/`.file-label` —
+o input nativo é ocultado por `clip-path` (mantendo foco e navegação por
+teclado), com rótulo estilizado via `<label for>`, tamanhos
+(`.file-label-sm`/`-lg`) e estado desabilitado. Todo o grupo é 100% CSS, sem
+dependência de JavaScript.
 
 Mockup: `mockup/forms-advanced.html`.
 
-### Fase 7 — Infraestrutura JS compartilhada
+### Infraestrutura JS Compartilhada
 
-**Status:** ✅ Concluído.
+Módulos internos em `js/core/` (ES modules, sem dependências externas)
+usados por todos os componentes interativos, sem componente visual próprio:
 
-Pré-requisito de qualquer componente interativo, sem componente visual
-próprio:
+- `positioning.js` — `computePosition()`/`applyPosition()`, com flip
+  automático para o lado oposto e clamp dentro da viewport. Usado por
+  Dropdown, Tooltip e, indiretamente via composição, Select customizado.
+- `overlay.js` — `lockScroll()`/`unlockScroll()` com compensação de
+  scrollbar e contagem de referências para overlays aninhados, além de
+  `onClickOutside()`. Usado por Modal e Dropdown.
+- `focus.js` — `createFocusTrap()` com ciclo Tab/Shift+Tab e
+  `onEscapeKey()`. Usado por Modal e Dropdown.
+- `transition.js` — `collapse()`/`expand()`, animando `height` via
+  `transitionend` e respeitando `prefers-reduced-motion`. Usado por
+  Accordion, Tabs e Toast.
+- `register.js` — `autoInit()`/`createInstanceRegistry()`, padrão comum de
+  inicialização automática (`data-clarus="..."`) e registro de instância
+  (`getInstance()`) usado por todo componente interativo.
 
-1. Posicionamento/overlay — usado por dropdown, tooltip e modal.
-2. Foco e teclado (focus trap + tecla Escape) — usado por modal e dropdown.
-3. Transição/collapse — usado por accordion, tabs e toast.
-
-Entregue em `js/core/` (ES modules, sem dependências externas): `positioning.js`
-(`computePosition()`/`applyPosition()`, com flip automático para o lado
-oposto e clamp dentro da viewport); `overlay.js` (`lockScroll()`/
-`unlockScroll()` com compensação de scrollbar e contagem de referências para
-overlays aninhados, `onClickOutside()`); `focus.js` (`createFocusTrap()` com
-ciclo Tab/Shift+Tab, `onEscapeKey()`); `transition.js` (`collapse()`/
-`expand()` animando `height` via `transitionend`, respeitando
-`prefers-reduced-motion`). Reexportado como `Clarus.core` pelo bundle único
-(`js/clarus.js` → `dist/js/clarus.js`) e também importável de forma granular
+Reexportado como `Clarus.core` pelo bundle único (`js/clarus.js` →
+`dist/js/clarus.js`) e também importável de forma granular
 (`clarus-css/js/core/positioning`, etc.), alinhado com a API JavaScript
 definida na seção 20.
 
-Mockup: `mockup/js-foundation.html` (harness manual de posicionamento, foco
-e transição, sem componente final).
+Mockup: `mockup/js-foundation.html` (harness de posicionamento, foco e
+transição, sem componente visual final).
 
-### Fase 8 — Dropdown e Tooltip
+### Dropdown e Tooltip
 
-**Status:** ✅ Concluído.
-
-Dropdown é o consumidor mais simples da infraestrutura de posicionamento.
-Tooltip reaproveita a mesma infraestrutura, com show/hide por hover/focus —
-os dois são os primeiros componentes JS por serem os mais simples. Entregue:
 `.dropdown-toggle`/`.dropdown-menu`/`.dropdown-item`/`.dropdown-divider`/
-`.dropdown-header` (`scss/components/_dropdown.scss`); `.tooltip`/
-`.tooltip-inner`/`.tooltip-arrow` com 4 posicionamentos (`scss/components/_tooltips.scss`),
-usando os novos tokens `--clarus-tooltip-bg`/`-text` (invertidos no dark
-mode). `js/dropdown.js` e `js/tooltip.js` seguem a API da seção 20:
-auto-init via `data-clarus="dropdown"`/`"tooltip"`, `Clarus.Dropdown`/
-`Clarus.Tooltip` com `getInstance()`, `.show()`/`.hide()`/`.toggle()`/
-`.dispose()`, eventos `clarus:dropdown:shown`/`-hidden` e
-`clarus:tooltip:shown`/`-hidden`. Dropdown adiciona navegação por
-ArrowUp/ArrowDown entre itens e fecha ao clicar em um item, fora do menu ou
-com Escape (foco retorna ao toggle); Tooltip mostra/esconde por
-hover/foco/blur e Escape, com `aria-describedby` ligando o elemento de
-referência ao tooltip. Novo `js/core/register.js` (`autoInit()`/
-`createInstanceRegistry()`) generaliza esse padrão de inicialização/registro
-de instância para os próximos componentes interativos.
+`.dropdown-header` (`scss/components/_dropdown.scss`). `.tooltip`/
+`.tooltip-inner`/`.tooltip-arrow` com 4 posicionamentos
+(`scss/components/_tooltips.scss`), usando os tokens
+`--clarus-tooltip-bg`/`-text` (invertidos no dark mode).
 
-`computePosition()` (`js/core/positioning.js`) ganhou a opção `align`
-(`"start"`/`"center"`/`"end"`) para o eixo cruzado, além do `placement`
-existente — usada pelo Dropdown via `data-align` no toggle (padrão
-`"start"`: borda esquerda do menu alinhada à borda esquerda do botão, como
-no Bootstrap). O offset do Dropdown em relação ao toggle caiu de 8px para
-4px, e `.dropdown-menu` ganhou `position: absolute` explícito no CSS base
-(antes só era aplicado via JS no `show()`), corrigindo uma medição incorreta
-de largura: sem isso, o menu era medido ainda como bloco normal (ocupando a
-largura inteira do `body`) antes do JS aplicar a posição, quebrando o
-cálculo de alinhamento `start`/`end`.
+`js/dropdown.js` e `js/tooltip.js` seguem a API da seção 20: auto-init via
+`data-clarus="dropdown"`/`"tooltip"`, `Clarus.Dropdown`/`Clarus.Tooltip` com
+`getInstance()`, `.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+`clarus:dropdown:shown`/`-hidden` e `clarus:tooltip:shown`/`-hidden`.
+Dropdown navega entre itens com ArrowUp/ArrowDown e fecha ao clicar em um
+item, fora do menu ou com Escape (foco retorna ao toggle). Tooltip
+mostra/esconde por hover/foco/blur e Escape, com `aria-describedby` ligando
+o elemento de referência ao tooltip.
+
+`computePosition()` (`js/core/positioning.js`) suporta a opção `align`
+(`"start"`/`"center"`/`"end"`) para o eixo cruzado, além do `placement`. O
+Dropdown usa `data-align` no toggle (padrão `"start"`, como no Bootstrap)
+com offset de 4px em relação ao toggle; `.dropdown-menu` tem
+`position: absolute` explícito no CSS base, evitando que o menu seja medido
+como bloco normal antes do JS aplicar a posição (o que quebraria o cálculo
+de alinhamento `start`/`end`).
 
 Mockup: `mockup/dropdown-tooltip.html`.
 
-### Fase 9 — Modal e Select customizado
+### Modal e Select Customizado
 
-**Status:** ✅ Concluído.
-
-Modal reaproveita posicionamento e foco/teclado; mais complexo que
-dropdown/tooltip. Select customizado (formulários avançados) é um dropdown
-aplicado a um campo de formulário — depende do dropdown já existir (Fase 8).
-
-Entregue: `.modal`/`.modal-dialog`/`.modal-content`/`.modal-header`/
+Modal: `.modal`/`.modal-dialog`/`.modal-content`/`.modal-header`/
 `.modal-title`/`.modal-body`/`.modal-footer` (`scss/components/_modal.scss`),
 com tamanhos `.modal-sm`/`.modal-lg` no `.modal-dialog`. `js/modal.js`
-(`Clarus.Modal`) reaproveita a infraestrutura da Fase 7: `lockScroll()`
-enquanto aberto, `createFocusTrap()` no `.modal-dialog`, `onEscapeKey()` e
-`onClickOutside()` para fechar (foco retorna ao gatilho); dismiss via
-qualquer elemento com `data-dismiss="modal"`; `data-backdrop="static"` no
-`.modal` desativa fechar por Escape/clique fora. Select customizado
-(`js/select.js`, `Clarus.Select`) gera a marcação (`.form-select` +
-`.dropdown-menu`/`.dropdown-item` por `<option>`) a partir de um `<select>`
-nativo (`data-clarus="select"`, oculto mas mantido em sincronia para
-submissão de formulário) e **compõe uma instância de `Dropdown` por cima**
-— reaproveitando 100% do posicionamento, navegação por setas e fechamento
-já entregues na Fase 8, em vez de duplicar essa lógica. Seleção atualiza o
-`<select>` nativo e dispara `change` nativo (compatibilidade com listeners
-externos) além de `clarus:select:changed`. ARIA usa `role="listbox"`/
-`"option"`/`aria-selected` (não `"menu"`/`"menuitem"` herdado do Dropdown),
-por serem semânticas mais corretas para este caso de uso. Tamanhos via
-`data-size="sm"/"lg"` no `<select>` (`.form-select-sm`/`-lg`, novo em
+(`Clarus.Modal`) reaproveita a infraestrutura JS compartilhada:
+`lockScroll()` enquanto aberto, `createFocusTrap()` no `.modal-dialog`,
+`onEscapeKey()` e `onClickOutside()` para fechar (foco retorna ao gatilho);
+dismiss via qualquer elemento com `data-dismiss="modal"`;
+`data-backdrop="static"` no `.modal` desativa fechar por Escape/clique fora.
+
+Select customizado: `js/select.js` (`Clarus.Select`) gera a marcação
+(`.form-select` + `.dropdown-menu`/`.dropdown-item` por `<option>`) a partir
+de um `<select>` nativo (`data-clarus="select"`, oculto mas mantido em
+sincronia para submissão de formulário) e **compõe uma instância de
+Dropdown por cima** — reaproveitando 100% do posicionamento, navegação por
+setas e fechamento do Dropdown, em vez de duplicar essa lógica. A seleção
+atualiza o `<select>` nativo e dispara `change` nativo (compatibilidade com
+listeners externos), além de `clarus:select:changed`. ARIA usa
+`role="listbox"`/`"option"`/`aria-selected` (semântica mais correta para
+este caso, em vez de `"menu"`/`"menuitem"` herdado do Dropdown). Tamanhos
+via `data-size="sm"/"lg"` no `<select>` (`.form-select-sm`/`-lg`,
 `scss/forms/_forms.scss`).
 
 Mockup: `mockup/modal-select.html`.
 
-### Fase 10 — Accordion, Tabs e Toast
+### Accordion, Tabs e Toast
 
-**Status:** ✅ Concluído.
+Os três reaproveitam a infraestrutura de transição/collapse
+(`js/core/transition.js`).
 
-Todos reaproveitam a infraestrutura de transição/collapse (Fase 7): Accordion
-e Tabs compartilham o mesmo padrão de alternância de painel; Toast reaproveita
-a mesma infraestrutura e adiciona timers de auto-dismiss. Última fase do
-escopo inicial de componentes (seção 9).
-
-Entregue: **Accordion** (`.accordion`/`.accordion-item`/`.accordion-header`/
+**Accordion** (`.accordion`/`.accordion-item`/`.accordion-header`/
 `.accordion-button`/`.accordion-collapse`/`.accordion-body`,
-`scss/components/_accordion.scss`) — `js/accordion.js` usa `collapse()`/
+`scss/components/_accordion.scss`): `js/accordion.js` usa `collapse()`/
 `expand()` de `Clarus.core` para animar a altura de cada painel; só um
-painel aberto por vez por padrão (`data-multiple="true"` permite vários).
-**Tabs** (`.tabs`/`.tab-content`/`.tab-pane`, `scss/components/_tabs.scss`,
-reaproveitando `.nav-link` já existente da Navbar/Fase 4 com um indicador de
-sublinhado escopado a `.tabs`) — `js/tabs.js` alterna `.active` no link e no
-painel correspondente, com navegação por ArrowLeft/ArrowRight/Home/End
-(`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`, `tabindex` roving),
-disparando `clarus:tab:changed`. **Toast**
-(`.toast-container`/`.toast`/`.toast-header`/`.toast-body`, variantes de
-cor de estado via `.toast-#{nome}`, `scss/components/_toasts.scss`) —
-`js/toast.js` usa `expand()`/`collapse()` para mostrar/esconder, com timer
-de auto-dismiss configurável (`data-delay`, `data-autohide="false"` para
-desativar) e dismiss via `data-dismiss="toast"`; instâncias são criadas no
-auto-init mas só ficam visíveis quando `.show()` é chamado (tipicamente após
-alguma ação), via `Clarus.Toast.getInstance(el).show()`.
+painel aberto por vez por padrão (`data-multiple="true"` permite vários
+simultâneos).
 
-Com esta fase, todos os 10 marcos de componentes da seção 21 (e o escopo
-inicial de componentes da seção 9) estão entregues.
+**Tabs** (`.tabs`/`.tab-content`/`.tab-pane`, `scss/components/_tabs.scss`,
+reaproveitando `.nav-link` da Navbar com um indicador de sublinhado escopado
+a `.tabs`): `js/tabs.js` alterna `.active` no link e no painel
+correspondente, com navegação por ArrowLeft/ArrowRight/Home/End entre as
+abas habilitadas (`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`,
+`tabindex` roving), disparando `clarus:tab:changed`.
+
+**Toast** (`.toast-container`/`.toast`/`.toast-header`/`.toast-body`,
+variantes de cor de estado via `.toast-#{nome}`,
+`scss/components/_toasts.scss`): `js/toast.js` usa `expand()`/`collapse()`
+para mostrar/esconder, com timer de auto-dismiss configurável (`data-delay`,
+`data-autohide="false"` para desativar) e dismiss via
+`data-dismiss="toast"`. Instâncias são criadas no auto-init mas só ficam
+visíveis quando `.show()` é chamado (tipicamente após alguma ação), via
+`Clarus.Toast.getInstance(el).show()`.
 
 Mockup: `mockup/accordion-tabs-toast.html`.
 
-## 22. Estratégia de Testes Visuais e Funcionais
+## 22. Testes Automatizados
 
-- Teste visual (regressão de CSS): Playwright com comparação de
-  screenshots, rodando local e no CI já existente — sem dependência de
-  serviço externo pago.
-- Teste funcional de JavaScript: Vitest com `jsdom`, cobrindo estado,
-  atributos ARIA e eventos disparados por cada componente interativo.
+- **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,
+  `tests/unit/`), cobrindo estado, atributos ARIA e eventos disparados por
+  cada componente interativo e pelos módulos de `js/core/` (posicionamento,
+  overlay, foco, transição). Executado via `npm test`.
+- **Teste visual (regressão de CSS):** Playwright (`playwright.config.mjs`,
+  `tests/visual/`), com screenshots de baseline por mockup e testes de
+  interação (abrir/fechar dropdown, modal, accordion, tabs, toast — foco,
+  Escape, clique fora, navegação por teclado). Executado via
+  `npm run test:visual`; as baselines são geradas por plataforma (sufixo
+  `-win32`/`-linux` no nome do arquivo), com as baselines Linux geradas em
+  um container Docker (`mcr.microsoft.com/playwright`) para bater com o
+  ambiente do CI (`ubuntu-latest`).
 - Os arquivos em `mockup/*.html` são as fixtures oficiais dos testes
-  visuais — cada componente/grupo implementado ganha (ou já usa) um mockup
-  dedicado, mantido atualizado.
-- Testes (visuais e funcionais) rodam automaticamente no GitHub Actions a
-  cada push/PR, como um novo step em `.github/workflows/ci.yml`, além do
-  lint e build já existentes.
-
-**Status desta seção (identificado em review, 2026-07-04):** a estratégia
-acima está decidida, mas nada dela foi implementado ainda — `npm test`
-continua sendo um `echo` no-op, e `ci.yml` só roda lint + build. Toda a
-validação feita até a v0.1.2 foi manual (Playwright ad-hoc por sessão, sem
-suíte versionada). O plano de implementação está na seção 24.
-
-## 23. Marcos do Projeto
-
-O projeto transforma estas definições em uma estrutura técnica através de
-marcos sequenciais. Cada marco tem escopo fechado, é validado com
-`npm run lint` + `npm run build`, e — a partir do Marco 2 — entrega também um
-mockup demonstrativo em `mockup/` (regra detalhada na seção 21).
-
-### Marco 1 — Base da versão inicial (concluído)
-
-Layout, grid, utilitários (display, flex, spacing, visibility, tipografia) e
-formulários básicos (controles, tamanhos, estados de foco/desabilitado/
-leitura) como fundação da versão inicial.
-
-### Marcos 2 a 11 — Componentes (Fases 1 a 10)
-
-Cada uma das 10 fases definidas na seção 21 corresponde a um marco próprio,
-na mesma ordem (dependência técnica primeiro, CSS-only antes de JS). Esta
-tabela é o checklist oficial de progresso do projeto — atualizar a coluna
-Status ao concluir cada marco (mesmo status também replicado no cabeçalho de
-cada fase, seção 21):
-
-| Marco | Fase (seção 21) | Escopo | Status |
-| --- | --- | --- | --- |
-| 1 | — | Base da versão inicial (layout, grid, utilitários, formulários) | ✅ Concluído |
-| 2 | Fase 1 | Botões | ✅ Concluído |
-| 3 | Fase 2 | Badges, Alertas | ✅ Concluído |
-| 4 | Fase 3 | Cards | ✅ Concluído |
-| 5 | Fase 4 | Tabelas, Navbar | ✅ Concluído |
-| 6 | Fase 5 | Paginação, Breadcrumbs | ✅ Concluído |
-| 7 | Fase 6 | Formulários avançados (CSS-only) | ✅ Concluído |
-| 8 | Fase 7 | Infraestrutura JS compartilhada | ✅ Concluído |
-| 9 | Fase 8 | Dropdown, Tooltip | ✅ Concluído |
-| 10 | Fase 9 | Modal, Select customizado | ✅ Concluído |
-| 11 | Fase 10 | Accordion, Tabs, Toast | ✅ Concluído |
-| 12 | Fase 11/12 (seção 24) | Testes automatizados (Vitest + Playwright) | ⬜ Pendente |
-
-Ao concluir o Marco 11, todo o escopo inicial de componentes (seção 9) e a
-ordem de implementação (seção 21) estarão entregues — o que já aconteceu.
-O Marco 12 (seção 24) fecha a lacuna entre a estratégia de testes decidida
-na seção 22 e o que de fato está implementado.
-
-## 24. Plano de Testes Automatizados e Gaps Remanescentes
-
-Levantamento feito em review completo do projeto (2026-07-04), comparando o
-que está definido neste documento com o que está de fato implementado.
-Nenhum item desta seção está implementado ainda — é um plano, não um
-registro de entrega (ao contrário das seções 18-21).
-
-### 24.1 Fase 11 — Testes funcionais (Vitest + jsdom)
-
-Cobre o requisito de "teste funcional de JavaScript" da seção 22.
-
-1. Dependências novas: `vitest`, `jsdom` (ou `happy-dom`); script
-   `"test": "vitest run"` em `package.json`, substituindo o `echo` atual.
-2. Um arquivo de teste por módulo de `js/core/`: `positioning` (flip e
-   `align` start/center/end), `overlay` (contagem de referências de
-   `lockScroll`/`unlockScroll`, `onClickOutside` ignorando o clique que
-   abriu), `focus` (ciclo Tab/Shift+Tab, `onEscapeKey`), `transition`
-   (resolução da Promise de `collapse()`/`expand()`, `prefers-reduced-motion`).
-3. Um arquivo de teste por componente (`dropdown`, `tooltip`, `modal`,
-   `select`, `accordion`, `tabs`, `toast`): estado (`isOpen`), atributos
-   ARIA (`aria-expanded`, `aria-selected`, `aria-controls`, etc.), eventos
-   `clarus:*` disparados, e o contrato de instância (`getInstance()`,
-   `.show()`/`.hide()`/`.toggle()`/`.dispose()` limpando listeners).
-4. Regressões já encontradas nesta sessão (bug do `.toast` com
-   `display: none` fixo, bug do `data-theme` não herdado em elementos
-   reanexados a `document.body`) viram casos de teste explícitos, para não
-   voltarem silenciosamente.
-
-### 24.2 Fase 12 — Testes visuais (Playwright)
-
-Cobre o requisito de "teste visual (regressão de CSS)" da seção 22, usando
-os arquivos em `mockup/*.html` como fixtures oficiais (já é a convenção
-usada manualmente durante todo o desenvolvimento das Fases 6-10).
-
-1. Dependência nova: `@playwright/test`, com `playwright.config.mjs`
-   apontando para os arquivos `mockup/*.html` via `file://` (sem precisar
-   de servidor HTTP).
-2. Screenshot de baseline (claro + escuro) para cada mockup, versionado em
-   `tests/visual/__screenshots__/`.
-3. Testes de interação mínimos por componente interativo (abrir/fechar
-   dropdown, modal, accordion, tabs, toast), reaproveitando os roteiros já
-   validados manualmente nesta sessão (foco, Escape, clique fora,
-   navegação por teclado) como asserções automatizadas em vez de checagem
-   ad-hoc.
-
-### 24.3 Integração no CI
-
-Atualizar `.github/workflows/ci.yml`:
-
-1. Adicionar `npx playwright install --with-deps chromium` antes dos
-   testes.
-2. Novo step "Testes funcionais" (`npm test`, agora rodando Vitest de
-   verdade).
-3. Novo step "Testes visuais" (`npx playwright test`), com upload do
-   diff de screenshots como artefato em caso de falha.
-4. Lint e build continuam como estão hoje.
-
-### 24.4 Outros gaps identificados (não bloqueantes)
-
-Itens menores, encontrados no mesmo review, que não fazem parte da
-estratégia de testes mas vale registrar:
-
-- **Tipos TypeScript (`.d.ts`)** para a API JS (`Clarus.*`, opções de cada
-  componente) — melhora a experiência de quem usa bundler/TS; não exigido
-  por nenhuma seção deste documento, mas é prática comum em pacotes JS
-  modernos.
-- **Referência consolidada de API por componente** (tabela de atributos
-  `data-*`, eventos `clarus:*` e métodos por componente): hoje essa
-  informação está espalhada entre `mockup/*.html`, o README e a prosa das
-  seções 20/21. Um `docs/components-api.md` fecharia essa lacuna sem
-  duplicar o que já existe.
-- `package.json` tem `description` em inglês enquanto o resto do projeto é
-  em português — inconsistência cosmética, não funcional.
-- Prática de versionamento: o bump de `0.1.1` para `0.1.2` (v0.1.2) foi de
-  patch mesmo adicionando 5 componentes novos (Fases 6-10). Daqui em
-  diante, adição de funcionalidade nova numa linha `0.x` deveria
-  preferencialmente ser bump de minor (`0.2.0`), reservando patch para
-  correções — mais alinhado com o espírito do Semantic Versioning citado
-  na seção 16.
-- Templates de issue/PR e metadata do repositório GitHub (topics,
-  descrição) — polimento de produto open source, não bloqueante.
+  visuais — cada componente/grupo implementado tem um mockup dedicado,
+  mantido atualizado.
+- Testes (funcionais e visuais) rodam automaticamente no GitHub Actions a
+  cada push/PR (`.github/workflows/ci.yml`), além do lint e build.

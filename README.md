@@ -35,7 +35,7 @@ React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 > implementados, com dark mode nativo e uma API JavaScript consistente
 > entre os componentes interativos. Veja
 > [`docs/definitions.md`](docs/definitions.md) para o histórico de decisões
-> e o detalhamento de cada fase do roadmap.
+> e o detalhamento técnico de cada componente.
 
 ## Por que Clarus CSS
 
@@ -233,7 +233,7 @@ herdado do elemento de referência mais próximo.
 ## Documentação
 
 - [`docs/definitions.md`](docs/definitions.md) — visão geral do produto,
-  decisões de arquitetura e o roadmap completo, fase a fase.
+  decisões de arquitetura e o catálogo completo de componentes.
 - [`docs/scss-architecture.md`](docs/scss-architecture.md) — arquitetura
   dos módulos SCSS e do pipeline de build.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente e
