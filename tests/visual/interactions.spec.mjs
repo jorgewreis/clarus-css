@@ -124,3 +124,24 @@ test.describe("Toast", () => {
     await expect(page.locator("#toast-claro")).toBeHidden();
   });
 });
+
+test.describe("Carousel", () => {
+  test("avança com o controle next e com o teclado, e salta pelo indicador", async ({ page }) => {
+    await page.goto(mockupUrl("carousel.html"));
+
+    const carousel = page.locator("#carousel-slide");
+    const items = carousel.locator(".carousel-item");
+
+    await expect(items.nth(0)).toHaveClass(/active/);
+
+    await carousel.locator(".carousel-control-next").click();
+    await expect(items.nth(1)).toHaveClass(/active/);
+
+    await carousel.focus();
+    await page.keyboard.press("End");
+    await expect(items.nth(2)).toHaveClass(/active/);
+
+    await carousel.locator(".carousel-indicators button").nth(0).click();
+    await expect(items.nth(0)).toHaveClass(/active/);
+  });
+});

@@ -29,7 +29,7 @@ Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwin
 
 ### 1. **Carrossel / Slider (Carousel)**
 
-**Status:** ❌ Não implementado
+**Status:** ✅ Implementado (Etapa 2 — `scss/components/_carousel.scss`, `js/carousel.js`)
 
 **Uso:** Presente em 100% dos 10 frameworks analisados.
 
@@ -52,7 +52,7 @@ Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwin
 
 ### 2. **Spinner / Progress Indicator**
 
-**Status:** ❌ Não implementado
+**Status:** ✅ Implementado (Etapa 1 — `scss/components/_spinner.scss`)
 
 **Uso:** Presente em 9/10 frameworks (padrão em Material Design, Chakra, Ant Design).
 
@@ -270,13 +270,16 @@ Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwin
 
 ## Roadmap Sugerido para v0.3.x–v0.5.x
 
+> **Progresso:** Etapa 1 (Spinner + Progress) e Etapa 2 (Carousel) concluídas.
+> Próxima: Etapa 3 (Stepper).
+
 ### v0.3.0 — Componentes de Feedback & Loading
-- Spinner
+- ✅ Spinner
 - Skeletons
-- Progress bar/ring
+- ✅ Progress bar/ring (barra linear; ring pendente)
 
 ### v0.4.0 — Navegação Avançada
-- Carousel
+- ✅ Carousel
 - Offcanvas
 - Collapse Standalone
 - Timeline

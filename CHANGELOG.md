@@ -157,6 +157,31 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   cumprindo a meta de dependência externa zero em tempo de execução para a
   fonte principal (Source Code Pro, no monoespaçado, mantida via Google
   Fonts).
+- Componente Spinner e Progress (`scss/components/_spinner.scss`, 100% CSS):
+  spinner giratório `.spinner` (animação `clarus-spin`) com tamanhos
+  (`.spinner-sm`/`.spinner-lg`) e variantes de cor de estado
+  (`.spinner-#{nome}`); barra de progresso `.progress`/`.progress-bar` com
+  largura por `--clarus-progress-value` (0–100), tamanhos
+  (`.progress-sm`/`.progress-lg`), variantes de cor
+  (`.progress-bar-#{nome}`, via `color-contrast()`) e faixas opcionais
+  (`.progress-bar-striped`/`.progress-bar-animated`). Toda animação respeita
+  `prefers-reduced-motion`. Mockup `mockup/spinner-progress.html`. Primeiro
+  item da Etapa 1 do roadmap de paridade (`docs/gap-analysis-componentes.md`).
+- Componente Carousel (`scss/components/_carousel.scss`, `js/carousel.js`):
+  carrossel de slides com layout "slide" (trilha flex deslocada por
+  `translateX`) e variante `.carousel-fade` (opacidade); setas
+  (`.carousel-control-prev`/`-next`) e indicadores (`.carousel-indicators`)
+  opcionais, com modificador opcional `.carousel-hover-controls` (setas só no
+  hover/foco). `Clarus.Carousel` com `.next()`/`.prev()`/`.goTo()`/`.pause()`/
+  `.dispose()`, evento `clarus:carousel:slid`, navegação por teclado
+  (setas/Home/End), swipe por pointer events e autoplay opcional
+  (`data-autoplay`/`data-interval`, válido para slide e fade) que pausa no
+  hover/foco. ARIA completo (`role="group"`, `aria-roledescription`,
+  `aria-current` nos indicadores) e respeito a `prefers-reduced-motion`. O
+  recorte fica no `.carousel` (elemento parado) e não na trilha, para não
+  cortar os slides seguintes ao deslocar. Mockup `mockup/carousel.html`.
+  Segundo item (Etapa 2) do roadmap de paridade
+  (`docs/gap-analysis-componentes.md`).
 
 ### Fixed
 

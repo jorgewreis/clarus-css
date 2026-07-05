@@ -501,6 +501,52 @@ visíveis quando `.show()` é chamado (tipicamente após alguma ação), via
 
 Mockup: `mockup/accordion-tabs-toast.html`.
 
+### Spinner e Progress
+
+Indicadores de carregamento e progresso, 100% CSS (sem JavaScript). Spinner
+giratório `.spinner` (anel com um lado transparente, animação contínua
+`clarus-spin`), com tamanhos (`.spinner-sm`/`.spinner-lg`) e variantes de cor
+de estado (`.spinner-#{nome}`) via os tokens `--clarus-color-*`; a cor herda
+de `currentColor`, permitindo colorir também com utilitários de texto.
+
+Barra de progresso `.progress`/`.progress-bar`
+(`scss/components/_spinner.scss`): a largura do preenchimento é controlada por
+`--clarus-progress-value` (0–100) ou por `style="width"`, com transição suave.
+Tamanhos (`.progress-sm`/`.progress-lg`), variantes de cor de estado
+(`.progress-bar-#{nome}`, reaproveitando `color-contrast()` como botões/badges)
+e faixas diagonais opcionais (`.progress-bar-striped`, animáveis com
+`.progress-bar-animated`). Toda animação respeita `prefers-reduced-motion`
+(spinner desacelera, listras param). ARIA fica a cargo do consumidor
+(`role="status"` no spinner, `role="progressbar"` + `aria-valuenow` na barra).
+
+Mockup: `mockup/spinner-progress.html`.
+
+### Carousel
+
+Carrossel de slides (`.carousel`/`.carousel-inner`/`.carousel-item`,
+`scss/components/_carousel.scss`). O layout padrão é "slide": `.carousel-inner`
+é uma trilha flex e `js/carousel.js` a desloca por `translateX(-index*100%)`;
+o recorte (`overflow: hidden`) fica no `.carousel` (elemento parado), não na
+trilha, senão a área de recorte se moveria junto e cortaria os slides
+seguintes. A variante `.carousel-fade` empilha os slides e anima a opacidade.
+Controles `.carousel-control-prev`/`-next` (setas) e `.carousel-indicators`
+(dots) são opcionais — o JS liga cada um ao slide correspondente; o
+modificador opcional `.carousel-hover-controls` esconde as setas até o
+hover/foco (`:focus-within`) do carrossel.
+
+`js/carousel.js` (`Clarus.Carousel`) segue a API da seção 20: auto-init via
+`data-clarus="carousel"`, `Clarus.Carousel.getInstance()`, métodos
+`.next()`/`.prev()`/`.goTo(i)`/`.pause()`/`.dispose()`, evento
+`clarus:carousel:slid` (`detail: { from, to }`). Navegação por teclado
+(ArrowLeft/Right, Home/End quando o carrossel tem foco), swipe por
+pointer events (limiar de 40px) e autoplay opcional (`data-autoplay="true"`,
+intervalo por `data-interval`, em ms) que pausa no hover/foco. `role="group"`
++ `aria-roledescription="carousel"`, `aria-hidden` por slide, `aria-current`
+nos indicadores; `aria-live` fica `off` no autoplay e `polite` sem ele. As
+transições respeitam `prefers-reduced-motion`.
+
+Mockup: `mockup/carousel.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,

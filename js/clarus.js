@@ -6,3 +6,4 @@ export { Select } from "./select.js";
 export { Accordion } from "./accordion.js";
 export { Tabs } from "./tabs.js";
 export { Toast } from "./toast.js";
+export { Carousel } from "./carousel.js";
