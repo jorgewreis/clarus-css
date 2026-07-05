@@ -778,6 +778,31 @@ Antes de remover o elemento do DOM, dispara o evento **cancelável**
 
 Mockup: `mockup/tag.html`.
 
+### File Input Drag-and-Drop
+
+Evolui o upload de arquivo (`.file-upload`/`.file-input`/`.file-label`,
+Fase 6) com arrastar-e-soltar. `js/file-drop.js` (`Clarus.FileDrop`)
+auto-inicia via `data-clarus="file-drop"` no próprio `<label for="...">`
+(o input associado é resolvido pelo atributo `for`, o mesmo vínculo que já
+existe entre `.file-input`/`.file-label`); escuta `dragenter`/`dragover`/
+`dragleave`/`drop`, aplicando `.is-dragover` como feedback visual, e ao
+soltar sincroniza `input.files` com o arquivo solto, disparando `change`
+nativo (mesmo padrão do Select customizado). Variante visual
+`.file-label-dropzone` para quando o alvo de soltar precisa ser maior que
+o botão padrão.
+
+Mockup: `mockup/file-drop.html`.
+
+### Hover Card
+
+Não é um componente novo — composição do Popover (`scss/components/_popover.scss`,
+`js/popover.js`) com `data-trigger="hover"` (já suportado desde a Fase 8) e
+conteúdo mais rico (ex. avatar + bio). O único ajuste é visual: o
+modificador `.popover-hover-card` alarga o popover (320px) e alinha um
+layout de linha (avatar ao lado do texto) no `.popover-body`.
+
+Mockup: `mockup/hover-card.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,

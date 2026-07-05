@@ -9,6 +9,19 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 9 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
+  evoluções de componentes existentes:
+  - File Input Drag-and-Drop (`js/file-drop.js`): evolui
+    `.file-upload`/`.file-input`/`.file-label` (Fase 6) com
+    `dragenter`/`dragover`/`dragleave`/`drop`, sincronizando o arquivo
+    solto com o `<input type="file">` nativo (dispara `change` nativo).
+    Estado visual `.is-dragover` e variante `.file-label-dropzone`. Mockup
+    `mockup/file-drop.html`. Testes unitários em
+    `tests/unit/file-drop.test.js`.
+  - Hover Card (`.popover-hover-card` em `scss/components/_popover.scss`):
+    composição do Popover já existente com `data-trigger="hover"`, sem
+    JavaScript novo — só um ajuste visual (largura + layout de avatar ao
+    lado do texto). Mockup `mockup/hover-card.html`.
 - Etapa 8 do roadmap de paridade (`docs/gap-analysis-componentes.md`):
   Badge dismissível / Tag (`scss/components/_tag.scss`, `js/tag.js`).
   `.tag` estende `.badge` (Fase 2) e `.btn-close` (Fase 3), só ajustando o

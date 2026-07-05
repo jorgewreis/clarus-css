@@ -258,6 +258,32 @@
   font-size: $font-size-lg;
 }
 
+// Drag-and-drop (js/file-drop.js): estado visual ao arrastar um arquivo por
+// cima do `.file-label`, e uma variante maior (dropzone) para quando o alvo
+// de soltar precisa ser mais generoso que o botão padrão de `.file-label`.
+.file-label.is-dragover {
+  border-color: var(--clarus-color-primary);
+  background-color: var(--clarus-color-subtle);
+}
+
+.file-label-dropzone {
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  height: auto;
+  padding: 32px 16px;
+  border-style: dashed;
+  border-width: 2px;
+  font-weight: $font-weight-regular;
+  text-align: center;
+}
+
+.file-label-dropzone .file-dropzone-hint {
+  color: var(--clarus-color-muted);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+}
+
 // Input Group: funde `.form-control` (ou `.form-select`/`.btn`) com "addons"
 // de texto/ícone de prefixo/sufixo, reaproveitando os tokens visuais do
 // próprio `.form-control` (borda, cor, radius). 100% CSS — a altura do addon

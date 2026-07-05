@@ -43,10 +43,12 @@ Semantic UI e Cirrus UI.
 - ✅ **Empty State** (Etapa 7)
 - ✅ **Rating / Stars** (Etapa 7)
 - ✅ **Badge dismissível / Tag** (Etapa 8)
+- ✅ **File Input Drag-and-Drop** (Etapa 9)
+- ✅ **Hover Card** (Etapa 9 — composição do Popover)
 
-**Total: 30 componentes CSS + 15 componentes JS/funções** (Dropdown, Tooltip,
+**Total: 31 componentes CSS + 16 componentes JS/funções** (Dropdown, Tooltip,
 Modal, Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
-Collapse, Breadcrumb, `Clarus.confirm`, Tag).
+Collapse, Breadcrumb, `Clarus.confirm`, Tag, FileDrop).
 
 ---
 
@@ -174,8 +176,8 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | ✅ | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
 | ✅ | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
 | ✅ | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
-| 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
-| 🟡 Baixa | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
+| ✅ | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
+| ✅ | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
 | 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | 10 | Compõe múltiplos Toasts + histórico |
 | 🟣 Futuro | **Menu aninhado (nested)** | Baixo | Alta | 10 | Complexidade alta, uso de nicho |
 
@@ -183,8 +185,8 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–8 concluídas. Etapas 9–10 planejadas abaixo,
-> cobrindo o restante dos "Gaps Remanescentes".
+> **Progresso:** Etapas 1–9 concluídas. Falta só a Etapa 10 para fechar
+> todos os "Gaps Remanescentes".
 
 | Etapa | Componentes | Status |
 |---|---|---|
@@ -196,7 +198,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | ✅ Concluída |
 | **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | ✅ Concluída |
 | **8** — Badge dismissível | Badge dismissível / Tags | ✅ Concluída |
-| **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | 🔜 Planejada |
+| **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | ✅ Concluída |
 | **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | 🔜 Planejada |
 
 Progress circular (ring) entra numa etapa futura, ainda sem posição definida.
@@ -251,20 +253,22 @@ badge) para não justificar posicionamento em par com outro componente.
 remover o elemento do DOM (`preventDefault()` bloqueia a remoção, mesmo
 espírito do `clarus:stepper:beforechange`). Mockup `mockup/tag.html`.
 
-### Etapa 9 — Evoluções de componentes existentes
+### Etapa 9 — Evoluções de componentes existentes ✅
 
 Os dois reaproveitam infraestrutura já pronta, sem introduzir posicionamento
 ou overlay novo.
 
-- **File Input Drag-and-Drop**: evolui `.file-upload`/`.file-input`
-  (Fase 6) com eventos `dragenter`/`dragover`/`drop` no `.file-label`,
-  sincronizando o arquivo solto com o `<input type="file">` nativo (dispara
-  `change` nativo, mesmo padrão do Select customizado).
-- **Hover Card**: na prática, uma composição do Popover (Etapa 4) já
-  existente com `data-trigger="hover"` (já suportado) e um conteúdo mais
-  rico (ex. avatar + bio). Esforço concentrado em documentação/mockup e,
-  no máximo, um ajuste visual pontual em `_popover.scss` — não é um
-  componente novo de infraestrutura.
+- **File Input Drag-and-Drop** (`js/file-drop.js`): evolui
+  `.file-upload`/`.file-input`/`.file-label` (Fase 6) com eventos
+  `dragenter`/`dragover`/`dragleave`/`drop` no `.file-label`, sincronizando
+  o arquivo solto com o `<input type="file">` nativo (dispara `change`
+  nativo, mesmo padrão do Select customizado). Variante visual
+  `.file-label-dropzone`. Mockup `mockup/file-drop.html`.
+- **Hover Card** (`.popover-hover-card` em `scss/components/_popover.scss`):
+  na prática, uma composição do Popover (Etapa 4) já existente com
+  `data-trigger="hover"` (já suportado) e um conteúdo mais rico (ex.
+  avatar + bio) — não é um componente novo de infraestrutura, só um
+  ajuste visual pontual. Mockup `mockup/hover-card.html`.
 
 ### Etapa 10 — Maior complexidade
 
@@ -329,6 +333,7 @@ nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 
 Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
 acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). Etapas 6
-(Input Group, Alert Dialog/Confirm), 7 (Divider, Empty State, Rating/Stars)
-e 8 (Badge dismissível/Tags) já estão concluídas; a próxima é a Etapa 9
-(File Input Drag-and-Drop, Hover Card).
+(Input Group, Alert Dialog/Confirm), 7 (Divider, Empty State, Rating/Stars),
+8 (Badge dismissível/Tags) e 9 (File Input Drag-and-Drop, Hover Card) já
+estão concluídas; falta só a Etapa 10 (Notification Center, Menu aninhado)
+para fechar todos os gaps remanescentes priorizados.
