@@ -62,24 +62,27 @@ cores de estado. Progress circular (ring) segue como refinamento futuro opcional
 
 ### 3. Popover
 
-**Status:** 🔜 Planejado (Etapa 4)
+**Status:** ✅ Implementado (Etapa 4 — `scss/components/_popover.scss`, `js/popover.js`)
 
 **Uso:** Em 8/11 frameworks. **Ausente no Cirrus** (só tooltip). Diferente do
 tooltip por ter conteúdo rico e controle manual.
 
-**Escopo:** reaproveita `positioning.js` (flip automático, já usado por Dropdown/
-Tooltip); disparo configurável (click/hover/focus/manual); header + corpo +
-footer; fecha com Escape/clique fora; `role="dialog"`.
+Entregue com `positioning.js` (flip automático, como Dropdown/Tooltip); 4 modos
+de disparo (`data-trigger`: click/hover/focus/manual); header + corpo + footer;
+fecha com Escape/clique fora (ignorando conteúdo interativo interno);
+`role="dialog"` + `aria-modal="false"` (sem focus trap, não é modal).
 
 ### 4. Offcanvas / Side Drawer
 
-**Status:** 🔜 Planejado (Etapa 4)
+**Status:** ✅ Implementado (Etapa 4 — `scss/components/_offcanvas.scss`, `js/offcanvas.js`)
 
 **Uso:** Em 9/11 frameworks. **Ausente no Cirrus.** Complemento do Modal para
 navegação lateral, filtros, menus responsivos.
 
-**Escopo:** posições left/right/top/bottom; reaproveita `overlay.js`/`focus.js`
-exatamente como o Modal (lock scroll, focus trap, Escape/clique fora).
+Entregue com posições left/right/top/bottom (`.offcanvas-start/-end/-top/-bottom`),
+reaproveitando `overlay.js`/`focus.js` como o Modal (lock scroll, focus trap,
+Escape/clique fora), aplicado de forma independente; backdrop opcional
+(`data-backdrop="false"`) ou estático (`data-backdrop="static"`).
 
 ### 5. Breadcrumb avançado com collapse
 
@@ -157,15 +160,15 @@ frameworks:
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–3 concluídas (Spinner/Progress, Carousel, Stepper).
-> Próxima: Etapa 4.
+> **Progresso:** Etapas 1–4 concluídas (Spinner/Progress, Carousel, Stepper,
+> Offcanvas + Popover). Próxima: Etapa 5.
 
 | Etapa | Componentes | Status |
 |---|---|---|
 | **1** — Feedback & Loading | Spinner, Progress bar | ✅ Concluída |
 | **2** — Carousel | Carousel (slide/fade, autoplay, swipe) | ✅ Concluída |
 | **3** — Stepper | Stepper/Wizard (horizontal/vertical, validação) | ✅ Concluída |
-| **4** — Overlays avançados | Offcanvas, Popover | 🔜 Planejada |
+| **4** — Overlays avançados | Offcanvas, Popover | ✅ Concluída |
 | **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | 🔜 Planejada |
 
 Progress circular (ring) e os "gaps remanescentes" acima entram depois da Etapa 5.
@@ -207,11 +210,11 @@ Progress circular (ring) e os "gaps remanescentes" acima entram depois da Etapa 
 
 ## Conclusão
 
-Com as Etapas 1–3 concluídas, o Clarus CSS já cobre os três gaps de **maior
-impacto** do estudo original (Carousel, Spinner, Stepper). As Etapas 4 e 5 fecham
-os sete restantes (Offcanvas, Popover, Segmented Control, Skeletons, Timeline,
-Collapse standalone, Breadcrumb avançado), atingindo **paridade completa com o
-Top-10** frente aos frameworks líderes.
+Com as Etapas 1–4 concluídas, o Clarus CSS já cobre cinco dos dez gaps do
+estudo original (Carousel, Spinner, Stepper, Offcanvas, Popover), incluindo os
+três de **maior impacto**. A Etapa 5 fecha os cinco restantes (Segmented
+Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado),
+atingindo **paridade completa com o Top-10** frente aos frameworks líderes.
 
 A comparação com o Cirrus UI reforça um diferencial do Clarus: mesmo entre
 frameworks híbridos, componentes interativos ricos como **carousel, offcanvas,

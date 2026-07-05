@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Offcanvas &amp; Popover</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+
+        section {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-panel">
+        <h2 class="fs-lg fw-medium">Claro</h2>
+
+        <section>
+            <p class="fs-sm fw-medium mt-3 mb-1">Offcanvas — posições, backdrop e backdrop-less</p>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="offcanvas" data-target="#offcanvas-start-claro">Left (start)</button>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="offcanvas" data-target="#offcanvas-end-claro">Right (end)</button>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="offcanvas" data-target="#offcanvas-top-claro">Top</button>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="offcanvas" data-target="#offcanvas-bottom-claro">Bottom</button>
+            <button type="button" class="btn mr-2" data-clarus="offcanvas" data-target="#offcanvas-nobackdrop-claro">Sem backdrop</button>
+            <button type="button" class="btn" data-clarus="offcanvas" data-target="#offcanvas-static-claro">Backdrop estático</button>
+
+            <div class="offcanvas offcanvas-start" id="offcanvas-start-claro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Menu</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas à esquerda.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-end" id="offcanvas-end-claro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Filtros</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas à direita.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-top" id="offcanvas-top-claro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Notificações</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas no topo.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-bottom" id="offcanvas-bottom-claro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Ações rápidas</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas embaixo.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-start" id="offcanvas-nobackdrop-claro" data-backdrop="false">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Sem backdrop</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Fecha com Escape ou clique fora, sem escurecer a página.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-start" id="offcanvas-static-claro" data-backdrop="static">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Backdrop estático</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Só fecha pelo botão — Escape e clique fora desativados.</div>
+            </div>
+        </section>
+
+        <section>
+            <p class="fs-sm fw-medium mt-3 mb-1">Popover — data-trigger: click (padrão), hover, focus, manual</p>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="popover" data-target="#pop-click-claro">Click</button>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="popover" data-trigger="hover" data-target="#pop-hover-claro">Hover</button>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="popover" data-trigger="focus" data-target="#pop-focus-claro">Focus</button>
+            <button type="button" class="btn" data-clarus="popover" data-trigger="manual" id="pop-manual-trigger-claro" data-target="#pop-manual-claro">Manual</button>
+
+            <div class="popover" id="pop-click-claro">
+                <div class="popover-arrow"></div>
+                <div class="popover-header">Confirmar ação</div>
+                <div class="popover-body">Este popover tem conteúdo interativo — clicar aqui dentro não fecha.</div>
+                <div class="popover-footer">
+                    <button type="button" class="btn btn-sm" data-dismiss="popover">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="popover">Confirmar</button>
+                </div>
+            </div>
+
+            <div class="popover" id="pop-hover-claro">
+                <div class="popover-arrow"></div>
+                <div class="popover-body">Aparece no hover do gatilho ou do próprio popover.</div>
+            </div>
+
+            <div class="popover" id="pop-focus-claro">
+                <div class="popover-arrow"></div>
+                <div class="popover-body">Aparece ao focar o gatilho (Tab), some ao sair do foco.</div>
+            </div>
+
+            <div class="popover" id="pop-manual-claro">
+                <div class="popover-arrow"></div>
+                <div class="popover-body">Só abre/fecha via Clarus.Popover.getInstance().toggle().</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="theme-panel" data-theme="dark">
+        <h2 class="fs-lg fw-medium">Escuro</h2>
+
+        <section>
+            <p class="fs-sm fw-medium mt-3 mb-1">Offcanvas</p>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="offcanvas" data-target="#offcanvas-start-escuro">Left (start)</button>
+            <button type="button" class="btn btn-primary" data-clarus="offcanvas" data-target="#offcanvas-end-escuro">Right (end)</button>
+
+            <div class="offcanvas offcanvas-start" id="offcanvas-start-escuro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Menu</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas à esquerda.</div>
+            </div>
+
+            <div class="offcanvas offcanvas-end" id="offcanvas-end-escuro">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title">Filtros</h3>
+                    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+                </div>
+                <div class="offcanvas-body">Conteúdo do offcanvas à direita.</div>
+            </div>
+        </section>
+
+        <section>
+            <p class="fs-sm fw-medium mt-3 mb-1">Popover</p>
+            <button type="button" class="btn btn-primary mr-2" data-clarus="popover" data-target="#pop-click-escuro">Click</button>
+            <button type="button" class="btn btn-primary" data-clarus="popover" data-trigger="hover" data-target="#pop-hover-escuro">Hover</button>
+
+            <div class="popover" id="pop-click-escuro">
+                <div class="popover-arrow"></div>
+                <div class="popover-header">Confirmar ação</div>
+                <div class="popover-body">Popover com header e footer.</div>
+                <div class="popover-footer">
+                    <button type="button" class="btn btn-sm" data-dismiss="popover">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="popover">Confirmar</button>
+                </div>
+            </div>
+
+            <div class="popover" id="pop-hover-escuro">
+                <div class="popover-arrow"></div>
+                <div class="popover-body">Aparece no hover.</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="../dist/js/clarus.js"></script>
+    <script>
+        document.getElementById("pop-manual-trigger-claro").addEventListener("click", () => {
+            Clarus.Popover.getInstance(document.getElementById("pop-manual-trigger-claro")).toggle();
+        });
+    </script>
+</body>
+</html>

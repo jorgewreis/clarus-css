@@ -1,7 +1,9 @@
 export * as core from "./core/index.js";
 export { Dropdown } from "./dropdown.js";
 export { Tooltip } from "./tooltip.js";
+export { Popover } from "./popover.js";
 export { Modal } from "./modal.js";
+export { Offcanvas } from "./offcanvas.js";
 export { Select } from "./select.js";
 export { Accordion } from "./accordion.js";
 export { Tabs } from "./tabs.js";

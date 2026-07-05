@@ -164,3 +164,64 @@ test.describe("Stepper", () => {
     await expect(steps.nth(0)).toHaveClass(/step-active/);
   });
 });
+
+test.describe("Offcanvas", () => {
+  test("abre pelo gatilho, bloqueia scroll, fecha com Escape e devolve o foco", async ({ page }) => {
+    await page.goto(mockupUrl("offcanvas-popover.html"));
+
+    const trigger = page.locator('button[data-target="#offcanvas-start-claro"]');
+    await trigger.click();
+
+    const panel = page.locator("#offcanvas-start-claro");
+    await expect(panel).toHaveClass(/show/);
+    await expect(page.locator(".offcanvas-backdrop")).toHaveClass(/show/);
+
+    await page.keyboard.press("Escape");
+    await expect(panel).not.toHaveClass(/show/);
+    await expect(page.locator(".offcanvas-backdrop")).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  });
+
+  test("data-backdrop=static ignora Escape e clique fora, fecha só pelo dismiss", async ({ page }) => {
+    await page.goto(mockupUrl("offcanvas-popover.html"));
+
+    await page.click('button[data-target="#offcanvas-static-claro"]');
+    const panel = page.locator("#offcanvas-static-claro");
+    await expect(panel).toHaveClass(/show/);
+
+    await page.keyboard.press("Escape");
+    await expect(panel).toHaveClass(/show/);
+
+    await panel.locator('[data-dismiss="offcanvas"]').click();
+    await expect(panel).not.toHaveClass(/show/);
+  });
+});
+
+test.describe("Popover", () => {
+  test("clique no gatilho abre; clique dentro não fecha; clique fora fecha", async ({ page }) => {
+    await page.goto(mockupUrl("offcanvas-popover.html"));
+
+    await page.click('button[data-target="#pop-click-claro"]');
+    const panel = page.locator("#pop-click-claro");
+    await expect(panel).toHaveClass(/show/);
+
+    await panel.locator(".popover-body").click();
+    await expect(panel).toHaveClass(/show/);
+
+    await page.mouse.click(5, 5);
+    await expect(panel).not.toHaveClass(/show/);
+  });
+
+  test("modo hover mostra ao passar o mouse e esconde ao sair", async ({ page }) => {
+    await page.goto(mockupUrl("offcanvas-popover.html"));
+
+    const trigger = page.locator('button[data-target="#pop-hover-claro"]');
+    const panel = page.locator("#pop-hover-claro");
+
+    await trigger.hover();
+    await expect(panel).toHaveClass(/show/);
+
+    await page.mouse.move(5, 5);
+    await expect(panel).not.toHaveClass(/show/);
+  });
+});

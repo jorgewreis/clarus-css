@@ -1,0 +1,87 @@
+@use "../settings" as *;
+
+// Popover: painel flutuante com conteúdo rico (header/body/footer),
+// posicionado como o Tooltip (mesma técnica de seta rotacionada 45°), mas com
+// aparência de card de superfície em vez do chip escuro do tooltip — porque
+// pode conter elementos interativos. z-index entre o Dropdown (1000) e o
+// Tooltip (1080), para um tooltip aplicado a um gatilho de popover ainda
+// vencer visualmente.
+.popover {
+  position: absolute;
+  z-index: 1070;
+  display: none;
+  max-width: 280px;
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-md);
+  box-shadow: var(--clarus-shadow-md);
+}
+
+.popover.show {
+  display: block;
+}
+
+.popover-header {
+  padding: 10px 14px;
+  background-color: var(--clarus-color-subtle);
+  border-bottom: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-md) var(--clarus-radius-md) 0 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.popover-body {
+  padding: 14px;
+  font-size: $font-size-sm;
+}
+
+.popover-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--clarus-color-border);
+}
+
+.popover-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--clarus-color-surface);
+  border: 1px solid var(--clarus-color-border);
+  transform: rotate(45deg);
+}
+
+.popover[data-placement="top"] .popover-arrow {
+  bottom: -5px;
+  left: 50%;
+  margin-left: -4px;
+  border-top: 0;
+  border-left: 0;
+}
+
+.popover[data-placement="bottom"] .popover-arrow {
+  top: -5px;
+  left: 50%;
+  margin-left: -4px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.popover[data-placement="left"] .popover-arrow {
+  top: 50%;
+  right: -5px;
+  margin-top: -4px;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.popover[data-placement="right"] .popover-arrow {
+  top: 50%;
+  left: -5px;
+  margin-top: -4px;
+  border-top: 0;
+  border-right: 0;
+}

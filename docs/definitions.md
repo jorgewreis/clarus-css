@@ -576,6 +576,66 @@ passos clicáveis navegáveis por teclado (Enter/Espaço).
 
 Mockup: `mockup/stepper.html`.
 
+### Offcanvas
+
+Painel deslizante (`.offcanvas`, `scss/components/_offcanvas.scss`), com o
+mesmo mecanismo de overlay do Modal (bloqueio de scroll, focus trap,
+fechamento por Escape/clique fora), aplicado de forma independente (não
+compõe `js/modal.js` — segue o padrão já usado por Accordion/Tabs/Toast, cada
+um reaproveitando os módulos de `js/core/` por si). Modificadores de posição
+obrigatórios `.offcanvas-start`/`-end`/`-top`/`-bottom` definem o eixo de
+tamanho (largura para start/end, altura para top/bottom) e a direção inicial
+do `transform`; `.offcanvas-header`/`-title`/`-body`/`-footer` seguem o mesmo
+padrão do Modal (reaproveitando `.btn-close`). O `.offcanvas-backdrop` é criado
+dinamicamente pelo JS (não fica fixo ao painel, como no Modal, porque o painel
+não cobre a tela inteira).
+
+`js/offcanvas.js` (`Clarus.Offcanvas`) segue a API da seção 20: auto-init via
+`data-clarus="offcanvas"`, `data-target` no gatilho, `getInstance()`,
+`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+`clarus:offcanvas:shown`/`-hidden`. `data-dismiss="offcanvas"` fecha a partir
+de qualquer elemento interno; `data-backdrop="static"` desativa Escape e
+clique fora (dismiss continua funcionando); `data-backdrop="false"` remove o
+elemento visual de backdrop mas mantém Escape e clique fora ativos (via
+`onClickOutside` no próprio painel, ignorando cliques no gatilho). Uma
+particularidade de implementação: como `visibility: hidden` mantém
+`offsetParent` não nulo (diferente de `display: none`), o elemento só fica de
+fato focável depois que o navegador processa a transição de visibilidade —
+por isso a ativação do focus trap é adiada por um duplo
+`requestAnimationFrame` (mesma técnica já usada por `collapse()`/`expand()`
+em `js/core/transition.js`).
+
+Mockup: `mockup/offcanvas-popover.html`.
+
+### Popover
+
+Painel flutuante com conteúdo rico (`.popover`/`.popover-header`/`-body`/
+`-footer`, `scss/components/_popover.scss`), posicionado com a mesma técnica
+do Tooltip (`.popover-arrow`, quadrado rotacionado 45°) mas com aparência de
+card de superfície (`--clarus-color-surface`/`-border`, `--clarus-shadow-md`)
+em vez do chip escuro do tooltip, já que pode conter elementos interativos.
+`role="dialog"` (não `"tooltip"`, que por spec ARIA não pode conter conteúdo
+interativo) com `aria-modal="false"` — é um overlay leve, sem focus trap e sem
+bloqueio de scroll (diferente de Modal/Offcanvas).
+
+`js/popover.js` (`Clarus.Popover`) é independente (não compõe `Tooltip` nem
+`Dropdown`), reaproveitando apenas `positioning.js`
+(`computePosition`/`applyPosition`, como Dropdown/Tooltip) e
+`onClickOutside`/`onEscapeKey`. Segue a API da seção 20
+(`data-clarus="popover"`, `data-target` no gatilho, `getInstance()`,
+`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+`clarus:popover:shown`/`-hidden`). `data-trigger` controla o disparo:
+`"click"` (padrão, com `onClickOutside` ignorando o gatilho e Escape
+devolvendo o foco), `"hover"` (mouseenter/mouseleave no gatilho **e** no
+próprio popover, com um pequeno delay de saída para permitir mover o mouse
+para dentro do conteúdo), `"focus"` (usa `focusout`/`relatedTarget` em vez de
+`blur`, pela mesma razão do hover) ou `"manual"` (instância criada via
+auto-init, sem nenhum listener automático — só API programática, no espírito
+do Toast). `data-dismiss="popover"` fecha a partir de qualquer elemento
+interno; `data-placement`/`data-align` controlam o posicionamento.
+
+Mockup: `mockup/offcanvas-popover.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,

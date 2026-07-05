@@ -26,6 +26,28 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   `.col-xxxl-*`, `.container-xxxl` e todos os utilitários responsivos
   `-xxxl` (spacing, gap, flex, display) via os mesmos loops que já geram os
   demais breakpoints.
+- Componente Offcanvas (`scss/components/_offcanvas.scss`, `js/offcanvas.js`):
+  painel deslizante com posições `.offcanvas-start`/`-end`/`-top`/`-bottom`,
+  mesmo mecanismo de overlay do Modal (bloqueio de scroll, focus trap,
+  Escape/clique fora), aplicado de forma independente (sem compor
+  `js/modal.js`). Backdrop criado dinamicamente pelo JS;
+  `data-backdrop="static"` desativa Escape/clique fora, `data-backdrop="false"`
+  remove o backdrop visual mantendo Escape/clique fora ativos. `Clarus.Offcanvas`
+  com `getInstance()`/`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+  `clarus:offcanvas:shown`/`-hidden`, `data-dismiss="offcanvas"`. Mockup
+  `mockup/offcanvas-popover.html`. Primeiro item (Etapa 4) do roadmap de
+  paridade.
+- Componente Popover (`scss/components/_popover.scss`, `js/popover.js`):
+  painel flutuante com conteúdo rico (`.popover-header`/`-body`/`-footer`),
+  posicionado via `computePosition()`/`applyPosition()` (como Dropdown/Tooltip),
+  `role="dialog"` + `aria-modal="false"` (não é modal — sem focus trap, sem
+  bloqueio de scroll). `data-trigger` controla o disparo: `"click"` (padrão),
+  `"hover"` (com tolerância para mover o mouse ao conteúdo), `"focus"` (via
+  `focusout`/`relatedTarget`) ou `"manual"` (sem listeners automáticos).
+  `Clarus.Popover` com `getInstance()`/`.show()`/`.hide()`/`.toggle()`/
+  `.dispose()`, eventos `clarus:popover:shown`/`-hidden`, `data-dismiss="popover"`.
+  Mockup `mockup/offcanvas-popover.html`. Segundo item (Etapa 4) do roadmap de
+  paridade.
 
 ### Changed
 

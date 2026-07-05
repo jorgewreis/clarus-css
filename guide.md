@@ -42,9 +42,11 @@ obrigatório para usar o framework no seu projeto.
 26. [Toast](#26-toast)
 27. [Carousel](#27-carousel)
 28. [Stepper](#28-stepper)
-29. [Customização por CSS Custom Properties (tokens)](#29-customização-por-css-custom-properties-tokens)
-30. [Dark mode](#30-dark-mode)
-31. [Onde ver mais exemplos e como contribuir](#31-onde-ver-mais-exemplos-e-como-contribuir)
+29. [Offcanvas](#29-offcanvas)
+30. [Popover](#30-popover)
+31. [Customização por CSS Custom Properties (tokens)](#31-customização-por-css-custom-properties-tokens)
+32. [Dark mode](#32-dark-mode)
+33. [Onde ver mais exemplos e como contribuir](#33-onde-ver-mais-exemplos-e-como-contribuir)
 
 ---
 
@@ -1660,7 +1662,162 @@ Eventos (todos disparados no elemento `.stepper`):
 O passo ativo recebe `aria-current="step"`, e os passos navegáveis são
 acessíveis por teclado (Enter/Espaço ativam o passo focado).
 
-## 29. Customização por CSS Custom Properties (tokens)
+## 29. Offcanvas
+
+O offcanvas é um painel deslizante, útil para menus laterais, filtros ou
+detalhes que não precisam ocupar a tela inteira como um Modal — ele desliza a
+partir de uma borda (esquerda, direita, topo ou base) e pode conter um
+backdrop escurecendo o restante da página, igual ao Modal.
+
+```html
+<button type="button" class="btn btn-primary" data-clarus="offcanvas" data-target="#meuOffcanvas">
+  Abrir menu
+</button>
+
+<div class="offcanvas offcanvas-start" id="meuOffcanvas">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Menu</h3>
+    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+  </div>
+  <div class="offcanvas-body">
+    Conteúdo do painel.
+  </div>
+</div>
+```
+
+### Estrutura e posições
+
+`.offcanvas` (painel) → `.offcanvas-header`/`-title`/`-body`/`-footer` (mesma
+composição do Modal, todas opcionais exceto o painel em si). Uma das quatro
+classes de posição é obrigatória:
+
+- `.offcanvas-start` — desliza da esquerda (largura fixa).
+- `.offcanvas-end` — desliza da direita (largura fixa).
+- `.offcanvas-top` — desliza do topo (altura fixa).
+- `.offcanvas-bottom` — desliza da base (altura fixa).
+
+### Atributos de dados
+
+| Atributo | Onde | Valores | Efeito |
+| --- | --- | --- | --- |
+| `data-clarus="offcanvas"` | no gatilho | — | ativa a auto-inicialização |
+| `data-target` | no gatilho | seletor CSS (`#id`) | aponta para o `.offcanvas` a ser aberto |
+| `data-dismiss="offcanvas"` | em qualquer elemento dentro do painel | — | fecha o painel ao clicar |
+| `data-backdrop` | no `.offcanvas` | `"static"` \| `"false"` | `static`: mantém o backdrop, mas desativa Escape/clique fora (só fecha via dismiss); `false`: remove o backdrop visual, mas Escape e clique fora continuam fechando |
+
+```html
+<div class="offcanvas offcanvas-end" id="filtros" data-backdrop="false">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Filtros</h3>
+    <button type="button" class="btn-close" data-dismiss="offcanvas" aria-label="Fechar"></button>
+  </div>
+  <div class="offcanvas-body">Sem backdrop, mas ainda fecha com Escape/clique fora.</div>
+</div>
+```
+
+### Comportamento (sem configuração adicional)
+
+Mesmo mecanismo do Modal: bloqueia o scroll da página enquanto aberto, prende
+o foco (Tab/Shift+Tab) dentro do painel, fecha com Escape ou clique fora
+(exceto com `data-backdrop="static"`), e devolve o foco ao gatilho ao fechar.
+
+### API JavaScript
+
+```js
+const offcanvasEl = document.getElementById("meuOffcanvas");
+const offcanvas = Clarus.Offcanvas.getInstance(offcanvasEl);
+
+offcanvas.show();
+offcanvas.hide();
+offcanvas.toggle();
+```
+
+Eventos: `clarus:offcanvas:shown`, `clarus:offcanvas:hidden` (no elemento
+gatilho).
+
+## 30. Popover
+
+O popover é um painel flutuante com conteúdo rico (título, corpo, ações) —
+diferente do Tooltip, que só mostra texto simples e não aceita interação. Use
+o popover quando precisar de um botão de confirmação, uma explicação mais
+longa ou qualquer conteúdo que o usuário possa clicar dentro do próprio
+painel.
+
+```html
+<button type="button" class="btn btn-primary" data-clarus="popover" data-target="#meuPopover">
+  Mais informações
+</button>
+
+<div class="popover" id="meuPopover">
+  <div class="popover-arrow"></div>
+  <div class="popover-header">Título</div>
+  <div class="popover-body">Conteúdo explicativo, com um botão de ação abaixo.</div>
+  <div class="popover-footer">
+    <button type="button" class="btn btn-sm" data-dismiss="popover">Fechar</button>
+  </div>
+</div>
+```
+
+### Estrutura
+
+`.popover` (painel) → `.popover-arrow` (seta indicando a referência) →
+`.popover-header`/`-body`/`-footer` (header e footer são opcionais).
+
+### Atributos de dados
+
+| Atributo | Valores | Efeito |
+| --- | --- | --- |
+| `data-clarus="popover"` | — | ativa a auto-inicialização |
+| `data-target` | seletor CSS (`#id`) | aponta para o `.popover` a ser exibido |
+| `data-trigger` | `"click"` (padrão) \| `"hover"` \| `"focus"` \| `"manual"` | como o popover é acionado |
+| `data-placement` | `top` (padrão) \| `bottom` \| `left` \| `right` | lado preferido em relação ao gatilho |
+| `data-dismiss="popover"` | em qualquer elemento dentro do painel | fecha o popover ao clicar |
+
+### Modos de disparo (`data-trigger`)
+
+- `click` — clique no gatilho alterna aberto/fechado; fecha com Escape ou
+  clique fora (clicar em conteúdo interativo dentro do próprio popover não
+  fecha).
+- `hover` — abre ao passar o mouse sobre o gatilho **ou** sobre o próprio
+  popover (com uma pequena tolerância ao mover o cursor de um para o outro),
+  fecha quando o mouse sai de ambos.
+- `focus` — abre ao focar o gatilho (Tab), fecha quando o foco sai tanto do
+  gatilho quanto do conteúdo do popover.
+- `manual` — nenhum disparo automático; controle 100% programático via
+  `.show()`/`.hide()`/`.toggle()` (mesmo espírito do Toast).
+
+```html
+<button type="button" class="btn" data-clarus="popover" data-trigger="hover" data-target="#dica" data-placement="right">
+  Passe o mouse
+</button>
+<div class="popover" id="dica">
+  <div class="popover-arrow"></div>
+  <div class="popover-body">Aparece no hover, à direita do gatilho.</div>
+</div>
+```
+
+### Comportamento e acessibilidade
+
+O popover **não** é um diálogo modal: não bloqueia o scroll da página nem
+prende o foco dentro de si — `Tab` pode sair livremente. `role="dialog"` +
+`aria-modal="false"`, com `aria-labelledby` apontando para o `.popover-header`
+quando presente; o gatilho recebe `aria-expanded`/`aria-controls`.
+
+### API JavaScript
+
+```js
+const triggerEl = document.querySelector('[data-target="#meuPopover"]');
+const popover = Clarus.Popover.getInstance(triggerEl);
+
+popover.show();
+popover.hide();
+popover.toggle();
+```
+
+Eventos: `clarus:popover:shown`, `clarus:popover:hidden` (no elemento
+gatilho).
+
+## 31. Customização por CSS Custom Properties (tokens)
 
 Toda a identidade visual do framework é exposta como variáveis CSS com
 prefixo `--clarus-`, definidas em `:root`. Para customizar, basta redefinir a
@@ -1710,7 +1867,7 @@ página com uma cor primária diferente do resto do site:
 Qualquer `.btn-primary`, `.badge-primary`, etc. dentro de `.secao-promocional`
 passa a usar essa cor, sem afetar o resto da página.
 
-## 30. Dark mode
+## 32. Dark mode
 
 O tema escuro é ativado por um único atributo em qualquer elemento
 ancestral — normalmente o `<html>`, para afetar a página inteira:
@@ -1755,7 +1912,7 @@ aplicado apenas a uma seção da página (não à página inteira).
 </div>
 ```
 
-## 31. Onde ver mais exemplos e como contribuir
+## 33. Onde ver mais exemplos e como contribuir
 
 - **`mockup/*.html`** — cada grupo de componente tem um arquivo de exemplo
   funcional dedicado (tema claro e escuro lado a lado), consumindo os
