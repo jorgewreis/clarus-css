@@ -80,7 +80,7 @@ Define a base estrutural do framework:
 - Rows.
 - Colunas.
 - Grid baseado em Flexbox.
-- Breakpoints compatíveis com a experiência do Bootstrap.
+- Breakpoints convencionais, amplamente adotados.
 
 O gutter do grid (`.row`/`.col-*`) é implementado via padding + margin negativo
 controlados pelas CSS Custom Properties `--clarus-gutter-x`/`--clarus-gutter-y`
@@ -122,6 +122,12 @@ Cada componente deve ter seu próprio arquivo parcial:
 - Toasts.
 - Pagination.
 - Breadcrumbs.
+- Spinner / Progress.
+- Carousel.
+- Stepper.
+
+Novos componentes entram como um parcial `_nome.scss` registrado em
+`scss/components/_index.scss` (ver "Regra de Evolução" abaixo).
 
 ### utilities
 

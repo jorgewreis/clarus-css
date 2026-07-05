@@ -1,6 +1,13 @@
-# Análise de Gaps — Clarus CSS vs 10 Frameworks Líderes
+# Análise de Gaps — Clarus CSS vs 11 Frameworks Líderes
 
-Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwind, Foundation, Bulma, Material Design, Ant Design, Chakra UI, Material-UI, Vuetify e Semantic UI.
+> **Documento interno / estratégico.** Não faz parte da documentação pública do
+> Clarus CSS — por isso cita frameworks concorrentes nominalmente, o que é
+> proibido nos documentos oficiais (README, guide, definitions, scss-architecture,
+> CHANGELOG). Serve como bússola de roadmap, não como material de divulgação.
+
+Comparação de funcionalidades do Clarus CSS (v0.3.0) contra Bootstrap, Tailwind,
+Foundation, Bulma, Material Design, Ant Design, Chakra UI, Material-UI, Vuetify,
+Semantic UI e Cirrus UI.
 
 ## Componentes Implementados no Clarus CSS
 
@@ -20,275 +27,148 @@ Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwin
 - ✅ Pagination
 - ✅ Breadcrumbs
 - ✅ Forms (inputs, select customizado, file upload, validação visual)
+- ✅ **Spinner / Progress** (Etapa 1 — v0.3.0)
+- ✅ **Carousel** (Etapa 2 — v0.3.0)
+- ✅ **Stepper / Wizard** (Etapa 3)
 
-**Total: 17 componentes CSS + 7 componentes JS**
+**Total: 20 componentes CSS + 9 componentes JS** (Dropdown, Tooltip, Modal,
+Select, Accordion, Tabs, Toast, Carousel, Stepper).
 
 ---
 
-## Top 10 Implementações Recomendadas
+## Top 10 Recomendados — Status Atual
 
-### 1. **Carrossel / Slider (Carousel)**
+Os 10 gaps críticos originais foram integralmente absorvidos pelo plano de 5
+etapas. Ao concluir a Etapa 5, **todo o Top-10 está fechado**.
+
+### 1. Carrossel / Slider (Carousel)
 
 **Status:** ✅ Implementado (Etapa 2 — `scss/components/_carousel.scss`, `js/carousel.js`)
 
-**Uso:** Presente em 100% dos 10 frameworks analisados.
+**Uso:** Presente em ~100% dos frameworks com JS. **Ausente no Cirrus UI** (100% CSS).
 
-**Justificativa:** Componente crítico para hero sections, product galleries, testimonials. Bootstrap, Swiper (standalone), Splide são referências.
+Entregue com layout slide + fade, setas, indicadores, autoplay com pausa no
+hover/foco, teclado, swipe e o modificador `.carousel-hover-controls`.
 
-**Escopo sugerido:**
-- Versão básica: indicadores (dots), navegação por setas (prev/next)
-- Auto-play com intervalo configurável
-- Transições (fade, slide)
-- Touch/swipe support (mobile)
-- Keyboard navigation (ArrowLeft/Right, Home/End)
-- ARIA labels para acessibilidade
-- Responsivo (slides visíveis por breakpoint)
-
-**Estimativa:** 150-200 linhas SCSS + 250-300 linhas JS
-
-**Exemplos:** Bootstrap Carousel, Chakra Slider, Material-UI Carousel
-
----
-
-### 2. **Spinner / Progress Indicator**
+### 2. Spinner / Progress Indicator
 
 **Status:** ✅ Implementado (Etapa 1 — `scss/components/_spinner.scss`)
 
-**Uso:** Presente em 9/10 frameworks (padrão em Material Design, Chakra, Ant Design).
+**Uso:** Progress em quase todos; spinner dedicado na maioria (Cirrus tem progress,
+mas **não** um spinner dedicado).
 
-**Justificativa:** UX essencial para feedback de loading, progresso de operações.
+Entregue 100% CSS: spinner giratório + progress linear (com faixas), tamanhos e
+cores de estado. Progress circular (ring) segue como refinamento futuro opcional.
 
-**Escopo sugerido:**
-- Spinner giratório (rotação contínua ou pulsante)
-- Progress bar linear (% visível)
-- Progress circular (donut/ring)
-- Estados: loading, success, error
-- Tamanhos: sm, md, lg
-- Cores por estado
+### 3. Popover
 
-**Estimativa:** 80-120 linhas SCSS + 100 linhas JS (se com animação customizável)
+**Status:** 🔜 Planejado (Etapa 4)
 
-**Exemplos:** Bootstrap Spinner, Material-UI CircularProgress, Chakra Spinner
+**Uso:** Em 8/11 frameworks. **Ausente no Cirrus** (só tooltip). Diferente do
+tooltip por ter conteúdo rico e controle manual.
 
----
+**Escopo:** reaproveita `positioning.js` (flip automático, já usado por Dropdown/
+Tooltip); disparo configurável (click/hover/focus/manual); header + corpo +
+footer; fecha com Escape/clique fora; `role="dialog"`.
 
-### 3. **Popover**
+### 4. Offcanvas / Side Drawer
 
-**Status:** ❌ Não implementado
+**Status:** 🔜 Planejado (Etapa 4)
 
-**Uso:** Em 8/10 frameworks. Diferente do tooltip por ter conteúdo rico e controle manual.
+**Uso:** Em 9/11 frameworks. **Ausente no Cirrus.** Complemento do Modal para
+navegação lateral, filtros, menus responsivos.
 
-**Justificativa:** Suplementa Tooltip — permite conteúdo HTML, headers, footers, persist on click.
+**Escopo:** posições left/right/top/bottom; reaproveita `overlay.js`/`focus.js`
+exatamente como o Modal (lock scroll, focus trap, Escape/clique fora).
 
-**Escopo sugerido:**
-- Posicionamento automático (similar ao Tooltip)
-- Disparador: click, hover, focus, manual
-- Header + corpo + footer
-- Fechar com Escape ou clique fora
-- ARIA roles (dialog, popover)
-- Dismissible
+### 5. Breadcrumb avançado com collapse
 
-**Estimativa:** 100-150 linhas SCSS + 150-200 linhas JS
+**Status:** 🔜 Planejado (Etapa 5) — breadcrumb básico já existe
 
-**Exemplos:** Bootstrap Popover, Chakra Popover, Semantic UI Popup
+**Escopo:** collapse automático em mobile (primeiros + últimos), truncação de
+labels com tooltip (reaproveita `js/tooltip.js`), versão compacta com dropdown
+para níveis intermediários (reaproveita `js/dropdown.js`).
 
----
+### 6. Collapse / Disclosure (standalone)
 
-### 4. **Offcanvas / Side Drawer**
+**Status:** 🔜 Planejado (Etapa 5) — hoje só embutido no Accordion
 
-**Status:** ❌ Não implementado
+**Escopo:** extrai o padrão `expand()`/`collapse()` (`js/core/transition.js`, já
+usado pelo Accordion) para uma seção expansível independente, com
+`aria-expanded`/`aria-controls`.
 
-**Uso:** Em 9/10 frameworks. Complemento do Modal para navegação side, filtros, menus responsivos.
+### 7. Timeline
 
-**Justificativa:** UX padrão mobile-first para navigation, sidebars retráteis.
+**Status:** 🔜 Planejado (Etapa 5)
 
-**Escopo sugerido:**
-- Posição: left, right, top, bottom
-- Backdrop (com/sem)
-- Suporte a scroll body lock (similar ao Modal)
-- Animação de deslize
-- Teclado (Escape para fechar)
-- Responsivo
+**Uso:** Em ~7/11 frameworks (forte em Ant Design, Material). **Ausente no Cirrus.**
 
-**Estimativa:** 100-150 linhas SCSS + 150-200 linhas JS
+**Escopo:** vertical/horizontal, itens com ícone/label/conteúdo, estados
+pending/active/completed/failed reaproveitando tokens de cor de estado. CSS puro.
 
-**Exemplos:** Bootstrap Offcanvas, Material-UI Drawer, Chakra Drawer
+### 8. Stepper / Wizard
 
----
+**Status:** ✅ Implementado (Etapa 3 — `scss/components/_stepper.scss`, `js/stepper.js`)
 
-### 5. **Breadcrumb avançado com collapse**
+**Uso:** Comum nos frameworks com JS. **Ausente no Cirrus.**
 
-**Status:** ✅ Breadcrumb básico existe, mas sem features avançadas
+Entregue com horizontal/vertical, estados active/completed/error, conector de
+progresso, painéis + navegação, validação por passo via evento cancelável
+`clarus:stepper:beforechange`.
 
-**Justificativa:** O breadcrumb atual é estático. Versões modernas suportam collapse em mobile (show fewer levels), truncação de labels longos, versão compacta.
+### 9. Segmented Control / Button Group
 
-**Escopo sugerido:**
-- Collapse automático em mobile (mostrar apenas primeiros + últimos)
-- Truncação de labels com tooltip
-- Versão "compacta" com dropdown para níveis intermediários
-- Structured data (JSON-LD) opcional
+**Status:** 🔜 Planejado (Etapa 5) — hoje parcial via Tabs
 
-**Estimativa:** 50-80 linhas SCSS + 80-120 linhas JS
+**Uso:** Button group presente em vários (incl. Cirrus). **Escopo:** grupo de
+botões com estado `selected`, modos exclusivo/inclusivo, reaproveita
+`color-contrast()`.
 
-**Exemplos:** Bootstrap breadcrumb avançado, Material-UI Breadcrumbs, Ant Design Breadcrumb
+### 10. Skeletons / Placeholder Loaders
 
----
+**Status:** 🔜 Planejado (Etapa 5)
 
-### 6. **Collapse / Disclosure (Componente independente de Accordion)**
-
-**Status:** ⚠️ Existe em Accordion, mas não como componente standalone
-
-**Justificativa:** Collapse é mais simples que Accordion — uma seção expansível. Presente em Foundation, Material Design, Chakra como componente independente. Útil para FAQs simplificadas, "Mais informações", etc.
-
-**Escopo sugerido:**
-- Uma seção expansível (não múltiplas como Accordion)
-- Indicador de estado (chevron/seta)
-- ARIA expanded
-- Transição suave
-
-**Estimativa:** 40-60 linhas SCSS + 80-120 linhas JS
-
-**Exemplos:** Material-UI Collapse, Chakra Collapse, Semantic UI Accordion (single)
+**Uso:** Em 8/11 frameworks (Cirrus **tem** placeholder). **Escopo:** `.skeleton`
+base + variantes rect/circle/text, animação pulse/wave respeitando
+`prefers-reduced-motion`. Majoritariamente CSS.
 
 ---
 
-### 7. **Timeline (Componente de Sequência)**
+## Gaps Remanescentes — Nova Priorização (pós-Etapa 5)
 
-**Status:** ❌ Não implementado
+Fechado o Top-10, as antigas "honoráveis menções" passam a ser os próximos alvos.
+Re-priorizadas por impacto × facilidade contra o conjunto já implementado e os 11
+frameworks:
 
-**Uso:** Em 7/10 frameworks, especialmente Ant Design, Material Design, Chakra.
-
-**Justificativa:** Componente visual para históricos, processos, steps — comum em dashboards, documentação de releases, fluxos de aprovação.
-
-**Escopo sugerido:**
-- Vertical e horizontal
-- Itens com ícone, label, conteúdo
-- Estados: pending, active, completed, failed
-- Cores por estado
-- Tamanhos: sm, md, lg
-
-**Estimativa:** 120-160 linhas SCSS + 50 linhas JS (principalmente visual)
-
-**Exemplos:** Ant Design Timeline, Material Design Timeline (via Stepper), Chakra Timeline (community)
-
----
-
-### 8. **Stepper / Wizard**
-
-**Status:** ❌ Não implementado
-
-**Uso:** Em 9/10 frameworks (padrão em fluxos multi-step).
-
-**Justificativa:** Componente crítico para wizards, checkouts, onboarding em múltiplos passos.
-
-**Escopo sugerido:**
-- Steps horizontais e verticais
-- Estados: inactive, active, completed, error
-- Conector entre steps (linha/seta)
-- Descrição e sub-label por step
-- Navegação (next/prev)
-- Validação por step
-
-**Estimativa:** 150-200 linhas SCSS + 200-250 linhas JS
-
-**Exemplos:** Material-UI Stepper, Chakra Stepper, Ant Design Steps
-
----
-
-### 9. **Segmented Control / Button Group avançado**
-
-**Status:** ⚠️ Parcialmente via Tabs, mas não como componente independente
-
-**Justificativa:** Segmented control é comum em mobile (iOS) e em dashboards para filtros/views (grid/list view). Diferente de Tabs por ser mais compacto e orientado a ação instantânea.
-
-**Escopo sugerido:**
-- Grupo de botões com estado "selected"
-- Full-width ou auto-width
-- Icones + label
-- Tamanhos: sm, md, lg
-- Cores: neutral, primary, danger
-- Versão "inclusive" (multi-select) vs "exclusive" (single)
-
-**Estimativa:** 80-120 linhas SCSS + 80-120 linhas JS
-
-**Exemplos:** Material Design Segmented Button, Chakra Button Group, iOS-style segments
-
----
-
-### 10. **Skeletons / Placeholder Loaders**
-
-**Status:** ❌ Não implementado
-
-**Uso:** Em 8/10 frameworks (essencial para perceived performance).
-
-**Justificativa:** UX best practice moderna — mostrar "ghost" do layout enquanto carrega, em vez de spinner vazio. Usado por Chakra, Material-UI, Ant Design.
-
-**Escopo sugerido:**
-- Skeleton base (retângulo cinza com animação pulse)
-- Variantes: rect, circle, text (múltiplas linhas)
-- Composição: card skeleton, list skeleton, table skeleton
-- Animação customizável (fade, pulse, wave)
-- Tema claro/escuro
-
-**Estimativa:** 100-140 linhas SCSS + 50 linhas JS (principalmente CSS animation)
-
-**Exemplos:** Material-UI Skeleton, Chakra Skeleton, Ant Design Skeleton
-
----
-
-## Honoráveis Menções (Implementações Secundárias)
-
-11. **Alert Dialog / Confirmação com Ações** — variante do Modal focada em confirmação
-12. **Input Group** — prefix/suffix em inputs (ícone, moeda, botão ação)
-13. **Rating / Stars** — componente de avaliação
-14. **Badge com dismiss** — badges que podem ser removidas (tags)
-15. **Hover Card / Detailed Tooltip** — tooltip rich com ações
-16. **Menu (Nested)** — versão mais complexa de Dropdown com submenu nativo
-17. **Divider / Separator** — componente de separação com label no meio
-18. **Empty State** — placeholder para listas vazias com ilustração
-19. **File Input Drag-and-Drop** — melhoria do upload atual com drag-drop
-20. **Notification Center** — composição de múltiplos Toasts com histórico
-
----
-
-## Priorização Recomendada (Por Impacto + Facilidade)
-
-| Prioridade | Componente | Impacto | Dificuldade | Razão |
+| Prioridade | Item | Impacto | Dificuldade | Observação |
 |---|---|---|---|---|
-| 🔴 **Alta** | Carousel | Alto | Média | Crítico para hero/galleries, 100% dos frameworks |
-| 🔴 **Alta** | Spinner | Alto | Baixa | Essencial UX, simples CSS |
-| 🔴 **Alta** | Stepper | Alto | Alta | Wizard/checkout, complexo mas comum |
-| 🟠 **Média** | Offcanvas | Médio | Média | Mobile-first, padrão moderno |
-| 🟠 **Média** | Popover | Médio | Média | Estende Tooltip, suplementa Modal |
-| 🟠 **Média** | Segmented Control | Médio | Baixa | Mobile/dashboard, simples |
-| 🟡 **Baixa** | Collapse Standalone | Baixo | Baixa | Refinamento de Accordion |
-| 🟡 **Baixa** | Timeline | Baixo | Baixa | Visual, pouco JS |
-| 🟡 **Baixa** | Skeletons | Médio | Baixa | CSS puro, UX moderna |
-| 🟣 **Futuro** | Menu Nested | Baixo | Alta | Complexidade alta, uso niche |
+| 🔴 Alta | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
+| 🔴 Alta | **Alert Dialog / Confirm** | Médio-alto | Baixa | Compõe o Modal; padrão universal de confirmação |
+| 🟠 Média | **Divider / Separator com label** | Médio | Muito baixa | Quick win 100% CSS |
+| 🟠 Média | **Empty State** | Médio | Baixa | Placeholder de lista vazia; quase todo CSS |
+| 🟠 Média | **Rating / Stars** | Médio | Média | **Ausente no Cirrus**; comum em Ant/MUI |
+| 🟠 Média | **Badge dismissível / Tags** | Médio | Baixa | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
+| 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | Evolui o upload atual |
+| 🟡 Baixa | **Hover Card** | Baixo | Média | Fica trivial depois do Popover (Etapa 4) |
+| 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | Compõe múltiplos Toasts + histórico |
+| 🟣 Futuro | **Menu aninhado (nested)** | Baixo | Alta | Complexidade alta, uso de nicho |
 
 ---
 
-## Roadmap Sugerido para v0.3.x–v0.5.x
+## Roadmap por Etapas
 
-> **Progresso:** Etapa 1 (Spinner + Progress) e Etapa 2 (Carousel) concluídas.
-> Próxima: Etapa 3 (Stepper).
+> **Progresso:** Etapas 1–3 concluídas (Spinner/Progress, Carousel, Stepper).
+> Próxima: Etapa 4.
 
-### v0.3.0 — Componentes de Feedback & Loading
-- ✅ Spinner
-- Skeletons
-- ✅ Progress bar/ring (barra linear; ring pendente)
+| Etapa | Componentes | Status |
+|---|---|---|
+| **1** — Feedback & Loading | Spinner, Progress bar | ✅ Concluída |
+| **2** — Carousel | Carousel (slide/fade, autoplay, swipe) | ✅ Concluída |
+| **3** — Stepper | Stepper/Wizard (horizontal/vertical, validação) | ✅ Concluída |
+| **4** — Overlays avançados | Offcanvas, Popover | 🔜 Planejada |
+| **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | 🔜 Planejada |
 
-### v0.4.0 — Navegação Avançada
-- ✅ Carousel
-- Offcanvas
-- Collapse Standalone
-- Timeline
-
-### v0.5.0 — Componentes de Formulário & Dialog
-- Stepper
-- Popover
-- Segmented Control
-- Input Group (versão básica)
+Progress circular (ring) e os "gaps remanescentes" acima entram depois da Etapa 5.
 
 ---
 
@@ -304,26 +184,40 @@ Comparação de funcionalidades do Clarus CSS (v0.2.0) contra Bootstrap, Tailwin
 
 ### Material Design (Google)
 - Tem: Carousel/Sliders, Progress, Stepper, Collapse, Card, Menu
-- Padrão: Muito opinativos em cores, animações, espaçamento
+- Padrão: muito opinativo em cores, animações, espaçamento
 
 ### Chakra UI
 - Tem: Skeleton, Spinner, Progress, Drawer, Popover, Menu, Tabs, Modal
-- Foco: Accessibility-first, simples de estender
+- Foco: accessibility-first, simples de estender
 
 ### Ant Design
-- Tem: Carousel, Progress, Spin (spinner), Timeline, Steps, Drawer, Popover, Empty, Skeleton
-- Padrão: Enterprise-heavy, complexo
+- Tem: Carousel, Progress, Spin, Timeline, Steps, Drawer, Popover, Empty, Skeleton
+- Padrão: enterprise-heavy, complexo
+
+### Cirrus UI (~v0.8)
+- Framework SCSS híbrido (component + utility-first), **100% CSS, sem JavaScript**.
+- Tem: modal, dropdown, tabs, tooltip, toast, accordion, breadcrumb, pagination,
+  tags, button group, progress bar, placeholder/skeleton, avatar, card, forms, table
+- Não tem: carousel, offcanvas, popover, timeline, stepper, rating, spinner dedicado
+- Padrão: prototipagem rápida com design system exposto via utilitários; tema e
+  dark mode via **configuração SCSS**, não via CSS custom properties em runtime
+  (contraste direto com a abordagem do Clarus, que expõe tudo em `--clarus-*`)
 
 ---
 
 ## Conclusão
 
-O Clarus CSS cobriu bem os **componentes core** (v0.1–v0.2), focando em solidez de API JS e acessibilidade. Os **gaps mais críticos** para atingir paridade com frameworks líderes são:
+Com as Etapas 1–3 concluídas, o Clarus CSS já cobre os três gaps de **maior
+impacto** do estudo original (Carousel, Spinner, Stepper). As Etapas 4 e 5 fecham
+os sete restantes (Offcanvas, Popover, Segmented Control, Skeletons, Timeline,
+Collapse standalone, Breadcrumb avançado), atingindo **paridade completa com o
+Top-10** frente aos frameworks líderes.
 
-1. **Carousel** (100% dos concorrentes)
-2. **Spinner** (90%)
-3. **Stepper** (90%)
-4. **Offcanvas** (90%)
-5. **Popover** (80%)
+A comparação com o Cirrus UI reforça um diferencial do Clarus: mesmo entre
+frameworks híbridos, componentes interativos ricos como **carousel, offcanvas,
+popover, timeline e stepper permanecem raros** — e o Clarus os entrega com JS
+nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
+.dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
-Recomenda-se focar em **v0.3–0.4** nesses 5 antes de explorar honoráveis menções, mantendo o padrão de API JS consistente (data-clarus, eventos customizados, getInstance, .show()/.hide()/.dispose()).
+Depois da Etapa 5, o foco passa aos **gaps remanescentes** priorizados acima,
+começando por Input Group e Alert Dialog (alto impacto, baixa dificuldade).

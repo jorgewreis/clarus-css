@@ -18,13 +18,13 @@ O projeto deve equilibrar três finalidades:
 
 ## 3. Público-Alvo
 
-O público-alvo principal inclui o próprio autor e qualquer tipo de desenvolvedor que queira usar classes prontas, componentes visuais consistentes e padrões de layout próximos à experiência oferecida pelo Bootstrap.
+O público-alvo principal inclui o próprio autor e qualquer tipo de desenvolvedor que queira usar classes prontas, componentes visuais consistentes e padrões de layout convencionais e familiares.
 
 O framework deve ser acessível para desenvolvedores iniciantes, mas suficientemente organizado para ser adotado por profissionais experientes em projetos reais.
 
 ## 4. Posicionamento do Produto
 
-O Clarus CSS será mais próximo do Bootstrap do que de frameworks puramente utilitários como Tailwind CSS. A proposta é entregar componentes prontos, classes auxiliares e uma estrutura previsível para acelerar a construção de interfaces.
+O Clarus CSS pende mais para o lado dos componentes prontos do que para o de frameworks puramente utilitários. A proposta é entregar componentes prontos, classes auxiliares e uma estrutura previsível para acelerar a construção de interfaces.
 
 A identidade visual deve seguir uma linha minimalista e moderna, com foco em clareza, legibilidade, baixo ruído visual e adaptação a diferentes tipos de aplicação.
 
@@ -69,15 +69,18 @@ As classes e componentes devem ser pensados para:
 
 O sistema de layout será baseado em Flexbox.
 
-O grid deve seguir uma abordagem próxima ao Bootstrap, incluindo breakpoints familiares:
+O grid deve seguir uma abordagem convencional de 12 colunas, com breakpoints
+(`scss/settings/_breakpoints.scss`) calibrados pelas larguras lógicas de tela
+mais comuns do mercado atual, não por números arbitrários:
 
-- `sm`
-- `md`
-- `lg`
-- `xl`
-- `xxl`
+- `sm` (640px) — tablets pequenos/phablets
+- `md` (768px) — tablet retrato
+- `lg` (1024px) — tablet paisagem / iPad
+- `xl` (1280px) — laptop comum
+- `xxl` (1536px) — laptop/desktop com escala (Mac/Windows)
+- `xxxl` (1920px) — monitor externo Full HD sem escala
 
-O objetivo é reduzir a curva de aprendizado para quem já conhece Bootstrap, mantendo liberdade para adaptar detalhes internos à identidade do Clarus CSS.
+O objetivo é reduzir a curva de aprendizado para quem já usou um framework CSS de componentes, mantendo liberdade para adaptar detalhes internos à identidade do Clarus CSS.
 
 ## 9. Escopo Inicial de Componentes
 
@@ -204,11 +207,11 @@ As seguintes decisões estão definidas:
 - Nome do produto: Clarus.
 - Nome do projeto/repositório: `clarus-css`.
 - Modelo de design: híbrido.
-- Referência principal: Bootstrap.
+- Referência: convenções amplamente adotadas em frameworks CSS de componentes.
 - Stack prioritária: HTML, CSS e JavaScript nativo.
 - Dependências externas em tempo de execução: zero.
 - Sistema de layout: Flexbox.
-- Breakpoints: próximos ao padrão Bootstrap.
+- Breakpoints: valores convencionais amplamente adotados.
 - Identidade visual: minimalista e moderna.
 - Paleta de cores: "Indigo autoral", definida na seção 18.1.
 - Tipografia: Plus Jakarta Sans, self-hosted, definida na seção 18.2.
@@ -228,11 +231,11 @@ As duas pendências desta seção (antes "a definir posteriormente") foram decid
 
 ### 18.1 Paleta de cores oficial
 
-Opção "Indigo autoral": paleta própria, escolhida por diferenciar o Clarus
-tanto do azul característico do Bootstrap quanto da paleta do Material
-Design do Google (esta última usada até então como placeholder em
-`scss/settings/_colors.scss`), reforçando o posicionamento de identidade
-visual própria (seção 4).
+Opção "Indigo autoral": paleta própria, escolhida por dar ao Clarus uma
+identidade cromática distinta dos azuis e paletas genéricas mais comuns em
+frameworks de UI (uma paleta de placeholder chegou a ser usada em
+`scss/settings/_colors.scss` durante o desenvolvimento inicial), reforçando o
+posicionamento de identidade visual própria (seção 4).
 
 - Cores de estado:
   - `primary`: `#4F46E5`
@@ -269,8 +272,8 @@ Pro no monoespaçado (`$font-family-mono`, sem alteração).
 
 ## 19. Convenção de Nomenclatura de Classes
 
-- Sem prefixo global: as classes seguem o padrão Bootstrap já em uso (`.btn`,
-  `.card`, `.container`), sem prefixo `clarus-`.
+- Sem prefixo global: as classes são "nuas" (`.btn`, `.card`, `.container`),
+  sem prefixo `clarus-`.
 - Variantes de cor/estilo por sufixo direto: `.btn-primary`, `.alert-danger`,
   `.badge-success`, seguindo os nomes já usados em `$theme-colors`
   (`scss/settings/_colors.scss`).
@@ -279,7 +282,7 @@ Pro no monoespaçado (`$font-family-mono`, sem alteração).
   o padrão já usado em `.form-control-sm`/`.form-control-lg`.
 - Estados controlados por JavaScript usam classes `is-*` (`.is-open`,
   `.is-active`, `.is-expanded`), nunca atributos `data-state` customizados.
-- Utilitários mantêm abreviações curtas estilo Bootstrap (`.d-flex`, `.mt-3`,
+- Utilitários mantêm abreviações curtas (`.d-flex`, `.mt-3`,
   `.gx-2`, `.p-2`), como já implementado em `scss/utilities/`.
 - Responsividade em utilitários e grid segue sempre o formato fixo
   `{propriedade}-{breakpoint}-{valor}` (ex.: `.col-md-6`, `.d-md-none`,
@@ -437,7 +440,7 @@ o elemento de referência ao tooltip.
 
 `computePosition()` (`js/core/positioning.js`) suporta a opção `align`
 (`"start"`/`"center"`/`"end"`) para o eixo cruzado, além do `placement`. O
-Dropdown usa `data-align` no toggle (padrão `"start"`, como no Bootstrap)
+Dropdown usa `data-align` no toggle (padrão `"start"`, alinhamento à esquerda)
 com offset de 4px em relação ao toggle; `.dropdown-menu` tem
 `position: absolute` explícito no CSS base, evitando que o menu seja medido
 como bloco normal antes do JS aplicar a posição (o que quebraria o cálculo
@@ -546,6 +549,32 @@ nos indicadores; `aria-live` fica `off` no autoplay e `polite` sem ele. As
 transições respeitam `prefers-reduced-motion`.
 
 Mockup: `mockup/carousel.html`.
+
+### Stepper
+
+Stepper/Wizard (`.stepper`/`.stepper-header`/`.step`, `scss/components/_stepper.scss`).
+Cada `.step` tem um `.step-indicator` (círculo com número, ou um "check" em SVG
+quando concluído) e um `.step-label`; a variante `.stepper-vertical` empilha os
+passos com `.step-content` (label + `.step-description`). Estados por passo:
+padrão (pendente), `.step-active`, `.step-completed` e `.step-error`. O conector
+entre passos é desenhado via `::after` e fica na cor primária depois de um passo
+concluído (indica progresso) — a regra usa `:not(:last-child)` para casar a
+especificidade da regra base do conector. Opcionalmente há painéis de conteúdo
+(`.step-panel`, só o ativo visível) e ações de navegação (`.stepper-actions` com
+botões `[data-stepper="prev"]`/`[data-stepper="next"]`).
+
+`js/stepper.js` (`Clarus.Stepper`) segue a API da seção 20: auto-init via
+`data-clarus="stepper"`, `getInstance()`, métodos `.next()`/`.prev()`/`.goTo(i)`/
+`.setError(i, bool)`/`.complete()`/`.dispose()`. Antes de cada troca dispara o
+evento **cancelável** `clarus:stepper:beforechange` (`detail: { from, to }`) —
+prevenir com `preventDefault()` bloqueia o avanço (hook de validação por passo);
+depois de trocar dispara `clarus:stepper:changed`, e ao concluir o último passo,
+`clarus:stepper:completed`. Por padrão é linear (`data-linear`, padrão `true`):
+o cabeçalho só navega para passos já concluídos; `data-linear="false"` libera
+pular para qualquer passo. Acessibilidade: `aria-current="step"` no passo ativo,
+passos clicáveis navegáveis por teclado (Enter/Espaço).
+
+Mockup: `mockup/stepper.html`.
 
 ## 22. Testes Automatizados
 

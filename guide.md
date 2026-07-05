@@ -41,26 +41,31 @@ obrigatório para usar o framework no seu projeto.
 25. [Tabs](#25-tabs)
 26. [Toast](#26-toast)
 27. [Carousel](#27-carousel)
-28. [Customização por CSS Custom Properties (tokens)](#28-customização-por-css-custom-properties-tokens)
-29. [Dark mode](#29-dark-mode)
-30. [Onde ver mais exemplos e como contribuir](#30-onde-ver-mais-exemplos-e-como-contribuir)
+28. [Stepper](#28-stepper)
+29. [Customização por CSS Custom Properties (tokens)](#29-customização-por-css-custom-properties-tokens)
+30. [Dark mode](#30-dark-mode)
+31. [Onde ver mais exemplos e como contribuir](#31-onde-ver-mais-exemplos-e-como-contribuir)
 
 ---
 
 ## 1. O que é o Clarus CSS
 
 Clarus CSS é um framework CSS open source, híbrido por design: ele entrega
-componentes prontos no estilo Bootstrap (`.btn`, `.card`, `.modal`) **e**
-classes utilitárias atômicas no estilo Tailwind (`.d-flex`, `.mt-3`, `.gx-2`)
-na mesma folha de estilo, com uma convenção de nomes pensada para que as duas
-abordagens não colidam entre si. Ele é construído com HTML, CSS/SCSS e
-JavaScript nativo, sem nenhuma dependência de runtime — não carrega React,
-Vue, Angular, jQuery nem qualquer outra biblioteca para funcionar, e nem
-mesmo a tipografia depende de um serviço externo em produção (a fonte
-principal, Plus Jakarta Sans, é distribuída junto ao pacote). Se você já
-conhece Bootstrap, a curva de aprendizado é curta: a nomenclatura de classes é
-propositalmente próxima, para que você consiga adivinhar o nome de uma classe
-antes de precisar consultar a documentação.
+componentes prontos (`.btn`, `.card`, `.modal`) **e** classes utilitárias
+atômicas (`.d-flex`, `.mt-3`, `.gx-2`) na mesma folha de estilo, com uma
+convenção de nomes pensada para que as duas abordagens não colidam entre si.
+Ele é construído com HTML, CSS/SCSS e JavaScript nativo, sem nenhuma
+dependência de runtime — não carrega React, Vue, Angular, jQuery nem qualquer
+outra biblioteca para funcionar, e nem mesmo a tipografia depende de um serviço
+externo em produção (a fonte principal, Plus Jakarta Sans, é distribuída junto
+ao pacote). A nomenclatura de classes segue convenções amplamente adotadas, de
+modo que você consiga adivinhar o nome de uma classe antes de precisar
+consultar a documentação.
+
+Este guia é o **manual de uso completo** do framework — a referência exaustiva,
+exemplo a exemplo. Para uma visão geral rápida (o que é, por que usar, como
+instalar) consulte o `README.md`; aqui o foco é ensinar a usar cada recurso em
+detalhe.
 
 Três ideias resumem o projeto e valem a pena ter em mente enquanto lê o resto
 deste guia:
@@ -160,7 +165,7 @@ repete em praticamente tudo que vem a seguir:
 
 | Categoria | Padrão | Exemplos |
 | --- | --- | --- |
-| Sem prefixo global | classes "nuas", como no Bootstrap | `.btn`, `.card`, `.container` |
+| Sem prefixo global | classes "nuas", sem prefixo | `.btn`, `.card`, `.container` |
 | Variantes de cor/estado | sufixo direto com o nome da cor | `.btn-primary`, `.alert-danger`, `.badge-success` |
 | Tamanhos | sufixo `-sm`/`-lg` | `.btn-sm`, `.card-lg`, `.form-control-sm` |
 | Estados via JavaScript | classes `is-*`, nunca atributos `data-state` customizados | `.is-valid`, `.is-invalid` |
@@ -173,13 +178,14 @@ As cinco cores de estado usadas em praticamente todo componente são:
 
 Os breakpoints (usados no grid e nos utilitários responsivos) são:
 
-| Breakpoint | Largura mínima |
-| --- | --- |
-| `sm` | 576px |
-| `md` | 768px |
-| `lg` | 992px |
-| `xl` | 1200px |
-| `xxl` | 1400px |
+| Breakpoint | Largura mínima | Alinhado a |
+| --- | --- | --- |
+| `sm` | 640px | tablets pequenos/phablets |
+| `md` | 768px | tablet retrato |
+| `lg` | 1024px | tablet paisagem / iPad |
+| `xl` | 1280px | laptop comum |
+| `xxl` | 1536px | laptop/desktop com escala (Mac/Windows) |
+| `xxxl` | 1920px | monitor externo Full HD sem escala |
 
 `xs` (0px) também existe como breakpoint base, mas não tem infixo — ou seja,
 uma classe sem breakpoint (`.col-6`) já é o comportamento "mobile-first", e os
@@ -219,16 +225,17 @@ para `.container-{breakpoint}` a partir do breakpoint correspondente):
 
 | Breakpoint | Largura máxima |
 | --- | --- |
-| `sm` | 540px |
+| `sm` | 600px |
 | `md` | 720px |
 | `lg` | 960px |
-| `xl` | 1140px |
-| `xxl` | 1320px |
+| `xl` | 1200px |
+| `xxl` | 1440px |
+| `xxxl` | 1800px |
 
 ## 5. Grid (sistema de linhas e colunas)
 
 O grid do Clarus CSS é baseado em Flexbox, com 12 colunas e breakpoints
-equivalentes ao Bootstrap — se você já montou uma página com `.row`/`.col-*`
+convencionais — se você já montou uma página com `.row`/`.col-*`
 em outro framework, o comportamento aqui é o mesmo. A estrutura básica é
 sempre a mesma: uma `.row` (linha flex) contendo uma ou mais `.col-*`
 (colunas), cuja largura é uma fração de 12.
@@ -306,7 +313,7 @@ você precisa que uma `.row`/`.col` específica ignore o comportamento padrão d
 > (não existe `.col-xs-6`) — para o comportamento "sem breakpoint", use
 > `.col-6` diretamente, que já é a base mobile-first.
 
-## 6. Utilitários de espaçonamento e gap
+## 6. Utilitários de espaçamento e gap
 
 Utilitários existem para evitar CSS customizado repetitivo — em vez de
 escrever uma regra `margin-top: 1rem` toda vez que precisar desse espaçamento,
@@ -1521,7 +1528,139 @@ carousel.dispose();
 Evento: `clarus:carousel:slid`, disparado a cada troca de slide, com
 `event.detail` contendo `{ from, to }` (índices do slide anterior e do novo).
 
-## 28. Customização por CSS Custom Properties (tokens)
+## 28. Stepper
+
+O stepper guia o usuário por uma sequência de passos — um wizard de cadastro,
+um checkout em etapas, o acompanhamento de um pedido. Mostra em que passo se
+está, quais já foram concluídos e permite (opcionalmente) navegar entre painéis
+de conteúdo com botões de avançar/voltar, incluindo um gancho de validação para
+bloquear o avanço.
+
+```html
+<div class="stepper" data-clarus="stepper" id="meuStepper">
+  <ol class="stepper-header">
+    <li class="step step-active">
+      <span class="step-indicator">1</span>
+      <span class="step-label">Conta</span>
+    </li>
+    <li class="step">
+      <span class="step-indicator">2</span>
+      <span class="step-label">Perfil</span>
+    </li>
+    <li class="step">
+      <span class="step-indicator">3</span>
+      <span class="step-label">Confirmação</span>
+    </li>
+  </ol>
+  <div class="stepper-content">
+    <div class="step-panel active">Passo 1 — dados da conta.</div>
+    <div class="step-panel">Passo 2 — dados do perfil.</div>
+    <div class="step-panel">Passo 3 — revise e confirme.</div>
+  </div>
+  <div class="stepper-actions">
+    <button type="button" class="btn" data-stepper="prev">Anterior</button>
+    <button type="button" class="btn btn-primary" data-stepper="next">Próximo</button>
+  </div>
+</div>
+```
+
+### Estrutura
+
+`.stepper` (contêiner) → `.stepper-header` (`<ol>` com os passos) → `.step`
+(cada passo) → `.step-indicator` (o círculo, com número no HTML) + `.step-label`
+(o rótulo). Os painéis de conteúdo (`.stepper-content` > `.step-panel`) e as
+ações (`.stepper-actions` com botões `[data-stepper="prev"]`/`[data-stepper="next"]`)
+são **opcionais** — um stepper pode ser só o cabeçalho, como indicador visual de
+progresso (por exemplo, o acompanhamento de um pedido). Exatamente um `.step`
+deve ter `.step-active` no HTML inicial.
+
+### Estados dos passos
+
+Aplicados no `.step` (o JavaScript gerencia `active`/`completed`; `error` fica a
+seu cargo, via `setError()`):
+
+- padrão (sem classe) — passo pendente/futuro.
+- `.step-active` — passo atual (círculo preenchido).
+- `.step-completed` — passo concluído (círculo com "check"; o conector à direita
+  fica na cor primária, indicando progresso).
+- `.step-error` — passo com erro (círculo na cor `danger`).
+
+### Variante vertical
+
+`.stepper-vertical` empilha os passos na vertical, com o rótulo ao lado do
+indicador. Use `.step-content` para agrupar o rótulo e uma descrição secundária:
+
+```html
+<div class="stepper stepper-vertical">
+  <ol class="stepper-header">
+    <li class="step step-completed">
+      <span class="step-indicator">1</span>
+      <span class="step-content">
+        <span class="step-label">Pedido recebido</span>
+        <span class="step-description">Confirmado às 09:12</span>
+      </span>
+    </li>
+    <li class="step step-active">
+      <span class="step-indicator">2</span>
+      <span class="step-content">
+        <span class="step-label">Em separação</span>
+        <span class="step-description">Preparando os itens</span>
+      </span>
+    </li>
+  </ol>
+</div>
+```
+
+### Atributos de dados
+
+| Atributo | Valores | Efeito |
+| --- | --- | --- |
+| `data-clarus="stepper"` | — | ativa a auto-inicialização |
+| `data-linear` | `"true"` (padrão) \| `"false"` | em `true`, o cabeçalho só navega para passos já concluídos (avanço só pelo botão "próximo", um por vez); em `false`, permite pular direto para qualquer passo pelo cabeçalho |
+
+### Validação por passo
+
+Antes de qualquer troca de passo, o componente dispara o evento **cancelável**
+`clarus:stepper:beforechange`. Chamar `preventDefault()` nele bloqueia o avanço —
+é assim que você valida um passo antes de deixar o usuário seguir:
+
+```js
+const stepperEl = document.getElementById("meuStepper");
+
+stepperEl.addEventListener("clarus:stepper:beforechange", (event) => {
+  const { from, to } = event.detail;
+  // só valida ao avançar (to > from); permite voltar sem checar
+  if (to > from && !campoDoPassoEstaValido(from)) {
+    event.preventDefault();
+    Clarus.Stepper.getInstance(stepperEl).setError(from);
+  }
+});
+```
+
+### API JavaScript
+
+```js
+const stepperEl = document.getElementById("meuStepper");
+const stepper = Clarus.Stepper.getInstance(stepperEl);
+
+stepper.next();            // avança um passo (ou completa, se já no último)
+stepper.prev();            // volta um passo
+stepper.goTo(2);           // vai para o passo de índice 2 (0-based)
+stepper.setError(1, true); // marca/desmarca o passo 1 com erro
+stepper.complete();        // marca todos como concluídos e emite :completed
+stepper.dispose();
+```
+
+Eventos (todos disparados no elemento `.stepper`):
+
+- `clarus:stepper:beforechange` — cancelável, `event.detail` com `{ from, to }`.
+- `clarus:stepper:changed` — após a troca, `event.detail` com `{ from, to }`.
+- `clarus:stepper:completed` — ao concluir o último passo.
+
+O passo ativo recebe `aria-current="step"`, e os passos navegáveis são
+acessíveis por teclado (Enter/Espaço ativam o passo focado).
+
+## 29. Customização por CSS Custom Properties (tokens)
 
 Toda a identidade visual do framework é exposta como variáveis CSS com
 prefixo `--clarus-`, definidas em `:root`. Para customizar, basta redefinir a
@@ -1571,7 +1710,7 @@ página com uma cor primária diferente do resto do site:
 Qualquer `.btn-primary`, `.badge-primary`, etc. dentro de `.secao-promocional`
 passa a usar essa cor, sem afetar o resto da página.
 
-## 29. Dark mode
+## 30. Dark mode
 
 O tema escuro é ativado por um único atributo em qualquer elemento
 ancestral — normalmente o `<html>`, para afetar a página inteira:
@@ -1616,7 +1755,7 @@ aplicado apenas a uma seção da página (não à página inteira).
 </div>
 ```
 
-## 30. Onde ver mais exemplos e como contribuir
+## 31. Onde ver mais exemplos e como contribuir
 
 - **`mockup/*.html`** — cada grupo de componente tem um arquivo de exemplo
   funcional dedicado (tema claro e escuro lado a lado), consumindo os

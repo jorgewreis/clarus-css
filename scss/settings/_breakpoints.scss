@@ -1,18 +1,25 @@
+// Escala alinhada às larguras lógicas de tela mais comuns do mercado atual:
+// sm/tablet retrato (~768 já cobria isso; 640 cobre phablets/tablets pequenos
+// antes desse corte), lg = tablet paisagem/iPad (1024), xl = laptop comum
+// (1280), xxl = notebook/desktop com escala (Mac/Windows a 1536 lógico),
+// xxxl = monitor externo Full HD sem escala (1920).
 $breakpoints: (
   xs: 0,
-  sm: 576px,
+  sm: 640px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px,
+  xxxl: 1920px
 ) !default;
 
 $container-max-widths: (
-  sm: 540px,
+  sm: 600px,
   md: 720px,
   lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
+  xl: 1200px,
+  xxl: 1440px,
+  xxxl: 1800px
 ) !default;
 
 $column-max-widths: (
@@ -20,5 +27,6 @@ $column-max-widths: (
   md: 240px,
   lg: 360px,
   xl: 480px,
-  xxl: 560px
+  xxl: 600px,
+  xxxl: 720px
 ) !default;

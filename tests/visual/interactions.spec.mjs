@@ -145,3 +145,22 @@ test.describe("Carousel", () => {
     await expect(items.nth(0)).toHaveClass(/active/);
   });
 });
+
+test.describe("Stepper", () => {
+  test("avança/volta pelo wizard e navega por passos concluídos", async ({ page }) => {
+    await page.goto(mockupUrl("stepper.html"));
+
+    const stepper = page.locator("#stepper-wizard");
+    const steps = stepper.locator(".step");
+
+    await expect(steps.nth(0)).toHaveClass(/step-active/);
+    await expect(stepper.locator('[data-stepper="prev"]')).toBeDisabled();
+
+    await stepper.locator('[data-stepper="next"]').click();
+    await expect(steps.nth(1)).toHaveClass(/step-active/);
+    await expect(steps.nth(0)).toHaveClass(/step-completed/);
+
+    await stepper.locator('[data-stepper="prev"]').click();
+    await expect(steps.nth(0)).toHaveClass(/step-active/);
+  });
+});

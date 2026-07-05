@@ -2,7 +2,7 @@
 
 # Clarus CSS
 
-**Um framework CSS híbrido — componentes prontos no estilo Bootstrap, classes utilitárias no estilo Tailwind, zero dependências em tempo de execução.**
+**Um framework CSS híbrido — componentes prontos e classes utilitárias atômicas na mesma folha de estilo, com zero dependências em tempo de execução.**
 
 [![npm version](https://img.shields.io/npm/v/clarus-css.svg)](https://www.npmjs.com/package/clarus-css)
 [![npm license](https://img.shields.io/npm/l/clarus-css.svg)](LICENSE)
@@ -11,10 +11,7 @@
 
 [Instalação](#instalação) ·
 [Por que Clarus CSS](#por-que-clarus-css) ·
-[Uso](#uso) ·
-[Componentes](#componentes-disponíveis) ·
-[JavaScript](#componentes-interativos-javascript) ·
-[Customização](#customização-por-variáveis) ·
+[Componentes](#componentes) ·
 [Documentação](#documentação)
 
 </div>
@@ -27,22 +24,23 @@ profissionais, e é distribuído publicamente como produto para qualquer
 desenvolvedor que precise construir interfaces consistentes sem carregar
 React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 
-> **Status:** escopo inicial completo (`0.1.x`). Layout, grid, utilitários,
-> formulários (com validação visual, select customizado e upload de
-> arquivo) e todos os 17 componentes previstos para a primeira versão —
-> botões, cards, alertas, badges, tabelas, navbar, dropdown, modal,
-> accordion, tabs, tooltips, toasts, paginação e breadcrumbs — estão
-> implementados, com dark mode nativo e uma API JavaScript consistente
-> entre os componentes interativos. Veja
-> [`docs/definitions.md`](docs/definitions.md) para o histórico de decisões
-> e o detalhamento técnico de cada componente.
+> **Status:** `0.3.0`. Base completa (layout, grid, utilitários, formulários com
+> validação visual, select customizado e upload de arquivo) mais um catálogo de
+> componentes em expansão — dos elementos de conteúdo e navegação aos
+> interativos (modal, dropdown, tabs, carousel, stepper e mais), todos com dark
+> mode nativo e uma API JavaScript consistente. O catálogo atual está em
+> [Componentes](#componentes); o histórico por versão, no
+> [`CHANGELOG.md`](CHANGELOG.md).
+
+Este README é a **visão geral** do projeto. Para aprender a usar cada recurso em
+detalhe, com exemplos completos, consulte o **[guia completo](guide.md)**.
 
 ## Por que Clarus CSS
 
 A maioria dos frameworks CSS obriga você a escolher um lado: componentes
-prontos e opinativos (Bootstrap) **ou** utilitários atômicos e flexíveis
-(Tailwind). O Clarus CSS assume os dois de propósito — é essa a filosofia
-híbrida que orienta toda a arquitetura do projeto.
+prontos e opinativos **ou** utilitários atômicos e flexíveis. O Clarus CSS
+assume os dois de propósito — é essa a filosofia híbrida que orienta toda a
+arquitetura do projeto.
 
 | | |
 | --- | --- |
@@ -50,7 +48,7 @@ híbrida que orienta toda a arquitetura do projeto.
 | **Zero dependências** | Nenhuma dependência de runtime — nem framework JS, nem CDN externo para fontes. HTML, CSS e JavaScript nativo, prontos para colar direto em qualquer página. |
 | **Dark mode nativo** | Suporte a tema escuro desde a v0.1, via CSS Custom Properties e um único atributo (`data-theme="dark"`) — sem plugin, sem JS extra. |
 | **Acessibilidade não é opcional** | ARIA, foco e navegação por teclado são parte da API de todo componente interativo desde o início, não um retrofit. |
-| **Curva de aprendizado familiar** | Nomenclatura de classes e grid próximos ao Bootstrap — quem já conhece Bootstrap se sente em casa em minutos. |
+| **Curva de aprendizado familiar** | Nomenclatura de classes e grid seguem convenções amplamente adotadas — quem já usou um framework CSS de componentes se sente em casa em minutos. |
 | **Customização sem fork** | Toda a identidade visual (cores, espaçamento, tipografia, raios, sombras) é exposta via CSS Custom Properties — sobrescreva sem recompilar. |
 
 ## Instalação
@@ -61,100 +59,26 @@ Via npm:
 npm install clarus-css
 ```
 
-Ou direto via CDN (jsDelivr/unpkg), sem precisar instalar nada:
+Ou direto via CDN (jsDelivr/unpkg), sem instalar nada:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clarus-css/dist/css/clarus.css">
+<script src="https://cdn.jsdelivr.net/npm/clarus-css/dist/js/clarus.js"></script>
 ```
 
-## Uso
+O CSS também é distribuído em arquivos separados (`layout.css`, `forms.css`,
+`components.css`, `helpers.css`), e o ponto de entrada Sass está disponível para
+compilar com suas próprias variáveis. As formas de uso estão detalhadas em
+[Instalação e formas de uso](guide.md#2-instalação-e-formas-de-uso).
 
-### Via bundle completo
+## Início rápido
+
+Um componente interativo se inicializa sozinho via `data-clarus` — basta incluir
+o CSS e o JS e escrever o HTML:
 
 ```html
 <link rel="stylesheet" href="node_modules/clarus-css/dist/css/clarus.min.css">
-<script src="node_modules/clarus-css/dist/js/clarus.min.js"></script>
-```
 
-Ou, com um bundler (Webpack, Vite, Parcel, etc.):
-
-```js
-import "clarus-css";
-```
-
-### Via arquivos separados
-
-Para incluir só o que for necessário:
-
-```html
-<link rel="stylesheet" href="node_modules/clarus-css/dist/css/layout.css">
-<link rel="stylesheet" href="node_modules/clarus-css/dist/css/forms.css">
-<link rel="stylesheet" href="node_modules/clarus-css/dist/css/components.css">
-<link rel="stylesheet" href="node_modules/clarus-css/dist/css/helpers.css">
-```
-
-Cada arquivo é independente (inclui variáveis, reset e dark mode), então dá
-pra combinar apenas os que fizerem sentido para o seu projeto.
-
-### Via SCSS
-
-```scss
-@use "clarus-css/scss" as clarus;
-```
-
-Compile do zero com suas próprias variáveis Sass, aproveitando a arquitetura
-modular descrita em
-[`docs/scss-architecture.md`](docs/scss-architecture.md).
-
-## Estrutura de classes
-
-A convenção de nomes segue de perto o Bootstrap, para reduzir a curva de
-aprendizado — e é consistente o suficiente para você prever o nome de uma
-classe antes de precisar consultar a documentação:
-
-| Categoria | Exemplos |
-| --- | --- |
-| Layout | `.container`, `.container-fluid`, `.row`, `.col`, `.col-{breakpoint}-{n}` |
-| Formulários | `.form-row`, `.form-label`, `.form-control`, `.form-select`, `.is-valid`/`.is-invalid` |
-| Componentes | `.btn`, `.card`, `.alert`, `.badge`, `.navbar`, `.modal`, `.dropdown`, `.accordion` |
-| Variantes de cor | sufixo direto: `.btn-primary`, `.alert-danger`, `.badge-success` |
-| Tamanhos | sufixo `-sm`/`-lg`: `.btn-sm`, `.card-lg`, `.form-control-sm` |
-| Utilitários | `.d-*` (display), `.m-*`/`.p-*` (espaçamento), `.g-*` (gap), `.text-*`/`.fw-*`/`.fs-*` (tipografia) |
-| Responsivo | `{propriedade}-{breakpoint}-{valor}`: `.col-md-6`, `.d-md-none`, `.mt-lg-3` |
-
-## Sistema de grid
-
-Grid baseado em Flexbox, com breakpoints equivalentes ao Bootstrap:
-
-| Breakpoint | Largura mínima |
-| --- | --- |
-| `sm` | 576px |
-| `md` | 768px |
-| `lg` | 992px |
-| `xl` | 1200px |
-| `xxl` | 1400px |
-
-## Componentes disponíveis
-
-- **Layout:** containers, grid Flexbox (`.row`/`.col-*`).
-- **Formulários:** controles, tamanhos, validação visual, select customizado, upload de arquivo estilizado.
-- **Conteúdo:** botões, cards (incluindo variante clicável e horizontal), alertas, badges, tabelas.
-- **Navegação:** navbar, dropdown, tabs, paginação, breadcrumbs.
-- **Overlay:** modal, tooltip, toast, accordion.
-
-Cada componente tem um exemplo funcional dedicado (claro + escuro) em
-[`mockup/`](mockup) — a forma mais rápida de ver o framework em ação sem
-escrever nenhum código. O escopo completo, com a ordem de implementação e o
-racional de cada decisão, está em
-[`docs/definitions.md`](docs/definitions.md#9-escopo-inicial-de-componentes).
-
-## Componentes interativos (JavaScript)
-
-Dropdown, Tooltip, Modal, Select customizado, Accordion, Tabs e Toast
-compartilham uma única API, pensada para funcionar direto no HTML — sem
-exigir `new` manual, sem exigir build:
-
-```html
 <button type="button" class="btn btn-primary" data-clarus="modal" data-target="#meuModal">
   Abrir modal
 </button>
@@ -170,72 +94,56 @@ exigir `new` manual, sem exigir build:
     </div>
   </div>
 </div>
+
+<script src="node_modules/clarus-css/dist/js/clarus.min.js"></script>
 ```
 
-Basta incluir `dist/js/clarus.js` (ou `clarus.min.js`) — a inicialização é
-automática via `data-clarus="<componente>"`. Cada instância continua
-acessível para controle programático, sem precisar reinstanciar:
+Todo componente interativo compartilha a mesma API (`.show()`, `.hide()`,
+`.toggle()`, `.dispose()`, `getInstance()` e eventos DOM `clarus:*`). Os
+conceitos gerais estão em
+[Componentes interativos](guide.md#19-componentes-interativos-conceitos-gerais-da-api-javascript).
 
-```js
-const modalEl = document.getElementById("meuModal");
-Clarus.Modal.getInstance(modalEl).show();
-```
+## Componentes
 
-Toda a família de componentes interativos segue a mesma API de instância —
-`.show()`, `.hide()`, `.toggle()`, `.dispose()` — e comunica estado via
-eventos DOM nativos (`clarus:modal:shown`, `clarus:tab:changed`, etc.), sem
-exigir callbacks de construtor. Também dá pra importar cada componente
-individualmente para uso com bundlers, sem carregar o bundle inteiro:
+- **Layout:** containers, grid Flexbox (`.row`/`.col-*`).
+- **Formulários:** controles, tamanhos, validação visual, select customizado, upload de arquivo estilizado.
+- **Conteúdo:** botões, cards (incluindo variante clicável e horizontal), alertas, badges, tabelas.
+- **Navegação:** navbar, dropdown, tabs, paginação, breadcrumbs.
+- **Overlay:** modal, tooltip, toast, accordion.
+- **Feedback:** spinner, progress bar.
+- **Interação avançada:** carousel, stepper.
 
-```js
-import { Modal } from "clarus-css/js/modal";
-```
+Cada componente tem um exemplo funcional dedicado (claro + escuro) em
+[`mockup/`](mockup) — a forma mais rápida de ver o framework em ação sem
+escrever nenhum código. O passo a passo de uso de cada um está no
+[guia completo](guide.md).
 
-Foco, teclado (Tab/Shift+Tab, setas, Escape) e atributos ARIA fazem parte da
-API desde a primeira versão de cada componente — não é um extra adicionado
-depois. Detalhes de cada componente (atributos, eventos, exemplos completos)
-estão nos arquivos [`mockup/*.html`](mockup) e no histórico de decisões em
-[`docs/definitions.md`](docs/definitions.md#20-api-javascript-dos-componentes-interativos).
-
-## Customização por variáveis
+## Customização e dark mode
 
 Todos os tokens visuais são expostos como CSS Custom Properties (prefixo
-`--clarus-`) em `:root`, definidas em `scss/tokens/_root.scss`. Para
-sobrescrever, basta redefinir a variável no seu próprio CSS — sem fork, sem
-recompilar o Sass:
+`--clarus-`). Para customizar, redefina a variável no seu próprio CSS — sem
+fork, sem recompilar:
 
 ```css
 :root {
   --clarus-color-primary: #6d28d9;
   --clarus-radius-md: 10px;
-  --clarus-font-sans: "Inter", sans-serif;
 }
 ```
 
-Isso cobre cores de estado, tipografia, raios de borda, sombras e os tokens
-específicos de cada componente (ex.: `--clarus-tooltip-bg`,
-`--clarus-alert-success-bg`) — a lista completa está em
-`scss/tokens/_root.scss` e `scss/themes/_dark.scss`.
-
-## Modo escuro
-
-Dark mode nativo, ativado por um único atributo no elemento raiz — sem
-biblioteca extra, sem flash de conteúdo sem estilo:
-
-```html
-<html data-theme="dark">
-```
-
-Todos os componentes, incluindo os que usam JavaScript para se posicionar
-fora do fluxo normal do documento (dropdown, tooltip), respeitam o tema
-herdado do elemento de referência mais próximo.
+O dark mode é ativado por um único atributo (`<html data-theme="dark">`), sem
+JavaScript obrigatório. Detalhes em
+[Customização por tokens](guide.md#29-customização-por-css-custom-properties-tokens)
+e [Dark mode](guide.md#30-dark-mode).
 
 ## Documentação
 
-- [`docs/definitions.md`](docs/definitions.md) — visão geral do produto,
-  decisões de arquitetura e o catálogo completo de componentes.
-- [`docs/scss-architecture.md`](docs/scss-architecture.md) — arquitetura
-  dos módulos SCSS e do pipeline de build.
+- [`guide.md`](guide.md) — **guia completo de uso**: manual de referência com
+  todos os componentes, utilitários e exemplos, do básico ao avançado.
+- [`docs/definitions.md`](docs/definitions.md) — decisões de arquitetura e o
+  catálogo técnico de cada componente (classes, tokens, módulos JS).
+- [`docs/scss-architecture.md`](docs/scss-architecture.md) — arquitetura dos
+  módulos SCSS e do pipeline de build.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente e
   convenções de contribuição.
 - [`CHANGELOG.md`](CHANGELOG.md) — histórico de mudanças, seguindo

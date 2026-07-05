@@ -9,18 +9,84 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
-- Definições iniciais do projeto (`docs/definitions.md`) e arquitetura SCSS
-  (`docs/scss-architecture.md`).
-- Estrutura modular `scss/` (settings, tools, tokens, base, layout, forms,
-  components, utilities, themes).
-- Pipeline de build: Sass + PostCSS (Autoprefixer) + esbuild, gerando `dist/css`
-  (`layout`, `forms`, `components`, `helpers`, `clarus`) e `dist/js/clarus.js`,
-  cada um em versão expandida e minificada com source maps.
-- Lint de SCSS via stylelint.
-- CI no GitHub Actions (lint + build).
-- Utilitários de tipografia (`text-*`, `fw-*`, `fs-*`, `font-*`) em
-  `scss/utilities/_typography.scss`.
-- Estado `:read-only` em `.form-control`.
+- Componente Stepper/Wizard (`scss/components/_stepper.scss`, `js/stepper.js`):
+  `.stepper`/`.stepper-header`/`.step` com `.step-indicator` (número, ou "check"
+  em SVG quando concluído) e `.step-label`; estados `.step-active`/
+  `.step-completed`/`.step-error`; conector de progresso na cor primária após um
+  passo concluído; variante `.stepper-vertical` (com `.step-content` +
+  `.step-description`); painéis opcionais `.step-panel` e ações `.stepper-actions`
+  com `[data-stepper="prev"]`/`[data-stepper="next"]`. `Clarus.Stepper` com
+  `.next()`/`.prev()`/`.goTo()`/`.setError()`/`.complete()`/`.dispose()`; evento
+  **cancelável** `clarus:stepper:beforechange` (hook de validação por passo),
+  `clarus:stepper:changed` e `clarus:stepper:completed`. Linear por padrão
+  (`data-linear`), `aria-current="step"` e navegação por teclado. Mockup
+  `mockup/stepper.html`. Terceiro item (Etapa 3) do roadmap de paridade.
+- Breakpoint adicional `xxxl` (1920px, `scss/settings/_breakpoints.scss`),
+  para monitores externos Full HD sem escala — gera automaticamente
+  `.col-xxxl-*`, `.container-xxxl` e todos os utilitários responsivos
+  `-xxxl` (spacing, gap, flex, display) via os mesmos loops que já geram os
+  demais breakpoints.
+
+### Changed
+
+- Escala de breakpoints (`scss/settings/_breakpoints.scss`) recalibrada para
+  as larguras lógicas de tela mais comuns do mercado atual:
+  `sm` 576px→640px (tablets pequenos/phablets), `lg` 992px→1024px (tablet
+  paisagem/iPad), `xl` 1200px→1280px (laptop comum), `xxl` 1400px→1536px
+  (laptop/desktop com escala, ex.: Mac/Windows a 125%). `md` (768px)
+  permanece igual. `$container-max-widths` ajustado na mesma proporção
+  (600/720/960/1200/1440px). Os nomes de classe não mudam
+  (`.col-md-6`, `.d-lg-none`, etc. continuam os mesmos) — só os valores em
+  px por trás de cada breakpoint, o que pode alterar sutilmente o layout
+  visual de projetos existentes nos pontos de corte afetados.
+
+## [0.3.0] - 2026-07-04
+
+### Added
+
+- Componente Spinner e Progress (`scss/components/_spinner.scss`, 100% CSS):
+  spinner giratório `.spinner` (animação `clarus-spin`) com tamanhos
+  (`.spinner-sm`/`.spinner-lg`) e variantes de cor de estado
+  (`.spinner-#{nome}`); barra de progresso `.progress`/`.progress-bar` com
+  largura por `--clarus-progress-value` (0–100), tamanhos
+  (`.progress-sm`/`.progress-lg`), variantes de cor
+  (`.progress-bar-#{nome}`, via `color-contrast()`) e faixas opcionais
+  (`.progress-bar-striped`/`.progress-bar-animated`). Toda animação respeita
+  `prefers-reduced-motion`. Mockup `mockup/spinner-progress.html`. Primeiro
+  item da Etapa 1 do roadmap de paridade.
+- Componente Carousel (`scss/components/_carousel.scss`, `js/carousel.js`):
+  carrossel de slides com layout "slide" (trilha flex deslocada por
+  `translateX`) e variante `.carousel-fade` (opacidade); setas
+  (`.carousel-control-prev`/`-next`) e indicadores (`.carousel-indicators`)
+  opcionais, com modificador opcional `.carousel-hover-controls` (setas só no
+  hover/foco). `Clarus.Carousel` com `.next()`/`.prev()`/`.goTo()`/`.pause()`/
+  `.dispose()`, evento `clarus:carousel:slid`, navegação por teclado
+  (setas/Home/End), swipe por pointer events e autoplay opcional
+  (`data-autoplay`/`data-interval`, válido para slide e fade) que pausa no
+  hover/foco. ARIA completo (`role="group"`, `aria-roledescription`,
+  `aria-current` nos indicadores) e respeito a `prefers-reduced-motion`. O
+  recorte fica no `.carousel` (elemento parado) e não na trilha, para não
+  cortar os slides seguintes ao deslocar. Mockup `mockup/carousel.html`.
+  Segundo item (Etapa 2) do roadmap de paridade.
+- Testes de regressão visual com Playwright integrados ao CI, com baselines por
+  plataforma (`-win32`/`-linux`, estas geradas em container Docker para bater
+  com o ambiente do CI).
+
+## [0.2.0] - 2026-07-04
+
+### Added
+
+- Suíte de testes automatizados: testes funcionais de JavaScript com Vitest +
+  jsdom (`tests/unit/`, cobrindo estado, ARIA e eventos de cada componente
+  interativo e dos módulos de `js/core/`) e testes visuais com Playwright
+  (`tests/visual/`, screenshots de baseline por mockup e testes de interação).
+  Ambos rodam automaticamente no GitHub Actions a cada push/PR, além do lint e
+  do build.
+
+## [0.1.2] - 2026-07-04
+
+### Added
+
 - Componente Botões (`scss/components/_buttons.scss`): variantes sólidas e
   outline por cor de estado (`.btn-primary/success/warning/danger/info`,
   `.btn-outline-*`), tamanhos (`.btn-sm`/`.btn-lg`) e estados de
@@ -157,31 +223,6 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   cumprindo a meta de dependência externa zero em tempo de execução para a
   fonte principal (Source Code Pro, no monoespaçado, mantida via Google
   Fonts).
-- Componente Spinner e Progress (`scss/components/_spinner.scss`, 100% CSS):
-  spinner giratório `.spinner` (animação `clarus-spin`) com tamanhos
-  (`.spinner-sm`/`.spinner-lg`) e variantes de cor de estado
-  (`.spinner-#{nome}`); barra de progresso `.progress`/`.progress-bar` com
-  largura por `--clarus-progress-value` (0–100), tamanhos
-  (`.progress-sm`/`.progress-lg`), variantes de cor
-  (`.progress-bar-#{nome}`, via `color-contrast()`) e faixas opcionais
-  (`.progress-bar-striped`/`.progress-bar-animated`). Toda animação respeita
-  `prefers-reduced-motion`. Mockup `mockup/spinner-progress.html`. Primeiro
-  item da Etapa 1 do roadmap de paridade (`docs/gap-analysis-componentes.md`).
-- Componente Carousel (`scss/components/_carousel.scss`, `js/carousel.js`):
-  carrossel de slides com layout "slide" (trilha flex deslocada por
-  `translateX`) e variante `.carousel-fade` (opacidade); setas
-  (`.carousel-control-prev`/`-next`) e indicadores (`.carousel-indicators`)
-  opcionais, com modificador opcional `.carousel-hover-controls` (setas só no
-  hover/foco). `Clarus.Carousel` com `.next()`/`.prev()`/`.goTo()`/`.pause()`/
-  `.dispose()`, evento `clarus:carousel:slid`, navegação por teclado
-  (setas/Home/End), swipe por pointer events e autoplay opcional
-  (`data-autoplay`/`data-interval`, válido para slide e fade) que pausa no
-  hover/foco. ARIA completo (`role="group"`, `aria-roledescription`,
-  `aria-current` nos indicadores) e respeito a `prefers-reduced-motion`. O
-  recorte fica no `.carousel` (elemento parado) e não na trilha, para não
-  cortar os slides seguintes ao deslocar. Mockup `mockup/carousel.html`.
-  Segundo item (Etapa 2) do roadmap de paridade
-  (`docs/gap-analysis-componentes.md`).
 
 ### Fixed
 
@@ -212,3 +253,28 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   barras via `::before`/`::after`, giradas ±45° e centralizadas por
   `transform: translate(-50%, -50%)` a partir do centro absoluto do
   botão — centralização exata, independente de fonte.
+
+## [0.1.1] - 2026-07-01
+
+### Added
+
+- Definições iniciais do projeto (`docs/definitions.md`) e arquitetura SCSS
+  (`docs/scss-architecture.md`).
+- Estrutura modular `scss/` (settings, tools, tokens, base, layout, forms,
+  components, utilities, themes).
+- Sistema de layout: containers, grid de 12 colunas baseado em Flexbox
+  (`.row`/`.col-*`) e utilitários responsivos por breakpoint.
+- Pipeline de build: Sass + PostCSS (Autoprefixer) + esbuild, gerando `dist/css`
+  (`layout`, `forms`, `components`, `helpers`, `clarus`) e `dist/js/clarus.js`,
+  cada um em versão expandida e minificada com source maps.
+- Lint de SCSS via stylelint.
+- CI no GitHub Actions (lint + build).
+- Utilitários de tipografia (`text-*`, `fw-*`, `fs-*`, `font-*`) em
+  `scss/utilities/_typography.scss`.
+- Estado `:read-only` em `.form-control`.
+
+[Unreleased]: https://github.com/jorgewreis/clarus-css/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/jorgewreis/clarus-css/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/jorgewreis/clarus-css/compare/v0.1.2...v0.2.0
+[0.1.2]: https://github.com/jorgewreis/clarus-css/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/jorgewreis/clarus-css/releases/tag/v0.1.1

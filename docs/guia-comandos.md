@@ -5,17 +5,16 @@ build. Não é documentação pública do projeto (isso é papel do README).
 
 ## Ambiente
 
-Node.js está instalado em `C:\Users\jwmenezes\node`, mas pode não estar no
-`PATH` da sessão do terminal. Se `node -v` / `npm -v` derem "command not
-found", rode antes (PowerShell):
+Node.js pode não estar no `PATH` da sessão do terminal. Se `node -v` / `npm -v`
+derem "command not found", aponte o `PATH` para a pasta onde o Node está
+instalado (ex.: `%USERPROFILE%\node`), em PowerShell:
 
 ```powershell
-$env:PATH = "C:\Users\jwmenezes\node;$env:PATH"
+$env:PATH = "$env:USERPROFILE\node;$env:PATH"
 ```
 
-Para não repetir isso sempre, adicione `C:\Users\jwmenezes\node` de forma
-permanente ao PATH do Windows (Configurações > Sistema > Variáveis de
-Ambiente).
+Para não repetir isso sempre, adicione essa pasta de forma permanente ao PATH
+do Windows (Configurações > Sistema > Variáveis de Ambiente).
 
 Remote configurado no repositório: `work` → `https://github.com/jorgewreis/clarus-css.git`.
 
@@ -57,14 +56,34 @@ git branch -d feature/nome-da-mudanca
 ## Build, lint e watch
 
 ```bash
-npm install       # instala dependências (roda depois de clonar ou puxar mudanças no package.json)
-npm run build     # gera dist/css e dist/js a partir de scss/ e js/
-npm run watch     # rebuild automático ao salvar arquivos em scss/ ou js/
-npm run lint      # stylelint em scss/**/*.scss
+npm install            # instala dependências (roda depois de clonar ou puxar mudanças no package.json)
+npm run build          # gera dist/css e dist/js a partir de scss/ e js/
+npm run watch          # rebuild automático ao salvar arquivos em scss/ ou js/
+npm run lint           # stylelint em scss/**/*.scss
+npm test               # testes funcionais (Vitest + jsdom)
+npm run test:visual    # testes de regressão visual (Playwright)
 ```
 
 `npm run build` sempre limpa `dist/` antes (script `clean`), então não
 precisa rodar `clean` manualmente.
+
+### Baselines visuais por plataforma
+
+Os testes visuais geram screenshots de baseline por plataforma (sufixo
+`-win32`/`-linux`). O CI roda em `ubuntu-latest`, então as baselines `-linux`
+precisam ser geradas num container Docker que bate com o ambiente do CI (mesma
+versão do Playwright), sem tocar no `node_modules` do host:
+
+```bash
+docker run --rm \
+  -v "$PWD":/work -v /work/node_modules -w /work \
+  mcr.microsoft.com/playwright:v1.61.1-noble \
+  bash -c "npm ci && npx playwright test tests/visual/mockups.spec.mjs -g '<mockup>' --update-snapshots"
+```
+
+No Git Bash do Windows, prefixe com `MSYS_NO_PATHCONV=1` e use o caminho
+absoluto no formato `/d/...`. As baselines `-win32` são geradas localmente com
+`npm run test:visual -- --update-snapshots`.
 
 ## Versionamento (semver)
 
