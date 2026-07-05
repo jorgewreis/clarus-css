@@ -37,10 +37,12 @@ Semantic UI e Cirrus UI.
 - ✅ **Timeline** (Etapa 5)
 - ✅ **Collapse standalone** (Etapa 5)
 - ✅ **Breadcrumb avançado** (colapso mobile + truncamento + tooltip, Etapa 5)
+- ✅ **Input Group** (Etapa 6)
+- ✅ **Alert Dialog / Confirm** (Etapa 6)
 
-**Total: 25 componentes CSS + 13 componentes JS** (Dropdown, Tooltip, Modal,
-Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
-Collapse, Breadcrumb).
+**Total: 26 componentes CSS + 14 componentes JS/funções** (Dropdown, Tooltip,
+Modal, Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
+Collapse, Breadcrumb, `Clarus.confirm`).
 
 ---
 
@@ -162,8 +164,8 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 | Prioridade | Item | Impacto | Dificuldade | Etapa | Observação |
 |---|---|---|---|---|---|
-| 🔴 Alta | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | 6 | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
-| 🔴 Alta | **Alert Dialog / Confirm** | Médio-alto | Baixa | 6 | Compõe o Modal; padrão universal de confirmação |
+| ✅ | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | 6 | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
+| ✅ | **Alert Dialog / Confirm** | Médio-alto | Baixa | 6 | Compõe o Modal; padrão universal de confirmação |
 | 🟠 Média | **Divider / Separator com label** | Médio | Muito baixa | 7 | Quick win 100% CSS |
 | 🟠 Média | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
 | 🟠 Média | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
@@ -177,8 +179,8 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–5 concluídas — **todo o Top-10 está fechado.**
-> Etapas 6–10 planejadas abaixo, cobrindo os "Gaps Remanescentes".
+> **Progresso:** Etapas 1–6 concluídas. Etapas 7–10 planejadas abaixo,
+> cobrindo o restante dos "Gaps Remanescentes".
 
 | Etapa | Componentes | Status |
 |---|---|---|
@@ -187,7 +189,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | **3** — Stepper | Stepper/Wizard (horizontal/vertical, validação) | ✅ Concluída |
 | **4** — Overlays avançados | Offcanvas, Popover | ✅ Concluída |
 | **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | ✅ Concluída |
-| **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | 🔜 Planejada |
+| **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | ✅ Concluída |
 | **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | 🔜 Planejada |
 | **8** — Badge dismissível | Badge dismissível / Tags | 🔜 Planejada |
 | **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | 🔜 Planejada |
@@ -195,23 +197,26 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 Progress circular (ring) entra numa etapa futura, ainda sem posição definida.
 
-### Etapa 6 — Formulários e confirmação
+### Etapa 6 — Formulários e confirmação ✅
 
 Os dois itens de prioridade alta da tabela acima. Ordem interna: Input Group
 primeiro (100% CSS, sem dependência), Alert Dialog depois (compõe o Modal já
 existente — mesma regra geral de "CSS-only antes do que depende de JS" usada
 desde a seção 21).
 
-- **Input Group**: `.input-group` envolvendo `.form-control` com
-  addons de prefixo/sufixo (texto ou ícone), reaproveitando os tokens visuais
-  de `.form-control` (borda, radius, tamanhos `-sm`/`-lg`) para os addons
-  ficarem visualmente fundidos ao campo. 100% CSS.
-- **Alert Dialog / Confirm**: variante do Modal (`.modal`) para confirmação
+- **Input Group** (`scss/forms/_forms.scss`): `.input-group` envolvendo
+  `.form-control` com addons de prefixo/sufixo (texto, ícone ou `.btn`),
+  reaproveitando os tokens visuais de `.form-control` (borda, radius,
+  tamanhos `-sm`/`-lg`) para os addons ficarem visualmente fundidos ao
+  campo. 100% CSS. Mockup `mockup/input-group.html`.
+- **Alert Dialog / Confirm** (`scss/components/_alert-dialog.scss`,
+  `js/confirm.js`): variante do Modal (`.modal`) para confirmação
   (ex. "Excluir item?"), compondo `js/modal.js` sem duplicar a lógica de
-  foco/teclado/overlay — o que muda é só a marcação padrão (ícone de
-  estado + dois botões de ação) e, possivelmente, uma Promise-based API
-  (`Clarus.confirm(options)`) para uso programático, a definir na
-  implementação.
+  foco/teclado/overlay — a marcação (ícone de estado + dois botões de ação)
+  é montada dinamicamente, sem precisar de HTML pré-declarado na página.
+  API `Clarus.confirm(options)`, baseada em Promise: resolve `true`/`false`
+  conforme o botão clicado (ou `false` em Escape/clique fora), com o foco
+  voltando ao elemento que chamou. Mockup `mockup/alert-dialog.html`.
 
 ### Etapa 7 — Quick wins CSS-only
 
@@ -313,6 +318,6 @@ nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 .dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
 Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
-acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"),
-começando por Input Group e Alert Dialog (Etapa 6 — alto impacto, baixa
-dificuldade).
+acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). A Etapa 6
+(Input Group, Alert Dialog/Confirm) já está concluída; a próxima é a
+Etapa 7 (Divider, Empty State, Rating/Stars).

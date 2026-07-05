@@ -9,6 +9,22 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 6 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
+  primeira etapa pós Top-10:
+  - Input Group (`scss/forms/_forms.scss`): `.input-group`/`.input-group-text`,
+    100% CSS. Funde `.form-control`/`.form-select`/`.btn` com addons de
+    prefixo/sufixo, bordas adjacentes sem duplicação e altura do addon
+    acompanhando o controle via `align-items: stretch`. Tamanhos
+    `.input-group-sm`/`-lg`. Mockup `mockup/input-group.html`.
+  - Alert Dialog / Confirm (`scss/components/_alert-dialog.scss`,
+    `js/confirm.js`): variante do Modal para confirmação, montada
+    dinamicamente (sem HTML pré-declarado) por `Clarus.confirm(options)`,
+    reaproveitando `js/modal.js` (foco/teclado/overlay). Retorna uma
+    `Promise<boolean>` (`true` ao confirmar, `false` ao cancelar/Escape/
+    clique fora), com o foco voltando ao elemento que chamou. Opções
+    `title`/`message`/`confirmText`/`cancelText`/`variant`. Mockup
+    `mockup/alert-dialog.html`.
+  - Testes unitários (Vitest) para `confirm()` (`tests/unit/confirm.test.js`).
 - Etapa 5 do roadmap de paridade (`docs/gap-analysis-componentes.md`), que
   fecha o Top-10 de gaps frente aos frameworks líderes:
   - Componente Segmented Control (`scss/components/_segmented-control.scss`):

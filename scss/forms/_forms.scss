@@ -257,3 +257,76 @@
   padding: 0 18px;
   font-size: $font-size-lg;
 }
+
+// Input Group: funde `.form-control` (ou `.form-select`/`.btn`) com "addons"
+// de texto/ícone de prefixo/sufixo, reaproveitando os tokens visuais do
+// próprio `.form-control` (borda, cor, radius). 100% CSS — a altura do addon
+// acompanha a do controle via `align-items: stretch` (herdado), sem precisar
+// fixar `height` nele.
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group > .form-control,
+.input-group > .form-select {
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--clarus-color-border);
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-subtle);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+// Funde as bordas dos itens adjacentes (remove a dupla borda) e mantém o
+// item focado por cima da sobreposição de -1px, senão a borda de foco fica
+// parcialmente escondida atrás do vizinho.
+.input-group > :not(:first-child) {
+  margin-left: -1px;
+}
+
+.input-group > :focus,
+.input-group > :focus-within {
+  position: relative;
+  z-index: 1;
+}
+
+.input-group > * {
+  border-radius: 0;
+}
+
+.input-group > :first-child {
+  border-top-left-radius: var(--clarus-radius-sm);
+  border-bottom-left-radius: var(--clarus-radius-sm);
+}
+
+.input-group > :last-child {
+  border-top-right-radius: var(--clarus-radius-sm);
+  border-bottom-right-radius: var(--clarus-radius-sm);
+}
+
+.input-group-sm > .form-control,
+.input-group-sm > .form-select,
+.input-group-sm > .input-group-text {
+  height: 30px;
+  padding: 0 8px;
+  font-size: $font-size-xs;
+}
+
+.input-group-lg > .form-control,
+.input-group-lg > .form-select,
+.input-group-lg > .input-group-text {
+  height: 46px;
+  padding: 0 16px;
+  font-size: $font-size-lg;
+}

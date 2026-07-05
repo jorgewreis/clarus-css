@@ -706,6 +706,34 @@ sempre o primeiro e o último nível visíveis.
 Mockup: `mockup/pagination-breadcrumbs.html` (exemplo avançado adicionado ao
 mockup já existente da Fase 5).
 
+### Input Group
+
+Funde `.form-control` (ou `.form-select`/`.btn`) com "addons" de texto/ícone
+de prefixo/sufixo (`.input-group`/`.input-group-text`,
+`scss/forms/_forms.scss`), 100% CSS. A altura do addon acompanha a do
+controle via `align-items: stretch` (sem precisar fixar `height`); as bordas
+adjacentes são fundidas (sem dupla borda) e só as pontas do grupo mantêm o
+radius. Tamanhos `.input-group-sm`/`-lg`.
+
+Mockup: `mockup/input-group.html`.
+
+### Alert Dialog / Confirm
+
+Variante do Modal (`scss/components/_alert-dialog.scss`, estende
+`.modal`/`.modal-dialog`/`.modal-content`/`.modal-footer` sem duplicar
+layout) para confirmação, 100% programática — ao contrário dos demais
+componentes (auto-init declarativo via `data-clarus`), é montada na hora por
+`Clarus.confirm(options)` (`js/confirm.js`), sem precisar de marcação
+pré-declarada na página. Internamente reaproveita `js/modal.js` (foco,
+teclado, overlay) com um gatilho sintético. Retorna uma `Promise<boolean>`:
+`true` se o botão de confirmação for clicado, `false` se cancelado ou
+fechado por Escape/clique fora. Opções: `title`, `message`, `confirmText`,
+`cancelText`, `variant` (cor de estado do ícone circular e do botão de
+confirmação, reaproveitando `color-contrast()`). O foco volta para o
+elemento que estava focado antes da chamada (o botão que abriu o diálogo).
+
+Mockup: `mockup/alert-dialog.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,
