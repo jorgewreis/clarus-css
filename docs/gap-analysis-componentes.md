@@ -156,28 +156,29 @@ base + variantes rect/circle/text, animação pulse/wave respeitando
 
 Fechado o Top-10, as antigas "honoráveis menções" passam a ser os próximos alvos.
 Re-priorizadas por impacto × facilidade contra o conjunto já implementado e os 11
-frameworks:
+frameworks. Organizados em 5 etapas (6 a 10, ver detalhamento abaixo), seguindo
+o mesmo critério das Etapas 1–5: prioridade alta primeiro e, dentro de cada
+etapa, componente 100% CSS antes do que depende de JavaScript.
 
-| Prioridade | Item | Impacto | Dificuldade | Observação |
-|---|---|---|---|---|
-| 🔴 Alta | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
-| 🔴 Alta | **Alert Dialog / Confirm** | Médio-alto | Baixa | Compõe o Modal; padrão universal de confirmação |
-| 🟠 Média | **Divider / Separator com label** | Médio | Muito baixa | Quick win 100% CSS |
-| 🟠 Média | **Empty State** | Médio | Baixa | Placeholder de lista vazia; quase todo CSS |
-| 🟠 Média | **Rating / Stars** | Médio | Média | **Ausente no Cirrus**; comum em Ant/MUI |
-| 🟠 Média | **Badge dismissível / Tags** | Médio | Baixa | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
-| 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | Evolui o upload atual |
-| 🟡 Baixa | **Hover Card** | Baixo | Média | Fica trivial depois do Popover (Etapa 4) |
-| 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | Compõe múltiplos Toasts + histórico |
-| 🟣 Futuro | **Menu aninhado (nested)** | Baixo | Alta | Complexidade alta, uso de nicho |
+| Prioridade | Item | Impacto | Dificuldade | Etapa | Observação |
+|---|---|---|---|---|---|
+| 🔴 Alta | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | 6 | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
+| 🔴 Alta | **Alert Dialog / Confirm** | Médio-alto | Baixa | 6 | Compõe o Modal; padrão universal de confirmação |
+| 🟠 Média | **Divider / Separator com label** | Médio | Muito baixa | 7 | Quick win 100% CSS |
+| 🟠 Média | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
+| 🟠 Média | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
+| 🟠 Média | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
+| 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
+| 🟡 Baixa | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
+| 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | 10 | Compõe múltiplos Toasts + histórico |
+| 🟣 Futuro | **Menu aninhado (nested)** | Baixo | Alta | 10 | Complexidade alta, uso de nicho |
 
 ---
 
 ## Roadmap por Etapas
 
 > **Progresso:** Etapas 1–5 concluídas — **todo o Top-10 está fechado.**
-> Próximos alvos: "Gaps Remanescentes" priorizados acima, começando por Input
-> Group e Alert Dialog.
+> Etapas 6–10 planejadas abaixo, cobrindo os "Gaps Remanescentes".
 
 | Etapa | Componentes | Status |
 |---|---|---|
@@ -186,8 +187,82 @@ frameworks:
 | **3** — Stepper | Stepper/Wizard (horizontal/vertical, validação) | ✅ Concluída |
 | **4** — Overlays avançados | Offcanvas, Popover | ✅ Concluída |
 | **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | ✅ Concluída |
+| **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | 🔜 Planejada |
+| **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | 🔜 Planejada |
+| **8** — Badge dismissível | Badge dismissível / Tags | 🔜 Planejada |
+| **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | 🔜 Planejada |
+| **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | 🔜 Planejada |
 
-Progress circular (ring) e os "gaps remanescentes" acima são o próximo alvo.
+Progress circular (ring) entra numa etapa futura, ainda sem posição definida.
+
+### Etapa 6 — Formulários e confirmação
+
+Os dois itens de prioridade alta da tabela acima. Ordem interna: Input Group
+primeiro (100% CSS, sem dependência), Alert Dialog depois (compõe o Modal já
+existente — mesma regra geral de "CSS-only antes do que depende de JS" usada
+desde a seção 21).
+
+- **Input Group**: `.input-group` envolvendo `.form-control` com
+  addons de prefixo/sufixo (texto ou ícone), reaproveitando os tokens visuais
+  de `.form-control` (borda, radius, tamanhos `-sm`/`-lg`) para os addons
+  ficarem visualmente fundidos ao campo. 100% CSS.
+- **Alert Dialog / Confirm**: variante do Modal (`.modal`) para confirmação
+  (ex. "Excluir item?"), compondo `js/modal.js` sem duplicar a lógica de
+  foco/teclado/overlay — o que muda é só a marcação padrão (ícone de
+  estado + dois botões de ação) e, possivelmente, uma Promise-based API
+  (`Clarus.confirm(options)`) para uso programático, a definir na
+  implementação.
+
+### Etapa 7 — Quick wins CSS-only
+
+Nenhum dos três depende de JavaScript; agrupados por serem os de menor
+esforço restante.
+
+- **Divider / Separator com label**: linha divisória com texto opcional
+  centralizado (`.divider`/`.divider-label`), via `::before`/`::after`.
+- **Empty State**: bloco padrão para listas/telas vazias (ícone ou
+  ilustração + título + descrição + ação opcional), reaproveitando botões
+  existentes para a ação.
+- **Rating / Stars**: reaproveita a mesma técnica de input oculto + label
+  irmão do Segmented Control (Etapa 5) — `<input type="radio">` por
+  estrela, exclusivo dentro do grupo, sem necessidade de JavaScript.
+
+### Etapa 8 — Badge dismissível / Tags
+
+Fica isolada porque é o primeiro item desta leva que precisa de JavaScript
+— mas é pouco o suficiente (um `click` no `.btn-close` que remove/oculta o
+badge) para não justificar posicionamento em par com outro componente.
+Reaproveita `.badge` (Fase 2) e `.btn-close` (Fase 3). API mínima: evento
+`clarus:tag:dismissed` antes de remover o elemento do DOM (permite cancelar
+via `preventDefault()`, no mesmo espírito do `clarus:stepper:beforechange`).
+
+### Etapa 9 — Evoluções de componentes existentes
+
+Os dois reaproveitam infraestrutura já pronta, sem introduzir posicionamento
+ou overlay novo.
+
+- **File Input Drag-and-Drop**: evolui `.file-upload`/`.file-input`
+  (Fase 6) com eventos `dragenter`/`dragover`/`drop` no `.file-label`,
+  sincronizando o arquivo solto com o `<input type="file">` nativo (dispara
+  `change` nativo, mesmo padrão do Select customizado).
+- **Hover Card**: na prática, uma composição do Popover (Etapa 4) já
+  existente com `data-trigger="hover"` (já suportado) e um conteúdo mais
+  rico (ex. avatar + bio). Esforço concentrado em documentação/mockup e,
+  no máximo, um ajuste visual pontual em `_popover.scss` — não é um
+  componente novo de infraestrutura.
+
+### Etapa 10 — Maior complexidade
+
+Deixados por último por dependerem de mais decisões de design e terem o
+menor ROI imediato entre os 10.
+
+- **Notification Center**: orquestra múltiplas instâncias de `Clarus.Toast`
+  com histórico persistente — é o item de maior complexidade de estado
+  entre os 10 (precisa de uma decisão de armazenamento: em memória vs.
+  `localStorage`, a definir na implementação).
+- **Menu aninhado (nested)**: dropdown com submenus recursivos; complexidade
+  alta (posicionamento em cascata, navegação por teclado entre níveis) e uso
+  de nicho — já indicado como "Futuro" na priorização original.
 
 ---
 
@@ -238,5 +313,6 @@ nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 .dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
 Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
-acima, começando por Input Group e Alert Dialog (alto impacto, baixa
+acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"),
+começando por Input Group e Alert Dialog (Etapa 6 — alto impacto, baixa
 dificuldade).
