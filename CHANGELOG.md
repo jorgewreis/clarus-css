@@ -9,6 +9,15 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 8 do roadmap de paridade (`docs/gap-analysis-componentes.md`):
+  Badge dismissível / Tag (`scss/components/_tag.scss`, `js/tag.js`).
+  `.tag` estende `.badge` (Fase 2) e `.btn-close` (Fase 3), só ajustando o
+  tamanho do botão de fechar (14×14px) para caber num badge. Primeiro item
+  do roadmap pós-Top-10 que precisa de JavaScript, de forma mínima:
+  `Clarus.Tag` só ouve o clique em `[data-dismiss="tag"]` e dispara o
+  evento cancelável `clarus:tag:dismissed` antes de remover o elemento do
+  DOM (`preventDefault()` bloqueia a remoção). Mockup `mockup/tag.html`.
+  Testes unitários em `tests/unit/tag.test.js`.
 - Etapa 7 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
   quick wins 100% CSS:
   - Divider (`scss/components/_divider.scss`): `<hr class="divider">` para

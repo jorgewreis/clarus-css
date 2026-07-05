@@ -765,6 +765,19 @@ de irmãos gerais (`~`). Tamanhos `.rating-sm`/`-lg`.
 
 Mockup: `mockup/rating.html`.
 
+### Badge Dismissível / Tag
+
+Tag removível (`.tag`, `scss/components/_tag.scss`), estendendo `.badge`
+(Fase 2) e `.btn-close` (Fase 3) sem duplicar estilos — só ajusta o
+tamanho do botão de fechar (14×14px) para caber num badge. Primeiro item
+do roadmap pós-Top-10 que precisa de JavaScript, mas de forma mínima:
+`js/tag.js` (`Clarus.Tag`) só ouve o clique em `[data-dismiss="tag"]`.
+Antes de remover o elemento do DOM, dispara o evento **cancelável**
+`clarus:tag:dismissed` (mesmo espírito de `clarus:stepper:beforechange`) —
+`preventDefault()` bloqueia a remoção.
+
+Mockup: `mockup/tag.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,

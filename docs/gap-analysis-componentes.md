@@ -42,10 +42,11 @@ Semantic UI e Cirrus UI.
 - ✅ **Divider** (Etapa 7)
 - ✅ **Empty State** (Etapa 7)
 - ✅ **Rating / Stars** (Etapa 7)
+- ✅ **Badge dismissível / Tag** (Etapa 8)
 
-**Total: 29 componentes CSS + 14 componentes JS/funções** (Dropdown, Tooltip,
+**Total: 30 componentes CSS + 15 componentes JS/funções** (Dropdown, Tooltip,
 Modal, Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
-Collapse, Breadcrumb, `Clarus.confirm`).
+Collapse, Breadcrumb, `Clarus.confirm`, Tag).
 
 ---
 
@@ -172,7 +173,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | ✅ | **Divider / Separator com label** | Médio | Muito baixa | 7 | Quick win 100% CSS |
 | ✅ | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
 | ✅ | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
-| 🟠 Média | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
+| ✅ | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
 | 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
 | 🟡 Baixa | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
 | 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | 10 | Compõe múltiplos Toasts + histórico |
@@ -182,7 +183,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–7 concluídas. Etapas 8–10 planejadas abaixo,
+> **Progresso:** Etapas 1–8 concluídas. Etapas 9–10 planejadas abaixo,
 > cobrindo o restante dos "Gaps Remanescentes".
 
 | Etapa | Componentes | Status |
@@ -194,7 +195,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | ✅ Concluída |
 | **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | ✅ Concluída |
 | **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | ✅ Concluída |
-| **8** — Badge dismissível | Badge dismissível / Tags | 🔜 Planejada |
+| **8** — Badge dismissível | Badge dismissível / Tags | ✅ Concluída |
 | **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | 🔜 Planejada |
 | **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | 🔜 Planejada |
 
@@ -239,14 +240,16 @@ esforço restante.
   necessidade de JavaScript. Tamanhos `.rating-sm`/`-lg`. Mockup
   `mockup/rating.html`.
 
-### Etapa 8 — Badge dismissível / Tags
+### Etapa 8 — Badge dismissível / Tags ✅
 
 Fica isolada porque é o primeiro item desta leva que precisa de JavaScript
-— mas é pouco o suficiente (um `click` no `.btn-close` que remove/oculta o
+— mas é pouco o suficiente (um `click` no `.btn-close` que remove o
 badge) para não justificar posicionamento em par com outro componente.
-Reaproveita `.badge` (Fase 2) e `.btn-close` (Fase 3). API mínima: evento
-`clarus:tag:dismissed` antes de remover o elemento do DOM (permite cancelar
-via `preventDefault()`, no mesmo espírito do `clarus:stepper:beforechange`).
+`scss/components/_tag.scss` reaproveita `.badge` (Fase 2) e `.btn-close`
+(Fase 3), só ajustando o tamanho do botão de fechar. `js/tag.js`
+(`Clarus.Tag`) dispara o evento cancelável `clarus:tag:dismissed` antes de
+remover o elemento do DOM (`preventDefault()` bloqueia a remoção, mesmo
+espírito do `clarus:stepper:beforechange`). Mockup `mockup/tag.html`.
 
 ### Etapa 9 — Evoluções de componentes existentes
 
@@ -326,5 +329,6 @@ nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 
 Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
 acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). Etapas 6
-(Input Group, Alert Dialog/Confirm) e 7 (Divider, Empty State, Rating/Stars)
-já estão concluídas; a próxima é a Etapa 8 (Badge dismissível / Tags).
+(Input Group, Alert Dialog/Confirm), 7 (Divider, Empty State, Rating/Stars)
+e 8 (Badge dismissível/Tags) já estão concluídas; a próxima é a Etapa 9
+(File Input Drag-and-Drop, Hover Card).
