@@ -1,46 +1,168 @@
-$color-white: #ffffff !default;
-$color-black: #000000 !default;
+// COLORS
 
-$color-primary: #4f46e5 !default;
-$color-success: #1bc559 !default;
-$color-warning: #f0b40e !default;
-$color-danger: #dc263e !default;
-$color-info: #8ba2c4 !default;
+  // YELLOW
+  $color-yellow-100: #fff9e6 !default;
+  $color-yellow-200: #fff2cc !default;
+  $color-yellow-300: #ffe699 !default;
+  $color-yellow-400: #ffdb66 !default;
+  $color-yellow-500: #fab633 !default;
+  $color-yellow-600: #e6a800 !default;
+  $color-yellow-700: #cc8a00 !default;
+  $color-yellow-800: #b36c00 !default;
+  $color-yellow-900: #995000 !default;
 
-// Tons de fundo derivados de $theme-colors por mistura com branco a 12%
-// (color.mix($cor, white, 12%)), consistentes entre si em claridade e
-// saturação — os valores manuais anteriores variavam de quase-branco
-// (success/warning/info) a um tom bem mais saturado/escuro (danger).
-$bg-color-primary: #eae9fc !default;
-$bg-color-success: #fdfffe !default;
-$bg-color-warning: #fdf6e2 !default;
-$bg-color-danger: #fdf8f9 !default;
-$bg-color-info: #f1f4f8 !default;
+  // GREEN
+  $color-green-100: #e6fff2 !default;
+  $color-green-200: #ccffe6 !default;
+  $color-green-300: #99ffcc !default;
+  $color-green-400: #66ffb3 !default;
+  $color-green-500: #0dd157 !default;
+  $color-green-600: #0bc24f !default;
+  $color-green-700: #0aa343 !default;
+  $color-green-800: #098537 !default;
+  $color-green-900: #08662b !default;
 
+  // BLUE
+  $color-blue-100: #e6f0ff !default;
+  $color-blue-200: #cce1ff !default;
+  $color-blue-300: #99c2ff !default;
+  $color-blue-400: #66a3ff !default;
+  $color-blue-500: #2972fa !default;
+  $color-blue-600: #1a61e6 !default;
+  $color-blue-700: #0b50d2 !default;
+  $color-blue-800: #0841a8 !default;
+  $color-blue-900: #05327f !default;
+
+  // GRAY
+  $color-gray-100: #f8fafc !default;
+  $color-gray-200: #f1f5f9 !default;
+  $color-gray-300: #e2e8f0 !default;
+  $color-gray-400: #cbd5e1 !default;
+  $color-gray-500: #94a3b8 !default;
+  $color-gray-600: #64748b !default;
+  $color-gray-700: #475569 !default;
+  $color-gray-800: #334155 !default;
+  $color-gray-900: #1e293b !default;
+
+  // RED
+  $color-red-100: #fff2f3 !default;
+  $color-red-200: #ffe6e8 !default;
+  $color-red-300: #ffcccc !default;
+  $color-red-400: #ffb3b3 !default;
+  $color-red-500: #fb4143 !default;
+  $color-red-600: #e63a3c !default;
+  $color-red-700: #cc3335 !default;
+  $color-red-800: #b32b2d !default;
+  $color-red-900: #992224 !default;
+
+  // PURPLE
+  $color-purple-100: #f2f2ff !default;
+  $color-purple-200: #e6e6ff !default;
+  $color-purple-300: #ccccff !default;
+  $color-purple-400: #b3b3ff !default;
+  $color-purple-500: #5e5cc7 !default;
+  $color-purple-600: #5251b5 !default;
+  $color-purple-700: #4645a3 !default;
+  $color-purple-800: #3a3991 !default;
+  $color-purple-900: #2e2d7f !default;
+
+  $color-white: #ffffff !default;
+  $color-black: #000000 !default;
+
+// COLORS EXTEND
+// Para cada cor semântica (primary/secondary/success/warning/danger/info),
+// a escala 100-900 correspondente alimenta um conjunto fixo de papéis:
+//   - color          (500) — cor principal, usada em fundo sólido/borda/texto de destaque
+//   - color-hover    (600) — hover da cor principal
+//   - color-active   (700) — active/pressed da cor principal
+//   - color-disabled (300) — tom claro/dessaturado para estado desabilitado
+//   - bg / bg-2      (100 / 200) — fundos tintados (alertas, badges sutis, etc.)
+//   - text / text-2  (900 / 700) — texto sobre fundo tintado (900 = mais contraste,
+//                                  700 = texto secundário/menos crítico)
+//   - border         (500) — borda na cor principal
+
+  // PRIMARY
+  $clarus-color-primary: $color-blue-500 !default;
+  $clarus-color-primary-hover: $color-blue-600 !default;
+  $clarus-color-primary-active: $color-blue-700 !default;
+  $clarus-color-primary-disabled: $color-blue-300 !default;
+  $clarus-bg-primary: $color-blue-100 !default;
+  $clarus-bg-primary-2: $color-blue-200 !default;
+  $clarus-text-primary: $color-blue-900 !default;
+  $clarus-text-primary-2: $color-blue-700 !default;
+  $clarus-border-primary: $color-blue-500 !default;
+
+  // SECONDARY (reaproveita a escala neutra $color-gray-*, papel clássico de
+  // botão/ação secundária discreta, sem competir visualmente com primary)
+  $clarus-color-secondary: $color-gray-600 !default;
+  $clarus-color-secondary-hover: $color-gray-700 !default;
+  $clarus-color-secondary-active: $color-gray-800 !default;
+  $clarus-color-secondary-disabled: $color-gray-300 !default;
+  $clarus-bg-secondary: $color-gray-100 !default;
+  $clarus-bg-secondary-2: $color-gray-200 !default;
+  $clarus-text-secondary: $color-gray-900 !default;
+  $clarus-text-secondary-2: $color-gray-700 !default;
+  $clarus-border-secondary: $color-gray-600 !default;
+
+  // SUCCESS
+  $clarus-color-success: $color-green-500 !default;
+  $clarus-color-success-hover: $color-green-600 !default;
+  $clarus-color-success-active: $color-green-700 !default;
+  $clarus-color-success-disabled: $color-green-300 !default;
+  $clarus-bg-success: $color-green-100 !default;
+  $clarus-bg-success-2: $color-green-200 !default;
+  $clarus-text-success: $color-green-900 !default;
+  $clarus-text-success-2: $color-green-700 !default;
+  $clarus-border-success: $color-green-500 !default;
+
+  // WARNING
+  $clarus-color-warning: $color-yellow-500 !default;
+  $clarus-color-warning-hover: $color-yellow-600 !default;
+  $clarus-color-warning-active: $color-yellow-700 !default;
+  $clarus-color-warning-disabled: $color-yellow-300 !default;
+  $clarus-bg-warning: $color-yellow-100 !default;
+  $clarus-bg-warning-2: $color-yellow-200 !default;
+  $clarus-text-warning: $color-yellow-900 !default;
+  $clarus-text-warning-2: $color-yellow-700 !default;
+  $clarus-border-warning: $color-yellow-500 !default;
+
+  // DANGER
+  $clarus-color-danger: $color-red-500 !default;
+  $clarus-color-danger-hover: $color-red-600 !default;
+  $clarus-color-danger-active: $color-red-700 !default;
+  $clarus-color-danger-disabled: $color-red-300 !default;
+  $clarus-bg-danger: $color-red-100 !default;
+  $clarus-bg-danger-2: $color-red-200 !default;
+  $clarus-text-danger: $color-red-900 !default;
+  $clarus-text-danger-2: $color-red-700 !default;
+  $clarus-border-danger: $color-red-500 !default;
+
+  // INFO
+  $clarus-color-info: $color-purple-500 !default;
+  $clarus-color-info-hover: $color-purple-600 !default;
+  $clarus-color-info-active: $color-purple-700 !default;
+  $clarus-color-info-disabled: $color-purple-300 !default;
+  $clarus-bg-info: $color-purple-100 !default;
+  $clarus-bg-info-2: $color-purple-200 !default;
+  $clarus-text-info: $color-purple-900 !default;
+  $clarus-text-info-2: $color-purple-700 !default;
+  $clarus-border-info: $color-purple-500 !default;
+
+// EXPORT COLORS
 $theme-bg-colors: (
-  primary: $bg-color-primary,
-  success: $bg-color-success,
-  warning: $bg-color-warning,
-  danger: $bg-color-danger,
-  info: $bg-color-info
+  primary: $clarus-bg-primary,
+  secondary: $clarus-bg-secondary,
+  success: $clarus-bg-success,
+  warning: $clarus-bg-warning,
+  danger: $clarus-bg-danger,
+  info: $clarus-bg-info
 ) !default;
 
-// Escala neutra "Indigo autoral" (docs/definitions.md, seção 18.1): 9 degraus
-// completos na mesma progressão de luminância usada nos tons de estado acima.
-$color-gray-100: #f8fafc !default;
-$color-gray-200: #f1f5f9 !default;
-$color-gray-300: #e2e8f0 !default;
-$color-gray-400: #cbd5e1 !default;
-$color-gray-500: #94a3b8 !default;
-$color-gray-600: #64748b !default;
-$color-gray-700: #475569 !default;
-$color-gray-800: #334155 !default;
-$color-gray-900: #1e293b !default;
-
 $theme-colors: (
-  primary: $color-primary,
-  success: $color-success,
-  warning: $color-warning,
-  danger: $color-danger,
-  info: $color-info
+  primary: $clarus-color-primary,
+  secondary: $clarus-color-secondary,
+  success: $clarus-color-success,
+  warning: $clarus-color-warning,
+  danger: $clarus-color-danger,
+  info: $clarus-color-info
 ) !default;

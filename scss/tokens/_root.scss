@@ -5,11 +5,6 @@
 :root {
   --clarus-color-white: #{$color-white};
   --clarus-color-black: #{$color-black};
-  --clarus-color-primary: #{$color-primary};
-  --clarus-color-success: #{$color-success};
-  --clarus-color-warning: #{$color-warning};
-  --clarus-color-danger: #{$color-danger};
-  --clarus-color-info: #{$color-info};
   --clarus-color-text: #{$color-gray-900};
   --clarus-color-muted: #{$color-gray-600};
   --clarus-color-border: #{$color-gray-300};
@@ -30,6 +25,7 @@
   --clarus-tooltip-text: #{$color-white};
 
   @each $name, $color in $theme-colors {
+    --clarus-color-#{$name}: #{$color};
     --clarus-alert-#{$name}-bg: #{tint-color($color)};
     --clarus-alert-#{$name}-text: #{shade-color($color)};
   }

@@ -60,7 +60,7 @@
 
 // Passo ativo.
 .step-active .step-indicator {
-  color: color-contrast($color-primary);
+  color: color-contrast($clarus-color-primary);
   background-color: var(--clarus-color-primary);
   border-color: var(--clarus-color-primary);
 }
@@ -92,7 +92,7 @@
 
 // Passo em erro.
 .step-error .step-indicator {
-  color: color-contrast($color-danger);
+  color: color-contrast($clarus-color-danger);
   background-color: var(--clarus-color-danger);
   border-color: var(--clarus-color-danger);
 }
