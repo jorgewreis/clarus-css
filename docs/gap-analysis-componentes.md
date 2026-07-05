@@ -30,16 +30,24 @@ Semantic UI e Cirrus UI.
 - ✅ **Spinner / Progress** (Etapa 1 — v0.3.0)
 - ✅ **Carousel** (Etapa 2 — v0.3.0)
 - ✅ **Stepper / Wizard** (Etapa 3)
+- ✅ **Offcanvas** (Etapa 4)
+- ✅ **Popover** (Etapa 4)
+- ✅ **Segmented Control / Button Group** (Etapa 5)
+- ✅ **Skeletons / Placeholder Loaders** (Etapa 5)
+- ✅ **Timeline** (Etapa 5)
+- ✅ **Collapse standalone** (Etapa 5)
+- ✅ **Breadcrumb avançado** (colapso mobile + truncamento + tooltip, Etapa 5)
 
-**Total: 20 componentes CSS + 9 componentes JS** (Dropdown, Tooltip, Modal,
-Select, Accordion, Tabs, Toast, Carousel, Stepper).
+**Total: 25 componentes CSS + 13 componentes JS** (Dropdown, Tooltip, Modal,
+Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
+Collapse, Breadcrumb).
 
 ---
 
 ## Top 10 Recomendados — Status Atual
 
 Os 10 gaps críticos originais foram integralmente absorvidos pelo plano de 5
-etapas. Ao concluir a Etapa 5, **todo o Top-10 está fechado**.
+etapas. **Com a Etapa 5 concluída, todo o Top-10 está fechado.**
 
 ### 1. Carrossel / Slider (Carousel)
 
@@ -86,28 +94,34 @@ Escape/clique fora), aplicado de forma independente; backdrop opcional
 
 ### 5. Breadcrumb avançado com collapse
 
-**Status:** 🔜 Planejado (Etapa 5) — breadcrumb básico já existe
+**Status:** ✅ Implementado (Etapa 5 — `scss/components/_breadcrumbs.scss`, `js/breadcrumb.js`)
 
-**Escopo:** collapse automático em mobile (primeiros + últimos), truncação de
-labels com tooltip (reaproveita `js/tooltip.js`), versão compacta com dropdown
-para níveis intermediários (reaproveita `js/dropdown.js`).
+Entregue com truncamento por CSS (`.breadcrumb-item-truncate`) + tooltip
+(`js/tooltip.js`) só quando o texto realmente transborda, e colapso automático
+abaixo do breakpoint `sm` (640px): mantém o primeiro e o último nível
+visíveis e substitui os intermediários por um item "…" que compõe um
+`Dropdown` (`js/dropdown.js`), mesmo padrão de composição já usado pelo
+Select customizado.
 
 ### 6. Collapse / Disclosure (standalone)
 
-**Status:** 🔜 Planejado (Etapa 5) — hoje só embutido no Accordion
+**Status:** ✅ Implementado (Etapa 5 — `scss/components/_collapse.scss`, `js/collapse.js`)
 
-**Escopo:** extrai o padrão `expand()`/`collapse()` (`js/core/transition.js`, já
-usado pelo Accordion) para uma seção expansível independente, com
-`aria-expanded`/`aria-controls`.
+Extrai o padrão `expand()`/`collapse()` (`js/core/transition.js`, já usado
+pelo Accordion) para uma seção expansível independente, com auto-init via
+`data-clarus="collapse"`, `aria-expanded`/`aria-controls` geridos
+automaticamente e eventos `clarus:collapse:shown`/`-hidden`.
 
 ### 7. Timeline
 
-**Status:** 🔜 Planejado (Etapa 5)
+**Status:** ✅ Implementado (Etapa 5 — `scss/components/_timeline.scss`)
 
 **Uso:** Em ~7/11 frameworks (forte em Ant Design, Material). **Ausente no Cirrus.**
 
-**Escopo:** vertical/horizontal, itens com ícone/label/conteúdo, estados
-pending/active/completed/failed reaproveitando tokens de cor de estado. CSS puro.
+Entregue vertical (padrão) e horizontal (`.timeline-horizontal`), itens com
+marcador/label/conteúdo, estados padrão (pendente)/`.timeline-active`/
+`.timeline-completed`/`.timeline-failed` reaproveitando os tokens de cor de
+estado. 100% CSS, mesma lógica de conector de progresso do Stepper.
 
 ### 8. Stepper / Wizard
 
@@ -121,19 +135,20 @@ progresso, painéis + navegação, validação por passo via evento cancelável
 
 ### 9. Segmented Control / Button Group
 
-**Status:** 🔜 Planejado (Etapa 5) — hoje parcial via Tabs
+**Status:** ✅ Implementado (Etapa 5 — `scss/components/_segmented-control.scss`)
 
-**Uso:** Button group presente em vários (incl. Cirrus). **Escopo:** grupo de
-botões com estado `selected`, modos exclusivo/inclusivo, reaproveita
-`color-contrast()`.
+**Uso:** Button group presente em vários (incl. Cirrus). Entregue 100% CSS:
+grupo de botões com estado selecionado, modo exclusivo (`<input
+type="radio">`) ou inclusivo (`<input type="checkbox">`), reaproveitando
+`color-contrast()`. Tamanhos `.segmented-control-sm`/`-lg`.
 
 ### 10. Skeletons / Placeholder Loaders
 
-**Status:** 🔜 Planejado (Etapa 5)
+**Status:** ✅ Implementado (Etapa 5 — `scss/components/_skeleton.scss`)
 
-**Uso:** Em 8/11 frameworks (Cirrus **tem** placeholder). **Escopo:** `.skeleton`
+**Uso:** Em 8/11 frameworks (Cirrus **tem** placeholder). Entregue: `.skeleton`
 base + variantes rect/circle/text, animação pulse/wave respeitando
-`prefers-reduced-motion`. Majoritariamente CSS.
+`prefers-reduced-motion`. 100% CSS.
 
 ---
 
@@ -160,8 +175,9 @@ frameworks:
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–4 concluídas (Spinner/Progress, Carousel, Stepper,
-> Offcanvas + Popover). Próxima: Etapa 5.
+> **Progresso:** Etapas 1–5 concluídas — **todo o Top-10 está fechado.**
+> Próximos alvos: "Gaps Remanescentes" priorizados acima, começando por Input
+> Group e Alert Dialog.
 
 | Etapa | Componentes | Status |
 |---|---|---|
@@ -169,9 +185,9 @@ frameworks:
 | **2** — Carousel | Carousel (slide/fade, autoplay, swipe) | ✅ Concluída |
 | **3** — Stepper | Stepper/Wizard (horizontal/vertical, validação) | ✅ Concluída |
 | **4** — Overlays avançados | Offcanvas, Popover | ✅ Concluída |
-| **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | 🔜 Planejada |
+| **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | ✅ Concluída |
 
-Progress circular (ring) e os "gaps remanescentes" acima entram depois da Etapa 5.
+Progress circular (ring) e os "gaps remanescentes" acima são o próximo alvo.
 
 ---
 
@@ -210,11 +226,10 @@ Progress circular (ring) e os "gaps remanescentes" acima entram depois da Etapa 
 
 ## Conclusão
 
-Com as Etapas 1–4 concluídas, o Clarus CSS já cobre cinco dos dez gaps do
-estudo original (Carousel, Spinner, Stepper, Offcanvas, Popover), incluindo os
-três de **maior impacto**. A Etapa 5 fecha os cinco restantes (Segmented
-Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado),
-atingindo **paridade completa com o Top-10** frente aos frameworks líderes.
+Com as Etapas 1–5 concluídas, o Clarus CSS cobre os dez gaps do estudo
+original (Carousel, Spinner, Stepper, Offcanvas, Popover, Segmented Control,
+Skeletons, Timeline, Collapse standalone, Breadcrumb avançado), atingindo
+**paridade completa com o Top-10** frente aos frameworks líderes.
 
 A comparação com o Cirrus UI reforça um diferencial do Clarus: mesmo entre
 frameworks híbridos, componentes interativos ricos como **carousel, offcanvas,
@@ -222,5 +237,6 @@ popover, timeline e stepper permanecem raros** — e o Clarus os entrega com JS
 nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 .dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
-Depois da Etapa 5, o foco passa aos **gaps remanescentes** priorizados acima,
-começando por Input Group e Alert Dialog (alto impacto, baixa dificuldade).
+Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
+acima, começando por Input Group e Alert Dialog (alto impacto, baixa
+dificuldade).

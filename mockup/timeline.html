@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Timeline</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+
+        .timeline-col {
+            width: 280px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <div class="timeline-col">
+            <p class="fs-sm fw-medium mb-2">Vertical</p>
+            <ul class="timeline">
+                <li class="timeline-item timeline-completed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Pedido recebido</p>
+                        <span class="timeline-time">09:12</span>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-completed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Pagamento confirmado</p>
+                        <span class="timeline-time">09:15</span>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-active">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Em separação</p>
+                        <p class="timeline-text">Aguardando despacho do centro de distribuição.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Envio</p>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-failed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Entrega</p>
+                        <p class="timeline-text">Tentativa de entrega falhou.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="flex: 1;">
+            <p class="fs-sm fw-medium mb-2">Horizontal</p>
+            <ul class="timeline timeline-horizontal">
+                <li class="timeline-item timeline-completed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Recebido</p>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-completed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Pago</p>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-active">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Separação</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Entrega</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="timeline-col">
+            <ul class="timeline">
+                <li class="timeline-item timeline-completed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Pedido recebido</p>
+                        <span class="timeline-time">09:12</span>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-active">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Em separação</p>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-failed">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-title">Entrega</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

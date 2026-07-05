@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Skeletons</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+
+        .card-skeleton {
+            width: 220px;
+            padding: 16px;
+            background-color: var(--clarus-color-surface);
+            border-radius: var(--clarus-radius-md);
+        }
+
+        .avatar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 220px;
+            padding: 16px;
+            background-color: var(--clarus-color-surface);
+            border-radius: var(--clarus-radius-md);
+        }
+
+        .avatar-row .skeleton-circle {
+            width: 40px;
+            height: 40px;
+        }
+
+        .avatar-row .skeleton-text-group {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <div class="avatar-row">
+            <div class="skeleton skeleton-circle"></div>
+            <div class="skeleton-text-group">
+                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                <div class="skeleton skeleton-text" style="width: 40%;"></div>
+            </div>
+        </div>
+
+        <div class="card-skeleton">
+            <div class="skeleton skeleton-rect" style="height: 120px; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+        </div>
+
+        <div class="card-skeleton">
+            <p class="fs-sm fw-medium mb-2">Variante wave</p>
+            <div class="skeleton skeleton-rect skeleton-wave" style="height: 60px; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text skeleton-wave"></div>
+            <div class="skeleton skeleton-text skeleton-wave"></div>
+        </div>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="avatar-row">
+            <div class="skeleton skeleton-circle"></div>
+            <div class="skeleton-text-group">
+                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                <div class="skeleton skeleton-text" style="width: 40%;"></div>
+            </div>
+        </div>
+
+        <div class="card-skeleton">
+            <div class="skeleton skeleton-rect" style="height: 120px; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+        </div>
+    </div>
+
+</body>
+</html>

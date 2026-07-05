@@ -9,6 +9,57 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 5 do roadmap de paridade (`docs/gap-analysis-componentes.md`), que
+  fecha o Top-10 de gaps frente aos frameworks líderes:
+  - Componente Segmented Control (`scss/components/_segmented-control.scss`):
+    `.segmented-control`/`.segmented-item`/`.segmented-label`, 100% CSS.
+    Modo exclusivo (`<input type="radio">`) ou inclusivo (`<input
+    type="checkbox">`), input oculto pela mesma técnica de `.file-input`
+    (`scss/forms/_forms.scss`), reaproveitando `color-contrast()` no item
+    selecionado. Tamanhos `.segmented-control-sm`/`-lg`. Mockup
+    `mockup/segmented-control.html`.
+  - Componente Skeletons (`scss/components/_skeleton.scss`): `.skeleton` base
+    e variantes `.skeleton-text`/`-circle`/`-rect`, 100% CSS. Animação
+    "pulse" por padrão; `.skeleton-wave` varre um brilho via
+    pseudo-elemento. Ambas desativadas em `prefers-reduced-motion: reduce`.
+    Mockup `mockup/skeletons.html`.
+  - Componente Timeline (`scss/components/_timeline.scss`): `.timeline`/
+    `.timeline-item`/`.timeline-marker`, 100% CSS, vertical por padrão
+    (`.timeline-horizontal` inverte o eixo). Estados padrão (pendente)/
+    `.timeline-active`/`.timeline-completed`/`.timeline-failed`
+    reaproveitando os tokens de cor de estado; conector de progresso na
+    mesma lógica do Stepper. Mockup `mockup/timeline.html`.
+  - Collapse standalone (`scss/components/_collapse.scss`, `js/collapse.js`):
+    extrai `collapse()`/`expand()` de `js/core/transition.js` (já usado pelo
+    Accordion) para uma seção expansível independente. `Clarus.Collapse`
+    segue a API da seção 20 (`data-clarus="collapse"`, `data-target`,
+    `getInstance()`, `.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+    `clarus:collapse:shown`/`-hidden`). Mockup `mockup/collapse.html`.
+  - Breadcrumb avançado (`scss/components/_breadcrumbs.scss`,
+    `js/breadcrumb.js`): truncamento por CSS com tooltip (`js/tooltip.js`)
+    só quando o texto transborda (medido após `document.fonts.ready`); abaixo
+    do breakpoint `sm` (640px), colapsa os níveis intermediários num item
+    "…" que compõe um `Dropdown` (`js/dropdown.js`), mantendo sempre o
+    primeiro e o último nível visíveis. `data-max-items` configurável.
+    Mockup `mockup/pagination-breadcrumbs.html` (exemplo avançado).
+- Testes unitários (Vitest) para Collapse e Breadcrumb
+  (`tests/unit/collapse.test.js`, `tests/unit/breadcrumb.test.js`).
+
+### Changed
+
+- Paleta de cores evoluída para escalas completas 100-900 por matiz
+  (yellow/green/blue/gray/red/purple) com papéis semânticos por cor de
+  estado (`color`/`-hover`/`-active`/`-disabled`/`bg`/`bg-2`/`text`/`text-2`/
+  `border`) em `scss/settings/_colors.scss`, incluindo uma nova cor
+  `secondary`; `scss/tokens/_root.scss` e `scss/themes/_dark.scss`
+  (variantes de dark mode por peso de tint) acompanham a nova estrutura.
+- Fonte monoespaçada Source Code Pro passa a ser self-hosted
+  (`assets/fonts/source-code-pro/`, licença OFL), removendo o último
+  `@import` externo de Google Fonts em `scss/base/_typography.scss` —
+  completa a meta de dependência externa zero em tempo de execução (seção 6
+  de `docs/definitions.md`) também para a fonte mono, no mesmo padrão já
+  usado pela Plus Jakarta Sans.
+
 - Componente Stepper/Wizard (`scss/components/_stepper.scss`, `js/stepper.js`):
   `.stepper`/`.stepper-header`/`.step` com `.step-indicator` (número, ou "check"
   em SVG quando concluído) e `.step-label`; estados `.step-active`/

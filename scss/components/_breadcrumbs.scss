@@ -1,4 +1,5 @@
 @use "../settings" as *;
+@use "../tools" as *;
 
 .breadcrumb {
   display: flex;
@@ -33,5 +34,33 @@
 }
 
 .breadcrumb-item.active {
+  color: var(--clarus-color-text);
+}
+
+// Breadcrumb avançado (js/breadcrumb.js): trunca labels longos com reticências
+// (tooltip com o texto completo é anexado via js/tooltip.js só quando o texto
+// realmente transborda) e, em telas pequenas, recolhe os níveis
+// intermediários num único item "…" que abre um dropdown (js/dropdown.js)
+// com os links ocultos.
+.breadcrumb-item-truncate {
+  display: inline-block;
+  max-width: 160px;
+  vertical-align: bottom;
+
+  @include truncate;
+}
+
+.breadcrumb-more {
+  padding: 0;
+  border: none;
+  color: var(--clarus-color-muted);
+  background: none;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.breadcrumb-more:hover {
   color: var(--clarus-color-text);
 }

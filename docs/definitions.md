@@ -636,6 +636,76 @@ interno; `data-placement`/`data-align` controlam o posicionamento.
 
 Mockup: `mockup/offcanvas-popover.html`.
 
+### Segmented Control
+
+Grupo de botões com estado selecionado (`.segmented-control`/`.segmented-item`/
+`.segmented-label`, `scss/components/_segmented-control.scss`), 100% CSS.
+Modo exclusivo: `<input type="radio">` (mesmo `name` em todos os itens do
+grupo). Modo inclusivo: `<input type="checkbox">`, cada item
+seleciona/deseleciona de forma independente. O `<input>` fica visualmente
+oculto (mesma técnica de `.file-input`, `scss/forms/_forms.scss`) e o
+`<label>` irmão recebe o estilo — o item selecionado reaproveita
+`color-contrast()` (mesma função de botões/badges/pagination) para garantir
+contraste. Tamanhos `.segmented-control-sm`/`-lg`.
+
+Mockup: `mockup/segmented-control.html`.
+
+### Skeletons
+
+Placeholder de carregamento (`.skeleton`, `scss/components/_skeleton.scss`),
+100% CSS. Variantes `.skeleton-text`/`-circle`/`-rect`; tamanho/forma
+controlados por largura/altura inline ou pelo elemento host. Animação padrão
+"pulse" (oscila a opacidade); variante `.skeleton-wave` substitui por um
+brilho que varre da esquerda pra direita via pseudo-elemento. Ambas
+desativadas em `prefers-reduced-motion: reduce`.
+
+Mockup: `mockup/skeletons.html`.
+
+### Timeline
+
+Linha do tempo (`.timeline`/`.timeline-item`/`.timeline-marker`/
+`.timeline-content`, `scss/components/_timeline.scss`), 100% CSS, vertical por
+padrão (`.timeline-horizontal` inverte o eixo). Estados por item: padrão
+(pendente), `.timeline-active`, `.timeline-completed` (marcador com "check",
+mesmo ícone do Stepper) e `.timeline-failed`, reaproveitando os tokens de cor
+de estado (`--clarus-color-primary/success/danger`). O conector entre
+marcadores fica na cor de sucesso depois de um item concluído, mesma lógica
+de progresso do Stepper (`scss/components/_stepper.scss`).
+
+Mockup: `mockup/timeline.html`.
+
+### Collapse (standalone)
+
+Extrai o padrão `collapse()`/`expand()` de `js/core/transition.js` — já usado
+internamente pelo Accordion — para uma seção expansível independente, sem
+precisar de um accordion completo. `.collapse` (`scss/components/_collapse.scss`)
+só define o `overflow: hidden` exigido pela animação de `height`. `js/collapse.js`
+(`Clarus.Collapse`) segue a API da seção 20: auto-init via
+`data-clarus="collapse"` no gatilho com `data-target`, `getInstance()`,
+`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
+`clarus:collapse:shown`/`-hidden`, `aria-expanded`/`aria-controls` geridos
+automaticamente. Estado inicial aberto via `aria-expanded="true"` no gatilho.
+
+Mockup: `mockup/collapse.html`.
+
+### Breadcrumb Avançado
+
+Estende `.breadcrumb`/`.breadcrumb-item` (Fase 5, `scss/components/_breadcrumbs.scss`)
+com truncamento e colapso automático em telas pequenas, via `js/breadcrumb.js`
+(`Clarus.Breadcrumb`, auto-init com `data-clarus="breadcrumb"` na lista,
+`data-max-items` configurável). Cada label ganha `.breadcrumb-item-truncate`
+(reticências por CSS); labels que realmente transbordam (medido só depois de
+`document.fonts.ready`, por causa da tipografia self-hosted da seção 18.2)
+ganham um `Tooltip` (`js/tooltip.js`) com o texto completo. Abaixo do
+breakpoint `sm` (640px), se a lista tiver mais itens que `data-max-items`,
+os níveis intermediários são substituídos por um único item `.breadcrumb-more`
+("…") que **compõe um `Dropdown`** (`js/dropdown.js`, mesmo padrão de
+composição do Select customizado da Fase 9) com os links ocultos — mantém
+sempre o primeiro e o último nível visíveis.
+
+Mockup: `mockup/pagination-breadcrumbs.html` (exemplo avançado adicionado ao
+mockup já existente da Fase 5).
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,

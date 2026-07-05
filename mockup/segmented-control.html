@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Segmented Control</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <p class="fs-sm fw-medium mb-0">Exclusivo (radio) — tamanhos</p>
+        <div class="segmented-control segmented-control-sm">
+            <div class="segmented-item">
+                <input type="radio" name="periodo-sm" id="periodo-sm-dia" class="segmented-input" checked>
+                <label for="periodo-sm-dia" class="segmented-label">Dia</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-sm" id="periodo-sm-semana" class="segmented-input">
+                <label for="periodo-sm-semana" class="segmented-label">Semana</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-sm" id="periodo-sm-mes" class="segmented-input">
+                <label for="periodo-sm-mes" class="segmented-label">Mês</label>
+            </div>
+        </div>
+
+        <div class="segmented-control">
+            <div class="segmented-item">
+                <input type="radio" name="periodo" id="periodo-dia" class="segmented-input">
+                <label for="periodo-dia" class="segmented-label">Dia</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo" id="periodo-semana" class="segmented-input" checked>
+                <label for="periodo-semana" class="segmented-label">Semana</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo" id="periodo-mes" class="segmented-input">
+                <label for="periodo-mes" class="segmented-label">Mês</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo" id="periodo-ano" class="segmented-input" disabled>
+                <label for="periodo-ano" class="segmented-label">Ano</label>
+            </div>
+        </div>
+
+        <div class="segmented-control segmented-control-lg">
+            <div class="segmented-item">
+                <input type="radio" name="periodo-lg" id="periodo-lg-dia" class="segmented-input" checked>
+                <label for="periodo-lg-dia" class="segmented-label">Dia</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-lg" id="periodo-lg-semana" class="segmented-input">
+                <label for="periodo-lg-semana" class="segmented-label">Semana</label>
+            </div>
+        </div>
+
+        <p class="fs-sm fw-medium mb-0">Inclusivo (checkbox) — múltipla seleção</p>
+        <div class="segmented-control">
+            <div class="segmented-item">
+                <input type="checkbox" id="filtro-negrito" class="segmented-input" checked>
+                <label for="filtro-negrito" class="segmented-label fw-medium">B</label>
+            </div>
+            <div class="segmented-item">
+                <input type="checkbox" id="filtro-italico" class="segmented-input">
+                <label for="filtro-italico" class="segmented-label">I</label>
+            </div>
+            <div class="segmented-item">
+                <input type="checkbox" id="filtro-sublinhado" class="segmented-input" checked>
+                <label for="filtro-sublinhado" class="segmented-label">U</label>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="segmented-control">
+            <div class="segmented-item">
+                <input type="radio" name="periodo-dark" id="periodo-dark-dia" class="segmented-input">
+                <label for="periodo-dark-dia" class="segmented-label">Dia</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-dark" id="periodo-dark-semana" class="segmented-input" checked>
+                <label for="periodo-dark-semana" class="segmented-label">Semana</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-dark" id="periodo-dark-mes" class="segmented-input">
+                <label for="periodo-dark-mes" class="segmented-label">Mês</label>
+            </div>
+            <div class="segmented-item">
+                <input type="radio" name="periodo-dark" id="periodo-dark-ano" class="segmented-input" disabled>
+                <label for="periodo-dark-ano" class="segmented-label">Ano</label>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

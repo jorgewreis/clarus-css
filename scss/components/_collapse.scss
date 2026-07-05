@@ -1,0 +1,7 @@
+// Extraído do padrão já usado por `.accordion-collapse`
+// (scss/components/_accordion.scss): o `overflow: hidden` é exigido pelo
+// `collapse()`/`expand()` de js/core/transition.js, que anima a propriedade
+// `height` do elemento.
+.collapse {
+  overflow: hidden;
+}
