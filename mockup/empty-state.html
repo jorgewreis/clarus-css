@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Empty State</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+
+        .card-like {
+            width: 320px;
+            background-color: var(--clarus-color-surface);
+            border-radius: var(--clarus-radius-md);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <div class="card-like">
+            <div class="empty-state">
+                <div class="empty-state-icon" aria-hidden="true">🔍</div>
+                <h3 class="empty-state-title">Nenhum resultado encontrado</h3>
+                <p class="empty-state-text">Tente ajustar os filtros ou buscar por outro termo.</p>
+                <button type="button" class="btn btn-primary">Limpar filtros</button>
+            </div>
+        </div>
+
+        <div class="card-like">
+            <div class="empty-state">
+                <div class="empty-state-icon" aria-hidden="true">📭</div>
+                <h3 class="empty-state-title">Caixa de entrada vazia</h3>
+                <p class="empty-state-text">Novas mensagens aparecerão aqui.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="card-like">
+            <div class="empty-state">
+                <div class="empty-state-icon" aria-hidden="true">🔍</div>
+                <h3 class="empty-state-title">Nenhum resultado encontrado</h3>
+                <p class="empty-state-text">Tente ajustar os filtros ou buscar por outro termo.</p>
+                <button type="button" class="btn btn-primary">Limpar filtros</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

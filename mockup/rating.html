@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Rating / Stars</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background-color: var(--clarus-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <p class="fs-sm fw-medium mb-0">Sem seleção</p>
+        <div class="rating">
+            <input type="radio" name="r1" id="r1-5" value="5" class="rating-input">
+            <label for="r1-5" class="rating-star">★</label>
+            <input type="radio" name="r1" id="r1-4" value="4" class="rating-input">
+            <label for="r1-4" class="rating-star">★</label>
+            <input type="radio" name="r1" id="r1-3" value="3" class="rating-input">
+            <label for="r1-3" class="rating-star">★</label>
+            <input type="radio" name="r1" id="r1-2" value="2" class="rating-input">
+            <label for="r1-2" class="rating-star">★</label>
+            <input type="radio" name="r1" id="r1-1" value="1" class="rating-input">
+            <label for="r1-1" class="rating-star">★</label>
+        </div>
+
+        <p class="fs-sm fw-medium mb-0">3 de 5 selecionado</p>
+        <div class="rating">
+            <input type="radio" name="r2" id="r2-5" value="5" class="rating-input">
+            <label for="r2-5" class="rating-star">★</label>
+            <input type="radio" name="r2" id="r2-4" value="4" class="rating-input">
+            <label for="r2-4" class="rating-star">★</label>
+            <input type="radio" name="r2" id="r2-3" value="3" class="rating-input" checked>
+            <label for="r2-3" class="rating-star">★</label>
+            <input type="radio" name="r2" id="r2-2" value="2" class="rating-input">
+            <label for="r2-2" class="rating-star">★</label>
+            <input type="radio" name="r2" id="r2-1" value="1" class="rating-input">
+            <label for="r2-1" class="rating-star">★</label>
+        </div>
+
+        <p class="fs-sm fw-medium mb-0">Tamanhos (sm / padrão / lg)</p>
+        <div class="rating rating-sm">
+            <input type="radio" name="r3" id="r3-5" value="5" class="rating-input">
+            <label for="r3-5" class="rating-star">★</label>
+            <input type="radio" name="r3" id="r3-4" value="4" class="rating-input" checked>
+            <label for="r3-4" class="rating-star">★</label>
+            <input type="radio" name="r3" id="r3-3" value="3" class="rating-input">
+            <label for="r3-3" class="rating-star">★</label>
+            <input type="radio" name="r3" id="r3-2" value="2" class="rating-input">
+            <label for="r3-2" class="rating-star">★</label>
+            <input type="radio" name="r3" id="r3-1" value="1" class="rating-input">
+            <label for="r3-1" class="rating-star">★</label>
+        </div>
+        <div class="rating rating-lg">
+            <input type="radio" name="r4" id="r4-5" value="5" class="rating-input" checked>
+            <label for="r4-5" class="rating-star">★</label>
+            <input type="radio" name="r4" id="r4-4" value="4" class="rating-input">
+            <label for="r4-4" class="rating-star">★</label>
+            <input type="radio" name="r4" id="r4-3" value="3" class="rating-input">
+            <label for="r4-3" class="rating-star">★</label>
+            <input type="radio" name="r4" id="r4-2" value="2" class="rating-input">
+            <label for="r4-2" class="rating-star">★</label>
+            <input type="radio" name="r4" id="r4-1" value="1" class="rating-input">
+            <label for="r4-1" class="rating-star">★</label>
+        </div>
+
+        <p class="fs-sm fw-medium mb-0">Desabilitado (2 de 5)</p>
+        <div class="rating">
+            <input type="radio" name="r5" id="r5-5" value="5" class="rating-input" disabled>
+            <label for="r5-5" class="rating-star">★</label>
+            <input type="radio" name="r5" id="r5-4" value="4" class="rating-input" disabled>
+            <label for="r5-4" class="rating-star">★</label>
+            <input type="radio" name="r5" id="r5-3" value="3" class="rating-input" disabled>
+            <label for="r5-3" class="rating-star">★</label>
+            <input type="radio" name="r5" id="r5-2" value="2" class="rating-input" checked disabled>
+            <label for="r5-2" class="rating-star">★</label>
+            <input type="radio" name="r5" id="r5-1" value="1" class="rating-input" disabled>
+            <label for="r5-1" class="rating-star">★</label>
+        </div>
+    </div>
+
+    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="rating">
+            <input type="radio" name="r6" id="r6-5" value="5" class="rating-input">
+            <label for="r6-5" class="rating-star">★</label>
+            <input type="radio" name="r6" id="r6-4" value="4" class="rating-input" checked>
+            <label for="r6-4" class="rating-star">★</label>
+            <input type="radio" name="r6" id="r6-3" value="3" class="rating-input">
+            <label for="r6-3" class="rating-star">★</label>
+            <input type="radio" name="r6" id="r6-2" value="2" class="rating-input">
+            <label for="r6-2" class="rating-star">★</label>
+            <input type="radio" name="r6" id="r6-1" value="1" class="rating-input">
+            <label for="r6-1" class="rating-star">★</label>
+        </div>
+    </div>
+
+</body>
+</html>

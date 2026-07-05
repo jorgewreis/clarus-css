@@ -1,0 +1,30 @@
+@use "../settings" as *;
+
+// Linha divisória, 100% CSS. `<hr class="divider">` para o traço simples;
+// `<div class="divider">` (não pode ser `<hr>`, que não aceita filhos) com
+// `.divider-label` para o texto centralizado, flanqueado por duas linhas via
+// pseudo-elementos.
+.divider {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--clarus-color-border);
+}
+
+.divider:not(hr) {
+  display: flex;
+  align-items: center;
+  border-top: none;
+  color: var(--clarus-color-muted);
+  font-size: $font-size-sm;
+}
+
+.divider:not(hr)::before,
+.divider:not(hr)::after {
+  flex: 1;
+  content: "";
+  border-top: 1px solid var(--clarus-color-border);
+}
+
+.divider-label {
+  padding: 0 12px;
+}

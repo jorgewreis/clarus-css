@@ -9,6 +9,21 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 7 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
+  quick wins 100% CSS:
+  - Divider (`scss/components/_divider.scss`): `<hr class="divider">` para
+    o traço simples; `<div class="divider">` com `.divider-label` para
+    texto centralizado, via `::before`/`::after`. Mockup
+    `mockup/divider.html`.
+  - Empty State (`scss/components/_empty-state.scss`): `.empty-state` com
+    `.empty-state-icon` (slot vazio), `.empty-state-title`,
+    `.empty-state-text` e ação opcional reaproveitando os botões
+    existentes. Mockup `mockup/empty-state.html`.
+  - Rating / Stars (`scss/components/_rating.scss`): `.rating`/
+    `.rating-star`, mesma técnica de input oculto + label irmão do
+    Segmented Control (`<input type="radio">` por estrela, `row-reverse` +
+    combinador de irmãos gerais). Tamanhos `.rating-sm`/`-lg`. Mockup
+    `mockup/rating.html`.
 - Etapa 6 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
   primeira etapa pós Top-10:
   - Input Group (`scss/forms/_forms.scss`): `.input-group`/`.input-group-text`,

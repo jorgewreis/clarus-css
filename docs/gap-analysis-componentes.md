@@ -39,8 +39,11 @@ Semantic UI e Cirrus UI.
 - ✅ **Breadcrumb avançado** (colapso mobile + truncamento + tooltip, Etapa 5)
 - ✅ **Input Group** (Etapa 6)
 - ✅ **Alert Dialog / Confirm** (Etapa 6)
+- ✅ **Divider** (Etapa 7)
+- ✅ **Empty State** (Etapa 7)
+- ✅ **Rating / Stars** (Etapa 7)
 
-**Total: 26 componentes CSS + 14 componentes JS/funções** (Dropdown, Tooltip,
+**Total: 29 componentes CSS + 14 componentes JS/funções** (Dropdown, Tooltip,
 Modal, Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
 Collapse, Breadcrumb, `Clarus.confirm`).
 
@@ -166,9 +169,9 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 |---|---|---|---|---|---|
 | ✅ | **Input Group** (prefix/suffix em inputs) | Alto | Baixa | 6 | Forms são core; presente em quase todos (Cirrus: `form-ext`) |
 | ✅ | **Alert Dialog / Confirm** | Médio-alto | Baixa | 6 | Compõe o Modal; padrão universal de confirmação |
-| 🟠 Média | **Divider / Separator com label** | Médio | Muito baixa | 7 | Quick win 100% CSS |
-| 🟠 Média | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
-| 🟠 Média | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
+| ✅ | **Divider / Separator com label** | Médio | Muito baixa | 7 | Quick win 100% CSS |
+| ✅ | **Empty State** | Médio | Baixa | 7 | Placeholder de lista vazia; quase todo CSS |
+| ✅ | **Rating / Stars** | Médio | Média | 7 | **Ausente no Cirrus**; comum em Ant/MUI |
 | 🟠 Média | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
 | 🟡 Baixa | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
 | 🟡 Baixa | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
@@ -179,7 +182,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–6 concluídas. Etapas 7–10 planejadas abaixo,
+> **Progresso:** Etapas 1–7 concluídas. Etapas 8–10 planejadas abaixo,
 > cobrindo o restante dos "Gaps Remanescentes".
 
 | Etapa | Componentes | Status |
@@ -190,7 +193,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | **4** — Overlays avançados | Offcanvas, Popover | ✅ Concluída |
 | **5** — Fechamento do Top-10 | Segmented Control, Skeletons, Timeline, Collapse standalone, Breadcrumb avançado | ✅ Concluída |
 | **6** — Formulários e confirmação | Input Group, Alert Dialog / Confirm | ✅ Concluída |
-| **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | 🔜 Planejada |
+| **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | ✅ Concluída |
 | **8** — Badge dismissível | Badge dismissível / Tags | 🔜 Planejada |
 | **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | 🔜 Planejada |
 | **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | 🔜 Planejada |
@@ -218,19 +221,23 @@ desde a seção 21).
   conforme o botão clicado (ou `false` em Escape/clique fora), com o foco
   voltando ao elemento que chamou. Mockup `mockup/alert-dialog.html`.
 
-### Etapa 7 — Quick wins CSS-only
+### Etapa 7 — Quick wins CSS-only ✅
 
 Nenhum dos três depende de JavaScript; agrupados por serem os de menor
 esforço restante.
 
-- **Divider / Separator com label**: linha divisória com texto opcional
-  centralizado (`.divider`/`.divider-label`), via `::before`/`::after`.
-- **Empty State**: bloco padrão para listas/telas vazias (ícone ou
-  ilustração + título + descrição + ação opcional), reaproveitando botões
-  existentes para a ação.
-- **Rating / Stars**: reaproveita a mesma técnica de input oculto + label
-  irmão do Segmented Control (Etapa 5) — `<input type="radio">` por
-  estrela, exclusivo dentro do grupo, sem necessidade de JavaScript.
+- **Divider / Separator com label** (`scss/components/_divider.scss`):
+  linha divisória com texto opcional centralizado (`.divider`/
+  `.divider-label`), via `::before`/`::after`. Mockup `mockup/divider.html`.
+- **Empty State** (`scss/components/_empty-state.scss`): bloco padrão para
+  listas/telas vazias (`.empty-state-icon` como slot vazio + título +
+  descrição + ação opcional), reaproveitando botões existentes para a ação.
+  Mockup `mockup/empty-state.html`.
+- **Rating / Stars** (`scss/components/_rating.scss`): reaproveita a mesma
+  técnica de input oculto + label irmão do Segmented Control (Etapa 5) —
+  `<input type="radio">` por estrela, exclusivo dentro do grupo, sem
+  necessidade de JavaScript. Tamanhos `.rating-sm`/`-lg`. Mockup
+  `mockup/rating.html`.
 
 ### Etapa 8 — Badge dismissível / Tags
 
@@ -318,6 +325,6 @@ nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 .dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
 Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
-acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). A Etapa 6
-(Input Group, Alert Dialog/Confirm) já está concluída; a próxima é a
-Etapa 7 (Divider, Empty State, Rating/Stars).
+acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). Etapas 6
+(Input Group, Alert Dialog/Confirm) e 7 (Divider, Empty State, Rating/Stars)
+já estão concluídas; a próxima é a Etapa 8 (Badge dismissível / Tags).

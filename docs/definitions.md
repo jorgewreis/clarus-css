@@ -734,6 +734,37 @@ elemento que estava focado antes da chamada (o botão que abriu o diálogo).
 
 Mockup: `mockup/alert-dialog.html`.
 
+### Divider
+
+Linha divisória (`scss/components/_divider.scss`), 100% CSS.
+`<hr class="divider">` para o traço simples; `<div class="divider">` (não
+pode ser `<hr>`, que não aceita filhos) com `.divider-label` para texto
+centralizado, flanqueado por duas linhas via pseudo-elementos.
+
+Mockup: `mockup/divider.html`.
+
+### Empty State
+
+Bloco padrão para listas/telas vazias (`.empty-state`,
+`scss/components/_empty-state.scss`), 100% CSS: `.empty-state-icon` (slot
+vazio para o consumidor colocar seu próprio SVG/emoji/ilustração),
+`.empty-state-title`, `.empty-state-text` e ação opcional reaproveitando os
+botões existentes.
+
+Mockup: `mockup/empty-state.html`.
+
+### Rating / Stars
+
+Avaliação por estrelas (`.rating`/`.rating-star`, `scss/components/_rating.scss`),
+100% CSS — mesma técnica de input oculto + label irmão do Segmented Control
+(seção anterior): um `<input type="radio">` por estrela, exclusivo dentro do
+grupo. A marcação usa os pares input+label em ordem decrescente de valor
+(5, 4, 3...) com `.rating` em `row-reverse` — o truque clássico de CSS para
+destacar "a estrela clicada e todas à esquerda dela" usando só o combinador
+de irmãos gerais (`~`). Tamanhos `.rating-sm`/`-lg`.
+
+Mockup: `mockup/rating.html`.
+
 ## 22. Testes Automatizados
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,
