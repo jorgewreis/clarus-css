@@ -31,12 +31,13 @@ export function onClickOutside(el, callback) {
     if (!el.contains(event.target)) callback(event);
   };
 
-  // Adiado para o próximo tick: evita que o mesmo clique que abriu o
-  // elemento (ainda em bubbling até o document) já dispare o fechamento.
-  const timerId = setTimeout(() => document.addEventListener("click", handler, true));
+  // Listener de captura registrado imediatamente: o clique que abriu o
+  // elemento já passou pelo document na fase de captura, então não dispara
+  // o fechamento — e um clique fora logo em seguida já encontra o listener
+  // ativo (adiar com setTimeout criava uma janela em que ele era perdido).
+  document.addEventListener("click", handler, true);
 
   return () => {
-    clearTimeout(timerId);
     document.removeEventListener("click", handler, true);
   };
 }
