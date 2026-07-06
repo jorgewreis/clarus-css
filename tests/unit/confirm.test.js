@@ -21,7 +21,6 @@ describe("confirm()", () => {
     expect(modalEl.querySelector(".alert-dialog-message").textContent).toBe("Essa ação não pode ser desfeita.");
     expect(modalEl.querySelector('[data-action="confirm"]').textContent).toBe("Excluir");
     expect(modalEl.querySelector('[data-action="cancel"]').textContent).toBe("Voltar");
-    expect(modalEl.querySelector(".alert-dialog-icon-danger")).not.toBeNull();
   });
 
   it("usa variant=danger e título/textos padrão quando nada é informado", async () => {

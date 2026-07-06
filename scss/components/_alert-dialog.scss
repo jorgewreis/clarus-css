@@ -1,50 +1,9 @@
 @use "../settings" as *;
-@use "../tools" as *;
 
-// Alert Dialog / Confirm: variante do Modal (scss/components/_modal.scss)
-// para confirmação, montada dinamicamente por Clarus.confirm() (js/confirm.js)
-// — reaproveita .modal/.modal-dialog/.modal-content/.modal-footer sem
-// duplicar layout, só adiciona o corpo com ícone + mensagem.
-.alert-dialog-body {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.alert-dialog-icon {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-medium;
-}
-
-@each $name, $color in $theme-colors {
-  .alert-dialog-icon-#{$name} {
-    color: color-contrast($color);
-    background-color: var(--clarus-color-#{$name});
-  }
-}
-
-.alert-dialog-icon-danger::before,
-.alert-dialog-icon-warning::before {
-  content: "!";
-}
-
-.alert-dialog-icon-success::before {
-  content: "✓";
-}
-
-.alert-dialog-icon-primary::before,
-.alert-dialog-icon-secondary::before,
-.alert-dialog-icon-info::before {
-  content: "?";
-}
-
+// Alert Dialog / Confirm: variante do Modal (scss/components/_modal.scss) para
+// confirmação, montada dinamicamente por Clarus.confirm() (js/confirm.js) —
+// reaproveita .modal/.modal-dialog/.modal-content/.modal-footer sem duplicar
+// layout, só adiciona a mensagem abaixo do título.
 .alert-dialog-message {
   margin: 4px 0 0;
   color: var(--clarus-color-muted);

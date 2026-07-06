@@ -119,9 +119,12 @@ import "clarus-css";
 
 O CSS é distribuído também em quatro arquivos independentes, cada um já
 incluindo variáveis (tokens), reset e suporte a dark mode — ou seja, dá para
-usar apenas um deles sem quebrar nada:
+usar apenas um deles sem quebrar nada. Há ainda o `fonts.css`, opcional, com as
+fontes self-hosted; sem ele, a tipografia cai no `sans-serif`/`monospace` do
+sistema:
 
 ```html
+<link rel="stylesheet" href="node_modules/clarus-css/dist/css/fonts.css">
 <link rel="stylesheet" href="node_modules/clarus-css/dist/css/layout.css">
 <link rel="stylesheet" href="node_modules/clarus-css/dist/css/forms.css">
 <link rel="stylesheet" href="node_modules/clarus-css/dist/css/components.css">
@@ -130,6 +133,7 @@ usar apenas um deles sem quebrar nada:
 
 | Arquivo | Conteúdo |
 | --- | --- |
+| `fonts.css` | `@font-face` das fontes self-hosted (opcional; importe antes dos demais) |
 | `layout.css` | Containers e grid (seções 4 e 5) |
 | `forms.css` | Formulários (seção 9) |
 | `components.css` | Botões, cards, alertas, badges, tabelas, navbar, dropdown, modal, accordion, tabs, tooltips, toasts, paginação, breadcrumbs, spinner/progress, carousel |

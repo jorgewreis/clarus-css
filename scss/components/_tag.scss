@@ -12,9 +12,21 @@
 .tag .btn-close {
   width: 14px;
   height: 14px;
+
+  // Herda a cor de texto do badge (contraste automático por variante) em vez
+  // do cinza fixo do `.btn-close`, pra o "x" ter contraste em qualquer fundo;
+  // o `opacity` o deixa discreto sem depender de uma cor fixa.
+  color: inherit;
+  opacity: 0.7;
 }
 
 .tag .btn-close::before,
 .tag .btn-close::after {
   width: 8px;
+}
+
+.tag .btn-close:hover {
+  color: inherit;
+  background-color: color-mix(in srgb, currentcolor 18%, transparent);
+  opacity: 1;
 }

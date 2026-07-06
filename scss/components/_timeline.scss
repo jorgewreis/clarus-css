@@ -116,6 +116,13 @@
   text-align: center;
 }
 
+// No modo horizontal o marcador não precisa do deslocamento vertical usado
+// para alinhar com a primeira linha de texto (margin-top no modo vertical);
+// zerá-lo faz o conector cair exatamente no centro do círculo.
+.timeline-horizontal .timeline-marker {
+  margin-top: 0;
+}
+
 .timeline-horizontal .timeline-item:not(:last-child)::before {
   top: 7px;
   left: calc(50% + 15px);

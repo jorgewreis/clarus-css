@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+// Bundle isolado só com os @font-face das fontes self-hosted, para ser
+// importado à parte (dist/css/fonts.css) — mantém as `url()` de woff2 fora
+// dos bundles principais (ver nota em scss/base/_fonts.scss).
+@use "base/fonts";

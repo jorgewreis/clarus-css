@@ -39,6 +39,7 @@
     "./forms.css": "./dist/css/forms.css",
     "./components.css": "./dist/css/components.css",
     "./helpers.css": "./dist/css/helpers.css",
+    "./fonts.css": "./dist/css/fonts.css",
     "./js": "./dist/js/clarus.js",
     "./js/*": "./js/*.js",
     "./package.json": "./package.json"

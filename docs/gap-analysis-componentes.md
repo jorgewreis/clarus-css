@@ -45,10 +45,13 @@ Semantic UI e Cirrus UI.
 - ✅ **Badge dismissível / Tag** (Etapa 8)
 - ✅ **File Input Drag-and-Drop** (Etapa 9)
 - ✅ **Hover Card** (Etapa 9 — composição do Popover)
+- ✅ **Notification Center** (Etapa 10 — orquestra `Clarus.Toast` + histórico)
+- ✅ **Menu aninhado / Nested Menu** (Etapa 10 — submenus recursivos do Dropdown)
 
-**Total: 31 componentes CSS + 16 componentes JS/funções** (Dropdown, Tooltip,
+**Total: 33 componentes CSS + 18 componentes JS/funções** (Dropdown, Tooltip,
 Modal, Select, Accordion, Tabs, Toast, Carousel, Stepper, Offcanvas, Popover,
-Collapse, Breadcrumb, `Clarus.confirm`, Tag, FileDrop).
+Collapse, Breadcrumb, `Clarus.confirm`, Tag, FileDrop, NotificationCenter,
+NestedMenu).
 
 ---
 
@@ -178,15 +181,15 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | ✅ | **Badge dismissível / Tags** | Médio | Baixa | 8 | Cirrus tem `tags`; reaproveita `.badge` + `.btn-close` |
 | ✅ | **File Input Drag-and-Drop** | Médio | Média | 9 | Evolui o upload atual |
 | ✅ | **Hover Card** | Baixo | Média | 9 | Fica trivial depois do Popover (Etapa 4) |
-| 🟡 Baixa | **Notification Center** | Baixo-médio | Média-alta | 10 | Compõe múltiplos Toasts + histórico |
-| 🟣 Futuro | **Menu aninhado (nested)** | Baixo | Alta | 10 | Complexidade alta, uso de nicho |
+| ✅ | **Notification Center** | Baixo-médio | Média-alta | 10 | Compõe múltiplos Toasts + histórico |
+| ✅ | **Menu aninhado (nested)** | Baixo | Alta | 10 | Complexidade alta, uso de nicho |
 
 ---
 
 ## Roadmap por Etapas
 
-> **Progresso:** Etapas 1–9 concluídas. Falta só a Etapa 10 para fechar
-> todos os "Gaps Remanescentes".
+> **Progresso:** Etapas 1–10 concluídas — todos os "Gaps Remanescentes"
+> priorizados estão fechados.
 
 | Etapa | Componentes | Status |
 |---|---|---|
@@ -199,7 +202,7 @@ etapa, componente 100% CSS antes do que depende de JavaScript.
 | **7** — Quick wins CSS-only | Divider, Empty State, Rating / Stars | ✅ Concluída |
 | **8** — Badge dismissível | Badge dismissível / Tags | ✅ Concluída |
 | **9** — Evoluções de componentes existentes | File Input Drag-and-Drop, Hover Card | ✅ Concluída |
-| **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | 🔜 Planejada |
+| **10** — Maior complexidade | Notification Center, Menu aninhado (nested) | ✅ Concluída |
 
 Progress circular (ring) entra numa etapa futura, ainda sem posição definida.
 
@@ -270,18 +273,34 @@ ou overlay novo.
   avatar + bio) — não é um componente novo de infraestrutura, só um
   ajuste visual pontual. Mockup `mockup/hover-card.html`.
 
-### Etapa 10 — Maior complexidade
+### Etapa 10 — Maior complexidade ✅
 
-Deixados por último por dependerem de mais decisões de design e terem o
-menor ROI imediato entre os 10.
+Os dois itens de maior complexidade, deixados por último. Sem dependência entre
+si; ambos compõem infraestrutura já pronta (Toast e Dropdown).
 
-- **Notification Center**: orquestra múltiplas instâncias de `Clarus.Toast`
-  com histórico persistente — é o item de maior complexidade de estado
-  entre os 10 (precisa de uma decisão de armazenamento: em memória vs.
-  `localStorage`, a definir na implementação).
-- **Menu aninhado (nested)**: dropdown com submenus recursivos; complexidade
-  alta (posicionamento em cascata, navegação por teclado entre níveis) e uso
-  de nicho — já indicado como "Futuro" na priorização original.
+- **Notification Center** (`scss/components/_notification-center.scss`,
+  `js/notification-center.js`): orquestra múltiplas instâncias de `Clarus.Toast`
+  (`js/toast.js`) e mantém um histórico. `push({title, body, variant})` empilha
+  um toast e registra a notificação; o painel (posicionado como o Dropdown via
+  `js/core/positioning.js`, fecha com Escape/clique fora) lista o histórico com
+  dispensa por item e "limpar tudo", além de um contador de não-lidas no gatilho
+  — abrir marca tudo como lido. Decisão de armazenamento resolvida: **memória
+  por padrão, `localStorage` opcional** via `data-storage="local"` (+
+  `data-storage-key`). `Clarus.NotificationCenter` com `getInstance()`/`push()`/
+  `remove()`/`clear()`/`getAll()`/`open()`/`close()`/`toggle()`/`dispose()` e
+  eventos `clarus:notification:pushed`/`-opened`/`-closed`/`-cleared`. Mockup
+  `mockup/notification-center.html`. Testes em
+  `tests/unit/notification-center.test.js`.
+- **Menu aninhado / Nested Menu** (`scss/components/_nested-menu.scss`,
+  `js/nested-menu.js`): Dropdown com submenus recursivos, reaproveitando
+  `.dropdown-menu`/`.dropdown-item` sem reestilizar. Abertura por hover é 100%
+  CSS; o JS cuida do posicionamento em cascata (`left: 100%`, com flip para a
+  esquerda perto da borda) e da navegação por teclado por nível (↓/↑ no nível,
+  → abre o submenu, ←/Esc fecham, Enter/Espaço alternam). `Clarus.NestedMenu`
+  com API padrão (`getInstance()`/`show()`/`hide()`/`toggle()`/`dispose()`) e
+  eventos `clarus:nested-menu:shown`/`-hidden`. Componente próprio (não estende
+  o Dropdown) porque a navegação por teclado é por nível, não linear. Mockup
+  `mockup/nested-menu.html`. Testes em `tests/unit/nested-menu.test.js`.
 
 ---
 
@@ -331,9 +350,8 @@ popover, timeline e stepper permanecem raros** — e o Clarus os entrega com JS
 nativo, API consistente (`data-clarus`, `getInstance()`, `.show()/.hide()/
 .dispose()`, eventos DOM) e acessibilidade desde a v0.1.
 
-Com o Top-10 fechado, o foco passa aos **gaps remanescentes** priorizados
-acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). Etapas 6
-(Input Group, Alert Dialog/Confirm), 7 (Divider, Empty State, Rating/Stars),
-8 (Badge dismissível/Tags) e 9 (File Input Drag-and-Drop, Hover Card) já
-estão concluídas; falta só a Etapa 10 (Notification Center, Menu aninhado)
-para fechar todos os gaps remanescentes priorizados.
+Com o Top-10 fechado, o foco passou aos **gaps remanescentes** priorizados
+acima, organizados nas Etapas 6 a 10 (seção "Roadmap por Etapas"). Com a
+Etapa 10 (Notification Center, Menu aninhado) concluída, **todas as Etapas 6–10
+estão fechadas** — não restam gaps remanescentes priorizados. Novos alvos
+(ex.: Progress circular/ring) entram em etapas futuras, ainda a definir.

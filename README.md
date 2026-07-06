@@ -71,6 +71,15 @@ O CSS também é distribuído em arquivos separados (`layout.css`, `forms.css`,
 compilar com suas próprias variáveis. As formas de uso estão detalhadas em
 [Instalação e formas de uso](guide.md#2-instalação-e-formas-de-uso).
 
+As fontes self-hosted (Plus Jakarta Sans e Source Code Pro) são distribuídas à
+parte em `fonts.css`. Inclua-o **antes** do CSS principal para usá-las; sem ele,
+a tipografia cai no `sans-serif`/`monospace` do sistema:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clarus-css/dist/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clarus-css/dist/css/clarus.css">
+```
+
 ## Início rápido
 
 Um componente interativo se inicializa sozinho via `data-clarus` — basta incluir

@@ -82,15 +82,17 @@
 //   - border         (500) — borda na cor principal
 
   // PRIMARY
-  $clarus-color-primary: $color-blue-500 !default;
-  $clarus-color-primary-hover: $color-blue-600 !default;
-  $clarus-color-primary-active: $color-blue-700 !default;
+  // main em 600 (não 500): 500 é claro demais e color-contrast() cai pra texto
+  // preto no preenchimento sólido; 600 garante texto branco legível (≥ 4.5:1).
+  $clarus-color-primary: $color-blue-600 !default;
+  $clarus-color-primary-hover: $color-blue-700 !default;
+  $clarus-color-primary-active: $color-blue-800 !default;
   $clarus-color-primary-disabled: $color-blue-300 !default;
   $clarus-bg-primary: $color-blue-100 !default;
   $clarus-bg-primary-2: $color-blue-200 !default;
   $clarus-text-primary: $color-blue-900 !default;
   $clarus-text-primary-2: $color-blue-700 !default;
-  $clarus-border-primary: $color-blue-500 !default;
+  $clarus-border-primary: $color-blue-600 !default;
 
   // SECONDARY (reaproveita a escala neutra $color-gray-*, papel clássico de
   // botão/ação secundária discreta, sem competir visualmente com primary)
@@ -127,15 +129,18 @@
   $clarus-border-warning: $color-yellow-500 !default;
 
   // DANGER
-  $clarus-color-danger: $color-red-500 !default;
-  $clarus-color-danger-hover: $color-red-600 !default;
-  $clarus-color-danger-active: $color-red-700 !default;
+  // main em 700 (não 500): o vermelho 500/600 é claro demais e color-contrast()
+  // cai pra texto preto no preenchimento sólido; 700 garante texto branco
+  // legível (≥ 4.5:1).
+  $clarus-color-danger: $color-red-700 !default;
+  $clarus-color-danger-hover: $color-red-800 !default;
+  $clarus-color-danger-active: $color-red-900 !default;
   $clarus-color-danger-disabled: $color-red-300 !default;
   $clarus-bg-danger: $color-red-100 !default;
   $clarus-bg-danger-2: $color-red-200 !default;
   $clarus-text-danger: $color-red-900 !default;
   $clarus-text-danger-2: $color-red-700 !default;
-  $clarus-border-danger: $color-red-500 !default;
+  $clarus-border-danger: $color-red-700 !default;
 
   // INFO
   $clarus-color-info: $color-purple-500 !default;

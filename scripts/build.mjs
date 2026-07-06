@@ -20,6 +20,7 @@ const cssEntries = [
   { entryPath: path.join(entriesDir, "forms-entry.scss"), outName: "forms" },
   { entryPath: path.join(entriesDir, "components-entry.scss"), outName: "components" },
   { entryPath: path.join(entriesDir, "utilities-entry.scss"), outName: "helpers" },
+  { entryPath: path.join(entriesDir, "fonts-entry.scss"), outName: "fonts" },
   { entryPath: path.join(scssDir, "clarus.scss"), outName: "clarus" },
 ];
 

@@ -27,12 +27,9 @@ export function confirm(options = {}) {
     modalEl.innerHTML = `
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
-          <div class="modal-body alert-dialog-body">
-            <div class="alert-dialog-icon alert-dialog-icon-${variant}" aria-hidden="true"></div>
-            <div>
-              <h3 class="modal-title">${escapeHtml(title)}</h3>
-              ${message ? `<p class="alert-dialog-message">${escapeHtml(message)}</p>` : ""}
-            </div>
+          <div class="modal-body">
+            <h3 class="modal-title">${escapeHtml(title)}</h3>
+            ${message ? `<p class="alert-dialog-message">${escapeHtml(message)}</p>` : ""}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn" data-action="cancel">${escapeHtml(cancelText)}</button>

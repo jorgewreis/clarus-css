@@ -6,10 +6,11 @@
 // tema escuro. O limite de cada uma é o quanto dá pra clarear em direção ao
 // branco antes de virar o texto branco/preto que color-contrast() já
 // pré-calculou para os preenchimentos sólidos (botões, badges) no tema claro
-// — passar do limite deixaria esse texto ilegível. `info` não tem margem
-// segura e fica sem alteração (100%).
+// — passar do limite deixaria esse texto ilegível. `primary` e `danger` têm
+// texto branco no preenchimento, então clareiam pouco (clarear reduz o
+// contraste com o branco); `info` não tem margem e fica sem alteração (100%).
 $dark-color-weights: (
-  primary: 86%,
+  primary: 95%,
   secondary: 90%,
   success: 65%,
   warning: 65%,

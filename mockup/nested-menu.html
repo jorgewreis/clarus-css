@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Nested Menu</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/fonts.css">
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            min-height: 240px;
+            padding: 24px;
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--clarus-color-text);
+            background-color: var(--clarus-color-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-panel">
+        <h2 class="fs-lg fw-medium">Claro</h2>
+        <p class="fs-sm fw-medium mb-0">Submenus recursivos — hover, clique ou setas (→ abre, ← fecha)</p>
+
+        <button type="button" class="btn dropdown-toggle" data-clarus="nested-menu" data-target="#menu-claro">Ações</button>
+        <div class="dropdown-menu" id="menu-claro">
+            <a href="#" class="dropdown-item">Novo arquivo</a>
+            <a href="#" class="dropdown-item">Abrir…</a>
+            <div class="dropdown-submenu">
+                <button type="button" class="dropdown-item dropdown-item-submenu">Compartilhar</button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Copiar link</a>
+                    <a href="#" class="dropdown-item">E-mail</a>
+                    <div class="dropdown-submenu">
+                        <button type="button" class="dropdown-item dropdown-item-submenu">Redes sociais</button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Twitter / X</a>
+                            <a href="#" class="dropdown-item">LinkedIn</a>
+                            <a href="#" class="dropdown-item">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-submenu">
+                <button type="button" class="dropdown-item dropdown-item-submenu">Exportar como</button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">PDF</a>
+                    <a href="#" class="dropdown-item">PNG</a>
+                    <a href="#" class="dropdown-item disabled">SVG (em breve)</a>
+                </div>
+            </div>
+            <hr class="dropdown-divider">
+            <a href="#" class="dropdown-item">Excluir</a>
+        </div>
+    </div>
+
+    <div class="theme-panel" data-theme="dark">
+        <h2 class="fs-lg fw-medium">Escuro</h2>
+
+        <button type="button" class="btn dropdown-toggle" data-clarus="nested-menu" data-target="#menu-escuro">Ações</button>
+        <div class="dropdown-menu" id="menu-escuro">
+            <a href="#" class="dropdown-item">Novo arquivo</a>
+            <div class="dropdown-submenu">
+                <button type="button" class="dropdown-item dropdown-item-submenu">Compartilhar</button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Copiar link</a>
+                    <div class="dropdown-submenu">
+                        <button type="button" class="dropdown-item dropdown-item-submenu">Redes sociais</button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Twitter / X</a>
+                            <a href="#" class="dropdown-item">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="dropdown-divider">
+            <a href="#" class="dropdown-item">Excluir</a>
+        </div>
+    </div>
+
+    <!-- SCRIPTS IMPORT -->
+    <script src="../dist/js/clarus.js"></script>
+
+</body>
+</html>

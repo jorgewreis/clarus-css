@@ -9,6 +9,29 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Etapa 10 do roadmap de paridade (`docs/gap-analysis-componentes.md`), os dois
+  itens de maior complexidade — fecha todos os gaps remanescentes priorizados:
+  - Notification Center (`scss/components/_notification-center.scss`,
+    `js/notification-center.js`): orquestra múltiplas instâncias de
+    `Clarus.Toast` e mantém um histórico. `push({title, body, variant})` empilha
+    um toast e registra a notificação; painel de histórico (posicionado como o
+    Dropdown, fecha com Escape/clique fora) com dispensa por item, "limpar tudo"
+    e contador de não-lidas no gatilho — abrir marca tudo como lido.
+    Persistência opcional em `localStorage` (`data-storage="local"` +
+    `data-storage-key`); padrão em memória. `Clarus.NotificationCenter` com
+    `push()`/`remove()`/`clear()`/`getAll()`/`open()`/`close()`/`toggle()`/
+    `dispose()` e eventos `clarus:notification:pushed`/`-opened`/`-closed`/
+    `-cleared`. Mockup `mockup/notification-center.html`. Testes em
+    `tests/unit/notification-center.test.js`.
+  - Menu aninhado / Nested Menu (`scss/components/_nested-menu.scss`,
+    `js/nested-menu.js`): Dropdown com submenus recursivos, reaproveitando
+    `.dropdown-menu`/`.dropdown-item`. Abertura por hover é 100% CSS;
+    posicionamento em cascata (`left: 100%`, com flip para a esquerda perto da
+    borda) e navegação por teclado por nível (↓/↑ no nível, → abre, ←/Esc
+    fecham, Enter/Espaço alternam). `Clarus.NestedMenu` com API padrão
+    (`getInstance()`/`show()`/`hide()`/`toggle()`/`dispose()`) e eventos
+    `clarus:nested-menu:shown`/`-hidden`. Mockup `mockup/nested-menu.html`.
+    Testes em `tests/unit/nested-menu.test.js`.
 - Etapa 9 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
   evoluções de componentes existentes:
   - File Input Drag-and-Drop (`js/file-drop.js`): evolui
@@ -100,6 +123,25 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
+- Cores `primary` e `danger` escurecidas no preenchimento sólido para o texto
+  branco ter contraste adequado (WCAG ≥ 4.5:1): `--clarus-color-primary` passa
+  de blue-500 (#2972fa) para blue-600 (#1a61e6) e `--clarus-color-danger` de
+  red-500 (#fb4143) para red-700 (#cc3335) em `scss/settings/_colors.scss`.
+  Antes o `color-contrast()` caía para texto preto nesses fundos (pouca
+  legibilidade, sobretudo no vermelho). O peso de clareamento do `primary` no
+  dark mode (`scss/themes/_dark.scss`) sobe de 86% para 95%, porque o texto do
+  preenchimento passou de preto para branco (clarear reduz o contraste com o
+  branco). Afeta botões, badges, alerts e bordas que usam essas cores.
+- Fontes self-hosted (Plus Jakarta Sans e Source Code Pro) movidas para um
+  arquivo à parte, opcional: novo bundle `dist/css/fonts.css` (a partir de
+  `scss/base/_fonts.scss` + `scss/entries/fonts-entry.scss`), exportado como
+  `clarus-css/fonts.css`; `scss/base/_typography.scss` mantém só as pilhas de
+  `font-family`. Quem quiser as fontes importa `fonts.css` antes do CSS
+  principal; sem ele, a tipografia cai no `sans-serif`/`monospace` do sistema.
+  Também elimina a duplicação dos `@font-face`, antes repetidos em `clarus.css`,
+  `components.css`, `forms.css`, `layout.css` e `helpers.css`.
+- Alert Dialog / Confirm (`js/confirm.js`, `scss/components/_alert-dialog.scss`):
+  removido o ícone informativo do corpo do diálogo — fica só título e mensagem.
 - Paleta de cores evoluída para escalas completas 100-900 por matiz
   (yellow/green/blue/gray/red/purple) com papéis semânticos por cor de
   estado (`color`/`-hover`/`-active`/`-disabled`/`bg`/`bg-2`/`text`/`text-2`/
@@ -165,6 +207,24 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   (`.col-md-6`, `.d-lg-none`, etc. continuam os mesmos) — só os valores em
   px por trás de cada breakpoint, o que pode alterar sutilmente o layout
   visual de projetos existentes nos pontos de corte afetados.
+
+### Fixed
+
+- Erro do bundlephobia ao analisar o pacote ("Found an asset without the
+  `.bundle` suffix ... `.woff2`"): o `main` (`dist/css/clarus.css`) referenciava
+  as `url(...woff2)` dos `@font-face`, que o webpack do bundlephobia não resolve
+  sem loader. Com os `@font-face` isolados em `fonts.css` (ver Changed), os
+  bundles principais não têm mais referências a woff2.
+- Badge (`scss/components/_badges.scss`): texto centralizado verticalmente — o
+  padding assimétrico `2px 8px 0`, que empurrava o texto para baixo, virou
+  `0 8px`, deixando a centralização por conta do flex.
+- Tag (`scss/components/_tag.scss`): o "x" do botão de fechar herda a cor de
+  texto do badge (contraste automático por variante) em vez de um cinza fixo,
+  corrigindo a baixa visibilidade sobre badges coloridos.
+- Timeline horizontal (`scss/components/_timeline.scss`): o conector alinha com
+  o centro do marcador — o `margin-top: 3px` do marcador (necessário só no modo
+  vertical) é zerado no horizontal, onde deixava a linha acima do centro do
+  círculo.
 
 ## [0.3.0] - 2026-07-04
 
