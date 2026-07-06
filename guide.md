@@ -1930,9 +1930,9 @@ aplicado apenas a uma seção da página (não à página inteira).
   (`settings`, `tools`, `tokens`, `base`, `layout`, `forms`, `components`,
   `utilities`, `themes`) e como o pipeline de build gera os arquivos de
   `dist/`.
-- **`docs/guia-comandos.md`** — referência de comandos de terminal (git,
-  npm, build, versionamento, publicação) para quem for desenvolver no
-  próprio repositório do framework.
+- **`docs/internal/guia-comandos.md`** — referência de comandos de terminal
+  (git, npm, build, versionamento, publicação) para quem for desenvolver no
+  próprio repositório do framework (não versionado; local).
 - **`CONTRIBUTING.md`** — convenções de contribuição, caso queira propor
   mudanças ou novos componentes.
 - **`CHANGELOG.md`** — histórico de versões, seguindo Keep a Changelog e
