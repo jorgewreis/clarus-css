@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { NotificationCenter } from "../../js/notification-center.js";
+import { NotificationCenter } from "../../packages/clarus-js/js/notification-center.js";
 
 function build({ storage } = {}) {
   const wrapper = document.createElement("div");

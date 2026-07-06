@@ -1,0 +1,47 @@
+@use "settings" as *;
+
+// Nested Menu (Etapa 10): Dropdown com submenus recursivos. Reaproveita
+// `.dropdown-menu`/`.dropdown-item` (scss/components/_dropdown.scss) sem
+// reestilizar — só adiciona o posicionamento em cascata dos submenus e a seta
+// indicadora. Abertura por hover é 100% CSS; teclado/clique e o flip de borda
+// ficam no js/nested-menu.js (Clarus.NestedMenu), que adiciona `.show`.
+
+// Cada nível de submenu é envolto por `.dropdown-submenu`, que serve de âncora
+// de posicionamento para o `.dropdown-menu` filho.
+.dropdown-submenu {
+  position: relative;
+}
+
+// Item que abre um submenu: seta apontando para o lado (em vez da seta pra
+// baixo do `.dropdown-toggle`), empurrada para a direita do item.
+.dropdown-item-submenu {
+  justify-content: space-between;
+}
+
+.dropdown-item-submenu::after {
+  margin-left: 8px;
+  content: "";
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentcolor;
+}
+
+// Submenu abre à direita do item, alinhado ao topo (compensa o padding + borda
+// do menu pai para os primeiros itens ficarem na mesma linha).
+.dropdown-submenu > .dropdown-menu {
+  top: -7px;
+  left: 100%;
+  margin: 0;
+}
+
+.dropdown-submenu:hover > .dropdown-menu,
+.dropdown-submenu > .dropdown-menu.show {
+  display: block;
+}
+
+// Sem espaço à direita: o JS marca `.dropdown-submenu-left` e o submenu abre
+// para a esquerda.
+.dropdown-submenu-left > .dropdown-menu {
+  right: 100%;
+  left: auto;
+}

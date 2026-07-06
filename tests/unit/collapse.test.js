@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { Collapse } from "../../js/collapse.js";
+import { Collapse } from "../../packages/clarus-js/js/collapse.js";
 
 function buildCollapse({ startsOpen = false } = {}) {
   const wrapper = document.createElement("div");

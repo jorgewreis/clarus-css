@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
-import { Carousel } from "../../js/carousel.js";
+import { Carousel } from "../../packages/clarus-js/js/carousel.js";
 
 function buildCarousel({ autoplay = false, interval } = {}) {
   const container = document.createElement("div");

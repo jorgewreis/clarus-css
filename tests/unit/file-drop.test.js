@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { FileDrop } from "../../js/file-drop.js";
+import { FileDrop } from "../../packages/clarus-js/js/file-drop.js";
 
 function buildFileDrop({ disabled = false } = {}) {
   const wrapper = document.createElement("div");

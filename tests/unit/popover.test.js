@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
-import { Popover } from "../../js/popover.js";
+import { Popover } from "../../packages/clarus-js/js/popover.js";
 
 function buildPopover({ trigger = "click" } = {}) {
   const wrapper = document.createElement("div");

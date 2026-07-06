@@ -27,7 +27,7 @@ function build() {
   });
 }
 
-const watcher = chokidar.watch(["scss/**/*.scss", "js/**/*.js"], {
+const watcher = chokidar.watch(["scss/**/*.scss", "packages/*/scss/**/*.scss", "packages/clarus-js/js/**/*.js"], {
   cwd: rootDir,
   ignoreInitial: true,
 });
@@ -37,5 +37,5 @@ watcher.on("all", (event, file) => {
   build();
 });
 
-console.log("Observando scss/ e js/ para rebuild automático...");
+console.log("Observando scss/, packages/*/scss e packages/clarus-js/js para rebuild automático...");
 build();

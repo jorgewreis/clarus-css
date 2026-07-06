@@ -1,0 +1,109 @@
+@use "settings" as *;
+@use "tools" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-subtle);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease-in-out;
+}
+
+.btn:hover {
+  filter: brightness(0.92);
+}
+
+.btn:active {
+  filter: brightness(0.85);
+}
+
+.btn:focus {
+  @include focus-ring;
+}
+
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@each $name, $color in $theme-colors {
+  .btn-#{$name} {
+    color: color-contrast($color);
+    background-color: var(--clarus-color-#{$name});
+    border-color: var(--clarus-color-#{$name});
+  }
+
+  .btn-outline-#{$name} {
+    color: var(--clarus-color-#{$name});
+    background-color: transparent;
+    border-color: var(--clarus-color-#{$name});
+  }
+
+  .btn-outline-#{$name}:hover,
+  .btn-outline-#{$name}:active {
+    color: color-contrast($color);
+    background-color: var(--clarus-color-#{$name});
+  }
+}
+
+.btn-sm {
+  min-height: 30px;
+  padding: 0 8px;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  min-height: 46px;
+  padding: 0 16px;
+  font-size: $font-size-lg;
+}
+
+.btn-close {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-muted);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-close::before,
+.btn-close::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background-color: currentcolor;
+  content: "";
+}
+
+.btn-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.btn-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.btn-close:hover {
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-subtle);
+}
+
+.btn-close:focus {
+  @include focus-ring;
+}

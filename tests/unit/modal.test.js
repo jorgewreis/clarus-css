@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Modal } from "../../js/modal.js";
+import { Modal } from "../../packages/clarus-js/js/modal.js";
 
 function buildModal({ backdropStatic = false } = {}) {
   const wrapper = document.createElement("div");

@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Offcanvas } from "../../js/offcanvas.js";
+import { Offcanvas } from "../../packages/clarus-js/js/offcanvas.js";
 
 async function flushDoubleRaf() {
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));

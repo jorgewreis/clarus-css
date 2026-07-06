@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Select } from "../../js/select.js";
+import { Select } from "../../packages/clarus-js/js/select.js";
 
 function buildSelect() {
   const select = document.createElement("select");

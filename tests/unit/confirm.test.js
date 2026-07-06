@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { confirm } from "../../js/confirm.js";
+import { confirm } from "../../packages/clarus-js/js/confirm.js";
 
 describe("confirm()", () => {
   afterEach(() => {

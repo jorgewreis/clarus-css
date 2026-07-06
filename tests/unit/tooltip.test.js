@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Tooltip } from "../../js/tooltip.js";
+import { Tooltip } from "../../packages/clarus-js/js/tooltip.js";
 
 function buildTooltip(attrs = "") {
   const el = document.createElement("button");

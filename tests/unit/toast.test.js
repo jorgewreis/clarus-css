@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { Toast } from "../../js/toast.js";
+import { Toast } from "../../packages/clarus-js/js/toast.js";
 
 function buildToast({ delay, autohide } = {}) {
   const el = document.createElement("div");

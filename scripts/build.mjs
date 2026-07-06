@@ -8,12 +8,23 @@ import cssnano from "cssnano";
 import * as esbuild from "esbuild";
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const packagesDir = path.join(rootDir, "packages");
 const scssDir = path.join(rootDir, "scss");
 const entriesDir = path.join(scssDir, "entries");
-const jsDir = path.join(rootDir, "js");
+const jsDir = path.join(packagesDir, "clarus-js", "js");
 const distDir = path.join(rootDir, "dist");
 const cssOutDir = path.join(distDir, "css");
 const jsOutDir = path.join(distDir, "js");
+
+// Cada pacote expõe seu próprio scss/ como raiz de resolução (import
+// sem prefixo, ex.: `@use "settings"`), permitindo que entries e
+// pacotes se refiram uns aos outros sem caminhos `../../`.
+const scssLoadPaths = [
+  path.join(packagesDir, "clarus-core", "scss"),
+  path.join(packagesDir, "clarus-components", "scss"),
+  path.join(packagesDir, "clarus-utilities", "scss"),
+  path.join(packagesDir, "clarus-fonts", "scss"),
+];
 
 const cssEntries = [
   { entryPath: path.join(entriesDir, "layout-entry.scss"), outName: "layout" },
@@ -26,7 +37,7 @@ const cssEntries = [
 
 async function buildCss({ entryPath, outName }) {
   const compiled = sass.compile(entryPath, {
-    loadPaths: [scssDir],
+    loadPaths: scssLoadPaths,
     sourceMap: true,
     sourceMapIncludeSources: true,
     style: "expanded",

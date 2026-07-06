@@ -21,10 +21,13 @@
   },
   "license": "MIT",
   "author": "Jorge Reis",
+  "workspaces": [
+    "packages/*"
+  ],
   "sideEffects": [
     "*.css",
     "dist/**/*.css",
-    "js/*.js",
+    "packages/clarus-js/js/*.js",
     "dist/js/*.js"
   ],
   "main": "dist/css/clarus.css",
@@ -41,14 +44,18 @@
     "./helpers.css": "./dist/css/helpers.css",
     "./fonts.css": "./dist/css/fonts.css",
     "./js": "./dist/js/clarus.js",
-    "./js/*": "./js/*.js",
+    "./js/*": "./packages/clarus-js/js/*.js",
     "./package.json": "./package.json"
   },
   "files": [
     "assets",
     "dist",
     "scss",
-    "js",
+    "packages/clarus-core/scss",
+    "packages/clarus-components/scss",
+    "packages/clarus-utilities/scss",
+    "packages/clarus-fonts/scss",
+    "packages/clarus-js/js",
     "docs/definitions.md",
     "docs/scss-architecture.md",
     "mockup",
@@ -63,7 +70,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && node scripts/build.mjs",
     "watch": "node scripts/watch.mjs",
-    "lint:scss": "stylelint \"scss/**/*.scss\"",
+    "lint:scss": "stylelint \"scss/**/*.scss\" \"packages/*/scss/**/*.scss\"",
     "lint": "npm run lint:scss",
     "test": "vitest run",
     "test:visual": "playwright test",

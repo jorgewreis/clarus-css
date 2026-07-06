@@ -1,0 +1,78 @@
+@use "settings" as *;
+@use "tools" as *;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item {
+  overflow: hidden;
+  border: 1px solid var(--clarus-color-border);
+}
+
+.accordion-item + .accordion-item {
+  border-top: none;
+}
+
+.accordion-item:first-child {
+  border-top-left-radius: var(--clarus-radius-md);
+  border-top-right-radius: var(--clarus-radius-md);
+}
+
+.accordion-item:last-child {
+  border-bottom-right-radius: var(--clarus-radius-md);
+  border-bottom-left-radius: var(--clarus-radius-md);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-button:hover {
+  background-color: var(--clarus-color-subtle);
+}
+
+.accordion-button:focus {
+  @include focus-ring;
+}
+
+.accordion-button::after {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-left: 12px;
+  content: "";
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.accordion-button[aria-expanded="true"]::after {
+  transform: rotate(-135deg);
+}
+
+.accordion-collapse {
+  overflow: hidden;
+}
+
+.accordion-body {
+  padding: 16px;
+  border-top: 1px solid var(--clarus-color-border);
+}

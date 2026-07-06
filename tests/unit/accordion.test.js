@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { Accordion } from "../../js/accordion.js";
+import { Accordion } from "../../packages/clarus-js/js/accordion.js";
 
 function buildAccordion({ multiple = false } = {}) {
   const el = document.createElement("div");

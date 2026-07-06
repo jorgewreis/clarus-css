@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Stepper } from "../../js/stepper.js";
+import { Stepper } from "../../packages/clarus-js/js/stepper.js";
 
 function buildStepper({ linear } = {}) {
   const container = document.createElement("div");

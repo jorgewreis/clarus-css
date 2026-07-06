@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { NestedMenu } from "../../js/nested-menu.js";
+import { NestedMenu } from "../../packages/clarus-js/js/nested-menu.js";
 
 function build() {
   const wrapper = document.createElement("div");

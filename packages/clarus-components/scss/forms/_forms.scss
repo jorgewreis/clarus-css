@@ -1,0 +1,358 @@
+@use "settings" as *;
+@use "tools" as *;
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 10px;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.form-label {
+  width: 120px;
+  margin-left: 8px;
+  margin-bottom: 2px;
+  color: var(--clarus-color-muted);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-regular;
+
+  @include truncate;
+}
+
+.form-text {
+  width: 120px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-muted);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+
+  @include truncate;
+}
+
+.valid-feedback,
+.invalid-feedback {
+  display: none;
+  width: 120px;
+  margin-top: 2px;
+  padding: 4px 8px;
+  border-radius: var(--clarus-radius-sm);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+
+  @include truncate;
+}
+
+.valid-feedback {
+  color: var(--clarus-color-success);
+  background-color: var(--clarus-feedback-success-bg);
+}
+
+.invalid-feedback {
+  color: var(--clarus-color-danger);
+  background-color: var(--clarus-feedback-danger-bg);
+}
+
+.is-valid ~ .valid-feedback,
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.form-control {
+  height: 38px;
+  padding: 0 7px;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+}
+
+.form-control::placeholder {
+  color: var(--clarus-color-muted);
+}
+
+.form-control:focus {
+  @include focus-ring;
+}
+
+.form-control:disabled {
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-subtle);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.form-control:read-only {
+  background-color: var(--clarus-color-subtle);
+  cursor: default;
+}
+
+.form-control-sm {
+  height: 30px;
+  font-size: $font-size-xs;
+}
+
+.form-control-lg {
+  height: 46px;
+  font-size: $font-size-md;
+}
+
+.form-size-sm {
+  width: 120px;
+}
+
+.form-size-md {
+  width: 180px;
+}
+
+.form-size-lg {
+  width: 240px;
+}
+
+.form-size-xl {
+  width: 300px;
+}
+
+.form-size-xxl {
+  width: 360px;
+}
+
+.form-control.is-valid {
+  border-color: var(--clarus-color-success);
+}
+
+.form-control.is-valid:focus {
+  @include focus-ring(var(--clarus-color-success));
+}
+
+.form-control.is-invalid {
+  border-color: var(--clarus-color-danger);
+}
+
+.form-control.is-invalid:focus {
+  @include focus-ring(var(--clarus-color-danger));
+}
+
+.form-select {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 38px;
+  padding: 0 7px;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-surface);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  text-align: left;
+  cursor: pointer;
+}
+
+.form-select::after {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 8px;
+  content: "";
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.form-select:focus {
+  @include focus-ring;
+}
+
+.form-select:disabled {
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-subtle);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.form-select-sm {
+  height: 30px;
+  font-size: $font-size-xs;
+}
+
+.form-select-lg {
+  height: 46px;
+  font-size: $font-size-md;
+}
+
+.file-upload {
+  position: relative;
+  display: inline-flex;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--clarus-color-border);
+  border-radius: var(--clarus-radius-sm);
+  color: var(--clarus-color-text);
+  background-color: var(--clarus-color-subtle);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.15s ease-in-out;
+}
+
+.file-label:hover {
+  filter: brightness(0.96);
+}
+
+.file-input:focus + .file-label {
+  @include focus-ring;
+}
+
+.file-input:disabled + .file-label {
+  color: var(--clarus-color-muted);
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+}
+
+.file-label-sm {
+  height: 30px;
+  padding: 0 10px;
+  font-size: $font-size-xs;
+}
+
+.file-label-lg {
+  height: 46px;
+  padding: 0 18px;
+  font-size: $font-size-lg;
+}
+
+// Drag-and-drop (js/file-drop.js): estado visual ao arrastar um arquivo por
+// cima do `.file-label`, e uma variante maior (dropzone) para quando o alvo
+// de soltar precisa ser mais generoso que o botão padrão de `.file-label`.
+.file-label.is-dragover {
+  border-color: var(--clarus-color-primary);
+  background-color: var(--clarus-color-subtle);
+}
+
+.file-label-dropzone {
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  height: auto;
+  padding: 32px 16px;
+  border-style: dashed;
+  border-width: 2px;
+  font-weight: $font-weight-regular;
+  text-align: center;
+}
+
+.file-label-dropzone .file-dropzone-hint {
+  color: var(--clarus-color-muted);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+}
+
+// Input Group: funde `.form-control` (ou `.form-select`/`.btn`) com "addons"
+// de texto/ícone de prefixo/sufixo, reaproveitando os tokens visuais do
+// próprio `.form-control` (borda, cor, radius). 100% CSS — a altura do addon
+// acompanha a do controle via `align-items: stretch` (herdado), sem precisar
+// fixar `height` nele.
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group > .form-control,
+.input-group > .form-select {
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--clarus-color-border);
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-subtle);
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+// Funde as bordas dos itens adjacentes (remove a dupla borda) e mantém o
+// item focado por cima da sobreposição de -1px, senão a borda de foco fica
+// parcialmente escondida atrás do vizinho.
+.input-group > :not(:first-child) {
+  margin-left: -1px;
+}
+
+.input-group > :focus,
+.input-group > :focus-within {
+  position: relative;
+  z-index: 1;
+}
+
+.input-group > * {
+  border-radius: 0;
+}
+
+.input-group > :first-child {
+  border-top-left-radius: var(--clarus-radius-sm);
+  border-bottom-left-radius: var(--clarus-radius-sm);
+}
+
+.input-group > :last-child {
+  border-top-right-radius: var(--clarus-radius-sm);
+  border-bottom-right-radius: var(--clarus-radius-sm);
+}
+
+.input-group-sm > .form-control,
+.input-group-sm > .form-select,
+.input-group-sm > .input-group-text {
+  height: 30px;
+  padding: 0 8px;
+  font-size: $font-size-xs;
+}
+
+.input-group-lg > .form-control,
+.input-group-lg > .form-select,
+.input-group-lg > .input-group-text {
+  height: 46px;
+  padding: 0 16px;
+  font-size: $font-size-lg;
+}

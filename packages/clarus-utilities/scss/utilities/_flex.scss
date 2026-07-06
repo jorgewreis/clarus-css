@@ -1,0 +1,52 @@
+@use "settings" as *;
+@use "tools" as *;
+
+@each $breakpoint, $min in $breakpoints {
+  $infix: breakpoint-infix($breakpoint);
+
+  @include media-breakpoint-up($breakpoint) {
+    .align-items#{$infix}-start {
+      align-items: flex-start;
+    }
+
+    .align-items#{$infix}-center {
+      align-items: center;
+    }
+
+    .align-items#{$infix}-end {
+      align-items: flex-end;
+    }
+
+    .justify-content#{$infix}-start {
+      justify-content: flex-start;
+    }
+
+    .justify-content#{$infix}-center {
+      justify-content: center;
+    }
+
+    .justify-content#{$infix}-end {
+      justify-content: flex-end;
+    }
+
+    .justify-content#{$infix}-around {
+      justify-content: space-around;
+    }
+
+    .justify-content#{$infix}-between {
+      justify-content: space-between;
+    }
+
+    .align-self#{$infix}-start {
+      align-self: flex-start;
+    }
+
+    .align-self#{$infix}-center {
+      align-self: center;
+    }
+
+    .align-self#{$infix}-end {
+      align-self: flex-end;
+    }
+  }
+}

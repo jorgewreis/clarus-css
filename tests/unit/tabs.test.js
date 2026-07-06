@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Tabs } from "../../js/tabs.js";
+import { Tabs } from "../../packages/clarus-js/js/tabs.js";
 
 function buildTabs() {
   const container = document.createElement("div");

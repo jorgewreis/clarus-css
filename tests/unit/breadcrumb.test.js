@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Breadcrumb } from "../../js/breadcrumb.js";
+import { Breadcrumb } from "../../packages/clarus-js/js/breadcrumb.js";
 
 function mockCollapseQuery(matches) {
   vi.spyOn(window, "matchMedia").mockReturnValue({

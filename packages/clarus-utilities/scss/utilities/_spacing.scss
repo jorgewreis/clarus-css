@@ -1,0 +1,127 @@
+@use "settings" as *;
+@use "tools" as *;
+
+@each $breakpoint, $min in $breakpoints {
+  $infix: breakpoint-infix($breakpoint);
+
+  @include media-breakpoint-up($breakpoint) {
+    @each $key, $value in $spacers {
+      .m#{$infix}-#{$key} {
+        margin: $value;
+      }
+
+      .mt#{$infix}-#{$key} {
+        margin-top: $value;
+      }
+
+      .mr#{$infix}-#{$key} {
+        margin-right: $value;
+      }
+
+      .mb#{$infix}-#{$key} {
+        margin-bottom: $value;
+      }
+
+      .ml#{$infix}-#{$key} {
+        margin-left: $value;
+      }
+
+      .mx#{$infix}-#{$key} {
+        margin-right: $value;
+        margin-left: $value;
+      }
+
+      .my#{$infix}-#{$key} {
+        margin-top: $value;
+        margin-bottom: $value;
+      }
+
+      .p#{$infix}-#{$key} {
+        padding: $value;
+      }
+
+      .pt#{$infix}-#{$key} {
+        padding-top: $value;
+      }
+
+      .pr#{$infix}-#{$key} {
+        padding-right: $value;
+      }
+
+      .pb#{$infix}-#{$key} {
+        padding-bottom: $value;
+      }
+
+      .pl#{$infix}-#{$key} {
+        padding-left: $value;
+      }
+
+      .px#{$infix}-#{$key} {
+        padding-right: $value;
+        padding-left: $value;
+      }
+
+      .py#{$infix}-#{$key} {
+        padding-top: $value;
+        padding-bottom: $value;
+      }
+
+      // Controla o gutter da grid (--clarus-gutter-x/-y), consumido por .row/.row > *.
+      .g#{$infix}-#{$key} {
+        --clarus-gutter-x: #{$value};
+        --clarus-gutter-y: #{$value};
+      }
+
+      .gx#{$infix}-#{$key} {
+        --clarus-gutter-x: #{$value};
+      }
+
+      .gy#{$infix}-#{$key} {
+        --clarus-gutter-y: #{$value};
+      }
+
+      // Gap literal (flex/grid), independente da grid de colunas.
+      .gap#{$infix}-#{$key} {
+        gap: $value;
+      }
+
+      .gap-x#{$infix}-#{$key} {
+        column-gap: $value;
+      }
+
+      .gap-y#{$infix}-#{$key} {
+        row-gap: $value;
+      }
+    }
+
+    .m#{$infix}-auto {
+      margin: auto;
+    }
+
+    .mt#{$infix}-auto {
+      margin-top: auto;
+    }
+
+    .mr#{$infix}-auto {
+      margin-right: auto;
+    }
+
+    .mb#{$infix}-auto {
+      margin-bottom: auto;
+    }
+
+    .ml#{$infix}-auto {
+      margin-left: auto;
+    }
+
+    .mx#{$infix}-auto {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .my#{$infix}-auto {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+}

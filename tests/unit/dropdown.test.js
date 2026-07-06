@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Dropdown } from "../../js/dropdown.js";
+import { Dropdown } from "../../packages/clarus-js/js/dropdown.js";
 
 function buildDropdown() {
   const wrapper = document.createElement("div");

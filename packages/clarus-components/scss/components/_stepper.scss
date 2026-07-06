@@ -1,0 +1,161 @@
+@use "settings" as *;
+@use "tools" as *;
+
+// Stepper / Wizard. Cabeçalho com os passos (`.step`) e, opcionalmente, painéis
+// de conteúdo (`.step-panel`) e ações de navegação (`.stepper-actions`).
+// Estados por passo: padrão (pendente), `.step-active`, `.step-completed`,
+// `.step-error` — controlados por `js/stepper.js`.
+.stepper-header {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.step-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--clarus-color-muted);
+  background-color: var(--clarus-color-surface);
+  border: 2px solid var(--clarus-color-border);
+  border-radius: 50%;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.step-label {
+  color: var(--clarus-color-muted);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.step-description {
+  color: var(--clarus-color-muted);
+  font-size: $font-size-xs;
+}
+
+// Conector entre passos: linha do centro deste passo ao centro do próximo.
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: calc(50% + 20px);
+  width: calc(100% - 40px);
+  height: 2px;
+  background-color: var(--clarus-color-border);
+}
+
+// Passo ativo.
+.step-active .step-indicator {
+  color: color-contrast($clarus-color-primary);
+  background-color: var(--clarus-color-primary);
+  border-color: var(--clarus-color-primary);
+}
+
+.step-active .step-label {
+  color: var(--clarus-color-text);
+}
+
+// Passo concluído: círculo preenchido com um "check" no lugar do número, e o
+// conector à direita fica na cor primária (indica progresso).
+.step-completed .step-indicator {
+  color: transparent;
+  background-color: var(--clarus-color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  border-color: var(--clarus-color-primary);
+}
+
+.step-completed .step-label {
+  color: var(--clarus-color-text);
+}
+
+// `:not(:last-child)` casa a especificidade da regra base do conector
+// (senão o cinza dela venceria e o progresso não apareceria).
+.step-completed:not(:last-child)::after {
+  background-color: var(--clarus-color-primary);
+}
+
+// Passo em erro.
+.step-error .step-indicator {
+  color: color-contrast($clarus-color-danger);
+  background-color: var(--clarus-color-danger);
+  border-color: var(--clarus-color-danger);
+}
+
+.step-error .step-label {
+  color: var(--clarus-color-danger);
+}
+
+// Passo clicável (navegação para trás via cabeçalho).
+.step.step-clickable {
+  cursor: pointer;
+}
+
+.step.step-clickable:focus-visible {
+  outline: 2px solid var(--clarus-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--clarus-radius-sm);
+}
+
+// Variante vertical.
+.stepper-vertical .stepper-header {
+  flex-direction: column;
+}
+
+.stepper-vertical .step {
+  flex-direction: row;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 56px;
+  text-align: left;
+}
+
+.stepper-vertical .step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 5px;
+}
+
+.stepper-vertical .step:not(:last-child)::after {
+  top: 34px;
+  left: 15px;
+  width: 2px;
+  height: calc(100% - 22px);
+}
+
+// Painéis de conteúdo (wizard) e ações de navegação.
+.step-panel {
+  display: none;
+}
+
+.step-panel.active {
+  display: block;
+}
+
+.stepper-content {
+  margin-top: 20px;
+}
+
+.stepper-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 20px;
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { Tag } from "../../js/tag.js";
+import { Tag } from "../../packages/clarus-js/js/tag.js";
 
 function buildTag() {
   const el = document.createElement("span");
