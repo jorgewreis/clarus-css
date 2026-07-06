@@ -23,9 +23,14 @@
   "author": "Jorge Reis",
   "sideEffects": [
     "*.css",
-    "dist/**/*.css"
+    "dist/**/*.css",
+    "js/*.js",
+    "dist/js/*.js"
   ],
+  "main": "dist/css/clarus.css",
   "style": "dist/css/clarus.css",
+  "unpkg": "dist/css/clarus.min.css",
+  "jsdelivr": "dist/css/clarus.min.css",
   "exports": {
     ".": "./dist/css/clarus.css",
     "./scss": "./scss/clarus.scss",
@@ -35,7 +40,8 @@
     "./components.css": "./dist/css/components.css",
     "./helpers.css": "./dist/css/helpers.css",
     "./js": "./dist/js/clarus.js",
-    "./js/*": "./js/*.js"
+    "./js/*": "./js/*.js",
+    "./package.json": "./package.json"
   },
   "files": [
     "assets",

@@ -47,40 +47,39 @@ describe("onClickOutside", () => {
     document.body.innerHTML = "";
   });
 
-  it("não dispara no clique síncrono que abriu o elemento", () => {
+  it("não dispara para o clique que abriu o elemento (registro durante o dispatch)", () => {
     const callback = vi.fn();
-    onClickOutside(el, callback);
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    trigger.addEventListener("click", () => onClickOutside(el, callback));
 
-    document.body.click();
+    trigger.click();
 
     expect(callback).not.toHaveBeenCalled();
   });
 
-  it("dispara o callback ao clicar fora do elemento, após o tick de proteção", async () => {
+  it("dispara o callback já no primeiro clique fora após o registro, sem esperar outro tick", () => {
     const callback = vi.fn();
     onClickOutside(el, callback);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
     document.body.click();
 
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it("não dispara o callback ao clicar dentro do elemento", async () => {
+  it("não dispara o callback ao clicar dentro do elemento", () => {
     const callback = vi.fn();
     onClickOutside(el, callback);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
     el.click();
 
     expect(callback).not.toHaveBeenCalled();
   });
 
-  it("a função de limpeza remove o listener", async () => {
+  it("a função de limpeza remove o listener", () => {
     const callback = vi.fn();
     const cleanup = onClickOutside(el, callback);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
     cleanup();
     document.body.click();
 
