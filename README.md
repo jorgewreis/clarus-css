@@ -24,7 +24,7 @@ profissionais, e é distribuído publicamente como produto para qualquer
 desenvolvedor que precise construir interfaces consistentes sem carregar
 React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 
-> **Status:** `0.3.0`. Base completa (layout, grid, utilitários, formulários com
+> **Status:** `0.4.0`. Base completa (layout, grid, utilitários, formulários com
 > validação visual, select customizado e upload de arquivo) mais um catálogo de
 > componentes em expansão — dos elementos de conteúdo e navegação aos
 > interativos (modal, dropdown, tabs, carousel, stepper e mais), todos com dark
@@ -33,7 +33,7 @@ React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 > [`CHANGELOG.md`](CHANGELOG.md).
 
 Este README é a **visão geral** do projeto. Para aprender a usar cada recurso em
-detalhe, com exemplos completos, consulte o **[guia completo](guide.md)**.
+detalhe, com exemplos completos, consulte a **[documentação completa](docs/README.md)**.
 
 ## Por que Clarus CSS
 
@@ -68,8 +68,9 @@ Ou direto via CDN (jsDelivr/unpkg), sem instalar nada:
 
 O CSS também é distribuído em arquivos separados (`layout.css`, `forms.css`,
 `components.css`, `helpers.css`), e o ponto de entrada Sass está disponível para
-compilar com suas próprias variáveis. As formas de uso estão detalhadas em
-[Instalação e formas de uso](guide.md#2-instalação-e-formas-de-uso).
+compilar com suas próprias variáveis. Detalhes em
+[Instalação](docs/getting-started/installation.md) e
+[Formas de uso](docs/getting-started/usage.md).
 
 As fontes self-hosted (Plus Jakarta Sans e Source Code Pro) são distribuídas à
 parte em `fonts.css`. Inclua-o **antes** do CSS principal para usá-las; sem ele,
@@ -110,22 +111,25 @@ o CSS e o JS e escrever o HTML:
 Todo componente interativo compartilha a mesma API (`.show()`, `.hide()`,
 `.toggle()`, `.dispose()`, `getInstance()` e eventos DOM `cl:*`). Os
 conceitos gerais estão em
-[Componentes interativos](guide.md#19-componentes-interativos-conceitos-gerais-da-api-javascript).
+[Formas de uso](docs/getting-started/usage.md#api-comum-aos-componentes-interativos).
 
 ## Componentes
 
 - **Layout:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`).
-- **Formulários:** controles, tamanhos, validação visual, select customizado, upload de arquivo estilizado.
-- **Conteúdo:** botões, cards (incluindo variante clicável e horizontal), alertas, badges, tabelas.
-- **Navegação:** navbar, dropdown, tabs, paginação, breadcrumbs.
-- **Overlay:** modal, tooltip, toast, accordion.
-- **Feedback:** spinner, progress bar.
-- **Interação avançada:** carousel, stepper.
+- **Formulários:** controles, select customizado, checkbox/radio/switch,
+  upload de arquivo (com drag-and-drop), input group.
+- **Conteúdo:** botões, cards, alertas, badges/tags, tabelas, tiles, divider,
+  empty state, skeleton.
+- **Navegação:** navbar, dropdown, nested menu, tabs, paginação, breadcrumbs,
+  accordion, collapse, stepper.
+- **Overlay:** modal, alert dialog, offcanvas, tooltip, popover.
+- **Feedback:** toast, notification center, spinner, progress bar.
+- **Interação avançada:** carousel, rating, segmented control, timeline.
 
 Cada componente tem um exemplo funcional dedicado (claro + escuro) em
 [`mockup/`](mockup) — a forma mais rápida de ver o framework em ação sem
-escrever nenhum código. O passo a passo de uso de cada um está no
-[guia completo](guide.md).
+escrever nenhum código. O passo a passo de uso de cada um está na
+[documentação de componentes](docs/README.md#componentes).
 
 ## Customização e dark mode
 
@@ -141,17 +145,17 @@ fork, sem recompilar:
 ```
 
 O dark mode é ativado por um único atributo (`<html data-theme="dark">`), sem
-JavaScript obrigatório. Detalhes em
-[Customização por tokens](guide.md#29-customização-por-css-custom-properties-tokens)
-e [Dark mode](guide.md#30-dark-mode).
+JavaScript obrigatório. Detalhes em [Theming](docs/guides/theming.md)
+e [Dark mode](docs/guides/dark-mode.md).
 
 ## Documentação
 
-- [`guide.md`](guide.md) — **guia completo de uso**: manual de referência com
-  todos os componentes, utilitários e exemplos, do básico ao avançado.
-- [`docs/definitions.md`](docs/definitions.md) — decisões de arquitetura e o
+- [`docs/README.md`](docs/README.md) — **documentação completa**: guias de
+  uso, um arquivo por componente (anatomia, variações, estados, A11y, API JS,
+  tokens, exemplo) e referência técnica.
+- [`docs/reference/definitions.md`](docs/reference/definitions.md) — decisões de arquitetura e o
   catálogo técnico de cada componente (classes, tokens, módulos JS).
-- [`docs/scss-architecture.md`](docs/scss-architecture.md) — arquitetura dos
+- [`docs/reference/scss-architecture.md`](docs/reference/scss-architecture.md) — arquitetura dos
   módulos SCSS e do pipeline de build.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente e
   convenções de contribuição.

@@ -11,7 +11,7 @@
       intencionalmente (`npm run test:visual:update`) e o diff visual foi
       revisado.
 - [ ] Componentes novos/alterados seguem as convenções (`.cl-*`/`.u-*`/`.is-*`,
-      tokens `--cl-*`, `data-cl-*`, eventos `cl:*`) — ver `docs/scss-architecture.md`.
+      tokens `--cl-*`, `data-cl-*`, eventos `cl:*`) — ver `docs/reference/scss-architecture.md`.
 - [ ] Estados de teclado/ARIA verificados para componentes interativos
       novos/alterados.
 - [ ] Mudança é **breaking**? Se sim, documentada no `CHANGELOG.md` sob

@@ -31,7 +31,7 @@ npm install
 ## Convenções de SCSS
 
 Antes de criar ou alterar módulos SCSS, leia
-[`docs/scss-architecture.md`](docs/scss-architecture.md) — inclui a
+[`docs/reference/scss-architecture.md`](docs/reference/scss-architecture.md) — inclui a
 organização em monorepo e o uso de cascade layers (`@layer`). Resumo do fluxo
 para novos componentes:
 
@@ -43,7 +43,7 @@ para novos componentes:
 ## Decisões do projeto
 
 As decisões de arquitetura e escopo já firmadas estão em
-[`docs/definitions.md`](docs/definitions.md). Mudanças que contradigam uma
+[`docs/reference/definitions.md`](docs/reference/definitions.md). Mudanças que contradigam uma
 decisão firme devem ser discutidas antes de implementadas.
 
 ## Semver e depreciação

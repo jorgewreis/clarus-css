@@ -9,6 +9,22 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
+- Fase 2 do plano mestre — documentação profissional: `guide.md` (76KB, um
+  arquivo só, desatualizado em relação ao rename da Fase 0) é substituído
+  por `docs/`, estruturada por categoria: `getting-started/` (instalação,
+  uso), `guides/` (theming, dark mode, acessibilidade, migração),
+  `components/` (38 arquivos, um por componente/controle, template padrão:
+  visão geral → anatomia → variações → estados → A11y → API JS → tokens →
+  exemplo — todo conteúdo verificado contra o SCSS/JS atual, não copiado do
+  guia antigo), `reference/` (design tokens, arquitetura SCSS, suporte a
+  navegadores, relatório de contraste, definições) e `contributing/`.
+  `docs/internal/` (planos provisórios, gap-analysis, guia de comandos)
+  agora é gitignored (preservado localmente, `git rm --cached`).
+  `definitions.md`/`scss-architecture.md` movidos para `docs/reference/`.
+  `package.json > files` publica a nova `docs/` pública (exceto `internal/`).
+  Referências cruzadas (README raiz, CONTRIBUTING, templates de PR)
+  atualizadas para os novos caminhos.
+
 - **BREAKING** — Fase 0 da refundação técnica rumo à v1.0.0
   (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
   - Rename mecânico de toda a API pública com prefixo `cl-`, para não colidir
@@ -38,7 +54,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     propagada a cada bundle de `dist/css/`). Efeito prático: uma classe
     utilitária (`.u-*`) sempre vence uma classe de componente, mesmo com
     especificidade igual, independente da ordem de import — ver
-    `docs/scss-architecture.md`. A camada `overrides` fica reservada, sem
+    `docs/reference/scss-architecture.md`. A camada `overrides` fica reservada, sem
     regras do framework, para customização do consumidor sem `!important`.
   - Cores primitivas migradas para OKLCH (`packages/clarus-core/scss/settings/_colors.scss`),
     calibradas para reproduzir os mesmos matizes hex de antes (round-trip
@@ -53,7 +69,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     primitivos) e primeiro componente migrado para tokens próprios
     (`.cl-btn` ganha `--cl-btn-bg`/`--cl-btn-color`/`--cl-btn-border-color`,
     sobrescrevíveis por instância sem `!important`) — ver
-    `docs/scss-architecture.md` para o padrão a seguir em outros componentes.
+    `docs/reference/scss-architecture.md` para o padrão a seguir em outros componentes.
   - Nova escala tipográfica compacta (`--cl-font-size-*`): corpo ~13px, piso
     ~11px reservado a texto de apoio; headings (`h1`–`h6`) ganham tamanho e
     peso próprios pela primeira vez (antes usavam o padrão do navegador).

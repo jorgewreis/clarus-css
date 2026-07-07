@@ -29,7 +29,7 @@ do framework:
 
 | Recurso | Uso no Clarus | Suporte mínimo |
 |---|---|---|
-| `@layer` (cascade layers) | Organiza `reset/tokens/base/layout/components/utilities/overrides` (ver `docs/scss-architecture.md`) | Safari 16.4, Chrome 99, Firefox 97 |
+| `@layer` (cascade layers) | Organiza `reset/tokens/base/layout/components/utilities/overrides` (ver `docs/reference/scss-architecture.md`) | Safari 16.4, Chrome 99, Firefox 97 |
 | `color-mix()` / OKLCH | Tokens de cor em 3 camadas (`packages/clarus-core/scss/settings/_colors.scss`) | Safari 16.4, Chrome 111, Firefox 113 |
 | Propriedades customizadas (`--cl-*`) | Tokens em todas as camadas | Suportado amplamente há anos |
 | `:focus-visible` | Anel de foco acessível (`focus-ring` mixin) | Suportado amplamente |
