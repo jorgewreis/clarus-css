@@ -12,9 +12,12 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Dogfooding do `clarus-icons`: emoji usados como placeholder de ícone em
   mockups/docs (Empty State, Tile, Notification Center, DataTable)
   trocados por SVGs reais do pacote — nenhum lugar oficial do projeto usa
-  emoji como ícone hoje (exceção deliberada: os glifos `★` do
-  [Rating](docs/components/rating.md), que são o próprio mecanismo visual
-  do widget, não um placeholder de ícone). Pagination ganhou ícones
+  emoji como ícone hoje. [Rating](docs/components/rating.md) também
+  trocou o glifo `★` pelo ícone `star` (contorno vazio por padrão,
+  preenchido via `fill: currentcolor` quando selecionado/hover — imita o
+  visual sólido do glifo antigo sem perder o estado "vazio"); cada
+  `<label>` ganhou `aria-label` (`"5 estrelas"` etc.), obrigatório agora
+  que o ícone é `aria-hidden`. Pagination ganhou ícones
   (`chevron-left`/`chevron-right` no lugar de `«`/`»`, `ellipsis` pra
   intervalo de páginas omitido — variação nova, documentada), e o pager
   gerado por `DataTable` (`packages/clarus-js/js/datatable.js`) trocou

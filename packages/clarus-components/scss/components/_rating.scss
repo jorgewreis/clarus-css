@@ -7,6 +7,10 @@
 // `.cl-rating` em `row-reverse`, o truque clássico de CSS pra destacar "a
 // estrela clicada e todas à esquerda dela" usando só `~` (combinador de
 // irmãos gerais, que só enxerga o que vem DEPOIS no DOM).
+// A estrela em si é o ícone `star` do `clarus-icons` (`.cl-icon`, outline
+// por padrão) — preenchida (`fill: currentcolor`) só quando selecionada/em
+// hover, pra imitar o glifo sólido que ★ tinha antes sem perder o contorno
+// vazio do estado "não avaliada".
 
 @layer components {
   .cl-rating {
@@ -27,10 +31,10 @@
   }
 
   .cl-rating-star {
+    display: flex;
     padding: 2px;
     color: var(--cl-color-border);
     font-size: 24px;
-    line-height: 1;
     cursor: pointer;
   }
 
@@ -38,6 +42,12 @@
   .cl-rating-star:hover,
   .cl-rating-star:hover ~ .cl-rating-star {
     color: var(--cl-color-warning);
+  }
+
+  .cl-rating-input:checked ~ .cl-rating-star .cl-icon,
+  .cl-rating-star:hover .cl-icon,
+  .cl-rating-star:hover ~ .cl-rating-star .cl-icon {
+    fill: currentcolor;
   }
 
   .cl-rating-input:focus-visible + .cl-rating-star {

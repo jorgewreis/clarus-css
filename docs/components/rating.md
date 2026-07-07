@@ -2,22 +2,23 @@
 
 Avaliação por estrelas, 100% CSS — mesma técnica de input oculto + label
 irmã do [Checkbox](checkbox.md)/[Segmented Control](segmented-control.md),
-usando `<input type="radio">` (seleção exclusiva nativa).
+usando `<input type="radio">` (seleção exclusiva nativa). A estrela é o
+ícone `star` do [`clarus-icons`](../guides/icons.md) — contorno vazio por
+padrão, preenchido (`fill: currentcolor`) quando selecionada ou em hover.
 
 ## Visão geral
 
 ```html
 <div class="cl-rating">
   <input type="radio" name="nota" class="cl-rating-input" id="nota-5" value="5">
-  <label for="nota-5" class="cl-rating-star">★</label>
+  <label for="nota-5" class="cl-rating-star" aria-label="5 estrelas">
+    <svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+  </label>
   <input type="radio" name="nota" class="cl-rating-input" id="nota-4" value="4">
-  <label for="nota-4" class="cl-rating-star">★</label>
-  <input type="radio" name="nota" class="cl-rating-input" id="nota-3" value="3">
-  <label for="nota-3" class="cl-rating-star">★</label>
-  <input type="radio" name="nota" class="cl-rating-input" id="nota-2" value="2">
-  <label for="nota-2" class="cl-rating-star">★</label>
-  <input type="radio" name="nota" class="cl-rating-input" id="nota-1" value="1">
-  <label for="nota-1" class="cl-rating-star">★</label>
+  <label for="nota-4" class="cl-rating-star" aria-label="4 estrelas">
+    <svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+  </label>
+  <!-- ... 3, 2, 1, mesmo padrão ... -->
 </div>
 ```
 
@@ -31,18 +32,21 @@ usa só o combinador de irmãos gerais (`~`, que só enxerga o que vem
 
 `.cl-rating` (contêiner, `row-reverse`) > pares `.cl-rating-input`
 (`<input type="radio">`, mesmo `name`, oculto via clip) +
-`.cl-rating-star` (`<label for="...">`, glifo `★`), um por nota possível,
-em ordem decrescente de `value`.
+`.cl-rating-star` (`<label for="...">` com `aria-label` + o ícone `star`
+dentro, `aria-hidden`), um par por nota possível, em ordem decrescente de
+`value`.
 
 ## Variações
 
 Tamanho: `.cl-rating-sm` (16px), `.cl-rating-lg` (32px); sem sufixo = 24px
-(padrão).
+(padrão) — controla o `font-size` do `<label>`, e o ícone (`.cl-icon`,
+`1em` × `1em`) acompanha.
 
 ## Estados
 
 - Nota selecionada e todas as anteriores (maior valor) ficam na cor de
-  aviso (`--cl-color-warning`) — via `:checked ~ .cl-rating-star`.
+  aviso (`--cl-color-warning`) e com a estrela preenchida — via
+  `:checked ~ .cl-rating-star`.
 - **Hover** prévia a mesma seleção antes de confirmar o clique
   (`:hover`/`:hover ~`).
 - `disabled` no input — opacidade reduzida, sem interação.
@@ -51,12 +55,9 @@ Tamanho: `.cl-rating-sm` (16px), `.cl-rating-lg` (32px); sem sufixo = 24px
 
 `<input type="radio">` nativo — `Tab` foca o grupo, `ArrowLeft`/
 `ArrowRight` (ou `Up`/`Down`) movem a seleção entre notas, `Space`
-confirma. Cada `label` deve ter um texto acessível melhor que só `★`
-para leitores de tela — considere `aria-label="5 estrelas"` no
-`<label>` ou um `<span class="u-visually-hidden">` (não existe essa
-utilitária no framework hoje; use `position: absolute; width: 1px...`
-como no padrão de "visualmente oculto" usado internamente, ou seu
-próprio CSS).
+confirma. Como a estrela é um ícone (`aria-hidden="true"`, sem texto
+visível), o `<label>` **precisa** de `aria-label` (`"5 estrelas"`,
+`"1 estrela"` etc.) — sem isso o link não tem nome acessível nenhum.
 
 ## API JS
 
@@ -75,11 +76,14 @@ hover), `--cl-color-primary` (anel de foco).
   <legend>Avalie sua experiência</legend>
   <div class="cl-rating">
     <input type="radio" name="exp" class="cl-rating-input" id="exp-5" value="5" checked>
-    <label for="exp-5" class="cl-rating-star" aria-label="5 estrelas">★</label>
+    <label for="exp-5" class="cl-rating-star" aria-label="5 estrelas">
+      <svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+    </label>
     <input type="radio" name="exp" class="cl-rating-input" id="exp-4" value="4">
-    <label for="exp-4" class="cl-rating-star" aria-label="4 estrelas">★</label>
-    <input type="radio" name="exp" class="cl-rating-input" id="exp-3" value="3">
-    <label for="exp-3" class="cl-rating-star" aria-label="3 estrelas">★</label>
+    <label for="exp-4" class="cl-rating-star" aria-label="4 estrelas">
+      <svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+    </label>
+    <!-- ... 3, mesmo padrão ... -->
   </div>
 </fieldset>
 ```
