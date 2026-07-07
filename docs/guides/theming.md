@@ -93,6 +93,42 @@ equivalente em CSS Custom Property, porque alimentam a geração de classes
 (nomes de classe fixos em `.css`, não podem reagir a uma variável em
 runtime). Ver [`docs/reference/design-tokens.md`](../reference/design-tokens.md).
 
+## Multi-brand
+
+Além de `data-theme` (claro/escuro), o Clarus suporta `data-brand="x"` para
+trocar a **cor de ação primária** em runtime, sem recompilar CSS — útil pra
+produtos white-label ou múltiplas marcas sobre o mesmo design system:
+
+```html
+<html data-brand="violet">
+```
+
+```html
+<html data-brand="violet" data-theme="dark">
+```
+
+Um brand de exemplo (`violet`, o mesmo tom do exemplo de customização acima)
+vem pronto em `packages/clarus-core/scss/themes/_brands.scss`, provando que
+a troca funciona combinada com claro e escuro. Só a cor de ação primária
+muda por marca — `secondary`/`success`/`warning`/`danger`/`info` continuam
+universais entre marcas, porque são semânticos (sucesso é sempre verde, erro
+sempre vermelho, independente de qual marca está ativa).
+
+Pra adicionar sua própria marca, siga o mesmo padrão do arquivo de exemplo:
+um bloco `[data-brand="sua-marca"]` (mais o par `@supports` OKLCH e a
+combinação com `[data-theme="dark"]`) redefinindo `--cl-color-primary`,
+`--cl-alert-primary-bg`, `--cl-alert-primary-text` e
+`--cl-feedback-primary-bg`.
+
+**Limitação conhecida:** `.cl-btn-primary`/`.cl-badge-primary` (preenchimento
+sólido) calculam a cor do texto em tempo de build via `color-contrast()` a
+partir do primary **padrão** (azul) — não recalculam por marca. Escolha um
+primitivo de marca escuro o bastante pro texto branco continuar legível
+(como no exemplo `violet`), ou sobrescreva `--cl-btn-color`/`--cl-badge-color`
+manualmente se o primitivo da sua marca for muito claro. Rode
+`npm run contrast` depois de adicionar uma marca — o relatório já audita o
+par `brand violet` como referência (`scripts/contrast-report.scss`).
+
 ## Próximo passo
 
 [Dark mode](dark-mode.md) — como o tema escuro usa a mesma camada de tokens.

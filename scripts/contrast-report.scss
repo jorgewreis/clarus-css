@@ -101,3 +101,33 @@ $dark-surface: color.to-space(#202124, oklch);
 
   @include check("dark: alert-#{$name} text/bg", $text, $bg);
 }
+
+// Brand "violet" (themes/_brands.scss) — mesma fórmula do primary padrão,
+// aplicada ao primitivo da marca.
+$brand-violet-primary: color.to-space(#6d28d9, oklch);
+
+@include check(
+  "brand violet: btn-primary text/bg (claro)",
+  color-contrast($brand-violet-primary),
+  $brand-violet-primary,
+  3
+);
+
+@include check(
+  "brand violet: alert-primary text/bg (claro)",
+  shade-color($brand-violet-primary),
+  tint-color($brand-violet-primary)
+);
+
+@include check(
+  "brand violet: btn-primary text(light)/bg (escuro)",
+  color-contrast($brand-violet-primary),
+  color.mix($brand-violet-primary, $color-white, 95%, $method: oklch),
+  3
+);
+
+@include check(
+  "brand violet: alert-primary text/bg (escuro)",
+  color.mix($brand-violet-primary, $color-white, 55%, $method: oklch),
+  color.mix($brand-violet-primary, $color-gray-900, 15%, $method: oklch)
+);

@@ -9,6 +9,21 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.2 — theming multi-brand
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): suporte a
+  `data-brand="x"` sobre a camada de tokens semânticos existente,
+  sobrescrevendo só a cor de ação primária (`--cl-color-primary` e os
+  tokens derivados de alert/feedback) — `secondary`/`success`/`warning`/
+  `danger`/`info` continuam universais entre marcas. Combina corretamente
+  com `data-theme="dark"` (mesma técnica de mistura OKLCH de
+  `themes/_dark.scss`). Um brand de exemplo (`violet`) em
+  `packages/clarus-core/scss/themes/_brands.scss` prova a troca em runtime
+  sem recompilar, com par de contraste auditado em `npm run contrast` e
+  demo em `mockup/theming.html`. Documentado em
+  [`docs/guides/theming.md`](docs/guides/theming.md#multi-brand), incluindo
+  a limitação conhecida de `color-contrast()` (texto de preenchimento
+  sólido calculado em build a partir do primary padrão, não por marca).
+
 - Fase final pré-v1.0.0, sub-fase 5.1 — layout avançado
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): três novas
   primitivas de layout CSS-only, `.cl-stack` (empilhamento vertical com
