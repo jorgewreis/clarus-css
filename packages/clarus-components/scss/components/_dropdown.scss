@@ -7,11 +7,13 @@
     display: inline-flex;
   }
 
+  // Sem margin-left: `.cl-dropdown-toggle` é sempre usado com `.cl-btn`
+  // (ver docs/components/dropdown.md), que já tem `gap` pros filhos —
+  // incluindo este `::after`, que conta como item flex do `.cl-btn`.
   .cl-dropdown-toggle::after {
     display: inline-block;
     width: 0;
     height: 0;
-    margin-left: 6px;
     vertical-align: middle;
     content: "";
     border-top: 5px solid;

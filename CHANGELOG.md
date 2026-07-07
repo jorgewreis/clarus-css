@@ -7,6 +7,26 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Changed
+
+- Dogfooding do `clarus-icons`: emoji usados como placeholder de ícone em
+  mockups/docs (Empty State, Tile, Notification Center, DataTable)
+  trocados por SVGs reais do pacote — nenhum lugar oficial do projeto usa
+  emoji como ícone hoje (exceção deliberada: os glifos `★` do
+  [Rating](docs/components/rating.md), que são o próprio mecanismo visual
+  do widget, não um placeholder de ícone). Pagination ganhou ícones
+  (`chevron-left`/`chevron-right` no lugar de `«`/`»`, `ellipsis` pra
+  intervalo de páginas omitido — variação nova, documentada), e o pager
+  gerado por `DataTable` (`packages/clarus-js/js/datatable.js`) trocou
+  `‹`/`›` pelos mesmos chevrons (SVG embutido como string — `clarus-js`
+  não pode depender do pacote opcional `clarus-icons` em runtime).
+  `.cl-btn`/`.cl-badge`/`.cl-alert`/`.cl-breadcrumb-item a` ganharam `gap`
+  próprio pra espaçar ícone+texto corretamente (antes só funcionava por
+  acidente, via colapso de espaço em branco do HTML); ajustado
+  `.cl-dropdown-toggle::after` (removido `margin-left` redundante, já que
+  agora conta como item flex do `.cl-btn` e herda o `gap`). Pagination
+  ganhou `aria-label`/`aria-hidden` explícitos nos itens só-ícone.
+
 ### Added
 
 - Fase final pré-v1.0.0, sub-fase 5.7 (ecossistema, parte 1/N) — pacote

@@ -309,6 +309,28 @@ literal do pedido preservado como referência).
   unitários, mockup, doc (`docs/guides/icons.md`), a11y e visual
   regression verdes. Licenças de terceiro (`LICENSE-LUCIDE.txt`, ISC +
   atribuição ao projeto Feather/MIT) distribuídas junto do pacote.
+- **Dogfooding pós-entrega (2026-07-07, a pedido do usuário)**: "se o
+  projeto tem um pacote de ícones, pra que usar emojis?" — auditoria
+  (`grep` por range Unicode de emoji) achou 📄🎨⚠️👤🔔🔍📭 usados como
+  placeholder de ícone em mockups/docs (Empty State, Tile, Notification
+  Center, DataTable); todos trocados por SVG do `clarus-icons`. Exceção
+  deliberada: `★` do Rating não é placeholder, é o mecanismo visual do
+  próprio widget — não mexi. Pedido evoluiu pra Pagination também
+  (`«`/`»` → `chevron-left`/`chevron-right`, mais uma variação nova de
+  reticências pra intervalo de páginas omitido, ícone `ellipsis`) e pro
+  pager JS do DataTable (`‹`/`›` → mesmos chevrons, embutidos como string
+  porque `clarus-js` não pode depender do pacote opcional em runtime).
+  Isso expôs um bug real de layout: `.cl-btn`/`.cl-badge`/`.cl-alert` não
+  tinham `gap` próprio — ícone+texto só "funcionava" por acidente via
+  colapso de espaço em branco do HTML, ficando visualmente colado quando
+  o espaço em branco não existia (ex.: `Notificações` sem espaço explícito
+  antes do texto). Corrigido com `gap` real nos quatro componentes
+  (`.cl-btn`, `.cl-badge`, `.cl-alert`, `.cl-breadcrumb-item a`), o que por
+  sua vez exigiu remover o `margin-left` de `.cl-dropdown-toggle::after`
+  (virou redundante — o `::after` conta como item flex do `.cl-btn` e já
+  herda o `gap` novo, então o `margin-left` antigo dobraria o espaçamento).
+  Build/lint/279 testes/a11y (38/38)/visual (90/90, só 2 baselines
+  esperadas mudaram) verdes.
 - `clarus-cli`: comandos `build`/`theme`/`analyze` já existentes hoje como
   scripts npm, empacotados como CLI instalável.
 - **Presets de tema**: 2–3 arquivos de tokens prontos (ex.: "corporate",

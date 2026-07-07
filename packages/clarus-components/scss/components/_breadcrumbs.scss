@@ -26,6 +26,9 @@
   }
 
   .cl-breadcrumb-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     color: var(--cl-alert-primary-text);
     text-decoration: none;
   }

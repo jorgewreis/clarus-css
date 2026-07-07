@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-07-07T20:19:32.314Z",
+  "measuredAt": "2026-07-07T20:50:37.076Z",
   "unit": "bytes",
   "files": {
     "css/layout.min.css": {
@@ -11,8 +11,8 @@
       "gzipBytes": 4592
     },
     "css/components.min.css": {
-      "bytes": 56257,
-      "gzipBytes": 10435
+      "bytes": 56366,
+      "gzipBytes": 10458
     },
     "css/helpers.min.css": {
       "bytes": 44631,
@@ -23,12 +23,12 @@
       "gzipBytes": 409
     },
     "css/clarus.min.css": {
-      "bytes": 108526,
-      "gzipBytes": 17423
+      "bytes": 108635,
+      "gzipBytes": 17454
     },
     "js/clarus.min.js": {
-      "bytes": 84679,
-      "gzipBytes": 17663
+      "bytes": 85174,
+      "gzipBytes": 17830
     }
   }
 }

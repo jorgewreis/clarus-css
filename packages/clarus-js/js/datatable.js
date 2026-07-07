@@ -5,6 +5,16 @@ const instances = createInstanceRegistry();
 // Quantos números de página exibir ao redor da atual (fora prev/next).
 const PAGE_WINDOW = 5;
 
+// Ícones de anterior/próxima (Lucide chevron-left/chevron-right), embutidos
+// como string em vez de importados de `clarus-icons` — esse pacote é
+// opcional/externo, e o `clarus-js` não pode depender dele em runtime.
+// `aria-hidden` porque o rótulo acessível real já vem do `aria-label` do
+// botão (ver `_pageItem`).
+const ICON_CHEVRON_LEFT =
+  '<svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+const ICON_CHEVRON_RIGHT =
+  '<svg class="cl-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
 function compareValues(a, b) {
   const numA = Number(a);
   const numB = Number(b);
@@ -255,11 +265,11 @@ export class DataTable {
     const end = Math.min(pageCount, Math.max(PAGE_WINDOW, this.currentPage + Math.floor(PAGE_WINDOW / 2)));
     const start = Math.max(1, end - PAGE_WINDOW + 1);
 
-    const items = [this._pageItem("‹", this.currentPage - 1, this.currentPage === 1, "Página anterior")];
+    const items = [this._pageItem(ICON_CHEVRON_LEFT, this.currentPage - 1, this.currentPage === 1, "Página anterior")];
     for (let page = start; page <= end; page += 1) {
       items.push(this._pageItem(String(page), page, false, `Página ${page}`, page === this.currentPage));
     }
-    items.push(this._pageItem("›", this.currentPage + 1, this.currentPage === pageCount, "Próxima página"));
+    items.push(this._pageItem(ICON_CHEVRON_RIGHT, this.currentPage + 1, this.currentPage === pageCount, "Próxima página"));
 
     this.paginationEl.innerHTML = `<ul class="cl-pagination">${items.join("")}</ul>`;
   }
