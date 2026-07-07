@@ -9,6 +9,23 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.7 (ecossistema, parte 1/N) — pacote
+  `clarus-icons` (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`,
+  P3): 1994 ícones SVG do conjunto [Lucide](https://lucide.dev) (ISC),
+  gerados em build-time a partir do devDependency `lucide-static`
+  (`scripts/build-icons.mjs`, `npm run build:icons`) — o pacote publicado
+  não tem nenhuma dependência de runtime. Dois formatos de consumo: SVG
+  puro (`clarus-icons/svg/<nome>.svg`) e módulos ES tree-shakeable
+  (`clarus-icons/icons/<nome>.js`, mais um barrel `clarus-icons` com nomes
+  em camelCase). Nova classe utilitária `.cl-icon` (com `-xs`/`-sm`/`-lg`/`-xl`)
+  em `packages/clarus-utilities/scss/utilities/_icon.scss`, sempre
+  disponível no `clarus-css` independente do pacote de ícones estar
+  instalado. Documentado em `docs/guides/icons.md`, mockup
+  `mockup/icons.html`, 5 testes unitários cobrindo a geração (limpeza do
+  SVG, `stroke="currentColor"`, colisões de nome no barrel). Licenças
+  (`LICENSE` MIT do Clarus + `LICENSE-LUCIDE.txt` ISC/Feather) distribuídas
+  junto do pacote.
+
 - Fase final pré-v1.0.0, sub-fases 5.10/5.11 — excelência de produto
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P2):
   `docs/reference/browser-support.md` ganhou uma **matriz de

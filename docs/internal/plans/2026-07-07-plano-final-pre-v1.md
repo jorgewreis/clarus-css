@@ -290,8 +290,25 @@ literal do pedido preservado como referência).
 > de produção (casos reais com métricas).
 
 #### 5.7 Ecossistema (escopo ampliado por P3 — ver ressalvas abaixo)
-- `clarus-icons`: pacote de ícones SVG opcional, tree-shakeable, mesmo
-  padrão de workspace dos demais `packages/*`.
+- `clarus-icons` — ✅ **concluído (2026-07-07)**: pacote de ícones SVG
+  opcional, tree-shakeable, mesmo padrão de workspace dos demais
+  `packages/*`. Decisão de escopo (conversa com o usuário): conjunto
+  **Lucide** (ISC), não Flaticon/Streamline Ultimate (o usuário preferia
+  esses dois esteticamente, mas ambos são licenciados/comerciais —
+  redistribuir os SVGs crus num pacote npm público MIT violaria a licença
+  deles; Lucide é feito justamente pra esse uso). Decisão de cobertura:
+  conjunto **completo** (1994 ícones, não um subconjunto curado) — com
+  módulo-por-ícone, o custo de ter "todos" é só espaço em disco no pacote
+  publicado, não peso no bundle de quem consome (tree-shaking cuida do
+  resto), e evita manutenção de decidir "esse ícone entra, esse não".
+  Gerado em build-time por `scripts/build-icons.mjs` a partir do
+  devDependency `lucide-static` — o pacote publicado (`packages/clarus-icons/`)
+  não tem dependência de runtime nenhuma. Dois formatos (SVG puro +
+  módulos ES), classe `.cl-icon` nova em `clarus-utilities` (sempre
+  disponível, independe do pacote de ícones estar instalado), 5 testes
+  unitários, mockup, doc (`docs/guides/icons.md`), a11y e visual
+  regression verdes. Licenças de terceiro (`LICENSE-LUCIDE.txt`, ISC +
+  atribuição ao projeto Feather/MIT) distribuídas junto do pacote.
 - `clarus-cli`: comandos `build`/`theme`/`analyze` já existentes hoje como
   scripts npm, empacotados como CLI instalável.
 - **Presets de tema**: 2–3 arquivos de tokens prontos (ex.: "corporate",

@@ -23,6 +23,8 @@ Referência completa de uso do framework — para a visão geral do projeto
   pública (`cl-`/`u-`/`is-`), codemod.
 - [Migração de outro framework](guides/migration-external.md) — tabela de
   equivalência de classes/componentes pra quem vem de outro framework CSS.
+- [Ícones](guides/icons.md) — pacote opcional `clarus-icons` (Lucide),
+  classe utilitária `.cl-icon`, uso via SVG puro ou módulo JS.
 
 ## Componentes
 
