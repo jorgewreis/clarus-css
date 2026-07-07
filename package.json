@@ -103,6 +103,8 @@
     "jsdom": "^29.1.1",
     "lucide-static": "^1.23.0",
     "postcss": "^8.5.16",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rimraf": "^6.1.3",
     "sass": "^1.101.0",
     "stylelint": "^17.14.0",
