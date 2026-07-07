@@ -8,132 +8,135 @@
 // js/notification-center.js (Clarus.NotificationCenter).
 
 // O gatilho estabelece o contexto de posicionamento do contador.
-[data-cl="notification-center"] {
-  position: relative;
-}
 
-.cl-notification-badge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 999px;
-  color: color-contrast($clarus-color-danger);
-  background-color: var(--cl-color-danger);
-  font-size: 0.65rem;
-  font-weight: $font-weight-medium;
-  line-height: 1;
-}
-
-.cl-notification-badge[hidden] {
-  display: none;
-}
-
-// Painel de histórico: reaproveita a mesma linguagem visual do Dropdown/Toast
-// (superfície + borda + sombra), posicionado via js/core/positioning.js.
-.cl-notification-center {
-  position: absolute;
-  display: none;
-  flex-direction: column;
-  width: 320px;
-  max-height: 420px;
-  border: 1px solid var(--cl-color-border);
-  border-radius: var(--cl-radius-md);
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-surface);
-  box-shadow: var(--cl-shadow-md);
-  z-index: 1080;
-}
-
-.cl-notification-center.is-open {
-  display: flex;
-}
-
-.cl-notification-center-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--cl-color-border);
-}
-
-.cl-notification-center-title {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-}
-
-.cl-notification-list {
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  list-style: none;
-}
-
-.cl-notification-item {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 10px 14px;
-  border-left: 3px solid transparent;
-  border-bottom: 1px solid var(--cl-color-border);
-}
-
-.cl-notification-item:last-child {
-  border-bottom: none;
-}
-
-.cl-notification-item-unread {
-  background-color: var(--cl-color-subtle);
-}
-
-@each $name, $color in $theme-colors {
-  .cl-notification-item-#{$name} {
-    border-left-color: var(--cl-color-#{$name});
+@layer components {
+  [data-cl="notification-center"] {
+    position: relative;
   }
-}
 
-.cl-notification-item-content {
-  flex: 1;
-  min-width: 0;
-}
+  .cl-notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    color: color-contrast($clarus-color-danger);
+    background-color: var(--cl-color-danger);
+    font-size: 0.65rem;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+  }
 
-.cl-notification-item-title {
-  margin: 0;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-}
+  .cl-notification-badge[hidden] {
+    display: none;
+  }
 
-.cl-notification-item-text {
-  margin: 2px 0 0;
-  color: var(--cl-color-muted);
-  font-size: $font-size-sm;
-}
+  // Painel de histórico: reaproveita a mesma linguagem visual do Dropdown/Toast
+  // (superfície + borda + sombra), posicionado via js/core/positioning.js.
+  .cl-notification-center {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    width: 320px;
+    max-height: 420px;
+    border: 1px solid var(--cl-color-border);
+    border-radius: var(--cl-radius-md);
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-surface);
+    box-shadow: var(--cl-shadow-md);
+    z-index: 1080;
+  }
 
-.cl-notification-item-time {
-  display: block;
-  margin-top: 4px;
-  color: var(--cl-color-muted);
-  font-size: $font-size-xs;
-}
+  .cl-notification-center.is-open {
+    display: flex;
+  }
 
-.cl-notification-item .cl-btn-close {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
+  .cl-notification-center-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--cl-color-border);
+  }
 
-.cl-notification-empty {
-  padding: 24px 14px;
-  color: var(--cl-color-muted);
-  font-size: $font-size-sm;
-  text-align: center;
-}
+  .cl-notification-center-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
 
-.cl-notification-empty[hidden] {
-  display: none;
+  .cl-notification-list {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  .cl-notification-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--cl-color-border);
+  }
+
+  .cl-notification-item:last-child {
+    border-bottom: none;
+  }
+
+  .cl-notification-item-unread {
+    background-color: var(--cl-color-subtle);
+  }
+
+  @each $name, $color in $theme-colors {
+    .cl-notification-item-#{$name} {
+      border-left-color: var(--cl-color-#{$name});
+    }
+  }
+
+  .cl-notification-item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cl-notification-item-title {
+    margin: 0;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  .cl-notification-item-text {
+    margin: 2px 0 0;
+    color: var(--cl-color-muted);
+    font-size: $font-size-sm;
+  }
+
+  .cl-notification-item-time {
+    display: block;
+    margin-top: 4px;
+    color: var(--cl-color-muted);
+    font-size: $font-size-xs;
+  }
+
+  .cl-notification-item .cl-btn-close {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .cl-notification-empty {
+    padding: 24px 14px;
+    color: var(--cl-color-muted);
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+
+  .cl-notification-empty[hidden] {
+    display: none;
+  }
 }

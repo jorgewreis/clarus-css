@@ -58,6 +58,9 @@
     "packages/clarus-js/js",
     "docs/definitions.md",
     "docs/scss-architecture.md",
+    "docs/guides/migration-v1.md",
+    "scripts/migrate-v1.mjs",
+    "scripts/migrate-v1-map.json",
     "mockup",
     "LICENSE",
     "README.md",
@@ -75,6 +78,8 @@
     "test": "vitest run",
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
+    "size": "node scripts/size.mjs",
+    "contrast": "node scripts/contrast.mjs",
     "prepublishOnly": "npm run build && npm test"
   },
   "publishConfig": {

@@ -1,45 +1,47 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.cl-pagination {
-  display: flex;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+@layer components {
+  .cl-pagination {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-.cl-page-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 8px;
-  border: 1px solid var(--cl-color-border);
-  border-radius: var(--cl-radius-sm);
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-surface);
-  text-decoration: none;
-  transition: background-color 0.15s ease-in-out;
-}
+  .cl-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--cl-color-border);
+    border-radius: var(--cl-radius-sm);
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-surface);
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out;
+  }
 
-.cl-page-link:hover {
-  background-color: var(--cl-color-subtle);
-}
+  .cl-page-link:hover {
+    background-color: var(--cl-color-subtle);
+  }
 
-.cl-page-link:focus {
-  @include focus-ring;
-}
+  .cl-page-link:focus {
+    @include focus-ring;
+  }
 
-.cl-page-item.is-active .cl-page-link {
-  color: color-contrast($clarus-color-primary);
-  background-color: var(--cl-color-primary);
-  border-color: var(--cl-color-primary);
-}
+  .cl-page-item.is-active .cl-page-link {
+    color: color-contrast($clarus-color-primary);
+    background-color: var(--cl-color-primary);
+    border-color: var(--cl-color-primary);
+  }
 
-.cl-page-item.is-disabled .cl-page-link {
-  color: var(--cl-color-muted);
-  opacity: 0.6;
-  pointer-events: none;
+  .cl-page-item.is-disabled .cl-page-link {
+    color: var(--cl-color-muted);
+    opacity: 0.6;
+    pointer-events: none;
+  }
 }

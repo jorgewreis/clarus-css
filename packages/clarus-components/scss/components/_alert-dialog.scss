@@ -4,8 +4,11 @@
 // confirmação, montada dinamicamente por Clarus.confirm() (js/confirm.js) —
 // reaproveita .cl-modal/.cl-modal-dialog/.cl-modal-content/.cl-modal-footer sem duplicar
 // layout, só adiciona a mensagem abaixo do título.
-.cl-alert-dialog-message {
-  margin: 4px 0 0;
-  color: var(--cl-color-muted);
-  font-size: $font-size-sm;
+
+@layer components {
+  .cl-alert-dialog-message {
+    margin: 4px 0 0;
+    color: var(--cl-color-muted);
+    font-size: $font-size-sm;
+  }
 }

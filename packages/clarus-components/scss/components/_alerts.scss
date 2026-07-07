@@ -1,18 +1,20 @@
 @use "settings" as *;
 
-.cl-alert {
-  padding: 12px 16px;
-  border: 1px solid var(--cl-color-border);
-  border-left: 5px solid var(--cl-color-border);
-  border-radius: var(--cl-radius-md);
-  color: var(--cl-color-text);
-  font-size: $font-size-sm;
-}
+@layer components {
+  .cl-alert {
+    padding: 12px 16px;
+    border: 1px solid var(--cl-color-border);
+    border-left: 5px solid var(--cl-color-border);
+    border-radius: var(--cl-radius-md);
+    color: var(--cl-color-text);
+    font-size: $font-size-sm;
+  }
 
-@each $name, $color in $theme-colors {
-  .cl-alert-#{$name} {
-    color: var(--cl-alert-#{$name}-text);
-    background-color: var(--cl-alert-#{$name}-bg);
-    border-color: var(--cl-alert-#{$name}-text);
+  @each $name, $color in $theme-colors {
+    .cl-alert-#{$name} {
+      color: var(--cl-alert-#{$name}-text);
+      background-color: var(--cl-alert-#{$name}-bg);
+      border-color: var(--cl-alert-#{$name}-text);
+    }
   }
 }

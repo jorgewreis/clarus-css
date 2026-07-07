@@ -5,28 +5,31 @@
 // (scss/components/_buttons.scss) — só ajusta o tamanho do botão de fechar
 // pra caber num badge, que é bem menor que um botão, e o espaçamento entre
 // o texto e o "x". O dismiss em si é feito por js/tag.js (Clarus.Tag).
-.cl-tag {
-  gap: 6px;
-}
 
-.cl-tag .cl-btn-close {
-  width: 14px;
-  height: 14px;
+@layer components {
+  .cl-tag {
+    gap: 6px;
+  }
 
-  // Herda a cor de texto do badge (contraste automático por variante) em vez
-  // do cinza fixo do `.cl-btn-close`, pra o "x" ter contraste em qualquer fundo;
-  // o `opacity` o deixa discreto sem depender de uma cor fixa.
-  color: inherit;
-  opacity: 0.7;
-}
+  .cl-tag .cl-btn-close {
+    width: 14px;
+    height: 14px;
 
-.cl-tag .cl-btn-close::before,
-.cl-tag .cl-btn-close::after {
-  width: 8px;
-}
+    // Herda a cor de texto do badge (contraste automático por variante) em vez
+    // do cinza fixo do `.cl-btn-close`, pra o "x" ter contraste em qualquer fundo;
+    // o `opacity` o deixa discreto sem depender de uma cor fixa.
+    color: inherit;
+    opacity: 0.7;
+  }
 
-.cl-tag .cl-btn-close:hover {
-  color: inherit;
-  background-color: color-mix(in srgb, currentcolor 18%, transparent);
-  opacity: 1;
+  .cl-tag .cl-btn-close::before,
+  .cl-tag .cl-btn-close::after {
+    width: 8px;
+  }
+
+  .cl-tag .cl-btn-close:hover {
+    color: inherit;
+    background-color: color-mix(in srgb, currentcolor 18%, transparent);
+    opacity: 1;
+  }
 }

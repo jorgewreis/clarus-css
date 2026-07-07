@@ -1,67 +1,69 @@
 @use "settings" as *;
 
-.cl-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1050;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background-color: rgb(0 0 0 / 50%);
-}
+@layer components {
+  .cl-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: rgb(0 0 0 / 50%);
+  }
 
-.cl-modal.is-open {
-  display: flex;
-}
+  .cl-modal.is-open {
+    display: flex;
+  }
 
-.cl-modal-dialog {
-  width: 100%;
-  max-width: 480px;
-}
+  .cl-modal-dialog {
+    width: 100%;
+    max-width: 480px;
+  }
 
-.cl-modal-dialog.cl-modal-sm {
-  max-width: 320px;
-}
+  .cl-modal-dialog.cl-modal-sm {
+    max-width: 320px;
+  }
 
-.cl-modal-dialog.cl-modal-lg {
-  max-width: 720px;
-}
+  .cl-modal-dialog.cl-modal-lg {
+    max-width: 720px;
+  }
 
-.cl-modal-content {
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100vh - 32px);
-  border-radius: var(--cl-radius-md);
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-surface);
-  box-shadow: var(--cl-shadow-lg);
-}
+  .cl-modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 32px);
+    border-radius: var(--cl-radius-md);
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-surface);
+    box-shadow: var(--cl-shadow-lg);
+  }
 
-.cl-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--cl-color-border);
-}
+  .cl-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--cl-color-border);
+  }
 
-.cl-modal-title {
-  margin: 0;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-medium;
-}
+  .cl-modal-title {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+  }
 
-.cl-modal-body {
-  padding: 20px;
-  overflow-y: auto;
-}
+  .cl-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+  }
 
-.cl-modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 16px 20px;
-  border-top: 1px solid var(--cl-color-border);
+  .cl-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--cl-color-border);
+  }
 }

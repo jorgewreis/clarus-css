@@ -1,7 +1,9 @@
-.u-visible {
-  visibility: visible;
-}
+@layer utilities {
+  .u-visible {
+    visibility: visible;
+  }
 
-.u-invisible {
-  visibility: hidden;
+  .u-invisible {
+    visibility: hidden;
+  }
 }

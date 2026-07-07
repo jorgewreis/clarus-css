@@ -7,52 +7,55 @@
 // `.cl-rating` em `row-reverse`, o truque clássico de CSS pra destacar "a
 // estrela clicada e todas à esquerda dela" usando só `~` (combinador de
 // irmãos gerais, que só enxerga o que vem DEPOIS no DOM).
-.cl-rating {
-  display: inline-flex;
-  flex-direction: row-reverse;
-}
 
-.cl-rating-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
+@layer components {
+  .cl-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+  }
 
-.cl-rating-star {
-  padding: 2px;
-  color: var(--cl-color-border);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
+  .cl-rating-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
 
-.cl-rating-input:checked ~ .cl-rating-star,
-.cl-rating-star:hover,
-.cl-rating-star:hover ~ .cl-rating-star {
-  color: var(--cl-color-warning);
-}
+  .cl-rating-star {
+    padding: 2px;
+    color: var(--cl-color-border);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+  }
 
-.cl-rating-input:focus-visible + .cl-rating-star {
-  border-radius: var(--cl-radius-sm);
-  outline: 2px solid var(--cl-color-primary);
-  outline-offset: 2px;
-}
+  .cl-rating-input:checked ~ .cl-rating-star,
+  .cl-rating-star:hover,
+  .cl-rating-star:hover ~ .cl-rating-star {
+    color: var(--cl-color-warning);
+  }
 
-.cl-rating-input:disabled + .cl-rating-star {
-  opacity: 0.5;
-  pointer-events: none;
-}
+  .cl-rating-input:focus-visible + .cl-rating-star {
+    border-radius: var(--cl-radius-sm);
+    outline: 2px solid var(--cl-color-primary);
+    outline-offset: 2px;
+  }
 
-.cl-rating-sm .cl-rating-star {
-  font-size: 16px;
-}
+  .cl-rating-input:disabled + .cl-rating-star {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
-.cl-rating-lg .cl-rating-star {
-  font-size: 32px;
+  .cl-rating-sm .cl-rating-star {
+    font-size: 16px;
+  }
+
+  .cl-rating-lg .cl-rating-star {
+    font-size: 32px;
+  }
 }

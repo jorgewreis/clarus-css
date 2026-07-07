@@ -32,6 +32,39 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     pacote publicado (`dist/`, `clarus-css/scss`, `clarus-css/js/*`
     continuam nos mesmos caminhos), só a organização interna do
     repositório-fonte.
+  - Todo o CSS emitido agora está organizado em cascade layers, na ordem
+    `reset, tokens, base, layout, components, utilities, overrides`
+    (declarada uma vez em `packages/clarus-core/scss/tokens/_root.scss`,
+    propagada a cada bundle de `dist/css/`). Efeito prático: uma classe
+    utilitária (`.u-*`) sempre vence uma classe de componente, mesmo com
+    especificidade igual, independente da ordem de import — ver
+    `docs/scss-architecture.md`. A camada `overrides` fica reservada, sem
+    regras do framework, para customização do consumidor sem `!important`.
+  - Cores primitivas migradas para OKLCH (`packages/clarus-core/scss/settings/_colors.scss`),
+    calibradas para reproduzir os mesmos matizes hex de antes (round-trip
+    hex→oklch→hex), com fallback automático em sRGB via
+    `@supports (color: oklch(0% 0 0))` para navegadores sem suporte —
+    identidade visual inalterada, sem browsers não suportados. Piso de
+    navegador atualizado para moderno com fallback progressivo (Safari/iOS
+    16.4+; ver `docs/reference/browser-support.md`).
+  - Nova camada semântica de tokens (`packages/clarus-core/scss/tokens/_semantic.scss`:
+    `--cl-color-bg-surface`, `--cl-color-text-primary`,
+    `--cl-color-border-default` etc., todos alias `var()` dos tokens
+    primitivos) e primeiro componente migrado para tokens próprios
+    (`.cl-btn` ganha `--cl-btn-bg`/`--cl-btn-color`/`--cl-btn-border-color`,
+    sobrescrevíveis por instância sem `!important`) — ver
+    `docs/scss-architecture.md` para o padrão a seguir em outros componentes.
+  - Nova escala tipográfica compacta (`--cl-font-size-*`): corpo ~13px, piso
+    ~11px reservado a texto de apoio; headings (`h1`–`h6`) ganham tamanho e
+    peso próprios pela primeira vez (antes usavam o padrão do navegador).
+    Utilitários `.u-fs-*`/`.u-fw-*` expandidos (`xl`, `h1`–`h6`,
+    `semibold`/`bold`).
+  - Governança: `CODE_OF_CONDUCT.md`, templates de issue/PR
+    (`.github/ISSUE_TEMPLATE/`, `.github/PULL_REQUEST_TEMPLATE.md`), política
+    de depreciação (2 minors) em `CONTRIBUTING.md`, guia de migração
+    (`docs/guides/migration-v1.md`) com codemod (`scripts/migrate-v1.mjs`),
+    script de baseline de tamanho gzip (`npm run size`) e relatório de
+    contraste WCAG (`npm run contrast`).
 
 ### Added
 

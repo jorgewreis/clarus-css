@@ -1,71 +1,80 @@
 // COLORS
+// Primitivos gerados em OKLCH a partir do hex histórico do projeto: cada
+// `color.to-space(#hex, oklch)` calibra o matiz ao valor atual (round-trip
+// hex→oklch→hex reproduz o mesmo hex, a menos de arredondamento de ponto
+// flutuante) — a identidade visual não muda, só o espaço de cor em que o
+// Sass passa a representar e misturar essas cores (ver `tools/_mixins.scss`,
+// `tint-color()`/`shade-color()`, e o fallback em `tokens/_root.scss`).
+@use "sass:color";
 
   // YELLOW
-  $color-yellow-100: #fff9e6 !default;
-  $color-yellow-200: #fff2cc !default;
-  $color-yellow-300: #ffe699 !default;
-  $color-yellow-400: #ffdb66 !default;
-  $color-yellow-500: #fab633 !default;
-  $color-yellow-600: #e6a800 !default;
-  $color-yellow-700: #cc8a00 !default;
-  $color-yellow-800: #b36c00 !default;
-  $color-yellow-900: #995000 !default;
+  $color-yellow-100: color.to-space(#fff9e6, oklch) !default;
+  $color-yellow-200: color.to-space(#fff2cc, oklch) !default;
+  $color-yellow-300: color.to-space(#ffe699, oklch) !default;
+  $color-yellow-400: color.to-space(#ffdb66, oklch) !default;
+  $color-yellow-500: color.to-space(#fab633, oklch) !default;
+  $color-yellow-600: color.to-space(#e6a800, oklch) !default;
+  $color-yellow-700: color.to-space(#cc8a00, oklch) !default;
+  $color-yellow-800: color.to-space(#b36c00, oklch) !default;
+  $color-yellow-900: color.to-space(#995000, oklch) !default;
 
   // GREEN
-  $color-green-100: #e6fff2 !default;
-  $color-green-200: #ccffe6 !default;
-  $color-green-300: #99ffcc !default;
-  $color-green-400: #66ffb3 !default;
-  $color-green-500: #0dd157 !default;
-  $color-green-600: #0bc24f !default;
-  $color-green-700: #0aa343 !default;
-  $color-green-800: #098537 !default;
-  $color-green-900: #08662b !default;
+  $color-green-100: color.to-space(#e6fff2, oklch) !default;
+  $color-green-200: color.to-space(#ccffe6, oklch) !default;
+  $color-green-300: color.to-space(#99ffcc, oklch) !default;
+  $color-green-400: color.to-space(#66ffb3, oklch) !default;
+  $color-green-500: color.to-space(#0dd157, oklch) !default;
+  $color-green-600: color.to-space(#0bc24f, oklch) !default;
+  $color-green-700: color.to-space(#0aa343, oklch) !default;
+  $color-green-800: color.to-space(#098537, oklch) !default;
+  $color-green-900: color.to-space(#08662b, oklch) !default;
 
   // BLUE
-  $color-blue-100: #e6f0ff !default;
-  $color-blue-200: #cce1ff !default;
-  $color-blue-300: #99c2ff !default;
-  $color-blue-400: #66a3ff !default;
-  $color-blue-500: #2972fa !default;
-  $color-blue-600: #1a61e6 !default;
-  $color-blue-700: #0b50d2 !default;
-  $color-blue-800: #0841a8 !default;
-  $color-blue-900: #05327f !default;
+  $color-blue-100: color.to-space(#e6f0ff, oklch) !default;
+  $color-blue-200: color.to-space(#cce1ff, oklch) !default;
+  $color-blue-300: color.to-space(#99c2ff, oklch) !default;
+  $color-blue-400: color.to-space(#66a3ff, oklch) !default;
+  $color-blue-500: color.to-space(#2972fa, oklch) !default;
+  $color-blue-600: color.to-space(#1a61e6, oklch) !default;
+  $color-blue-700: color.to-space(#0b50d2, oklch) !default;
+  $color-blue-800: color.to-space(#0841a8, oklch) !default;
+  $color-blue-900: color.to-space(#05327f, oklch) !default;
 
   // GRAY
-  $color-gray-100: #f8fafc !default;
-  $color-gray-200: #f1f5f9 !default;
-  $color-gray-300: #e2e8f0 !default;
-  $color-gray-400: #cbd5e1 !default;
-  $color-gray-500: #94a3b8 !default;
-  $color-gray-600: #64748b !default;
-  $color-gray-700: #475569 !default;
-  $color-gray-800: #334155 !default;
-  $color-gray-900: #1e293b !default;
+  $color-gray-100: color.to-space(#f8fafc, oklch) !default;
+  $color-gray-200: color.to-space(#f1f5f9, oklch) !default;
+  $color-gray-300: color.to-space(#e2e8f0, oklch) !default;
+  $color-gray-400: color.to-space(#cbd5e1, oklch) !default;
+  $color-gray-500: color.to-space(#94a3b8, oklch) !default;
+  $color-gray-600: color.to-space(#64748b, oklch) !default;
+  $color-gray-700: color.to-space(#475569, oklch) !default;
+  $color-gray-800: color.to-space(#334155, oklch) !default;
+  $color-gray-900: color.to-space(#1e293b, oklch) !default;
 
   // RED
-  $color-red-100: #fff2f3 !default;
-  $color-red-200: #ffe6e8 !default;
-  $color-red-300: #ffcccc !default;
-  $color-red-400: #ffb3b3 !default;
-  $color-red-500: #fb4143 !default;
-  $color-red-600: #e63a3c !default;
-  $color-red-700: #cc3335 !default;
-  $color-red-800: #b32b2d !default;
-  $color-red-900: #992224 !default;
+  $color-red-100: color.to-space(#fff2f3, oklch) !default;
+  $color-red-200: color.to-space(#ffe6e8, oklch) !default;
+  $color-red-300: color.to-space(#ffcccc, oklch) !default;
+  $color-red-400: color.to-space(#ffb3b3, oklch) !default;
+  $color-red-500: color.to-space(#fb4143, oklch) !default;
+  $color-red-600: color.to-space(#e63a3c, oklch) !default;
+  $color-red-700: color.to-space(#cc3335, oklch) !default;
+  $color-red-800: color.to-space(#b32b2d, oklch) !default;
+  $color-red-900: color.to-space(#992224, oklch) !default;
 
   // PURPLE
-  $color-purple-100: #f2f2ff !default;
-  $color-purple-200: #e6e6ff !default;
-  $color-purple-300: #ccccff !default;
-  $color-purple-400: #b3b3ff !default;
-  $color-purple-500: #5e5cc7 !default;
-  $color-purple-600: #5251b5 !default;
-  $color-purple-700: #4645a3 !default;
-  $color-purple-800: #3a3991 !default;
-  $color-purple-900: #2e2d7f !default;
+  $color-purple-100: color.to-space(#f2f2ff, oklch) !default;
+  $color-purple-200: color.to-space(#e6e6ff, oklch) !default;
+  $color-purple-300: color.to-space(#ccccff, oklch) !default;
+  $color-purple-400: color.to-space(#b3b3ff, oklch) !default;
+  $color-purple-500: color.to-space(#5e5cc7, oklch) !default;
+  $color-purple-600: color.to-space(#5251b5, oklch) !default;
+  $color-purple-700: color.to-space(#4645a3, oklch) !default;
+  $color-purple-800: color.to-space(#3a3991, oklch) !default;
+  $color-purple-900: color.to-space(#2e2d7f, oklch) !default;
 
+  // Acromáticos: sem matiz a preservar, ficam em sRGB legado (mais simples,
+  // e são os pontos-limite de toda mistura tint/shade).
   $color-white: #ffffff !default;
   $color-black: #000000 !default;
 

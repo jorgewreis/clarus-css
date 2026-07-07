@@ -4,27 +4,30 @@
 // `<div class="divider">` (não pode ser `<hr>`, que não aceita filhos) com
 // `.cl-divider-label` para o texto centralizado, flanqueado por duas linhas via
 // pseudo-elementos.
-.cl-divider {
-  margin: 16px 0;
-  border: 0;
-  border-top: 1px solid var(--cl-color-border);
-}
 
-.cl-divider:not(hr) {
-  display: flex;
-  align-items: center;
-  border-top: none;
-  color: var(--cl-color-muted);
-  font-size: $font-size-sm;
-}
+@layer components {
+  .cl-divider {
+    margin: 16px 0;
+    border: 0;
+    border-top: 1px solid var(--cl-color-border);
+  }
 
-.cl-divider:not(hr)::before,
-.cl-divider:not(hr)::after {
-  flex: 1;
-  content: "";
-  border-top: 1px solid var(--cl-color-border);
-}
+  .cl-divider:not(hr) {
+    display: flex;
+    align-items: center;
+    border-top: none;
+    color: var(--cl-color-muted);
+    font-size: $font-size-sm;
+  }
 
-.cl-divider-label {
-  padding: 0 12px;
+  .cl-divider:not(hr)::before,
+  .cl-divider:not(hr)::after {
+    flex: 1;
+    content: "";
+    border-top: 1px solid var(--cl-color-border);
+  }
+
+  .cl-divider-label {
+    padding: 0 12px;
+  }
 }

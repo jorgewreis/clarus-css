@@ -1,109 +1,120 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.cl-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  padding: 0 12px;
-  border: 1px solid var(--cl-color-border);
-  border-radius: var(--cl-radius-sm);
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-subtle);
-  font-size: $font-size-md;
-  font-weight: $font-weight-medium;
-  text-decoration: none;
-  cursor: pointer;
-  transition: filter 0.15s ease-in-out;
-}
+@layer components {
+  // Tokens de componente: cada `.cl-btn-*` abaixo só sobrescreve estas três
+  // custom properties (nunca `color`/`background-color`/`border-color`
+  // diretamente) — permite customizar um botão específico via CSS
+  // (`.minha-classe { --cl-btn-bg: ...; }`) sem precisar de `!important` nem
+  // repetir a declaração de layout. Ver docs/scss-architecture.md.
+  .cl-btn {
+    --cl-btn-color: var(--cl-color-text-primary);
+    --cl-btn-bg: var(--cl-color-bg-subtle);
+    --cl-btn-border-color: var(--cl-color-border-default);
 
-.cl-btn:hover {
-  filter: brightness(0.92);
-}
-
-.cl-btn:active {
-  filter: brightness(0.85);
-}
-
-.cl-btn:focus {
-  @include focus-ring;
-}
-
-.cl-btn:disabled,
-.cl-btn.is-disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-@each $name, $color in $theme-colors {
-  .cl-btn-#{$name} {
-    color: color-contrast($color);
-    background-color: var(--cl-color-#{$name});
-    border-color: var(--cl-color-#{$name});
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid var(--cl-btn-border-color);
+    border-radius: var(--cl-radius-sm);
+    color: var(--cl-btn-color);
+    background-color: var(--cl-btn-bg);
+    font-size: $font-size-md;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.15s ease-in-out;
   }
 
-  .cl-btn-outline-#{$name} {
-    color: var(--cl-color-#{$name});
+  .cl-btn:hover {
+    filter: brightness(0.92);
+  }
+
+  .cl-btn:active {
+    filter: brightness(0.85);
+  }
+
+  .cl-btn:focus {
+    @include focus-ring;
+  }
+
+  .cl-btn:disabled,
+  .cl-btn.is-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @each $name, $color in $theme-colors {
+    .cl-btn-#{$name} {
+      --cl-btn-color: #{color-contrast($color)};
+      --cl-btn-bg: var(--cl-color-#{$name});
+      --cl-btn-border-color: var(--cl-color-#{$name});
+    }
+
+    .cl-btn-outline-#{$name} {
+      --cl-btn-color: var(--cl-color-#{$name});
+      --cl-btn-bg: transparent;
+      --cl-btn-border-color: var(--cl-color-#{$name});
+    }
+
+    .cl-btn-outline-#{$name}:hover,
+    .cl-btn-outline-#{$name}:active {
+      --cl-btn-color: #{color-contrast($color)};
+      --cl-btn-bg: var(--cl-color-#{$name});
+    }
+  }
+
+  .cl-btn-sm {
+    min-height: 30px;
+    padding: 0 8px;
+    font-size: $font-size-sm;
+  }
+
+  .cl-btn-lg {
+    min-height: 46px;
+    padding: 0 16px;
+    font-size: $font-size-lg;
+  }
+
+  .cl-btn-close {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: var(--cl-radius-sm);
+    color: var(--cl-color-muted);
     background-color: transparent;
-    border-color: var(--cl-color-#{$name});
+    cursor: pointer;
   }
 
-  .cl-btn-outline-#{$name}:hover,
-  .cl-btn-outline-#{$name}:active {
-    color: color-contrast($color);
-    background-color: var(--cl-color-#{$name});
+  .cl-btn-close::before,
+  .cl-btn-close::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    background-color: currentcolor;
+    content: "";
   }
-}
 
-.cl-btn-sm {
-  min-height: 30px;
-  padding: 0 8px;
-  font-size: $font-size-sm;
-}
+  .cl-btn-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 
-.cl-btn-lg {
-  min-height: 46px;
-  padding: 0 16px;
-  font-size: $font-size-lg;
-}
+  .cl-btn-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 
-.cl-btn-close {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border: none;
-  border-radius: var(--cl-radius-sm);
-  color: var(--cl-color-muted);
-  background-color: transparent;
-  cursor: pointer;
-}
+  .cl-btn-close:hover {
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-subtle);
+  }
 
-.cl-btn-close::before,
-.cl-btn-close::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 2px;
-  background-color: currentcolor;
-  content: "";
-}
-
-.cl-btn-close::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.cl-btn-close::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.cl-btn-close:hover {
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-subtle);
-}
-
-.cl-btn-close:focus {
-  @include focus-ring;
+  .cl-btn-close:focus {
+    @include focus-ring;
+  }
 }

@@ -8,40 +8,43 @@
 
 // Cada nível de submenu é envolto por `.cl-dropdown-submenu`, que serve de âncora
 // de posicionamento para o `.cl-dropdown-menu` filho.
-.cl-dropdown-submenu {
-  position: relative;
-}
 
-// Item que abre um submenu: seta apontando para o lado (em vez da seta pra
-// baixo do `.cl-dropdown-toggle`), empurrada para a direita do item.
-.cl-dropdown-item-submenu {
-  justify-content: space-between;
-}
+@layer components {
+  .cl-dropdown-submenu {
+    position: relative;
+  }
 
-.cl-dropdown-item-submenu::after {
-  margin-left: 8px;
-  content: "";
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid currentcolor;
-}
+  // Item que abre um submenu: seta apontando para o lado (em vez da seta pra
+  // baixo do `.cl-dropdown-toggle`), empurrada para a direita do item.
+  .cl-dropdown-item-submenu {
+    justify-content: space-between;
+  }
 
-// Submenu abre à direita do item, alinhado ao topo (compensa o padding + borda
-// do menu pai para os primeiros itens ficarem na mesma linha).
-.cl-dropdown-submenu > .cl-dropdown-menu {
-  top: -7px;
-  left: 100%;
-  margin: 0;
-}
+  .cl-dropdown-item-submenu::after {
+    margin-left: 8px;
+    content: "";
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentcolor;
+  }
 
-.cl-dropdown-submenu:hover > .cl-dropdown-menu,
-.cl-dropdown-submenu > .cl-dropdown-menu.is-open {
-  display: block;
-}
+  // Submenu abre à direita do item, alinhado ao topo (compensa o padding + borda
+  // do menu pai para os primeiros itens ficarem na mesma linha).
+  .cl-dropdown-submenu > .cl-dropdown-menu {
+    top: -7px;
+    left: 100%;
+    margin: 0;
+  }
 
-// Sem espaço à direita: o JS marca `.cl-dropdown-submenu-left` e o submenu abre
-// para a esquerda.
-.cl-dropdown-submenu-left > .cl-dropdown-menu {
-  right: 100%;
-  left: auto;
+  .cl-dropdown-submenu:hover > .cl-dropdown-menu,
+  .cl-dropdown-submenu > .cl-dropdown-menu.is-open {
+    display: block;
+  }
+
+  // Sem espaço à direita: o JS marca `.cl-dropdown-submenu-left` e o submenu abre
+  // para a esquerda.
+  .cl-dropdown-submenu-left > .cl-dropdown-menu {
+    right: 100%;
+    left: auto;
+  }
 }

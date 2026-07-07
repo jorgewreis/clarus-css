@@ -1,33 +1,35 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.cl-badge {
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
-  padding: 0 8px;
-  border-radius: var(--cl-radius-sm);
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-subtle);
-  font-size: $font-size-xs;
-  font-weight: $font-weight-medium;
-}
-
-@each $name, $color in $theme-colors {
-  .cl-badge-#{$name} {
-    color: color-contrast($color);
-    background-color: var(--cl-color-#{$name});
+@layer components {
+  .cl-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 20px;
+    padding: 0 8px;
+    border-radius: var(--cl-radius-sm);
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-subtle);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
   }
-}
 
-.cl-badge-sm {
-  min-height: 16px;
-  padding: 0 6px;
-  font-size: $font-size-xs;
-}
+  @each $name, $color in $theme-colors {
+    .cl-badge-#{$name} {
+      color: color-contrast($color);
+      background-color: var(--cl-color-#{$name});
+    }
+  }
 
-.cl-badge-lg {
-  min-height: 24px;
-  padding: 0 10px;
-  font-size: $font-size-md;
+  .cl-badge-sm {
+    min-height: 16px;
+    padding: 0 6px;
+    font-size: $font-size-xs;
+  }
+
+  .cl-badge-lg {
+    min-height: 24px;
+    padding: 0 10px;
+    font-size: $font-size-md;
+  }
 }

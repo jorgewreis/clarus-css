@@ -1,11 +1,13 @@
-.u-shadow-sm {
-  box-shadow: var(--cl-shadow-sm);
-}
+@layer utilities {
+  .u-shadow-sm {
+    box-shadow: var(--cl-shadow-sm);
+  }
 
-.u-shadow {
-  box-shadow: var(--cl-shadow-md);
-}
+  .u-shadow {
+    box-shadow: var(--cl-shadow-md);
+  }
 
-.u-shadow-lg {
-  box-shadow: var(--cl-shadow-lg);
+  .u-shadow-lg {
+    box-shadow: var(--cl-shadow-lg);
+  }
 }

@@ -1,0 +1,103 @@
+// Fonte do relatório de contraste (`npm run contrast`). Não é publicado nem
+// importado pelo framework — só existe para o Node compilar e capturar as
+// mensagens `@debug` via scripts/contrast.mjs. Replica (não reimporta, por
+// serem `@each` isolados e não mixins reaproveitáveis) as fórmulas de
+// packages/clarus-core/scss/tokens/_root.scss e
+// packages/clarus-core/scss/themes/_dark.scss — se essas fórmulas mudarem,
+// atualize os pares aqui.
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+@use "settings" as *;
+@use "tools" as *;
+
+$dark-color-weights: (
+  primary: 95%,
+  secondary: 90%,
+  success: 65%,
+  warning: 65%,
+  danger: 95%,
+  info: 100%
+);
+
+@function fmt($ratio) {
+  @return math.div(math.round($ratio * 100), 100);
+}
+
+@mixin check($id, $fg, $bg, $min: 4.5) {
+  $ratio: contrast-ratio($fg, $bg);
+  $aa: "FAIL";
+  $aaa: "-";
+
+  @if $ratio >= $min {
+    $aa: "AA";
+  }
+
+  @if $ratio >= 7 {
+    $aaa: "AAA";
+  }
+
+  @debug "#{$id}|#{fmt($ratio)}|#{$aa}|#{$aaa}";
+}
+
+// Texto base (claro)
+@include check("light: text/surface", $color-gray-900, $color-white);
+@include check("light: muted/surface", $color-gray-600, $color-white);
+@include check("light: text/subtle", $color-gray-900, $color-gray-100);
+
+// Botões sólidos (claro) — cor decidida por color-contrast() no build.
+@each $name, $color in $theme-colors {
+  @include check(
+    "light: btn-#{$name} text/bg",
+    color-contrast($color),
+    $color,
+    3
+  );
+}
+
+// Alerts (claro) — tint-color()/shade-color() do mesmo primitivo.
+@each $name, $color in $theme-colors {
+  @include check(
+    "light: alert-#{$name} text/bg",
+    shade-color($color),
+    tint-color($color)
+  );
+}
+
+// Texto base (escuro)
+$dark-text: color.to-space(#f1f3f4, oklch);
+$dark-muted: color.to-space(#bdc1c6, oklch);
+$dark-surface: color.to-space(#202124, oklch);
+
+@include check("dark: text/surface", $dark-text, $dark-surface);
+@include check("dark: muted/surface", $dark-muted, $dark-surface);
+
+// Botões sólidos (escuro) — o texto continua o branco/preto escolhido no
+// claro (é um valor estático gravado em `.cl-btn-{name}`, não recalculado
+// por tema); o fundo é o `--cl-color-{name}` redefinido pelo tema escuro
+// (mistura em direção ao branco). Ratio baixo aqui é uma regressão real:
+// sinaliza que o texto do botão ficou ilegível no escuro.
+@each $name, $color in $theme-colors {
+  $dark-bg: color.mix(
+    $color,
+    $color-white,
+    map.get($dark-color-weights, $name),
+    $method: oklch
+  );
+
+  @include check(
+    "dark: btn-#{$name} text(light)/bg(dark)",
+    color-contrast($color),
+    $dark-bg,
+    3
+  );
+}
+
+// Alerts (escuro) — pesos calibrados em themes/_dark.scss
+// ($dark-alert-text-weight/$dark-alert-bg-weight) para ≥4.5:1.
+@each $name, $color in $theme-colors {
+  $text: color.mix($color, $color-white, 55%, $method: oklch);
+  $bg: color.mix($color, $color-gray-900, 15%, $method: oklch);
+
+  @include check("dark: alert-#{$name} text/bg", $text, $bg);
+}

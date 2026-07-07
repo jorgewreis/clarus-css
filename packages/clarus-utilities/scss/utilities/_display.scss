@@ -1,19 +1,21 @@
-.u-d-none {
-  display: none;
-}
+@layer utilities {
+  .u-d-none {
+    display: none;
+  }
 
-.u-d-block {
-  display: block;
-}
+  .u-d-block {
+    display: block;
+  }
 
-.u-d-inline {
-  display: inline;
-}
+  .u-d-inline {
+    display: inline;
+  }
 
-.u-d-inline-block {
-  display: inline-block;
-}
+  .u-d-inline-block {
+    display: inline-block;
+  }
 
-.u-d-flex {
-  display: flex;
+  .u-d-flex {
+    display: flex;
+  }
 }

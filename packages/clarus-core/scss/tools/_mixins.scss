@@ -68,10 +68,35 @@
   @return $color-black;
 }
 
+// Razão de contraste WCAG entre duas cores (1–21). Usada pelo relatório de
+// contraste do build (`npm run contrast`, `scripts/contrast-report.scss`) —
+// ver docs/reference/contrast-report.md para os pares auditados.
+@function contrast-ratio($foreground, $background) {
+  $l1: relative-luminance($foreground) + 0.05;
+  $l2: relative-luminance($background) + 0.05;
+
+  @if $l1 > $l2 {
+    @return math.div($l1, $l2);
+  }
+
+  @return math.div($l2, $l1);
+}
+
 @function tint-color($color, $weight: 15%) {
-  @return color.mix($color, $color-white, $weight);
+  @return color.mix($color, $color-white, $weight, $method: oklch);
 }
 
 @function shade-color($color, $weight: 50%) {
-  @return color.mix($color, $color-black, $weight);
+  @return color.mix($color, $color-black, $weight, $method: oklch);
+}
+
+// Fallback sRGB de uma cor OKLCH para navegadores sem suporte a `oklch()`
+// (ver `@supports` em tokens/_root.scss e themes/_dark.scss). Faz gamut
+// mapping antes da conversão — misturas em OKLCH frequentemente caem fora do
+// gamut sRGB, e converter sem mapear gera `rgb()`/`hsl()` com canais
+// inválidos (saturação > 100%, etc.).
+@function rgb-fallback($color) {
+  $mapped: color.to-gamut($color, $space: rgb, $method: local-minde);
+
+  @return color.to-space($mapped, rgb);
 }

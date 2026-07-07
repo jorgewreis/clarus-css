@@ -1,16 +1,18 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  line-height: var(--cl-line-height-base);
-  text-size-adjust: 100%;
-}
+  html {
+    line-height: var(--cl-line-height-base);
+    text-size-adjust: 100%;
+  }
 
-body {
-  margin: 0;
-  color: var(--cl-color-text);
-  background-color: var(--cl-color-surface);
+  body {
+    margin: 0;
+    color: var(--cl-color-text);
+    background-color: var(--cl-color-surface);
+  }
 }

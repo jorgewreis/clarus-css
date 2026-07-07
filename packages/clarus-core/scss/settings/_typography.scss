@@ -1,11 +1,27 @@
 $font-family-sans: "Plus Jakarta Sans", sans-serif !default;
 $font-family-mono: "Source Code Pro", monospace !default;
 
-$font-size-xs: 0.65rem !default;
+// Escala compacta: corpo (md) ~13px, piso (xs) ~11px — reservado a
+// texto de apoio (meta/label), nunca corpo de leitura.
+$font-size-xs: 0.6875rem !default;
 $font-size-sm: 0.75rem !default;
-$font-size-md: 0.85rem !default;
+$font-size-md: 0.8125rem !default;
 $font-size-lg: 1rem !default;
+$font-size-xl: 1.25rem !default;
+
+// Escala de headings, deliberadamente menor que o padrão do navegador
+// (preferência por texto compacto — ver docs/internal/plans).
+$font-size-h1: 1.75rem !default;
+$font-size-h2: 1.5rem !default;
+$font-size-h3: 1.3125rem !default;
+$font-size-h4: 1.125rem !default;
+$font-size-h5: 1rem !default;
+$font-size-h6: 0.875rem !default;
 
 $font-weight-regular: 400 !default;
 $font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
 $line-height-base: 1.5 !default;
+$line-height-heading: 1.25 !default;
