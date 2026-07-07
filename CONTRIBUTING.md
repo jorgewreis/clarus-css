@@ -22,11 +22,17 @@ npm install
 - `npm run lint` — roda o stylelint sobre `scss/**/*.scss` e `packages/*/scss/**/*.scss`.
 - `npm test` — roda os testes unitários (Vitest).
 - `npm run test:visual` — roda a regressão visual (Playwright).
-- `npm run contrast` — audita contraste WCAG dos tokens de cor (ver
-  `docs/reference/contrast-report.md`); rode depois de alterar cores/pesos de
-  mistura.
-- `npm run size` — mede o tamanho gzip das distribuições e atualiza
-  `docs/reference/size-baseline.json`.
+- `npm run test:a11y` — audita os mockups com axe-core (Playwright, regras
+  WCAG 2.1 A/AA); ver [matriz de acessibilidade](docs/reference/accessibility-matrix.md).
+- `npm run contrast` / `npm run contrast:check` — audita contraste WCAG dos
+  tokens de cor (ver `docs/reference/contrast-report.md`); rode depois de
+  alterar cores/pesos de mistura. A variante `:check` falha o build se
+  algum par ficar abaixo de AA (gate do CI).
+- `npm run size` / `npm run size:check` — mede o tamanho gzip das
+  distribuições e atualiza `docs/reference/size-baseline.json`. A variante
+  `:check` falha o build se algum budget (definido em `scripts/size.mjs`)
+  for ultrapassado (gate do CI). Inclua o relatório de tamanho no
+  `CHANGELOG.md` de toda release que altere `dist/`.
 
 ## Convenções de SCSS
 

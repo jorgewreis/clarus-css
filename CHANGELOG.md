@@ -7,6 +7,40 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Fase 3 do plano mestre — qualidade, A11y e performance como gate
+  (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
+  - Gate `npm run test:a11y` (axe-core via Playwright, regras WCAG 2.1
+    A/AA) sobre todo mockup em `mockup/*.html`, rodando no CI a cada PR.
+    Descobriu e corrigiu violações reais de contraste em texto sobre
+    fundo (link/nav ativo, botão `outline-*`, feedback de formulário,
+    step/timeline de erro) que usavam a cor de token "crua" — agora usam
+    `--cl-alert-{nome}-text` (já calibrado ≥4.5:1 nos dois temas) — e uma
+    violação de nome acessível ausente em `role="progressbar"`
+    (`aria-label` adicionado nos exemplos, guia atualizado em
+    [`docs/components/progress.md`](docs/components/progress.md)).
+  - [Matriz de acessibilidade](docs/reference/accessibility-matrix.md)
+    publicada em `docs/reference/`: teclado, ARIA e gestão de foco por
+    componente, com link pra seção "A11y" de cada página.
+  - Budgets de tamanho como blocker no CI: `npm run size:check` falha o
+    build se `layout` (core), `components`, `clarus` (full) ou o JS
+    ultrapassarem os tetos do plano mestre (12/18/32/14 KB gzip). Relatório
+    de tamanho gzip desta release (`npm run size`):
+
+    | Distribuição | Bruto | Gzip | Budget |
+    | --- | --- | --- | --- |
+    | `css/layout.min.css` | 13.39 KB | 3.10 KB | 12 KB |
+    | `css/forms.min.css` | 18.24 KB | 4.26 KB | — |
+    | `css/components.min.css` | 48.41 KB | 9.19 KB | 18 KB |
+    | `css/helpers.min.css` | 41.59 KB | 7.24 KB | — |
+    | `css/fonts.min.css` | 1.47 KB | 0.40 KB | — |
+    | `css/clarus.min.css` | 97.08 KB | 15.58 KB | 32 KB |
+    | `js/clarus.min.js` | 51.17 KB | 11.19 KB | 14 KB |
+
+  - `npm run contrast:check` (mesma auditoria de `npm run contrast`, mas
+    falha o build abaixo de AA) também vira gate do CI.
+
 ### Changed
 
 - Fase 2 do plano mestre — documentação profissional: `guide.md` (76KB, um

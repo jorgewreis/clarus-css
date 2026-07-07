@@ -54,7 +54,7 @@
     }
 
     .cl-btn-outline-#{$name} {
-      --cl-btn-color: var(--cl-color-#{$name});
+      --cl-btn-color: var(--cl-alert-#{$name}-text);
       --cl-btn-bg: transparent;
       --cl-btn-border-color: var(--cl-color-#{$name});
     }

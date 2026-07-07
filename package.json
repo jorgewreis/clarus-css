@@ -75,16 +75,20 @@
     "lint:scss": "stylelint \"scss/**/*.scss\" \"packages/*/scss/**/*.scss\"",
     "lint": "npm run lint:scss",
     "test": "vitest run",
-    "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual": "playwright test tests/visual",
+    "test:visual:update": "playwright test tests/visual --update-snapshots",
+    "test:a11y": "playwright test tests/a11y",
     "size": "node scripts/size.mjs",
+    "size:check": "node scripts/size.mjs --check",
     "contrast": "node scripts/contrast.mjs",
+    "contrast:check": "node scripts/contrast.mjs --strict",
     "prepublishOnly": "npm run build && npm test"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "autoprefixer": "^10.5.2",
     "chokidar": "^5.0.0",

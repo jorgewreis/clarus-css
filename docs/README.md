@@ -75,6 +75,10 @@ Cada componente tem um exemplo funcional dedicado (claro + escuro) em
   fallbacks, `.browserslistrc`.
 - [Relatório de contraste](reference/contrast-report.md) — auditoria WCAG
   dos tokens de cor.
+- [Matriz de acessibilidade](reference/accessibility-matrix.md) — teclado,
+  ARIA e gestão de foco por componente.
+- [Baseline de tamanho](reference/size-baseline.json) — medição gzip das
+  distribuições, com budgets no CI.
 - [Definições do projeto](reference/definitions.md) — decisões de
   arquitetura e escopo.
 

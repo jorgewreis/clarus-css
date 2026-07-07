@@ -59,9 +59,12 @@ presente = carregando; progress: `--cl-progress-value` = progresso atual).
   visual por padrão.
 - Progress: para expor o valor a leitores de tela, adicione
   `role="progressbar"` + `aria-valuenow`/`aria-valuemin="0"`/
-  `aria-valuemax="100"` no `.cl-progress` (mantidos em sincronia com
-  `--cl-progress-value` pela sua aplicação — o framework não injeta
-  automaticamente).
+  `aria-valuemax="100"` **e um nome acessível** (`aria-label="Progresso: 60%"`
+  ou `aria-labelledby` apontando pro rótulo visível) no `.cl-progress`
+  (mantidos em sincronia com `--cl-progress-value` pela sua aplicação — o
+  framework não injeta automaticamente). Sem nome acessível, o
+  `role="progressbar"` é rejeitado por leitores de tela (gate `axe` no CI:
+  regra `aria-progressbar-name`).
 - A animação de listras (`.cl-progress-bar-animated`) para sob
   `prefers-reduced-motion: reduce`; a rotação do spinner desacelera (não
   para completamente, pra não parecer travado) no mesmo cenário.

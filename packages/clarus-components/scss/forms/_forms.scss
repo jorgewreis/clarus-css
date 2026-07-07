@@ -57,12 +57,12 @@
   }
 
   .cl-valid-feedback {
-    color: var(--cl-color-success);
+    color: var(--cl-alert-success-text);
     background-color: var(--cl-feedback-success-bg);
   }
 
   .cl-invalid-feedback {
-    color: var(--cl-color-danger);
+    color: var(--cl-alert-danger-text);
     background-color: var(--cl-feedback-danger-bg);
   }
 

@@ -23,6 +23,19 @@ const targets = [
   "js/clarus.min.js",
 ];
 
+// Budgets gzip (bytes) do plano mestre (docs/internal/plans/), calibrados
+// ao baseline medido nesta fase — `layout` é a distribuição "core"
+// (reset/base/grid/tokens). `forms`/`helpers`/`fonts` não têm meta própria
+// no plano; ficam de fora do gate (só informativos abaixo).
+const budgets = {
+  "css/layout.min.css": 12 * 1024,
+  "css/components.min.css": 18 * 1024,
+  "css/clarus.min.css": 32 * 1024,
+  "js/clarus.min.js": 14 * 1024,
+};
+
+const check = process.argv.includes("--check");
+
 async function measure(relPath) {
   const abs = path.join(distDir, relPath);
   const raw = await fs.readFile(abs);
@@ -39,18 +52,36 @@ async function run() {
 
   console.log("Tamanho das distribuições (dist/, minificado):\n");
   console.log(
-    ["Arquivo".padEnd(24), "Bruto".padStart(10), "Gzip".padStart(10)].join(
-      "  ",
-    ),
+    [
+      "Arquivo".padEnd(24),
+      "Bruto".padStart(10),
+      "Gzip".padStart(10),
+      "Budget".padStart(10),
+    ].join("  "),
   );
+
+  let overBudget = 0;
   for (const r of results) {
+    const budget = budgets[r.path];
+    const status = budget === undefined ? "" : r.gzipBytes > budget ? "✗" : "✓";
+    if (budget !== undefined && r.gzipBytes > budget) overBudget += 1;
     console.log(
       [
         r.path.padEnd(24),
         fmtKb(r.bytes).padStart(10),
         fmtKb(r.gzipBytes).padStart(10),
+        (budget === undefined ? "-" : `${status} ${fmtKb(budget)}`).padStart(10),
       ].join("  "),
     );
+  }
+
+  console.log(
+    `\n${overBudget} de ${Object.keys(budgets).length} distribuições com budget acima do limite.`,
+  );
+
+  if (overBudget > 0 && check) {
+    console.error("\n--check: budget de tamanho estourado é um erro de build.");
+    process.exitCode = 1;
   }
 
   const baseline = {

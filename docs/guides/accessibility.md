@@ -87,7 +87,15 @@ de apoio é definido por você.
 ## Testes automatizados
 
 A regressão visual (`npm run test:visual`, Playwright) cobre
-carregamento/interação sem erros de console, mas **não** é um gate de
-acessibilidade. Um gate `axe-core` sobre os mockups está planejado para a
-Fase 3 do roadmap — até lá, valide manualmente com um leitor de tela e
-navegação só por teclado antes de considerar um componente pronto.
+carregamento/interação sem erros de console, mas não é um gate de
+acessibilidade. `npm run test:a11y` roda o axe-core (regras WCAG 2.1 A/AA)
+contra todo mockup em `mockup/*.html` e falha o build ao encontrar
+violações (nome acessível ausente, contraste insuficiente, papel ARIA
+inválido etc.) — roda no CI a cada PR. Veja a cobertura por componente na
+[matriz de acessibilidade](../reference/accessibility-matrix.md).
+
+Mesmo com o gate automatizado, valide manualmente com um leitor de tela e
+navegação só por teclado antes de considerar um componente pronto — axe
+cobre um subconjunto de regras verificáveis por máquina (contraste, nomes,
+papéis), não a experiência real de uso (ordem de leitura, clareza dos
+anúncios, foco percebido).
