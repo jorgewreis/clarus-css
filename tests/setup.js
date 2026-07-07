@@ -28,3 +28,7 @@ Object.defineProperty(document.documentElement, "clientHeight", { configurable: 
 // para js/core/transition.js funcionar independente da configuração do ambiente.
 window.requestAnimationFrame = window.requestAnimationFrame || ((callback) => setTimeout(() => callback(Date.now()), 16));
 window.cancelAnimationFrame = window.cancelAnimationFrame || ((id) => clearTimeout(id));
+
+// jsdom não implementa scrollIntoView (js/combobox.js usa pra manter a opção
+// ativa visível durante a navegação por teclado).
+Element.prototype.scrollIntoView = Element.prototype.scrollIntoView || (() => {});

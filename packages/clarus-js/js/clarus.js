@@ -17,3 +17,4 @@ export { Stepper } from "./stepper.js";
 export { Breadcrumb } from "./breadcrumb.js";
 export { NotificationCenter } from "./notification-center.js";
 export { NestedMenu } from "./nested-menu.js";
+export { Combobox } from "./combobox.js";

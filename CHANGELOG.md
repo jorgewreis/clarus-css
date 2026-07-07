@@ -9,6 +9,25 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.3 — componente Combobox/Autocomplete
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): `<input>` de
+  texto com listbox de sugestões que filtra por substring conforme o
+  usuário digita, seguindo o padrão
+  [WAI-ARIA Combobox (List Autocomplete)](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
+  — `role="combobox"`/`aria-autocomplete`/`aria-controls`/`aria-expanded`
+  no input, `role="listbox"`/`role="option"`/`aria-selected` na lista,
+  destaque de navegação via `aria-activedescendant` (foco nunca sai do
+  input). Teclado completo (`ArrowUp`/`ArrowDown` com wrap,
+  `Home`/`End`, `Enter` seleciona, `Escape` fecha sem alterar o valor).
+  Reusa `js/core/positioning.js` e as classes `.cl-dropdown-menu`/
+  `.cl-dropdown-item` do Dropdown/Select para a listbox flutuante — só
+  `packages/clarus-components/scss/components/_combobox.scss` (wrapper +
+  `max-height` com scroll) é novo em CSS. Item opcional `data-cl-empty`
+  para mensagem de "sem resultados", com visibilidade alternada
+  automaticamente. Testes unitários (13 casos), mockup em
+  `mockup/combobox.html`, documentado em
+  [`docs/components/combobox.md`](docs/components/combobox.md).
+
 - Fase final pré-v1.0.0, sub-fase 5.2 — theming multi-brand
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): suporte a
   `data-brand="x"` sobre a camada de tokens semânticos existente,
