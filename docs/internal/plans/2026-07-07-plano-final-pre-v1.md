@@ -84,60 +84,107 @@ tokens exportáveis para Figma via tokens JSON) em vez de fingir que
 "showcase de produção" ou "casos de sucesso" podem ser produzidos sem
 usuários reais. Sinalizo isso explicitamente abaixo em cada item.
 
-## 5. Escopo aprovado, em ordem de execução
+## 5. Escopo aprovado, em ordem de execução (por prioridade)
 
 A ordem importa: cada bloco é uma entrega verificável (build+lint+testes
-verdes) antes de começar o próximo, para não acumular risco. Vou tratar
-isso como sub-fases numeradas (4.1 a 4.7) dentro desta fase final.
+verdes) antes de começar o próximo, para não acumular risco. A partir de
+2026-07-07 o escopo passou a ser organizado nas prioridades P1–P4 definidas
+pelo usuário (P1 é a nomenclatura que dou aqui ao que já estava aprovado na
+seção 4 antes das prioridades existirem; P2–P4 vieram depois e têm o texto
+literal do pedido preservado como referência).
 
-### 5.1 Layout avançado (rascunho, sem dono — baixo risco, primeiro)
-- `.cl-stack`/`.cl-cluster`/`.cl-sidebar` (utilitários de layout, CSS puro).
+### P1 — Fase 4 "núcleo" (já aprovado na seção 4, sem mudança)
+
+#### 5.1 Layout avançado — ✅ concluída (2026-07-07)
+- `.cl-stack`/`.cl-cluster`/`.cl-sidebar` (utilitários de layout, CSS puro)
+  em `packages/clarus-core/scss/layout/`, com modificador de gap
+  `.cl-{stack,cluster,sidebar}-gap-{0..5}`; Sidebar com
+  `.cl-sidebar-width-{sm..xxxl}` e `.cl-sidebar-reverse`.
 - Utilitários de posição sticky (`.u-sticky-top`, `.u-sticky-bottom`) com
-  tokens de offset.
-- Utilitários de `@container` (`--cl-cq-sm/md/lg` + classes de breakpoint
-  de container) — a base pedida no rascunho 15.2.
+  tokens de offset (`--cl-sticky-top`/`-bottom`), em
+  `packages/clarus-utilities/scss/utilities/_position.scss`.
+- Utilitários de `@container` (`--cl-cq-sm/md/lg` + classes
+  `.u-cq`/`.u-cq-{sm,md,lg}-d-*`) — a base pedida no rascunho 15.2, em
+  `_container-queries.scss`.
+- Documentado em `docs/guides/layout-advanced.md`, com exemplo em
+  `mockup/layout.html`. Suite completa verde (lint, build, unit, visual,
+  a11y, contrast, size) — baseline visual win32 de `layout.html`
+  regenerada (conteúdo novo mudou a altura da página).
 
-### 5.2 Theming multi-brand
-- Suporte a `data-brand="x|y|z"` sobre a camada de tokens semânticos já
+#### 5.2 Theming multi-brand — ✅ concluída (2026-07-07)
+- Suporte a `data-brand="x"` sobre a camada de tokens semânticos já
   existente (sem novo componente, só uma camada de override de tokens,
-  igual ao que `_dark.scss` já faz para `data-theme`).
-- Um brand de exemplo (além do padrão) documentado em `docs/guides/theming.md`
-  para provar que a troca em runtime funciona sem recompilar CSS.
+  igual ao que `_dark.scss` já faz para `data-theme`) — só a cor de ação
+  primária muda por marca; `secondary`/`success`/`warning`/`danger`/`info`
+  continuam universais. Combina corretamente com `data-theme="dark"`
+  (seletor `[data-brand="x"][data-theme="dark"]`, maior especificidade,
+  mesma técnica de mistura OKLCH do tema escuro padrão).
+- Brand de exemplo `violet` em
+  `packages/clarus-core/scss/themes/_brands.scss`, provando que a troca em
+  runtime funciona sem recompilar CSS — documentado em
+  `docs/guides/theming.md#multi-brand`, demo em `mockup/theming.html`, par
+  de contraste auditado em `scripts/contrast-report.scss`/`npm run contrast`.
+- **Limitação conhecida, documentada no guia**: `.cl-btn-primary`/
+  `.cl-badge-primary` (preenchimento sólido) calculam a cor do texto via
+  `color-contrast()` em tempo de **build**, a partir do primary padrão —
+  não recalculam por marca. Brands com primitivo muito claro precisam
+  sobrescrever `--cl-btn-color`/`--cl-badge-color` manualmente.
+- Suite completa verde (lint, build, unit, visual — nova baseline de
+  `theming.html` —, a11y, contrast, size).
 
-### 5.3 Combobox/Autocomplete
-- Reusa `js/core/positioning.js` + a base de Dropdown/Select já existentes.
-- DoD completo (estados, teclado, ARIA `combobox`/`listbox`, tokens, testes
-  unit + visual + a11y).
+#### 5.3 Combobox/Autocomplete — ✅ concluída (2026-07-07)
+- `packages/clarus-js/js/combobox.js` reusa `js/core/positioning.js` +
+  `.cl-dropdown-menu`/`.cl-dropdown-item` do Dropdown/Select; só
+  `_combobox.scss` (wrapper + `max-height`/scroll) é CSS novo.
+- Padrão WAI-ARIA Combobox (List Autocomplete): `role="combobox"` +
+  `aria-autocomplete`/`aria-controls`/`aria-expanded` no input,
+  `role="listbox"`/`role="option"`/`aria-selected` na lista,
+  `aria-activedescendant` pro destaque (foco nunca sai do input — opções
+  não são focáveis, ao contrário do Dropdown).
+- Teclado completo: `ArrowUp`/`ArrowDown` (com wrap), `Home`/`End`,
+  `Enter` seleciona, `Escape` fecha sem alterar o valor.
+- Item opcional `data-cl-empty` pra mensagem de "sem resultados",
+  visibilidade alternada automaticamente pelo filtro.
+- DoD completo: 13 testes unitários, mockup (`mockup/combobox.html`,
+  validado interativamente via script Playwright — filtro, navegação,
+  seleção por teclado/clique, Escape, clique fora, todos corretos),
+  a11y (axe) e visual regression verdes, documentado em
+  `docs/components/combobox.md`. Budget de tamanho do JS: +0.87 KB gzip
+  (11.19 → 12.06 KB de um teto de 14 KB).
 
-### 5.4 Datepicker/Timepicker
-- CSS-only quando possível (`<input type="date">`/`time` estilizado) com
-  variante JS opcional para um calendar picker customizado, seguindo o
-  mesmo padrão de auto-init (`data-cl="datepicker"`) dos demais componentes.
+#### 5.4 Datepicker/Timepicker — ✅ concluída (2026-07-07)
+- CSS-only: `<input type="date">`/`"time"` herdam `.cl-form-control`;
+  corrigido o indicador nativo (ícone) invisível no tema escuro
+  (`filter: invert(1)` sob `[data-theme="dark"]`).
+- Datepicker customizado (`packages/clarus-js/js/datepicker.js`): padrão
+  WAI-ARIA Date Picker Dialog adaptado a popup não-modal, `role="combobox"`
+  no input (obrigatório — `aria-expanded` não é permitido no role
+  `textbox` implícito), `role="grid"`/`"row"`/`"gridcell"` na grade,
+  roving `tabindex` real (dias focáveis, diferente do Combobox). Teclado
+  completo (setas cruzam semana/mês, `Home`/`End`, `PageUp`/`PageDown`
+  por mês, `Shift+PageUp`/`Down` por ano, `Enter`/`Space`/`Escape`).
+- Dois bugs reais pegos e corrigidos durante o desenvolvimento: (1)
+  `aria-expanded` reprovado pelo axe por causa do role errado — resolvido
+  com `role="combobox"`; (2) setas do teclado sem efeito nenhum com foco
+  no input (o keydown do grid só reagia com foco já num dia) — resolvido
+  com handler dedicado no input que abre/move o foco pro grid em
+  `ArrowDown`/`ArrowUp`, com guarda contra reabertura indevida ao
+  devolver o foco após seleção/Escape.
+- 17 testes unitários, mockup (`mockup/datepicker.html`, valida datepicker
+  customizado + `date`/`time` nativos lado a lado), a11y e visual
+  regression verdes. Documentado em `docs/components/datepicker.md`.
+- ⚠️ **Budget de tamanho do JS ficou apertado**: 13.82 KB gzip de um teto
+  de 14 KB (só ~180 bytes de folga). O teto foi calibrado antes da decisão
+  de trazer a Fase 4 inteira pra esta fase final — DataTable (5.5) e
+  Command palette/Tree view (5.6) quase certamente estourariam o budget
+  atual. Precisa de decisão antes de 5.5: recalibrar o budget do JS pra
+  cima (quanto?), ou considerar `dist/js` com entradas por componente
+  (import só do que usa) em vez de um bundle único — ver seção 7.
 
-### 5.5 DataTable v1
-- Sort + filter + paginação client-side sobre `<table>` semântica
-  existente; reusa `_pagination.scss` e o design de Table já shipado.
-
-### 5.6 Depois do DataTable (rascunho: "depois")
+#### 5.6 Depois do DataTable (rascunho: "depois")
 - Command palette, Tree view — mesmo DoD dos demais componentes.
 
-### 5.7 Ecossistema (com a ressalva da seção 4)
-- `clarus-icons`: pacote de ícones SVG opcional, tree-shakeable, mesmo
-  padrão de workspace dos demais `packages/*`.
-- `clarus-cli`: comandos `build`/`theme`/`analyze` já existentes hoje como
-  scripts npm, empacotados como CLI instalável.
-- Wrapper mínimo para **um** framework (React) — componente-fino que só
-  aplica `data-cl`/classes e delega pro JS vanilla existente; Vue/Svelte
-  ficam de fora desta fase (mesmo princípio, replicável depois, mas
-  triplica a superfície de manutenção sem usuário validando ainda).
-- Tokens exportados em JSON (formato compatível com Figma Tokens/Style
-  Dictionary) — a "integração com Figma" possível de entregar sem depender
-  de conta/plugin de terceiros.
-- "Showcase de produção" fica **fora** desta fase — não posso gerar casos
-  de uso reais de terceiros; substituo por manter a página "kitchen sink"
-  (item novo, seção 3) como demo interna.
-
-### 5.8 DX e supply-chain (itens novos, podem correr em paralelo aos acima)
+#### 5.8 DX e supply-chain (itens novos, podem correr em paralelo aos acima)
 - `.d.ts` para a API JS pública (`Clarus`, `Modal`, `Dropdown`, `Select`,
   `Combobox`, `DataTable` etc. conforme forem entrando).
 - `npm publish --provenance` no workflow de release (a criar).
@@ -146,17 +193,125 @@ isso como sub-fases numeradas (4.1 a 4.7) dentro desta fase final.
 - Página "kitchen sink" em `mockup/`, atualizada conforme cada componente
   novo entra.
 
-### 5.9 Corte da v1.0.0 (último passo, só depois de 5.1–5.8 verdes)
+### P2 — Excelência de produto (texto literal do pedido, 2026-07-07)
+
+> Componentes de dados avançados: DataTable completa
+> (ordenação/filtro/paginação/estados/teclado). Matriz de compatibilidade
+> explícita por feature moderna: `:has`, `@container`, `color-mix`, fallback
+> documentado. Guia de migração formal: vindo de Bootstrap/Tailwind com
+> equivalências de classes/componentes.
+
+#### 5.5 DataTable v1 (substitui a versão anterior deste item — escopo ampliado)
+- Sort + filter + paginação client-side sobre `<table>` semântica
+  existente; reusa `_pagination.scss` e o design de Table já shipado.
+- **Estados** (vazio/carregando/erro, reusando Empty State/Skeleton) e
+  **teclado completo** (navegação por célula/linha, ordenação via
+  `Enter`/`Space` no cabeçalho, `aria-sort`) — DoD completo, não um MVP.
+
+#### 5.10 Matriz de compatibilidade por feature moderna (novo)
+- Expande `docs/reference/browser-support.md` com uma tabela explícita por
+  feature usada no CSS (`@layer`, `:has()`, `@container`, `color-mix()`,
+  custom media/OKLCH) × navegador/versão mínima × comportamento de
+  fallback documentado (o que acontece quando a feature não é suportada).
+- Sem isso hoje o browser-support é geral (browserslist), não por feature —
+  esta é uma lacuna real de transparência técnica frente a frameworks
+  "top-10" que documentam isso explicitamente (ex.: Bootstrap "browser
+  support" por componente).
+
+#### 5.11 Guia de migração formal — Bootstrap/Tailwind → Clarus (novo)
+- Diferente do `docs/guides/migration-v1.md` existente (que documenta a
+  migração *interna* do rename `cl-` da Fase 0), este é um guia novo
+  **externo**: tabela de equivalência de classes/componentes
+  (`.btn.btn-primary` → `.cl-btn.cl-btn-primary`, utilitários Tailwind
+  `flex`/`gap-4` → `.u-d-flex`/`.u-gap-4` etc.) para quem migra de outro
+  framework, não de uma versão antiga do Clarus.
+
+### P3 — Liderança/ecossistema (texto literal do pedido, 2026-07-07)
+
+> Plugins e extensões oficiais (charts wrappers, forms extras, presets de
+> tema). Integrações opcionais (React/Vue/Svelte wrappers finos). Showcase
+> de produção (casos reais com métricas).
+
+#### 5.7 Ecossistema (escopo ampliado por P3 — ver ressalvas abaixo)
+- `clarus-icons`: pacote de ícones SVG opcional, tree-shakeable, mesmo
+  padrão de workspace dos demais `packages/*`.
+- `clarus-cli`: comandos `build`/`theme`/`analyze` já existentes hoje como
+  scripts npm, empacotados como CLI instalável.
+- **Presets de tema**: 2–3 arquivos de tokens prontos (ex.: "corporate",
+  "vibrant") sobre a mesma camada de `data-brand` da P1/5.2 — isso é
+  puramente CSS/tokens, sem dependência externa, plenamente entregável.
+- **Wrapper React** (decidido em 2026-07-07) — só React nesta fase.
+  Componente-fino que aplica `data-cl`/classes e delega pro JS vanilla
+  existente. Vue/Svelte ficam de fora: sem nenhum consumidor real ainda
+  validando o padrão, manter 3 pacotes/3 suítes de teste triplicaria a
+  superfície de manutenção sem necessidade comprovada. O wrapper React
+  serve de molde — depois que houver uso real (issues, feedback de quem
+  consome via React), replicar pra Vue/Svelte fica rápido e já testado em
+  produção.
+- **Charts: tokens/tema agnóstico** (decidido em 2026-07-07) — em vez de
+  wrapper de uma lib específica, entrega um guia (`docs/guides/charts.md`
+  ou seção em `theming.md`) + tokens CSS dedicados (cores de série,
+  grid/eixos, tooltip) que qualquer lib de gráfico (Chart.js, ECharts,
+  Recharts etc.) pode consumir. Zero dependência nova — mantém a proposta
+  de valor de zero dependências em runtime — e zero manutenção atrelada à
+  API de uma lib de terceiro que muda com o tempo.
+- **Forms extras** (decidido em 2026-07-07): **Range/Slider** (`<input
+  type="range">` estilizado, com marcações/valor visível, tokens de
+  trilha/thumb) e **Upload avançado** (evolução do `file-upload` atual:
+  múltiplos arquivos, preview por arquivo — nome/tamanho/thumbnail de
+  imagem —, progresso individual e remoção por item; o `file-upload`
+  existente vira a variante "simples", este é a variante "avançada" do
+  mesmo componente). DoD completo (estados, teclado, ARIA, tokens, testes)
+  como os demais.
+- **"Showcase de produção"** (decidido em 2026-07-07): **placeholder
+  estrutural** por enquanto. Página `docs/showcase.md` (ou seção em
+  `docs/README.md`) com layout/estrutura prontos e um aviso "em
+  construção — em breve" no lugar de casos fictícios ou métricas
+  inventadas. Fica pronta pra receber conteúdo assim que houver um projeto
+  real usando o Clarus pra citar.
+
+### P4 — Impacto de mercado imediato (texto literal do pedido, 2026-07-07)
+
+> Docs como aplicação pública (não só docs em markdown): playground
+> interativo, copy 1-click, exemplos vivos por componente. Pacotes de
+> adoção rápida: templates oficiais (dashboard, auth, landing, admin).
+> Página comparativa oficial: "Clarus vs Bootstrap/Tailwind" com
+> benchmarks e trade-offs.
+
+#### 5.12 Docs como aplicação pública — **adiado para depois do v1.0.0** (decidido em 2026-07-07)
+- Mantida a decisão original (seção 4, item 2): docs seguem em markdown
+  para o corte da v1.0.0. Um docs-app interativo (VitePress/Astro,
+  playground, copy 1-click) vira um projeto próprio bem definido depois do
+  v1.0, com o núcleo já estável, em vez de inflar esta fase final por
+  semanas. Fora de escopo deste plano — ver "Fora de escopo" abaixo.
+
+#### 5.13 Templates oficiais de adoção rápida (novo)
+- 4 templates prontos (dashboard, auth, landing, admin) em
+  `mockup/templates/` (ou pasta própria) — HTML completo, com o CSS/JS já
+  publicado, prontos pra copiar. Escopo contido e claramente executável
+  sem depender de decisão pendente.
+
+#### 5.14 Página comparativa "Clarus vs Bootstrap/Tailwind" (decidido em 2026-07-07)
+- Tabela de trade-offs (filosofia, tamanho de bundle, dependências, dark
+  mode nativo, etc.) com dados públicos reais e verificáveis (tamanho gzip
+  publicado de cada framework, por exemplo) — sem benchmarks de
+  performance ao vivo nesta fase, marcados explicitamente na própria
+  página como "pendente de metodologia" em vez de omitidos silenciosamente
+  (evita publicar números não controláveis/desatualizados sobre projetos
+  de terceiros, mas deixa claro que não é esquecimento).
+
+### 5.9 Corte da v1.0.0 (último passo, só depois de tudo acima verde)
 - Bump de versão (`1.0.0`), consolidar `CHANGELOG.md` (`[Unreleased]` →
   `## [1.0.0]`), checklist de release do `CONTRIBUTING.md`, tag e
   publicação com `--provenance`.
 
 ### Fora de escopo mesmo com "tudo" aprovado
-- Docs-app interativo — decisão mantida (seção 4, item 2).
 - RFC process público / SLA de triagem comunitária (rascunho item 227) —
   baixo valor pra projeto de mantenedor único hoje; sugiro adiar
   indefinidamente em vez de agendar.
-- Vue/Svelte wrappers, showcase de produção real — ver ressalva da seção 4.
+- Docs-app interativo (VitePress/Astro, playground, copy 1-click) —
+  decisão confirmada em 2026-07-07 (ver 5.12): adiado para depois do
+  v1.0.0.
 
 ## 6. Verificação (ao final de cada sub-fase e no total)
 
@@ -171,3 +326,34 @@ isso como sub-fases numeradas (4.1 a 4.7) dentro desta fase final.
 5. `npm pack --dry-run` conferindo que `files`/`exports` do `package.json`
    publicam exatamente o esperado para a v1.0.0 (sem `docs/internal`, sem
    artefatos de teste).
+
+## 7. Pontos que precisavam de aprovação (todos resolvidos em 2026-07-07)
+
+Os itens P3/P4 trouxeram conflitos com decisões já tomadas e itens sem
+escopo fechado. Todos foram resolvidos um de cada vez (perguntas
+estruturadas, plano atualizado a cada resposta):
+
+1. ~~**Wrappers**: só React ou React+Vue+Svelte?~~ ✅ Resolvido
+   (2026-07-07): **só React** nesta fase — ver 5.7.
+2. ~~**Charts wrappers**: qual lib (ou agnóstico/tokens só)?~~ ✅ Resolvido
+   (2026-07-07): **agnóstico**, só tokens/tema — ver 5.7.
+   ~~**Forms extras**: o que conta como extra?~~ ✅ Resolvido (2026-07-07):
+   **Range/Slider + Upload avançado** — ver 5.7.
+3. ~~**Showcase de produção**: projeto real ou placeholder?~~ ✅ Resolvido
+   (2026-07-07): **placeholder estrutural** "em construção" — ver 5.7.
+4. ~~**Docs-app (P4)**: reabrir agora ou adiar?~~ ✅ Resolvido
+   (2026-07-07): **adiado para depois do v1.0.0** — ver 5.12 e "Fora de
+   escopo".
+5. ~~**Benchmarks de performance na página comparativa**: estrutural/bundle
+   agora, ou performance ao vivo já?~~ ✅ Resolvido (2026-07-07): **só
+   estrutural/de bundle** por agora, performance ao vivo marcada como
+   pendente de metodologia — ver 5.14.
+6. ~~**Budget de tamanho do JS**: recalibrar pra cima, mudar arquitetura de
+   distribuição, ou manter rígido?~~ ✅ Resolvido (2026-07-07): **recalibrado
+   pra 24 KB gzip** (opção a) — `scripts/size.mjs`, budget dobrado. Deixa
+   folga real pra DataTable (5.5) e Command palette/Tree view (5.6) sem
+   mudar a arquitetura de distribuição (bundle único `clarus.min.js`).
+
+Com isso, o escopo e os budgets do plano estão totalmente fechados —
+pronto para eu continuar a implementação pela sub-fase 5.5 (DataTable)
+assim que você der o sinal verde.
