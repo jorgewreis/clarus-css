@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Tile</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/fonts.css">
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 24px;
+            background-color: var(--cl-color-subtle);
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        .tile-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 420px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="u-fs-lg u-fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <div class="theme-panel">
+        <p class="u-fs-sm u-fw-medium u-mb-0">Padrão (ações à direita)</p>
+        <div class="tile-col">
+            <div class="cl-tile">
+                <div class="cl-tile-icon">📄</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">Relatório mensal.pdf</p>
+                    <p class="cl-tile-subtitle">2.4 MB · Atualizado há 2h</p>
+                </div>
+                <div class="cl-tile-actions">
+                    <button type="button" class="cl-btn cl-btn-sm">Abrir</button>
+                </div>
+            </div>
+            <div class="cl-tile">
+                <div class="cl-tile-icon">🎨</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">Tema escuro</p>
+                    <p class="cl-tile-subtitle">Alterna a aparência da interface</p>
+                </div>
+                <div class="cl-tile-actions">
+                    <div class="cl-switch">
+                        <input type="checkbox" class="cl-switch-input" id="tile-switch" checked aria-label="Ativar tema escuro">
+                        <label for="tile-switch" class="cl-switch-label"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-0">Ações embaixo</p>
+        <div class="tile-col">
+            <div class="cl-tile cl-tile-actions-bottom">
+                <div class="cl-tile-icon">⚠️</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">Plano expira em 3 dias</p>
+                    <p class="cl-tile-subtitle">Renove para manter acesso aos recursos pagos.</p>
+                </div>
+                <div class="cl-tile-actions">
+                    <button type="button" class="cl-btn cl-btn-outline-secondary cl-btn-sm">Depois</button>
+                    <button type="button" class="cl-btn cl-btn-primary cl-btn-sm">Renovar</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-0">Clicável (stretched-link) e tamanhos (sm / padrão / lg)</p>
+        <div class="tile-col">
+            <div class="cl-tile cl-tile-clickable">
+                <div class="cl-tile-icon">👤</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title"><a href="#" class="cl-stretched-link">Jorge Reis</a></p>
+                    <p class="cl-tile-subtitle">Ver perfil</p>
+                </div>
+            </div>
+            <div class="cl-tile cl-tile-sm">
+                <div class="cl-tile-icon">🔔</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">sm</p>
+                </div>
+            </div>
+            <div class="cl-tile cl-tile-lg">
+                <div class="cl-tile-icon">🔔</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">lg</p>
+                    <p class="cl-tile-subtitle">Notificações push</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="u-fs-lg u-fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--cl-color-surface); color: var(--cl-color-text); margin: 0;">Escuro</h2>
+    <div class="theme-panel" data-theme="dark">
+        <div class="tile-col">
+            <div class="cl-tile">
+                <div class="cl-tile-icon">📄</div>
+                <div class="cl-tile-body">
+                    <p class="cl-tile-title">Relatório mensal.pdf</p>
+                    <p class="cl-tile-subtitle">2.4 MB · Atualizado há 2h</p>
+                </div>
+                <div class="cl-tile-actions">
+                    <button type="button" class="cl-btn cl-btn-sm">Abrir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

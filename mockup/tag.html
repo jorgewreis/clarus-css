@@ -54,9 +54,13 @@
             </span>
         </div>
 
-        <p class="u-fs-sm u-fw-medium u-mb-0">Tamanhos (sm / padrão / lg)</p>
-        <div class="tag-row">
-            <span class="cl-badge cl-badge-info cl-tag cl-badge-sm" data-cl="tag">
+        <p class="u-fs-sm u-fw-medium u-mb-0">Tamanhos (xs / sm / padrão / lg / xl)</p>
+        <div class="cl-tag-group">
+            <span class="cl-badge cl-badge-info cl-tag cl-tag-xs" data-cl="tag">
+                xs
+                <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
+            </span>
+            <span class="cl-badge cl-badge-info cl-tag cl-tag-sm" data-cl="tag">
                 sm
                 <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
             </span>
@@ -64,10 +68,23 @@
                 padrão
                 <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
             </span>
-            <span class="cl-badge cl-badge-info cl-tag cl-badge-lg" data-cl="tag">
+            <span class="cl-badge cl-badge-info cl-tag cl-tag-lg" data-cl="tag">
                 lg
                 <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
             </span>
+            <span class="cl-badge cl-badge-info cl-tag cl-tag-xl" data-cl="tag">
+                xl
+                <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
+            </span>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-0">Agrupamento (.cl-tag-group)</p>
+        <div class="cl-tag-group">
+            <span class="cl-badge cl-tag" data-cl="tag">Design<button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button></span>
+            <span class="cl-badge cl-tag" data-cl="tag">Frontend<button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button></span>
+            <span class="cl-badge cl-tag" data-cl="tag">Backend<button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button></span>
+            <span class="cl-badge cl-tag" data-cl="tag">DevOps<button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button></span>
+            <span class="cl-badge cl-tag" data-cl="tag">QA<button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button></span>
         </div>
 
         <p class="u-fs-sm u-fw-medium u-mb-0">Cancelando a remoção (cl:tag:dismissed + preventDefault)</p>

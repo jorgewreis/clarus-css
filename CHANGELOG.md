@@ -68,6 +68,30 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase 1 do plano mestre (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`) —
+  componentes e refinamentos, já na convenção `cl-`/`@layer`/tokens da Fase 0:
+  - Checkbox/radio/switch 100% CSS (`packages/clarus-components/scss/forms/_check-radio-switch.scss`):
+    `.cl-check`/`.cl-radio`/`.cl-switch`, técnica de input oculto + label
+    irmã (mesma do Segmented Control/Rating). Estados checked/disabled/
+    indeterminate/`:focus-visible`, validação `is-valid`/`is-invalid`,
+    tamanhos sm/md/lg. Switch com knob retangular arredondado (não circular).
+  - Tile (`_tile.scss`): `.cl-tile` > `.cl-tile-icon` / `.cl-tile-body`
+    (`-title`/`-subtitle`) / `.cl-tile-actions` (à direita por padrão,
+    `.cl-tile-actions-bottom` pra embaixo). Variante `.cl-tile-clickable`
+    reusa `.cl-stretched-link` do Card. Tamanhos sm/lg.
+  - Pagination (`_pagination.scss`): `.cl-pagination-bordered` (itens
+    colados, borda fundida), tamanhos sm/lg, `.cl-page-link-text` para
+    prev/next descritivo (texto em vez de só «/»).
+  - Tabs (`_tabs.scss`): estilos `.cl-tabs-pill` e `.cl-tabs-depth` (além do
+    padrão em linha), alinhamento `.cl-tabs-center`/`-right`/`-fill`,
+    tamanhos sm/lg — tudo modificador de `.cl-tabs`, reaproveita `.cl-nav-link`
+    e a navegação por teclado existente (`js/tabs.js`) sem mudar o HTML.
+  - Tags (`_tag.scss`): escala própria `.cl-tag-xs`…`-xl`, agrupamento
+    (`.cl-tag-group`), feedback tátil (`:active`) no botão de dispensa.
+  - Mockups novos: `mockup/check-radio-switch.html`, `mockup/tile.html`;
+    exemplos adicionados a `mockup/pagination-breadcrumbs.html`,
+    `mockup/accordion-tabs-toast.html`, `mockup/tag.html`.
+
 - Etapa 10 do roadmap de paridade (`docs/gap-analysis-componentes.md`), os dois
   itens de maior complexidade — fecha todos os gaps remanescentes priorizados:
   - Notification Center (`scss/components/_notification-center.scss`,
