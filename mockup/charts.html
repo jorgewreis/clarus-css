@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Charts (tokens)</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/fonts.css">
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        .chart-swatches {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chart-swatch {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--cl-radius-md);
+            display: flex;
+            align-items: flex-end;
+            padding: 4px;
+            font-size: 10px;
+            color: #fff;
+            text-shadow: 0 1px 1px rgb(0 0 0 / 40%);
+        }
+
+        .chart-demo {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 120px;
+            border-bottom: 2px solid var(--cl-chart-axis);
+            padding: 0 8px;
+            margin-top: 12px;
+        }
+
+        .chart-demo-bar {
+            width: 32px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .chart-demo-tooltip {
+            background-color: var(--cl-chart-tooltip-bg);
+            color: var(--cl-chart-tooltip-text);
+            padding: 4px 8px;
+            border-radius: var(--cl-radius-sm);
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<!--
+  Não é um wrapper de biblioteca de gráficos (docs/guides/charts.md) — só
+  os tokens --cl-chart-* que qualquer lib pode consumir via
+  getComputedStyle. Este mockup só visualiza os tokens (swatches + barras
+  de CSS puro), sem carregar nenhuma lib de terceiro.
+-->
+
+<div class="theme-panel">
+    <h2 class="u-fs-lg u-fw-medium">Claro</h2>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Séries (--cl-chart-series-1..6)</p>
+    <div class="chart-swatches">
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-1);">1</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-2);">2</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-3);">3</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-4);">4</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-5);">5</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-6);">6</div>
+    </div>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Barras de exemplo (grid/axis)</p>
+    <div class="chart-demo">
+        <div class="chart-demo-bar" style="height: 40%; background-color: var(--cl-chart-series-1);"></div>
+        <div class="chart-demo-bar" style="height: 70%; background-color: var(--cl-chart-series-2);"></div>
+        <div class="chart-demo-bar" style="height: 55%; background-color: var(--cl-chart-series-3);"></div>
+    </div>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Tooltip (--cl-chart-tooltip-bg/text)</p>
+    <span class="chart-demo-tooltip">Jan: 120</span>
+</div>
+
+<div class="theme-panel" data-theme="dark">
+    <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Séries (--cl-chart-series-1..6)</p>
+    <div class="chart-swatches">
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-1);">1</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-2);">2</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-3);">3</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-4);">4</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-5);">5</div>
+        <div class="chart-swatch" style="background-color: var(--cl-chart-series-6);">6</div>
+    </div>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Barras de exemplo (grid/axis)</p>
+    <div class="chart-demo">
+        <div class="chart-demo-bar" style="height: 40%; background-color: var(--cl-chart-series-1);"></div>
+        <div class="chart-demo-bar" style="height: 70%; background-color: var(--cl-chart-series-2);"></div>
+        <div class="chart-demo-bar" style="height: 55%; background-color: var(--cl-chart-series-3);"></div>
+    </div>
+
+    <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Tooltip (--cl-chart-tooltip-bg/text)</p>
+    <span class="chart-demo-tooltip">Jan: 120</span>
+</div>
+
+</body>
+</html>

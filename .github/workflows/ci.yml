@@ -32,6 +32,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Types check
+        run: npm run types:check
+
       - name: Contrast check (WCAG AA)
         run: npm run contrast:check
 

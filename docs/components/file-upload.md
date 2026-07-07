@@ -85,3 +85,9 @@ document.getElementById("arquivo2").addEventListener("change", (event) => {
 
 Ver acima (Visão geral e Variações) — mockup completo em
 [`mockup/file-drop.html`](../../mockup/file-drop.html).
+
+## Variante avançada (múltiplos arquivos)
+
+Pra upload de múltiplos arquivos com preview, progresso e remoção por
+item, veja [Upload avançado](file-upload-advanced.md) — evolução deste
+componente, reaproveitando a mesma dropzone/botão como gatilho.

@@ -107,12 +107,17 @@ produtos white-label ou múltiplas marcas sobre o mesmo design system:
 <html data-brand="violet" data-theme="dark">
 ```
 
-Um brand de exemplo (`violet`, o mesmo tom do exemplo de customização acima)
-vem pronto em `packages/clarus-core/scss/themes/_brands.scss`, provando que
-a troca funciona combinada com claro e escuro. Só a cor de ação primária
-muda por marca — `secondary`/`success`/`warning`/`danger`/`info` continuam
-universais entre marcas, porque são semânticos (sucesso é sempre verde, erro
-sempre vermelho, independente de qual marca está ativa).
+Três presets vêm prontos em `packages/clarus-core/scss/themes/_brands.scss`,
+provando que a troca funciona combinada com claro e escuro:
+
+- `violet` — o mesmo tom do exemplo de customização acima.
+- `corporate` — azul-marinho sóbrio, para aplicações internas/B2B.
+- `vibrant` — laranja energético, para produtos de consumo/marketing.
+
+Só a cor de ação primária muda por marca — `secondary`/`success`/`warning`/
+`danger`/`info` continuam universais entre marcas, porque são semânticos
+(sucesso é sempre verde, erro sempre vermelho, independente de qual marca
+está ativa).
 
 Pra adicionar sua própria marca, siga o mesmo padrão do arquivo de exemplo:
 um bloco `[data-brand="sua-marca"]` (mais o par `@supports` OKLCH e a
@@ -126,8 +131,9 @@ partir do primary **padrão** (azul) — não recalculam por marca. Escolha um
 primitivo de marca escuro o bastante pro texto branco continuar legível
 (como no exemplo `violet`), ou sobrescreva `--cl-btn-color`/`--cl-badge-color`
 manualmente se o primitivo da sua marca for muito claro. Rode
-`npm run contrast` depois de adicionar uma marca — o relatório já audita o
-par `brand violet` como referência (`scripts/contrast-report.scss`).
+`npm run contrast` depois de adicionar uma marca — o relatório já audita os
+pares `brand violet`/`brand corporate`/`brand vibrant` como referência
+(`scripts/contrast-report.scss`).
 
 ## Próximo passo
 

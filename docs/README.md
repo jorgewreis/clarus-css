@@ -25,6 +25,10 @@ Referência completa de uso do framework — para a visão geral do projeto
   equivalência de classes/componentes pra quem vem de outro framework CSS.
 - [Ícones](guides/icons.md) — pacote opcional `clarus-icons` (Lucide),
   classe utilitária `.cl-icon`, uso via SVG puro ou módulo JS.
+- [Utilitários de impressão](guides/print.md) — `.u-print-hide`/`.u-print-only`
+  e variações de `display` restritas a `@media print`.
+- [Gráficos](guides/charts.md) — tokens `--cl-chart-*` agnósticos de
+  biblioteca (Chart.js, ECharts, Recharts…).
 
 ## Componentes
 
@@ -35,7 +39,9 @@ Referência completa de uso do framework — para a visão geral do projeto
 [Datepicker / Timepicker](components/datepicker.md) ·
 [Checkbox](components/checkbox.md) ·
 [Radio](components/radio.md) · [Switch](components/switch.md) ·
-[File Upload](components/file-upload.md)
+[Range/Slider](components/range.md) ·
+[File Upload](components/file-upload.md) ·
+[Upload avançado](components/file-upload-advanced.md)
 
 ### Conteúdo
 
@@ -74,6 +80,23 @@ Referência completa de uso do framework — para a visão geral do projeto
 
 Cada componente tem um exemplo funcional dedicado (claro + escuro) em
 [`mockup/`](../mockup) — a forma mais rápida de ver o framework em ação.
+Para uma visão geral compacta de todos os componentes numa página só, veja
+[`mockup/kitchen-sink.html`](../mockup/kitchen-sink.html) (smoke test visual
+rápido, não substitui os mockups individuais).
+
+## Ecossistema
+
+Pacotes opcionais, publicados separadamente do core:
+
+- [`clarus-icons`](../packages/clarus-icons/README.md) — ícones SVG
+  (Lucide), tree-shakeable, zero dependências em runtime.
+- [`clarus-cli`](../packages/clarus-cli/README.md) — CLI (`build`/`theme`/
+  `analyze`) para projetos consumidores.
+- [`clarus-react`](../packages/clarus-react/README.md) — wrapper React
+  fino (Modal/Dropdown/Tabs), delega pro JS vanilla existente.
+
+[Showcase de produção](showcase.md) — 🚧 em construção, aguardando casos
+de uso reais.
 
 ## Referência
 

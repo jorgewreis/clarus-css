@@ -52,4 +52,89 @@
       --cl-feedback-primary-bg: #{color.mix($brand-violet-primary, $color-gray-900, 15%, $method: oklch)};
     }
   }
+
+  // Preset "corporate" — azul-marinho/steel blue, tom sóbrio para
+  // aplicações internas/B2B. Mesma técnica de mistura OKLCH acima.
+  $brand-corporate-primary: color.to-space(#1d4e89, oklch) !default;
+
+  [data-brand="corporate"] {
+    --cl-color-primary: #{rgb-fallback($brand-corporate-primary)};
+    --cl-alert-primary-bg: #{rgb-fallback(tint-color($brand-corporate-primary))};
+    --cl-alert-primary-text: #{rgb-fallback(shade-color($brand-corporate-primary))};
+    --cl-feedback-primary-bg: #{rgb-fallback(tint-color($brand-corporate-primary))};
+  }
+
+  [data-brand="corporate"][data-theme="dark"] {
+    --cl-color-primary: #{rgb-fallback(color.mix($brand-corporate-primary, $color-white, 95%, $method: oklch))};
+    --cl-alert-primary-bg: #{rgb-fallback(color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch))};
+    --cl-alert-primary-text: #{rgb-fallback(color.mix($brand-corporate-primary, $color-white, 55%, $method: oklch))};
+    --cl-feedback-primary-bg: #{rgb-fallback(color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch))};
+  }
+
+  // Preset "vibrant" — laranja energético, tom para produtos de consumo/
+  // marketing que queiram uma ação primária mais chamativa.
+  $brand-vibrant-primary: color.to-space(#f2542d, oklch) !default;
+
+  [data-brand="vibrant"] {
+    --cl-color-primary: #{rgb-fallback($brand-vibrant-primary)};
+    --cl-alert-primary-bg: #{rgb-fallback(tint-color($brand-vibrant-primary))};
+    --cl-alert-primary-text: #{rgb-fallback(shade-color($brand-vibrant-primary))};
+    --cl-feedback-primary-bg: #{rgb-fallback(tint-color($brand-vibrant-primary))};
+  }
+
+  [data-brand="vibrant"][data-theme="dark"] {
+    --cl-color-primary: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-white, 95%, $method: oklch))};
+    --cl-alert-primary-bg: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch))};
+    --cl-alert-primary-text: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-white, 55%, $method: oklch))};
+    --cl-feedback-primary-bg: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch))};
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    [data-brand="corporate"] {
+      --cl-color-primary: #{$brand-corporate-primary};
+      --cl-alert-primary-bg: #{tint-color($brand-corporate-primary)};
+      --cl-alert-primary-text: #{shade-color($brand-corporate-primary)};
+      --cl-feedback-primary-bg: #{tint-color($brand-corporate-primary)};
+    }
+
+    [data-brand="corporate"][data-theme="dark"] {
+      --cl-color-primary: #{color.mix($brand-corporate-primary, $color-white, 95%, $method: oklch)};
+      --cl-alert-primary-bg: #{color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch)};
+      --cl-alert-primary-text: #{color.mix($brand-corporate-primary, $color-white, 55%, $method: oklch)};
+      --cl-feedback-primary-bg: #{color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch)};
+    }
+
+    [data-brand="vibrant"] {
+      --cl-color-primary: #{$brand-vibrant-primary};
+      --cl-alert-primary-bg: #{tint-color($brand-vibrant-primary)};
+      --cl-alert-primary-text: #{shade-color($brand-vibrant-primary)};
+      --cl-feedback-primary-bg: #{tint-color($brand-vibrant-primary)};
+    }
+
+    [data-brand="vibrant"][data-theme="dark"] {
+      --cl-color-primary: #{color.mix($brand-vibrant-primary, $color-white, 95%, $method: oklch)};
+      --cl-alert-primary-bg: #{color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch)};
+      --cl-alert-primary-text: #{color.mix($brand-vibrant-primary, $color-white, 55%, $method: oklch)};
+      --cl-feedback-primary-bg: #{color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch)};
+    }
+  }
+}
+
+// Ao contrário de violet/corporate, o primitivo "vibrant" (laranja) é claro
+// o bastante pra o texto branco padrão de `.cl-btn-primary`/`.cl-badge-primary`
+// (calculado em tempo de build a partir do primary PADRÃO, não do de marca —
+// ver nota no topo do arquivo) cair abaixo de 4.5:1 — exatamente o caso que
+// a mitigação documentada em docs/guides/theming.md#multi-brand cobre.
+// Precisa estar em `@layer overrides` (a camada de maior prioridade — ver
+// `tokens/_root.scss`): `.cl-btn-primary`/`.cl-badge-primary` setam
+// `--cl-btn-color`/`--cl-badge-color` no próprio elemento dentro de
+// `@layer components`, e cascade layers ignoram especificidade — um
+// seletor mais específico em `@layer tokens` (onde vivem os blocos acima)
+// perderia mesmo assim.
+@layer overrides {
+  [data-brand="vibrant"] .cl-btn-primary,
+  [data-brand="vibrant"] .cl-badge-primary {
+    --cl-btn-color: #{$color-black};
+    --cl-badge-color: #{$color-black};
+  }
 }

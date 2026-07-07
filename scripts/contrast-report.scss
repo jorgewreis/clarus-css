@@ -131,3 +131,59 @@ $brand-violet-primary: color.to-space(#6d28d9, oklch);
   color.mix($brand-violet-primary, $color-white, 55%, $method: oklch),
   color.mix($brand-violet-primary, $color-gray-900, 15%, $method: oklch)
 );
+
+// Presets "corporate" e "vibrant" (themes/_brands.scss) — mesma fórmula.
+$brand-corporate-primary: color.to-space(#1d4e89, oklch);
+$brand-vibrant-primary: color.to-space(#f2542d, oklch);
+
+@include check(
+  "brand corporate: btn-primary text/bg (claro)",
+  color-contrast($brand-corporate-primary),
+  $brand-corporate-primary,
+  3
+);
+
+@include check(
+  "brand corporate: alert-primary text/bg (claro)",
+  shade-color($brand-corporate-primary),
+  tint-color($brand-corporate-primary)
+);
+
+@include check(
+  "brand corporate: btn-primary text(light)/bg (escuro)",
+  color-contrast($brand-corporate-primary),
+  color.mix($brand-corporate-primary, $color-white, 95%, $method: oklch),
+  3
+);
+
+@include check(
+  "brand corporate: alert-primary text/bg (escuro)",
+  color.mix($brand-corporate-primary, $color-white, 55%, $method: oklch),
+  color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch)
+);
+
+@include check(
+  "brand vibrant: btn-primary text/bg (claro)",
+  color-contrast($brand-vibrant-primary),
+  $brand-vibrant-primary,
+  3
+);
+
+@include check(
+  "brand vibrant: alert-primary text/bg (claro)",
+  shade-color($brand-vibrant-primary),
+  tint-color($brand-vibrant-primary)
+);
+
+@include check(
+  "brand vibrant: btn-primary text(light)/bg (escuro)",
+  color-contrast($brand-vibrant-primary),
+  color.mix($brand-vibrant-primary, $color-white, 95%, $method: oklch),
+  3
+);
+
+@include check(
+  "brand vibrant: alert-primary text/bg (escuro)",
+  color.mix($brand-vibrant-primary, $color-white, 55%, $method: oklch),
+  color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch)
+);

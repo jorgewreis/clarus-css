@@ -32,3 +32,11 @@ window.cancelAnimationFrame = window.cancelAnimationFrame || ((id) => clearTimeo
 // jsdom não implementa scrollIntoView (js/combobox.js usa pra manter a opção
 // ativa visível durante a navegação por teclado).
 Element.prototype.scrollIntoView = Element.prototype.scrollIntoView || (() => {});
+
+// jsdom não implementa URL.createObjectURL/revokeObjectURL (js/file-upload-advanced.js
+// usa pra gerar thumbnail de imagem a partir do File selecionado).
+if (!window.URL.createObjectURL) {
+  let counter = 0;
+  window.URL.createObjectURL = vi.fn(() => `blob:mock-${(counter += 1)}`);
+  window.URL.revokeObjectURL = vi.fn();
+}

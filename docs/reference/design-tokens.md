@@ -31,6 +31,23 @@ comunica melhor a intenção no seu código:
 | `--cl-color-action-primary` | `--cl-color-primary` |
 | `--cl-color-action-danger` | `--cl-color-danger` |
 
+### Gráficos (`tokens/_charts.scss`)
+
+Agnósticos de biblioteca — ver [guia de gráficos](../guides/charts.md).
+
+| Token | Alias de |
+|---|---|
+| `--cl-chart-series-1` | `--cl-color-primary` |
+| `--cl-chart-series-2` | `--cl-color-success` |
+| `--cl-chart-series-3` | `--cl-color-warning` |
+| `--cl-chart-series-4` | `--cl-color-danger` |
+| `--cl-chart-series-5` | `--cl-color-info` |
+| `--cl-chart-series-6` | `--cl-color-secondary` |
+| `--cl-chart-grid` | `--cl-color-border` |
+| `--cl-chart-axis` | `--cl-color-muted` |
+| `--cl-chart-tooltip-bg` | `--cl-tooltip-bg` |
+| `--cl-chart-tooltip-text` | `--cl-tooltip-text` |
+
 ### Cores de tema
 
 Seis papéis, cada um com 3 tokens derivados automaticamente do primitivo

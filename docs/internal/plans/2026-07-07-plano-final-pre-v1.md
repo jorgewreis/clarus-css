@@ -224,14 +224,25 @@ literal do pedido preservado como referência).
   Budget de tamanho do JS: 17.25 KB gzip de um teto de 24 KB (~6.75 KB de
   folga restante).
 
-#### 5.8 DX e supply-chain (itens novos, podem correr em paralelo aos acima)
-- `.d.ts` para a API JS pública (`Clarus`, `Modal`, `Dropdown`, `Select`,
-  `Combobox`, `DataTable` etc. conforme forem entrando).
-- `npm publish --provenance` no workflow de release (a criar).
-- `.github/FUNDING.yml` + Dependabot (npm + GitHub Actions).
-- Utilitários de impressão básicos (`.u-print-hide`, `.u-print-block`).
-- Página "kitchen sink" em `mockup/`, atualizada conforme cada componente
-  novo entra.
+#### 5.8 DX e supply-chain — ✅ concluída (2026-07-07)
+- `.d.ts` para a API JS pública: um arquivo por módulo em
+  `packages/clarus-js/js/*.d.ts` + `clarus.d.ts` agregador +
+  `global.d.ts` (uso via `<script>`), validados por `npm run types:check`
+  (`tsc --noEmit -p tsconfig.types.json`) contra `tests/types/clarus.test-d.ts`
+  — gate novo no CI. Descoberto e corrigido um bug real no processo: o
+  padrão `"./js/*"` do `exports` do `package.json` duplicava `.js`
+  (`modal.js.js`), quebrando o import documentado `clarus-css/js/modal.js`
+  — nunca fora exercitado por um import real antes desta sub-fase.
+- `npm publish --provenance` em `.github/workflows/release.yml` (novo,
+  dispara em tags `v*.*.*`; publica `clarus-css`, `clarus-icons`,
+  `clarus-cli`, `clarus-react`).
+- `.github/FUNDING.yml` + `.github/dependabot.yml` (npm + github-actions).
+- Utilitários de impressão (`.u-print-hide`/`.u-print-only`/
+  `.u-print-block`/`-inline`/`-inline-block`), `docs/guides/print.md`.
+- `mockup/kitchen-sink.html` — exemplo compacto de cada componente, dois
+  temas; referenciado em `docs/README.md`.
+- `.github/workflows/ci.yml` ganhou `npm run types:check`.
+- Build/lint/303 testes/a11y (42/42)/visual (98/98)/contrast/size verdes.
 
 ### P2 — Excelência de produto (texto literal do pedido, 2026-07-07)
 
@@ -289,7 +300,7 @@ literal do pedido preservado como referência).
 > tema). Integrações opcionais (React/Vue/Svelte wrappers finos). Showcase
 > de produção (casos reais com métricas).
 
-#### 5.7 Ecossistema (escopo ampliado por P3 — ver ressalvas abaixo)
+#### 5.7 Ecossistema — ✅ concluída (2026-07-07, escopo ampliado por P3 — ver ressalvas abaixo)
 - `clarus-icons` — ✅ **concluído (2026-07-07)**: pacote de ícones SVG
   opcional, tree-shakeable, mesmo padrão de workspace dos demais
   `packages/*`. Decisão de escopo (conversa com o usuário): conjunto
@@ -338,40 +349,37 @@ literal do pedido preservado como referência).
   `::after` conta como item flex do `.cl-btn` e já herda o `gap` novo,
   então o `margin-left` antigo dobraria o espaçamento). Build/lint/279
   testes/a11y (38/38)/visual (90/90) verdes.
-- `clarus-cli`: comandos `build`/`theme`/`analyze` já existentes hoje como
-  scripts npm, empacotados como CLI instalável.
-- **Presets de tema**: 2–3 arquivos de tokens prontos (ex.: "corporate",
-  "vibrant") sobre a mesma camada de `data-brand` da P1/5.2 — isso é
-  puramente CSS/tokens, sem dependência externa, plenamente entregável.
-- **Wrapper React** (decidido em 2026-07-07) — só React nesta fase.
-  Componente-fino que aplica `data-cl`/classes e delega pro JS vanilla
-  existente. Vue/Svelte ficam de fora: sem nenhum consumidor real ainda
-  validando o padrão, manter 3 pacotes/3 suítes de teste triplicaria a
-  superfície de manutenção sem necessidade comprovada. O wrapper React
-  serve de molde — depois que houver uso real (issues, feedback de quem
-  consome via React), replicar pra Vue/Svelte fica rápido e já testado em
-  produção.
-- **Charts: tokens/tema agnóstico** (decidido em 2026-07-07) — em vez de
-  wrapper de uma lib específica, entrega um guia (`docs/guides/charts.md`
-  ou seção em `theming.md`) + tokens CSS dedicados (cores de série,
-  grid/eixos, tooltip) que qualquer lib de gráfico (Chart.js, ECharts,
-  Recharts etc.) pode consumir. Zero dependência nova — mantém a proposta
-  de valor de zero dependências em runtime — e zero manutenção atrelada à
-  API de uma lib de terceiro que muda com o tempo.
-- **Forms extras** (decidido em 2026-07-07): **Range/Slider** (`<input
-  type="range">` estilizado, com marcações/valor visível, tokens de
-  trilha/thumb) e **Upload avançado** (evolução do `file-upload` atual:
-  múltiplos arquivos, preview por arquivo — nome/tamanho/thumbnail de
-  imagem —, progresso individual e remoção por item; o `file-upload`
-  existente vira a variante "simples", este é a variante "avançada" do
-  mesmo componente). DoD completo (estados, teclado, ARIA, tokens, testes)
-  como os demais.
-- **"Showcase de produção"** (decidido em 2026-07-07): **placeholder
-  estrutural** por enquanto. Página `docs/showcase.md` (ou seção em
-  `docs/README.md`) com layout/estrutura prontos e um aviso "em
-  construção — em breve" no lugar de casos fictícios ou métricas
-  inventadas. Fica pronta pra receber conteúdo assim que houver um projeto
-  real usando o Clarus pra citar.
+- `clarus-cli` — ✅ **concluído (2026-07-07)**: pacote `packages/clarus-cli/`
+  com 3 comandos (`build`, `theme`, `analyze`), sem dependência de Sass no
+  comando `theme` (gera CSS puro via `color-mix()`). 6 testes unitários,
+  README com exemplos.
+- **Presets de tema** — ✅ **concluído (2026-07-07)**: `corporate`
+  (azul-marinho) e `vibrant` (laranja) em `themes/_brands.scss`, mesma
+  camada de `data-brand` da P1/5.2. O preset "vibrant" expôs um bug real
+  (`.cl-badge-primary` fixava `color` direto em vez de custom property,
+  ao contrário de `.cl-btn-primary`) — corrigido, alinhado ao mesmo padrão.
+- **Wrapper React** — ✅ **concluído (2026-07-07)**: pacote
+  `packages/clarus-react/` — `ModalTrigger`/`ModalPanel`,
+  `DropdownTrigger`/`DropdownMenu`, `TabList` (componente-fino, delega pro
+  JS vanilla via `clarus-css/js/*`). Cobertura parcial e deliberada (só os
+  2 formatos de contrato do `clarus-js`, não todos os componentes) — serve
+  de molde. 4 testes unitários (React + react-dom, sem testing-library).
+- **Charts: tokens/tema agnóstico** — ✅ **concluído (2026-07-07)**:
+  `tokens/_charts.scss` (`--cl-chart-series-1..6`/`-grid`/`-axis`/
+  `-tooltip-bg`/`-text`, aliases da camada semântica existente),
+  `docs/guides/charts.md`, mockup `mockup/charts.html`. Zero dependência
+  nova, nenhuma lib de gráfico específica.
+- **Forms extras** — ✅ **concluído (2026-07-07)**: **Range/Slider**
+  (`.cl-form-range` + `js/range.js` opcional pra valor visível/trilha
+  preenchida) e **Upload avançado** (`js/file-upload-advanced.js` —
+  múltiplos arquivos, preview, progresso individual, remoção por item,
+  agnóstico de backend). DoD completo (estados, teclado/ARIA nativos,
+  tokens, testes, mockup, doc) nos dois.
+- **"Showcase de produção"** — ✅ **concluído (2026-07-07)**: placeholder
+  estrutural em `docs/showcase.md`, sem casos fictícios nem métricas
+  inventadas.
+- Build/lint/303 testes/a11y (42/42)/visual (98/98)/contrast/size verdes
+  no total da sub-fase (incluindo o fix de contraste do preset "vibrant").
 
 ### P4 — Impacto de mercado imediato (texto literal do pedido, 2026-07-07)
 

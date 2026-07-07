@@ -32,6 +32,7 @@
   ],
   "main": "dist/css/clarus.css",
   "style": "dist/css/clarus.css",
+  "types": "packages/clarus-js/js/clarus.d.ts",
   "unpkg": "dist/css/clarus.min.css",
   "jsdelivr": "dist/css/clarus.min.css",
   "exports": {
@@ -43,8 +44,11 @@
     "./components.css": "./dist/css/components.css",
     "./helpers.css": "./dist/css/helpers.css",
     "./fonts.css": "./dist/css/fonts.css",
-    "./js": "./dist/js/clarus.js",
-    "./js/*": "./packages/clarus-js/js/*.js",
+    "./js": {
+      "types": "./packages/clarus-js/js/clarus.d.ts",
+      "default": "./dist/js/clarus.js"
+    },
+    "./js/*": "./packages/clarus-js/js/*",
     "./package.json": "./package.json"
   },
   "files": [
@@ -83,6 +87,7 @@
     "size:check": "node scripts/size.mjs --check",
     "contrast": "node scripts/contrast.mjs",
     "contrast:check": "node scripts/contrast.mjs --strict",
+    "types:check": "tsc --noEmit -p tsconfig.types.json",
     "prepublishOnly": "npm run build && npm test"
   },
   "publishConfig": {
@@ -102,6 +107,7 @@
     "sass": "^1.101.0",
     "stylelint": "^17.14.0",
     "stylelint-config-standard-scss": "^17.0.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.9"
   }
 }

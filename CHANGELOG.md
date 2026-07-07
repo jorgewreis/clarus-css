@@ -32,6 +32,84 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.8 — DX e supply-chain
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P1): `.d.ts`
+  hand-escritos para toda a API JS pública (`packages/clarus-js/js/*.d.ts`,
+  um por módulo + `clarus.d.ts` agregador + `global.d.ts` pro uso via
+  `<script>`), validados por `npm run types:check` (`tsc --noEmit`) contra
+  um exemplo de uso real (`tests/types/clarus.test-d.ts`) — gate novo no
+  CI. Corrigido bug real descoberto ao validar o subpath export
+  (`clarus-css/js/modal.js`, o formato documentado em `usage.md`): o
+  padrão `"./js/*"` do `exports` do `package.json` duplicava a extensão
+  `.js` (`modal.js.js`), quebrando qualquer import direto de um módulo —
+  nunca fora exercitado por um import real antes desta sub-fase.
+  `npm publish --provenance` no novo `.github/workflows/release.yml`
+  (dispara em tags `v*.*.*`, publica `clarus-css`+`clarus-icons`).
+  `.github/FUNDING.yml` e `.github/dependabot.yml` (npm + github-actions,
+  semanal). Utilitários de impressão (`.u-print-hide`/`.u-print-only`/
+  `.u-print-block`/`-inline`/`-inline-block`,
+  `packages/clarus-utilities/scss/utilities/_print.scss`), documentados em
+  `docs/guides/print.md`. Página kitchen sink
+  (`mockup/kitchen-sink.html`) com um exemplo compacto de cada componente,
+  dois temas — smoke test visual rápido, referenciada em `docs/README.md`.
+
+- Fase final pré-v1.0.0, sub-fase 5.7 (parte 2/N) — presets de tema,
+  `clarus-cli`, tokens de gráficos, forms extras e wrapper React
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P3):
+  - Dois novos presets de marca em
+    `packages/clarus-core/scss/themes/_brands.scss`: `corporate`
+    (azul-marinho sóbrio) e `vibrant` (laranja energético) — mesma técnica
+    OKLCH do preset `violet` existente. O primitivo do "vibrant" é claro o
+    bastante pra o texto branco padrão de `.cl-btn-primary`/
+    `.cl-badge-primary` cair abaixo de 4.5:1 (pego pelo gate `test:a11y`);
+    corrigido com um override em `@layer overrides` (a camada de maior
+    prioridade — cascade layers ignoram especificidade, então um seletor
+    mais específico dentro de `@layer tokens` perderia mesmo assim). Ao
+    investigar o fix, descoberto que `.cl-badge-primary` fixava `color`
+    diretamente (ao contrário de `.cl-btn-primary`, que já seguia a
+    convenção de só sobrescrever uma custom property) — alinhado
+    (`--cl-badge-color`/`--cl-badge-bg`, mesmo padrão de `.cl-btn`).
+  - Pacote `clarus-cli` (`packages/clarus-cli/`): comandos `build`
+    (compila um entry `.scss` de um projeto consumidor com o mesmo
+    pipeline sass→autoprefixer→cssnano do build interno), `theme` (gera um
+    preset `data-brand` em CSS puro via `color-mix()`, sem dependência de
+    Sass, decidindo automaticamente `--cl-btn-color`/`--cl-badge-color`
+    pelo contraste com a cor informada) e `analyze` (tamanho bruto/gzip de
+    qualquer arquivo, versão genérica de `scripts/size.mjs`).
+  - Tokens de gráficos agnósticos de biblioteca (`--cl-chart-series-1..6`,
+    `--cl-chart-grid`, `--cl-chart-axis`, `--cl-chart-tooltip-bg/text`,
+    `packages/clarus-core/scss/tokens/_charts.scss`) — aliases da camada
+    semântica existente, sem wrapper de nenhuma lib específica. Documentado
+    em `docs/guides/charts.md`, mockup `mockup/charts.html`.
+  - Range/Slider (`.cl-form-range`,
+    `packages/clarus-components/scss/forms/_range.scss`): trilha/thumb
+    estilizados via pseudo-elementos vendor-prefixados; teclado e ARIA já
+    vêm do `<input type="range">` nativo. JS opcional
+    (`packages/clarus-js/js/range.js`, `data-cl="range"`) só pinta a
+    trilha preenchida (`--cl-range-percent`, necessário porque só o
+    Firefox suporta `::-moz-range-progress`) e espelha o valor num
+    `<output>` associado. Documentado em `docs/components/range.md`,
+    mockup `mockup/range.html`.
+  - Upload avançado (`packages/clarus-js/js/file-upload-advanced.js`,
+    `data-cl="file-upload-advanced"`): evolução do File Upload simples —
+    múltiplos arquivos, preview (thumbnail de imagem via
+    `URL.createObjectURL`, nome, tamanho), progresso individual
+    (`setProgress`/`setError`, reusa `.cl-progress`) e remoção por item.
+    Agnóstico de backend (não faz upload de verdade, só expõe a API pro
+    consumidor plugar o próprio XHR/fetch). Documentado em
+    `docs/components/file-upload-advanced.md`, mockup
+    `mockup/file-upload-advanced.html`.
+  - Pacote `clarus-react` (`packages/clarus-react/`): wrapper React fino
+    (`ModalTrigger`/`ModalPanel`, `DropdownTrigger`/`DropdownMenu`,
+    `TabList`) — cada componente só instancia a classe vanilla
+    correspondente (`clarus-css/js/*`) sobre o elemento renderizado pelo
+    React e desfaz no unmount, sem reimplementar comportamento. Cobertura
+    parcial e deliberada (só React, só 3 componentes cobrindo os dois
+    formatos de contrato do `clarus-js`) — serve de molde pros demais.
+  - Placeholder estrutural de showcase de produção (`docs/showcase.md`) —
+    sem casos fictícios nem métricas inventadas, aguardando projetos reais.
+  - `.github/workflows/ci.yml` ganhou o gate `npm run types:check`.
+
 - Fase final pré-v1.0.0, sub-fase 5.7 (ecossistema, parte 1/N) — pacote
   `clarus-icons` (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`,
   P3): 1994 ícones SVG do conjunto [Lucide](https://lucide.dev) (ISC),

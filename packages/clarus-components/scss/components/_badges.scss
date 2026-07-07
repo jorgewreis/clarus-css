@@ -2,23 +2,30 @@
 @use "tools" as *;
 
 @layer components {
+  // Mesma convenção de `.cl-btn` (packages/clarus-components/scss/components/_buttons.scss):
+  // cada `.cl-badge-*` só sobrescreve `--cl-badge-color`/`--cl-badge-bg`
+  // (nunca `color`/`background-color` diretamente) — permite customizar um
+  // badge específico via CSS, inclusive por marca (`[data-brand="x"] .cl-badge-primary { --cl-badge-color: ...; }`).
   .cl-badge {
+    --cl-badge-color: var(--cl-color-text);
+    --cl-badge-bg: var(--cl-color-subtle);
+
     display: inline-flex;
     align-items: center;
     gap: 6px;
     min-height: 20px;
     padding: 0 4px 0 8px;
     border-radius: var(--cl-radius-sm);
-    color: var(--cl-color-text);
-    background-color: var(--cl-color-subtle);
+    color: var(--cl-badge-color);
+    background-color: var(--cl-badge-bg);
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
   }
 
   @each $name, $color in $theme-colors {
     .cl-badge-#{$name} {
-      color: color-contrast($color);
-      background-color: var(--cl-color-#{$name});
+      --cl-badge-color: #{color-contrast($color)};
+      --cl-badge-bg: var(--cl-color-#{$name});
     }
   }
 
