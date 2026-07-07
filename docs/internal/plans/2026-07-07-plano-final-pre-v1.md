@@ -248,23 +248,40 @@ literal do pedido preservado como referência).
   **teclado completo** (navegação por célula/linha, ordenação via
   `Enter`/`Space` no cabeçalho, `aria-sort`) — DoD completo, não um MVP.
 
-#### 5.10 Matriz de compatibilidade por feature moderna (novo)
-- Expande `docs/reference/browser-support.md` com uma tabela explícita por
-  feature usada no CSS (`@layer`, `:has()`, `@container`, `color-mix()`,
-  custom media/OKLCH) × navegador/versão mínima × comportamento de
-  fallback documentado (o que acontece quando a feature não é suportada).
-- Sem isso hoje o browser-support é geral (browserslist), não por feature —
-  esta é uma lacuna real de transparência técnica frente a frameworks
-  "top-10" que documentam isso explicitamente (ex.: Bootstrap "browser
-  support" por componente).
+#### 5.10 Matriz de compatibilidade por feature moderna — ✅ concluída (2026-07-07)
 
-#### 5.11 Guia de migração formal — Bootstrap/Tailwind → Clarus (novo)
-- Diferente do `docs/guides/migration-v1.md` existente (que documenta a
-  migração *interna* do rename `cl-` da Fase 0), este é um guia novo
-  **externo**: tabela de equivalência de classes/componentes
-  (`.btn.btn-primary` → `.cl-btn.cl-btn-primary`, utilitários Tailwind
-  `flex`/`gap-4` → `.u-d-flex`/`.u-gap-4` etc.) para quem migra de outro
-  framework, não de uma versão antiga do Clarus.
+- `docs/reference/browser-support.md` ganhou uma tabela explícita por
+  feature × navegador mínimo com suporte nativo × comportamento de
+  fallback documentado: `@layer`, `color-mix()`/`oklch()`, `@container`,
+  `:focus-visible`, `prefers-reduced-motion` — as features moderna
+  *efetivamente usadas* no CSS/JS do framework hoje (auditado via grep no
+  repo antes de escrever a tabela, não assumido).
+- **Desvio da lista original do pedido**: `:has()` e `@custom-media` (dois
+  dos quatro itens citados no pedido original) não são usados em nenhuma
+  linha do framework — confirmado por busca no repo. Em vez de inventar
+  uso ou omitir silenciosamente, a tabela ganhou uma seção própria
+  ("Recursos considerados, mas não usados hoje") deixando isso explícito,
+  com o compromisso de que qualquer uso futuro ganha uma linha na mesma
+  tabela antes do merge.
+
+#### 5.11 Guia de migração formal — de outro framework CSS → Clarus — ✅ concluída (2026-07-07)
+
+- Novo `docs/guides/migration-external.md`, diferente do
+  `docs/guides/migration-v1.md` existente (que documenta a migração
+  *interna* do rename `cl-` da Fase 0): tabela de equivalência de
+  utilitários (flex/grid/spacing/tipografia) e componentes
+  (botão/card/alert/badge/table/modal/dropdown/form-control), seção "o
+  que não migra 1:1" (API JS, escala de espaçamento, grid flexbox vs.
+  CSS Grid, tema/dark mode, build) e checklist de migração em 5 passos.
+- **Sem nomes de framework concorrente no texto** (regra já seguida em
+  README/guias/CHANGELOG oficiais) — descreve os padrões genericamente
+  ("framework baseado em classes utilitárias", "framework de componentes
+  com prefixo `.btn`/`.card`") em vez de nomear Bootstrap/Tailwind, que só
+  aparecem no título desta seção do plano interno (não no guia publicado).
+- Ao escrever isso, notei que `docs/README.md` nunca ganhou entradas pro
+  DataTable (5.5) nem pro Command Palette/Tree View (5.6) — corrigido
+  junto (lacuna de documentação das duas sub-fases anteriores, não deste
+  item).
 
 ### P3 — Liderança/ecossistema (texto literal do pedido, 2026-07-07)
 

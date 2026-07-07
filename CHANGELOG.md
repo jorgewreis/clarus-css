@@ -9,6 +9,19 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fases 5.10/5.11 — excelência de produto
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P2):
+  `docs/reference/browser-support.md` ganhou uma **matriz de
+  compatibilidade explícita por feature** (`@layer`, `color-mix()`/OKLCH,
+  `@container`, `:focus-visible`, `prefers-reduced-motion`) — navegador
+  mínimo com suporte nativo × comportamento de fallback documentado por
+  recurso, em vez de só o alvo geral do `.browserslistrc`. Novo guia
+  `docs/guides/migration-external.md`: tabela de equivalência de
+  classes/componentes pra quem migra de outro framework CSS pro Clarus
+  (utilitários, componentes, o que não migra 1:1, checklist). Corrigida
+  também uma lacuna no índice (`docs/README.md`): DataTable, Command
+  Palette e Tree View (sub-fases 5.5/5.6) não estavam listados.
+
 - Fase final pré-v1.0.0, sub-fase 5.6 — Command Palette e Tree View
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
   `packages/clarus-js/js/command-palette.js`, diálogo de busca/comandos

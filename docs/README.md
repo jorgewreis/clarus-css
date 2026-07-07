@@ -21,6 +21,8 @@ Referência completa de uso do framework — para a visão geral do projeto
   foco, teclado, ARIA e contraste.
 - [Migração para v1.0.0](guides/migration-v1.md) — renomeação da API
   pública (`cl-`/`u-`/`is-`), codemod.
+- [Migração de outro framework](guides/migration-external.md) — tabela de
+  equivalência de classes/componentes pra quem vem de outro framework CSS.
 
 ## Componentes
 
@@ -38,6 +40,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 [Button](components/button.md) · [Card](components/card.md) ·
 [Badge](components/badge.md) · [Tag](components/tag.md) ·
 [Alert](components/alert.md) · [Table](components/table.md) ·
+[DataTable](components/datatable.md) ·
 [Divider](components/divider.md) · [Empty State](components/empty-state.md) ·
 [Tile](components/tile.md) · [Skeleton](components/skeleton.md)
 
@@ -45,6 +48,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 
 [Navbar](components/navbar.md) · [Tabs](components/tabs.md) ·
 [Dropdown](components/dropdown.md) · [Nested Menu](components/nested-menu.md) ·
+[Tree View](components/tree-view.md) ·
 [Pagination](components/pagination.md) · [Breadcrumb](components/breadcrumb.md) ·
 [Accordion](components/accordion.md) · [Collapse](components/collapse.md) ·
 [Stepper](components/stepper.md)
@@ -53,7 +57,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 
 [Modal](components/modal.md) · [Alert Dialog](components/alert-dialog.md) ·
 [Offcanvas](components/offcanvas.md) · [Tooltip](components/tooltip.md) ·
-[Popover](components/popover.md)
+[Popover](components/popover.md) · [Command Palette](components/command-palette.md)
 
 ### Feedback
 
