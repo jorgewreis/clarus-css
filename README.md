@@ -24,11 +24,15 @@ profissionais, e é distribuído publicamente como produto para qualquer
 desenvolvedor que precise construir interfaces consistentes sem carregar
 React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 
-> **Status:** `0.4.0`. Base completa (layout, grid, utilitários, formulários com
-> validação visual, select customizado e upload de arquivo) mais um catálogo de
-> componentes em expansão — dos elementos de conteúdo e navegação aos
-> interativos (modal, dropdown, tabs, carousel, stepper e mais), todos com dark
-> mode nativo e uma API JavaScript consistente. O catálogo atual está em
+> **Status:** `0.5.0`, reta final rumo à `1.0.0`. Base completa (monorepo,
+> `@layer`, tokens OKLCH, layout, grid, utilitários, formulários com validação
+> visual, select customizado e upload de arquivo) mais um catálogo de mais de
+> 35 componentes — dos elementos de conteúdo e navegação aos interativos
+> (modal, dropdown, tabs, carousel, stepper e mais), todos com dark mode nativo
+> e uma API JavaScript consistente. Qualidade é gate de CI, não promessa: todo
+> componente passa por regressão visual (Playwright), auditoria de
+> acessibilidade automatizada (axe-core, WCAG 2.1 A/AA), checagem de contraste
+> e budget de tamanho a cada PR. O catálogo atual está em
 > [Componentes](#componentes); o histórico por versão, no
 > [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -47,7 +51,7 @@ arquitetura do projeto.
 | **Híbrido por design** | Componentes prontos (`.cl-btn`, `.cl-card`, `.cl-modal`) e utilitários atômicos (`.u-d-flex`, `.u-mt-3`, `.u-gx-2`) convivem na mesma folha de estilo, com uma convenção de nomes (`cl-`/`u-`/`is-`) que evita colisão entre os dois mundos. |
 | **Zero dependências** | Nenhuma dependência de runtime — nem framework JS, nem CDN externo para fontes. HTML, CSS e JavaScript nativo, prontos para colar direto em qualquer página. |
 | **Dark mode nativo** | Suporte a tema escuro desde a v0.1, via CSS Custom Properties e um único atributo (`data-theme="dark"`) — sem plugin, sem JS extra. |
-| **Acessibilidade não é opcional** | ARIA, foco e navegação por teclado são parte da API de todo componente interativo desde o início, não um retrofit. |
+| **Acessibilidade não é opcional** | ARIA, foco e navegação por teclado são parte da API de todo componente interativo desde o início, não um retrofit — e um gate `axe-core` no CI garante isso a cada PR (ver [matriz de acessibilidade](docs/reference/accessibility-matrix.md)). |
 | **Curva de aprendizado familiar** | Nomenclatura de classes e grid seguem convenções amplamente adotadas — quem já usou um framework CSS de componentes se sente em casa em minutos. |
 | **Customização sem fork** | Toda a identidade visual (cores, espaçamento, tipografia, raios, sombras) é exposta via CSS Custom Properties — sobrescreva sem recompilar. |
 
@@ -157,6 +161,10 @@ e [Dark mode](docs/guides/dark-mode.md).
   catálogo técnico de cada componente (classes, tokens, módulos JS).
 - [`docs/reference/scss-architecture.md`](docs/reference/scss-architecture.md) — arquitetura dos
   módulos SCSS e do pipeline de build.
+- [`docs/reference/accessibility-matrix.md`](docs/reference/accessibility-matrix.md) — teclado,
+  ARIA e gestão de foco por componente.
+- [`docs/reference/contrast-report.md`](docs/reference/contrast-report.md) — auditoria WCAG dos
+  tokens de cor nos dois temas.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente e
   convenções de contribuição.
 - [`CHANGELOG.md`](CHANGELOG.md) — histórico de mudanças, seguindo
