@@ -44,6 +44,19 @@
             gap: 16px;
             margin-bottom: 24px;
         }
+
+        .usage-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .usage-row .cl-alert,
+        .usage-row .cl-input-group {
+            max-width: 280px;
+        }
     </style>
 </head>
 <body>
@@ -88,11 +101,54 @@
             <svg class="cl-icon cl-icon-xl" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         </div>
 
-        <p class="u-fs-sm u-fw-medium u-mb-1">Uso em botão — a cor do ícone acompanha currentColor</p>
-        <button type="button" class="cl-btn cl-btn-primary">
-            <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
-            Baixar
-        </button>
+        <p class="u-fs-sm u-fw-medium u-mb-1">Uso em componentes reais — o ícone é conteúdo comum, colado onde o componente já aceita qualquer HTML</p>
+
+        <div class="usage-row">
+            <button type="button" class="cl-btn cl-btn-primary">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+                Baixar
+            </button>
+
+            <span class="cl-badge cl-badge-warning">
+                <svg class="cl-icon cl-icon-xs" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                Destaque
+            </span>
+        </div>
+
+        <div class="usage-row">
+            <div class="cl-alert cl-alert-danger">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                Falha ao salvar as alterações.
+            </div>
+
+            <div class="cl-input-group">
+                <span class="cl-input-group-text">
+                    <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                </span>
+                <input type="search" class="cl-form-control" placeholder="Buscar…" aria-label="Buscar">
+            </div>
+        </div>
+
+        <nav aria-label="breadcrumb">
+            <ol class="cl-breadcrumb">
+                <li class="cl-breadcrumb-item">
+                    <a href="#">
+                        <svg class="cl-icon cl-icon-sm" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Início
+                    </a>
+                </li>
+                <li class="cl-breadcrumb-item"><a href="#">Configurações</a></li>
+                <li class="cl-breadcrumb-item is-active">Perfil</li>
+            </ol>
+        </nav>
+
+        <div class="cl-empty-state">
+            <div class="cl-empty-state-icon" aria-hidden="true">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            </div>
+            <h3 class="cl-empty-state-title">Caixa de entrada vazia</h3>
+            <p class="cl-empty-state-text">Novas mensagens aparecerão aqui — o slot de ícone do Empty State aceita qualquer SVG, incluindo os do clarus-icons.</p>
+        </div>
     </div>
 
     <div class="theme-panel" data-theme="dark">
@@ -105,11 +161,41 @@
             <svg class="cl-icon cl-icon-lg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
         </div>
 
-        <p class="u-fs-sm u-fw-medium u-mb-1">Uso em botão</p>
-        <button type="button" class="cl-btn cl-btn-primary">
-            <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Confirmar
-        </button>
+        <p class="u-fs-sm u-fw-medium u-mb-1">Uso em componentes reais</p>
+
+        <div class="usage-row">
+            <button type="button" class="cl-btn cl-btn-primary">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Confirmar
+            </button>
+
+            <span class="cl-badge cl-badge-info">
+                <svg class="cl-icon cl-icon-xs" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Novo
+            </span>
+        </div>
+
+        <div class="usage-row">
+            <div class="cl-alert cl-alert-success">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Alterações salvas com sucesso.
+            </div>
+
+            <div class="cl-input-group">
+                <span class="cl-input-group-text">
+                    <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                </span>
+                <input type="search" class="cl-form-control" placeholder="Buscar…" aria-label="Buscar">
+            </div>
+        </div>
+
+        <div class="cl-empty-state">
+            <div class="cl-empty-state-icon" aria-hidden="true">
+                <svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            </div>
+            <h3 class="cl-empty-state-title">Caixa de entrada vazia</h3>
+            <p class="cl-empty-state-text">Mesmo slot de ícone, mesmo SVG — a cor muda sozinha com o tema.</p>
+        </div>
     </div>
 
 </body>
