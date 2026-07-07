@@ -175,3 +175,12 @@ e [Dark mode](docs/guides/dark-mode.md).
 
 Distribuído sob a licença [MIT](LICENSE) — uso livre em projetos pessoais,
 comerciais e comunitários.
+
+---
+
+<div align="center">
+
+Desenvolvido integralmente por **Jorge Wanderley Reis de Menezes** —
+[jorgew.reis@outlook.com](mailto:jorgew.reis@outlook.com)
+
+</div>
