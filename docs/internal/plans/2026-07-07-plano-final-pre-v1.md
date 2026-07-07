@@ -181,6 +181,25 @@ literal do pedido preservado como referência).
   cima (quanto?), ou considerar `dist/js` com entradas por componente
   (import só do que usa) em vez de um bundle único — ver seção 7.
 
+#### 5.5 DataTable v1 — ✅ concluída (2026-07-07)
+
+- `packages/clarus-js/js/datatable.js`: sort (ciclo asc → desc → nenhuma
+  via `data-cl-sort` no `<th>`, `aria-sort`, padrão WAI-ARIA Table Sort),
+  filtro por substring (`[data-cl-datatable-filter]`) e paginação
+  client-side (`data-cl-page-size`), reusando `.cl-table`/`.cl-pagination`/
+  `.cl-page-link` já shipados — só `_datatable.scss` (botão de ordenação +
+  indicador ↕/↑/↓) é CSS novo.
+- Estados vazio/carregando/erro reusam `.cl-empty-state`/`.cl-skeleton`
+  (`setLoading()`/`setError()` públicos); roving `tabindex` nas células do
+  corpo com navegação completa (setas, `Home`/`End`,
+  `Ctrl+Home`/`Ctrl+End`).
+- DoD completo: 18 testes unitários, mockup (`mockup/datatable.html`, dois
+  temas + demonstração de loading/erro), a11y (axe) e visual regression
+  verdes, documentado em `docs/components/datatable.md` (com
+  `docs/components/table.md` atualizado pra referenciá-lo). Budget de
+  tamanho do JS: 15.84 KB gzip de um teto de 24 KB (~8.16 KB de folga
+  restante pra 5.6).
+
 #### 5.6 Depois do DataTable (rascunho: "depois")
 - Command palette, Tree view — mesmo DoD dos demais componentes.
 

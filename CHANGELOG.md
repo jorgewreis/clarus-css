@@ -7,6 +7,24 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Fase final pré-v1.0.0, sub-fase 5.5 — DataTable v1
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
+  `packages/clarus-js/js/datatable.js`, camada JS opcional sobre uma
+  [Table](docs/components/table.md) comum — ordenação por coluna
+  (`data-cl-sort`, ciclo asc → desc → nenhuma, `aria-sort` seguindo o
+  padrão [WAI-ARIA Table Sort](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)),
+  filtro por texto (`[data-cl-datatable-filter]`, substring
+  case-insensitive em qualquer célula) e paginação client-side
+  (`data-cl-page-size`, reusa `.cl-pagination`/`.cl-page-link`). Estados de
+  vazio/carregando/erro reusam `.cl-empty-state`/`.cl-skeleton`
+  (`setLoading()`/`setError()`). Roving `tabindex` nas células do corpo com
+  navegação completa por setas/`Home`/`End`/`Ctrl+Home`/`Ctrl+End`. 18
+  testes unitários, mockup (`mockup/datatable.html`), a11y e visual
+  regression verdes. Documentado em `docs/components/datatable.md` (com
+  `docs/components/table.md` atualizado pra referenciá-lo).
+
 ### Changed
 
 - Budget de tamanho do JS (`scripts/size.mjs`, gate `npm run size:check`)

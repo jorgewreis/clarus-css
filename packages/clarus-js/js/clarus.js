@@ -19,3 +19,4 @@ export { NotificationCenter } from "./notification-center.js";
 export { NestedMenu } from "./nested-menu.js";
 export { Combobox } from "./combobox.js";
 export { Datepicker } from "./datepicker.js";
+export { DataTable } from "./datatable.js";

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - DataTable</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../dist/css/fonts.css">
+    <link rel="stylesheet" href="../dist/css/components.css">
+    <link rel="stylesheet" href="../dist/css/forms.css">
+    <link rel="stylesheet" href="../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        [data-theme="dark"].theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        section {
+            max-width: 560px;
+            margin-bottom: 24px;
+        }
+
+        .demo-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-panel">
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
+
+        <section>
+            <p class="u-fs-sm u-fw-medium u-mb-1">DataTable — ordene por coluna, filtre e pagine (5 linhas/página)</p>
+            <div class="cl-datatable" id="datatable-claro" data-cl="datatable" data-cl-page-size="5">
+                <div class="cl-datatable-toolbar">
+                    <input type="search" class="cl-form-control" data-cl-datatable-filter placeholder="Filtrar por nome ou framework…">
+                </div>
+                <table class="cl-table cl-table-striped cl-table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-cl-sort="name">Nome</th>
+                            <th scope="col" data-cl-sort="framework">Framework</th>
+                            <th scope="col" data-cl-sort="year">Lançamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ana</td><td>Clarus CSS</td><td>2026</td></tr>
+                        <tr><td>Bruno</td><td>Cirrus UI</td><td>2018</td></tr>
+                        <tr><td>Carla</td><td>UIkit</td><td>2013</td></tr>
+                        <tr><td>Diego</td><td>Bulma</td><td>2016</td></tr>
+                        <tr><td>Elisa</td><td>Foundation</td><td>2011</td></tr>
+                        <tr><td>Fábio</td><td>Materialize</td><td>2014</td></tr>
+                        <tr><td>Giulia</td><td>Pure.css</td><td>2013</td></tr>
+                        <tr><td>Hugo</td><td>Milligram</td><td>2015</td></tr>
+                        <tr><td>Iris</td><td>Spectre.css</td><td>2017</td></tr>
+                        <tr><td>João</td><td>Tachyons</td><td>2014</td></tr>
+                        <tr><td>Karina</td><td>Picnic CSS</td><td>2016</td></tr>
+                        <tr><td>Lucas</td><td>Almost Flat</td><td>2013</td></tr>
+                    </tbody>
+                </table>
+                <div class="cl-empty-state" data-cl-datatable-empty hidden>
+                    <div class="cl-empty-state-icon" aria-hidden="true">🔍</div>
+                    <p class="cl-empty-state-title">Nenhum resultado encontrado.</p>
+                </div>
+                <div class="cl-datatable-loading" data-cl-datatable-loading hidden>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px; margin-bottom: 8px;"></div>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px; margin-bottom: 8px;"></div>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px;"></div>
+                </div>
+                <div class="cl-empty-state" data-cl-datatable-error hidden>
+                    <div class="cl-empty-state-icon" aria-hidden="true">⚠️</div>
+                    <p class="cl-empty-state-title">Falha ao carregar dados</p>
+                    <p class="cl-empty-state-text" data-cl-datatable-error-message></p>
+                </div>
+            </div>
+            <div class="demo-actions">
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="loading" data-demo-target="datatable-claro">Simular carregando</button>
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="error" data-demo-target="datatable-claro">Simular erro</button>
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="reset" data-demo-target="datatable-claro">Normal</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="theme-panel" data-theme="dark">
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
+
+        <section>
+            <p class="u-fs-sm u-fw-medium u-mb-1">DataTable — ordene por coluna, filtre e pagine (5 linhas/página)</p>
+            <div class="cl-datatable" id="datatable-escuro" data-cl="datatable" data-cl-page-size="5">
+                <div class="cl-datatable-toolbar">
+                    <input type="search" class="cl-form-control" data-cl-datatable-filter placeholder="Filtrar por nome ou framework…">
+                </div>
+                <table class="cl-table cl-table-striped cl-table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-cl-sort="name">Nome</th>
+                            <th scope="col" data-cl-sort="framework">Framework</th>
+                            <th scope="col" data-cl-sort="year">Lançamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ana</td><td>Clarus CSS</td><td>2026</td></tr>
+                        <tr><td>Bruno</td><td>Cirrus UI</td><td>2018</td></tr>
+                        <tr><td>Carla</td><td>UIkit</td><td>2013</td></tr>
+                        <tr><td>Diego</td><td>Bulma</td><td>2016</td></tr>
+                        <tr><td>Elisa</td><td>Foundation</td><td>2011</td></tr>
+                        <tr><td>Fábio</td><td>Materialize</td><td>2014</td></tr>
+                        <tr><td>Giulia</td><td>Pure.css</td><td>2013</td></tr>
+                        <tr><td>Hugo</td><td>Milligram</td><td>2015</td></tr>
+                        <tr><td>Iris</td><td>Spectre.css</td><td>2017</td></tr>
+                        <tr><td>João</td><td>Tachyons</td><td>2014</td></tr>
+                        <tr><td>Karina</td><td>Picnic CSS</td><td>2016</td></tr>
+                        <tr><td>Lucas</td><td>Almost Flat</td><td>2013</td></tr>
+                    </tbody>
+                </table>
+                <div class="cl-empty-state" data-cl-datatable-empty hidden>
+                    <div class="cl-empty-state-icon" aria-hidden="true">🔍</div>
+                    <p class="cl-empty-state-title">Nenhum resultado encontrado.</p>
+                </div>
+                <div class="cl-datatable-loading" data-cl-datatable-loading hidden>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px; margin-bottom: 8px;"></div>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px; margin-bottom: 8px;"></div>
+                    <div class="cl-skeleton cl-skeleton-text" style="width: 100%; height: 20px;"></div>
+                </div>
+                <div class="cl-empty-state" data-cl-datatable-error hidden>
+                    <div class="cl-empty-state-icon" aria-hidden="true">⚠️</div>
+                    <p class="cl-empty-state-title">Falha ao carregar dados</p>
+                    <p class="cl-empty-state-text" data-cl-datatable-error-message></p>
+                </div>
+            </div>
+            <div class="demo-actions">
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="loading" data-demo-target="datatable-escuro">Simular carregando</button>
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="error" data-demo-target="datatable-escuro">Simular erro</button>
+                <button type="button" class="cl-btn cl-btn-sm" data-demo-action="reset" data-demo-target="datatable-escuro">Normal</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- SCRIPTS IMPORT -->
+    <script src="../dist/js/clarus.js"></script>
+    <script>
+        // Só pro mockup: os botões abaixo demonstram setLoading()/setError(),
+        // que na vida real seriam chamados ao redor de uma requisição real.
+        document.querySelectorAll("[data-demo-action]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const instance = Clarus.DataTable.getInstance(document.getElementById(btn.dataset.demoTarget));
+                if (btn.dataset.demoAction === "loading") instance.setLoading(true);
+                else if (btn.dataset.demoAction === "error") instance.setError("Não foi possível conectar ao servidor.");
+                else {
+                    instance.setLoading(false);
+                    instance.setError(null);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

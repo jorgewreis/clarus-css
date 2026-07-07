@@ -47,8 +47,9 @@ Combináveis entre si (ex.: `cl-table-striped cl-table-bordered cl-table-sm`).
 
 ## Estados
 
-Nenhum — tabela é conteúdo estático; ordenação/filtro/paginação de dados
-ficam a cargo da sua aplicação (não há JS de tabela no framework hoje).
+Nenhum — tabela é conteúdo estático. Se precisar de ordenação/filtro/
+paginação client-side, veja o [DataTable](datatable.md), a camada JS
+opcional que reusa `.cl-table`.
 
 ## A11y
 
@@ -59,7 +60,8 @@ ficam a cargo da sua aplicação (não há JS de tabela no framework hoje).
 
 ## API JS
 
-Nenhuma — 100% CSS.
+Nenhuma — 100% CSS. Para ordenação/filtro/paginação, use o
+[DataTable](datatable.md).
 
 ## Tokens
 
