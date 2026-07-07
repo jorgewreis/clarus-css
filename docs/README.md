@@ -15,6 +15,8 @@ Referência completa de uso do framework — para a visão geral do projeto
 - [Theming](guides/theming.md) — as 3 camadas de tokens, customização
   global e via Sass.
 - [Dark mode](guides/dark-mode.md) — ativação, como funciona, toggle.
+- [Layout avançado](guides/layout-advanced.md) — Stack, Cluster, Sidebar,
+  utilitários sticky e de container query (`@container`).
 - [Acessibilidade](guides/accessibility.md) — padrões compartilhados de
   foco, teclado, ARIA e contraste.
 - [Migração para v1.0.0](guides/migration-v1.md) — renomeação da API

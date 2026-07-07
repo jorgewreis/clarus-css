@@ -60,5 +60,73 @@
         <p class="u-font-mono u-fs-md">Texto em fonte monoespaçada</p>
     </div>
 
+    <div class="cl-container-fluid u-p-2 u-mt-3">
+        <p class="u-fs-sm u-fw-medium u-mb-1">Stack — empilhamento vertical com gap consistente</p>
+        <div class="cl-stack" style="max-width: 320px; background-color: var(--cl-color-subtle); padding: 12px;">
+            <div class="u-p-2" style="background-color: var(--cl-color-surface);">Item 1</div>
+            <div class="u-p-2" style="background-color: var(--cl-color-surface);">Item 2</div>
+            <div class="u-p-2" style="background-color: var(--cl-color-surface);">Item 3</div>
+        </div>
+        <div class="cl-stack cl-stack-gap-1 u-mt-2" style="max-width: 320px; background-color: var(--cl-color-subtle); padding: 12px;">
+            <div class="u-p-2" style="background-color: var(--cl-color-surface);">Gap menor (cl-stack-gap-1)</div>
+            <div class="u-p-2" style="background-color: var(--cl-color-surface);">Item 2</div>
+        </div>
+    </div>
+
+    <div class="cl-container-fluid u-p-2 u-mt-3">
+        <p class="u-fs-sm u-fw-medium u-mb-1">Cluster — grupo horizontal com quebra automática</p>
+        <div class="cl-cluster" style="background-color: var(--cl-color-subtle); padding: 12px;">
+            <span class="u-p-2" style="background-color: var(--cl-color-surface); border-radius: var(--cl-radius-sm);">Frontend</span>
+            <span class="u-p-2" style="background-color: var(--cl-color-surface); border-radius: var(--cl-radius-sm);">Design System</span>
+            <span class="u-p-2" style="background-color: var(--cl-color-surface); border-radius: var(--cl-radius-sm);">Acessibilidade</span>
+            <span class="u-p-2" style="background-color: var(--cl-color-surface); border-radius: var(--cl-radius-sm);">Performance</span>
+            <span class="u-p-2" style="background-color: var(--cl-color-surface); border-radius: var(--cl-radius-sm);">CSS</span>
+        </div>
+    </div>
+
+    <div class="cl-container-fluid u-p-2 u-mt-3">
+        <p class="u-fs-sm u-fw-medium u-mb-1">Sidebar — aside com largura fixa + conteúdo flexível</p>
+        <div class="cl-sidebar cl-sidebar-width-sm" style="background-color: var(--cl-color-subtle); padding: 12px;">
+            <div class="cl-sidebar-aside u-p-2" style="background-color: var(--cl-color-surface);">Aside (largura fixa)</div>
+            <div class="cl-sidebar-content u-p-2" style="background-color: var(--cl-color-surface);">Conteúdo (preenche o espaço restante e quebra pra baixo da aside quando o container fica estreito demais)</div>
+        </div>
+        <div class="cl-sidebar cl-sidebar-width-sm cl-sidebar-reverse u-mt-2" style="background-color: var(--cl-color-subtle); padding: 12px;">
+            <div class="cl-sidebar-aside u-p-2" style="background-color: var(--cl-color-surface);">Aside (reverse — à direita)</div>
+            <div class="cl-sidebar-content u-p-2" style="background-color: var(--cl-color-surface);">Conteúdo</div>
+        </div>
+    </div>
+
+    <div class="cl-container-fluid u-p-2 u-mt-3">
+        <p class="u-fs-sm u-fw-medium u-mb-1">Sticky — permanece fixo ao rolar o container</p>
+        <div tabindex="0" style="max-height: 120px; overflow-y: auto; border: 1px solid var(--cl-color-border);">
+            <div class="u-sticky-top u-p-2" style="background-color: var(--cl-color-subtle);">Cabeçalho fixo (u-sticky-top)</div>
+            <div class="u-p-2">Linha 1</div>
+            <div class="u-p-2">Linha 2</div>
+            <div class="u-p-2">Linha 3</div>
+            <div class="u-p-2">Linha 4</div>
+            <div class="u-p-2">Linha 5</div>
+        </div>
+    </div>
+
+    <div class="cl-container-fluid u-p-2 u-mt-3">
+        <p class="u-fs-sm u-fw-medium u-mb-1">Container queries — reage à largura do container, não da viewport</p>
+        <div class="u-cq" style="width: 600px; max-width: 100%; background-color: var(--cl-color-subtle); padding: 12px;">
+            <p class="u-fs-sm u-mb-1">Container largo (≥ 480px): itens em linha</p>
+            <div class="u-cq-md-d-flex u-gap-2">
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">A</div>
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">B</div>
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">C</div>
+            </div>
+        </div>
+        <div class="u-cq u-mt-2" style="width: 300px; max-width: 100%; background-color: var(--cl-color-subtle); padding: 12px;">
+            <p class="u-fs-sm u-mb-1">Container estreito (&lt; 480px): sem o d-flex do breakpoint md, itens empilham</p>
+            <div class="u-cq-md-d-flex u-gap-2">
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">A</div>
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">B</div>
+                <div class="u-p-2" style="background-color: var(--cl-color-surface);">C</div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

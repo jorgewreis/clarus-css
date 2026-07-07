@@ -38,6 +38,16 @@
     --cl-radius-lg: #{$radius-lg};
     --cl-gutter-x: #{map.get($spacers, 4)};
     --cl-gutter-y: 0px;
+
+    // Referência dos limiares usados pelos utilitários `@container` (ver
+    // `packages/clarus-utilities/scss/utilities/_container-queries.scss`).
+    // Só informativas: a condição de um `@container` precisa de um valor
+    // literal em tempo de build, não aceita `var()` — mudar aqui não
+    // recalibra as regras já compiladas, só documenta os valores usados.
+    @each $name, $width in $container-breakpoints {
+      --cl-cq-#{$name}: #{$width};
+    }
+
     --cl-shadow-sm: 0 1px 3px rgb(0 0 0 / 15%), 0 1px 2px rgb(0 0 0 / 10%);
     --cl-shadow-md: 0 6px 12px rgb(0 0 0 / 15%), 0 3px 6px rgb(0 0 0 / 10%);
     --cl-shadow-lg: 0 15px 30px rgb(0 0 0 / 18%), 0 6px 12px rgb(0 0 0 / 12%);

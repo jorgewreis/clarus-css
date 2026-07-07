@@ -9,6 +9,21 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.1 — layout avançado
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): três novas
+  primitivas de layout CSS-only, `.cl-stack` (empilhamento vertical com
+  `gap`), `.cl-cluster` (grupo horizontal com quebra automática) e
+  `.cl-sidebar` (aside de largura fixa + conteúdo flexível, com variante
+  `.cl-sidebar-reverse`) — todas com modificador de gap
+  (`.cl-{stack,cluster,sidebar}-gap-{0..5}`), em
+  `packages/clarus-core/scss/layout/`. Utilitários `.u-sticky-top`/
+  `.u-sticky-bottom` (posição fixa ao rolar, com offset configurável).
+  Utilitários de container query (`.u-cq` + `.u-cq-{sm,md,lg}-d-*`),
+  reagindo à largura do container mais próximo em vez da viewport, com
+  tokens de referência `--cl-cq-sm/md/lg` (320/480/640px). Documentado em
+  [`docs/guides/layout-advanced.md`](docs/guides/layout-advanced.md), com
+  exemplo em `mockup/layout.html`.
+
 - Fase 3 do plano mestre — qualidade, A11y e performance como gate
   (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
   - Gate `npm run test:a11y` (axe-core via Playwright, regras WCAG 2.1

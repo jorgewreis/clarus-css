@@ -94,6 +94,20 @@ limitação técnica.
 Controlados em runtime pelas classes `.u-g-*`/`.u-gx-*`/`.u-gy-*` — ver
 [`docs/reference/scss-architecture.md`](scss-architecture.md#layout).
 
+## Layout avançado (Stack/Cluster/Sidebar/sticky/container queries)
+
+| Token | Valor padrão |
+|---|---|
+| `--cl-stack-gap` | `1rem` (`.cl-stack-gap-{0..5}` sobrescreve) |
+| `--cl-cluster-gap` | `0.5rem` (`.cl-cluster-gap-{0..5}` sobrescreve) |
+| `--cl-sidebar-gap` | `1rem` (`.cl-sidebar-gap-{0..5}` sobrescreve) |
+| `--cl-sidebar-width` | `16rem` (`.cl-sidebar-width-{sm..xxxl}` sobrescreve) |
+| `--cl-sticky-top` / `--cl-sticky-bottom` | `0` |
+| `--cl-cq-sm` / `--cl-cq-md` / `--cl-cq-lg` | `320px` / `480px` / `640px` — só informativos, ver [Layout avançado](../guides/layout-advanced.md#container-queries-container) |
+
+Ver [Layout avançado](../guides/layout-advanced.md) para a documentação
+completa de uso.
+
 ## Só-Sass (sem CSS Custom Property)
 
 Não têm equivalente em token CSS porque alimentam geração de classe em
