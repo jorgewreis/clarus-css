@@ -7,6 +7,15 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Changed
+
+- Budget de tamanho do JS (`scripts/size.mjs`, gate `npm run size:check`)
+  recalibrado de 14 KB pra **24 KB gzip** (`js/clarus.min.js`). O teto de
+  14 KB foi fixado na Fase 0/3, antes da decisão de trazer a Fase 4 inteira
+  (Combobox, Datepicker, DataTable, Command palette, Tree view) pra esta
+  fase final — com Combobox+Datepicker já em 13.82 KB, não sobrevivia ao
+  resto do escopo aprovado.
+
 ### Added
 
 - Fase final pré-v1.0.0, sub-fase 5.4 — Datepicker/Timepicker

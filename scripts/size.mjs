@@ -27,11 +27,18 @@ const targets = [
 // ao baseline medido nesta fase — `layout` é a distribuição "core"
 // (reset/base/grid/tokens). `forms`/`helpers`/`fonts` não têm meta própria
 // no plano; ficam de fora do gate (só informativos abaixo).
+//
+// `js/clarus.min.js` recalibrado de 14 KB pra 24 KB em 2026-07-07 (plano
+// final pré-v1.0.0, sub-fase 5.4): o teto de 14 KB foi fixado na Fase 0,
+// antes da decisão de trazer a Fase 4 inteira (Combobox, Datepicker,
+// DataTable, Command palette, Tree view) pra esta fase final — com
+// Combobox+Datepicker já em 13.82 KB, o teto original não sobrevivia ao
+// resto do escopo aprovado.
 const budgets = {
   "css/layout.min.css": 12 * 1024,
   "css/components.min.css": 18 * 1024,
   "css/clarus.min.css": 32 * 1024,
-  "js/clarus.min.js": 14 * 1024,
+  "js/clarus.min.js": 24 * 1024,
 };
 
 const check = process.argv.includes("--check");
