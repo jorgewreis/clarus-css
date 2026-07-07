@@ -9,6 +9,23 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.6 — Command Palette e Tree View
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
+  `packages/clarus-js/js/command-palette.js`, diálogo de busca/comandos
+  disparado por botão ou por atalho global (`data-cl-shortcut="mod+k"`),
+  combinando o overlay/focus trap do Modal com o filtro/navegação por
+  teclado do Combobox — reusa `.cl-dropdown-item` pros itens da lista.
+  `packages/clarus-js/js/tree-view.js`, lista hierárquica seguindo o
+  padrão [WAI-ARIA Tree View](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/):
+  marcação `<ul>`/`<li>` nativa aninhada, botão de expandir/colapsar
+  auto-injetado, roving `tabindex`, navegação completa por teclado
+  (`ArrowRight`/`ArrowLeft` cruzam níveis, `Home`/`End`,
+  `Enter`/`Espaço`). 27 testes unitários somados entre os dois, mockups
+  (`mockup/command-palette.html`, `mockup/tree-view.html`), a11y e visual
+  regression verdes. Documentados em `docs/components/command-palette.md`
+  e `docs/components/tree-view.md`. Budget de tamanho do JS: 17.25 KB
+  gzip de um teto de 24 KB.
+
 - Fase final pré-v1.0.0, sub-fase 5.5 — DataTable v1
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
   `packages/clarus-js/js/datatable.js`, camada JS opcional sobre uma

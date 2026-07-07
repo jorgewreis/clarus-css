@@ -200,8 +200,29 @@ literal do pedido preservado como referência).
   tamanho do JS: 15.84 KB gzip de um teto de 24 KB (~8.16 KB de folga
   restante pra 5.6).
 
-#### 5.6 Depois do DataTable (rascunho: "depois")
-- Command palette, Tree view — mesmo DoD dos demais componentes.
+#### 5.6 Command Palette e Tree View — ✅ concluída (2026-07-07)
+
+- `packages/clarus-js/js/command-palette.js`: diálogo de busca/comandos,
+  disparado por botão (`data-cl="command-palette"`) ou atalho global
+  opcional (`data-cl-shortcut="mod+k"`) — combina o overlay/focus trap do
+  Modal (`js/core/focus.js#createFocusTrap`, `js/core/overlay.js#lockScroll`)
+  com o filtro/navegação por teclado do Combobox; reusa
+  `.cl-dropdown-item`/`.is-active`/`.is-disabled` pros itens da lista, só
+  o backdrop/diálogo/campo de busca são CSS novo (`_command-palette.scss`).
+- `packages/clarus-js/js/tree-view.js`: lista hierárquica seguindo o
+  padrão [WAI-ARIA Tree View](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/) —
+  marcação `<ul>`/`<li>` nativa aninhada (só exige `<span class="cl-tree-label">`
+  como filho direto de cada `<li>`), botão de expandir/colapsar
+  auto-injetado (mesma técnica do botão de ordenação do DataTable), roving
+  `tabindex` restrito aos nós visíveis, navegação completa por teclado
+  (`ArrowRight`/`ArrowLeft` cruzam níveis do jeito certo — expande sem
+  mover foco vs. move pro filho/pai —, `Home`/`End`, `Enter`/`Espaço`).
+- DoD completo: 27 testes unitários somados, mockups
+  (`mockup/command-palette.html`, `mockup/tree-view.html`, dois temas
+  cada), a11y (axe) e visual regression verdes, documentados em
+  `docs/components/command-palette.md` e `docs/components/tree-view.md`.
+  Budget de tamanho do JS: 17.25 KB gzip de um teto de 24 KB (~6.75 KB de
+  folga restante).
 
 #### 5.8 DX e supply-chain (itens novos, podem correr em paralelo aos acima)
 - `.d.ts` para a API JS pública (`Clarus`, `Modal`, `Dropdown`, `Select`,

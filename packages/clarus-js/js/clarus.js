@@ -20,3 +20,5 @@ export { NestedMenu } from "./nested-menu.js";
 export { Combobox } from "./combobox.js";
 export { Datepicker } from "./datepicker.js";
 export { DataTable } from "./datatable.js";
+export { CommandPalette } from "./command-palette.js";
+export { TreeView } from "./tree-view.js";
