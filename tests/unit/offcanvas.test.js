@@ -9,13 +9,13 @@ function buildOffcanvas({ backdrop } = {}) {
   const wrapper = document.createElement("div");
   const backdropAttr = backdrop ? ` data-backdrop="${backdrop}"` : "";
   wrapper.innerHTML = `
-    <button type="button" id="trigger" data-target="#myOffcanvas">Abrir</button>
-    <div class="offcanvas offcanvas-start" id="myOffcanvas"${backdropAttr}>
-      <div class="offcanvas-header">
-        <h3 class="offcanvas-title">Título</h3>
-        <button type="button" class="btn-close" data-dismiss="offcanvas">x</button>
+    <button type="button" id="trigger" data-cl-target="#myOffcanvas">Abrir</button>
+    <div class="cl-offcanvas cl-offcanvas-start" id="myOffcanvas"${backdropAttr}>
+      <div class="cl-offcanvas-header">
+        <h3 class="cl-offcanvas-title">Título</h3>
+        <button type="button" class="cl-btn-close" data-cl-dismiss="offcanvas">x</button>
       </div>
-      <div class="offcanvas-body">
+      <div class="cl-offcanvas-body">
         <button type="button" id="bodyBtn">Ação</button>
       </div>
     </div>
@@ -33,7 +33,7 @@ describe("Offcanvas", () => {
     document.body.innerHTML = "";
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
-    document.querySelectorAll(".offcanvas-backdrop").forEach((el) => el.remove());
+    document.querySelectorAll(".cl-offcanvas-backdrop").forEach((el) => el.remove());
   });
 
   it("getInstance() retorna a instância criada", () => {
@@ -53,9 +53,9 @@ describe("Offcanvas", () => {
     trigger.click();
     await flushDoubleRaf();
 
-    expect(offcanvasEl.classList.contains("show")).toBe(true);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(true);
     expect(document.body.style.overflow).toBe("hidden");
-    expect(document.querySelector(".offcanvas-backdrop.show")).not.toBeNull();
+    expect(document.querySelector(".cl-offcanvas-backdrop.is-open")).not.toBeNull();
     expect(document.activeElement.textContent).toBe("x");
   });
 
@@ -66,9 +66,9 @@ describe("Offcanvas", () => {
 
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
 
-    expect(offcanvasEl.classList.contains("show")).toBe(false);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(false);
     expect(document.body.style.overflow).toBe("");
-    expect(document.querySelector(".offcanvas-backdrop")).toBeNull();
+    expect(document.querySelector(".cl-offcanvas-backdrop")).toBeNull();
     expect(document.activeElement).toBe(trigger);
   });
 
@@ -80,17 +80,17 @@ describe("Offcanvas", () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
     document.body.click();
 
-    expect(offcanvasEl.classList.contains("show")).toBe(false);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(false);
   });
 
-  it("qualquer elemento com data-dismiss=offcanvas fecha o painel", async () => {
+  it("qualquer elemento com data-cl-dismiss=offcanvas fecha o painel", async () => {
     const { offcanvasEl, offcanvas } = buildOffcanvas();
     offcanvas.show();
     await flushDoubleRaf();
 
-    offcanvasEl.querySelector('[data-dismiss="offcanvas"]').click();
+    offcanvasEl.querySelector('[data-cl-dismiss="offcanvas"]').click();
 
-    expect(offcanvasEl.classList.contains("show")).toBe(false);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(false);
   });
 
   it("data-backdrop=static ignora Escape e clique fora, mas dismiss fecha", async () => {
@@ -99,14 +99,14 @@ describe("Offcanvas", () => {
     await flushDoubleRaf();
 
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
-    expect(offcanvasEl.classList.contains("show")).toBe(true);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(true);
 
     await new Promise((resolve) => setTimeout(resolve, 0));
     document.body.click();
-    expect(offcanvasEl.classList.contains("show")).toBe(true);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(true);
 
-    offcanvasEl.querySelector('[data-dismiss="offcanvas"]').click();
-    expect(offcanvasEl.classList.contains("show")).toBe(false);
+    offcanvasEl.querySelector('[data-cl-dismiss="offcanvas"]').click();
+    expect(offcanvasEl.classList.contains("is-open")).toBe(false);
   });
 
   it("data-backdrop=false não cria o elemento de backdrop, mas ainda fecha com Escape e clique fora", async () => {
@@ -114,18 +114,18 @@ describe("Offcanvas", () => {
     offcanvas.show();
     await flushDoubleRaf();
 
-    expect(document.querySelector(".offcanvas-backdrop")).toBeNull();
+    expect(document.querySelector(".cl-offcanvas-backdrop")).toBeNull();
 
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
-    expect(offcanvasEl.classList.contains("show")).toBe(false);
+    expect(offcanvasEl.classList.contains("is-open")).toBe(false);
   });
 
-  it("dispara clarus:offcanvas:shown e clarus:offcanvas:hidden", async () => {
+  it("dispara cl:offcanvas:shown e cl:offcanvas:hidden", async () => {
     const { trigger, offcanvas } = buildOffcanvas();
     const shownHandler = vi.fn();
     const hiddenHandler = vi.fn();
-    trigger.addEventListener("clarus:offcanvas:shown", shownHandler);
-    trigger.addEventListener("clarus:offcanvas:hidden", hiddenHandler);
+    trigger.addEventListener("cl:offcanvas:shown", shownHandler);
+    trigger.addEventListener("cl:offcanvas:hidden", hiddenHandler);
 
     offcanvas.show();
     await flushDoubleRaf();
@@ -139,8 +139,8 @@ describe("Offcanvas", () => {
     const { offcanvas: first } = buildOffcanvas();
     const secondWrapper = document.createElement("div");
     secondWrapper.innerHTML = `
-      <button type="button" id="trigger2" data-target="#second"></button>
-      <div class="offcanvas offcanvas-end" id="second"></div>
+      <button type="button" id="trigger2" data-cl-target="#second"></button>
+      <div class="cl-offcanvas cl-offcanvas-end" id="second"></div>
     `;
     document.body.appendChild(secondWrapper);
     const second = new Offcanvas(secondWrapper.querySelector("#trigger2"));

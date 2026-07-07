@@ -6,120 +6,120 @@
 
   @include media-breakpoint-up($breakpoint) {
     @each $key, $value in $spacers {
-      .m#{$infix}-#{$key} {
+      .u-m#{$infix}-#{$key} {
         margin: $value;
       }
 
-      .mt#{$infix}-#{$key} {
+      .u-mt#{$infix}-#{$key} {
         margin-top: $value;
       }
 
-      .mr#{$infix}-#{$key} {
+      .u-mr#{$infix}-#{$key} {
         margin-right: $value;
       }
 
-      .mb#{$infix}-#{$key} {
+      .u-mb#{$infix}-#{$key} {
         margin-bottom: $value;
       }
 
-      .ml#{$infix}-#{$key} {
+      .u-ml#{$infix}-#{$key} {
         margin-left: $value;
       }
 
-      .mx#{$infix}-#{$key} {
+      .u-mx#{$infix}-#{$key} {
         margin-right: $value;
         margin-left: $value;
       }
 
-      .my#{$infix}-#{$key} {
+      .u-my#{$infix}-#{$key} {
         margin-top: $value;
         margin-bottom: $value;
       }
 
-      .p#{$infix}-#{$key} {
+      .u-p#{$infix}-#{$key} {
         padding: $value;
       }
 
-      .pt#{$infix}-#{$key} {
+      .u-pt#{$infix}-#{$key} {
         padding-top: $value;
       }
 
-      .pr#{$infix}-#{$key} {
+      .u-pr#{$infix}-#{$key} {
         padding-right: $value;
       }
 
-      .pb#{$infix}-#{$key} {
+      .u-pb#{$infix}-#{$key} {
         padding-bottom: $value;
       }
 
-      .pl#{$infix}-#{$key} {
+      .u-pl#{$infix}-#{$key} {
         padding-left: $value;
       }
 
-      .px#{$infix}-#{$key} {
+      .u-px#{$infix}-#{$key} {
         padding-right: $value;
         padding-left: $value;
       }
 
-      .py#{$infix}-#{$key} {
+      .u-py#{$infix}-#{$key} {
         padding-top: $value;
         padding-bottom: $value;
       }
 
-      // Controla o gutter da grid (--clarus-gutter-x/-y), consumido por .row/.row > *.
-      .g#{$infix}-#{$key} {
-        --clarus-gutter-x: #{$value};
-        --clarus-gutter-y: #{$value};
+      // Controla o gutter da grid (--cl-gutter-x/-y), consumido por .row/.row > *.
+      .u-g#{$infix}-#{$key} {
+        --cl-gutter-x: #{$value};
+        --cl-gutter-y: #{$value};
       }
 
-      .gx#{$infix}-#{$key} {
-        --clarus-gutter-x: #{$value};
+      .u-gx#{$infix}-#{$key} {
+        --cl-gutter-x: #{$value};
       }
 
-      .gy#{$infix}-#{$key} {
-        --clarus-gutter-y: #{$value};
+      .u-gy#{$infix}-#{$key} {
+        --cl-gutter-y: #{$value};
       }
 
       // Gap literal (flex/grid), independente da grid de colunas.
-      .gap#{$infix}-#{$key} {
+      .u-gap#{$infix}-#{$key} {
         gap: $value;
       }
 
-      .gap-x#{$infix}-#{$key} {
+      .u-gap-x#{$infix}-#{$key} {
         column-gap: $value;
       }
 
-      .gap-y#{$infix}-#{$key} {
+      .u-gap-y#{$infix}-#{$key} {
         row-gap: $value;
       }
     }
 
-    .m#{$infix}-auto {
+    .u-m#{$infix}-auto {
       margin: auto;
     }
 
-    .mt#{$infix}-auto {
+    .u-mt#{$infix}-auto {
       margin-top: auto;
     }
 
-    .mr#{$infix}-auto {
+    .u-mr#{$infix}-auto {
       margin-right: auto;
     }
 
-    .mb#{$infix}-auto {
+    .u-mb#{$infix}-auto {
       margin-bottom: auto;
     }
 
-    .ml#{$infix}-auto {
+    .u-ml#{$infix}-auto {
       margin-left: auto;
     }
 
-    .mx#{$infix}-auto {
+    .u-mx#{$infix}-auto {
       margin-right: auto;
       margin-left: auto;
     }
 
-    .my#{$infix}-auto {
+    .u-my#{$infix}-auto {
       margin-top: auto;
       margin-bottom: auto;
     }

@@ -9,7 +9,7 @@ function escapeHtml(value) {
 }
 
 // Alert Dialog / Confirm: ao contrário dos demais componentes (auto-init
-// declarativo via data-clarus), é 100% programático — monta o modal na hora,
+// declarativo via data-cl), é 100% programático — monta o modal na hora,
 // reaproveitando js/modal.js (foco/teclado/overlay já prontos) sem precisar
 // de marcação pré-declarada na página. Resolve `true` (confirmado), `false`
 // (cancelado ou fechado por Escape/clique fora).
@@ -22,29 +22,29 @@ export function confirm(options = {}) {
     const invokerEl = document.activeElement instanceof HTMLElement ? document.activeElement : document.body;
 
     const modalEl = document.createElement("div");
-    modalEl.className = "modal alert-dialog";
+    modalEl.className = "cl-modal cl-alert-dialog";
     modalEl.id = modalId;
     modalEl.innerHTML = `
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h3 class="modal-title">${escapeHtml(title)}</h3>
-            ${message ? `<p class="alert-dialog-message">${escapeHtml(message)}</p>` : ""}
+      <div class="cl-modal-dialog cl-modal-sm">
+        <div class="cl-modal-content">
+          <div class="cl-modal-body">
+            <h3 class="cl-modal-title">${escapeHtml(title)}</h3>
+            ${message ? `<p class="cl-alert-dialog-message">${escapeHtml(message)}</p>` : ""}
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn" data-action="cancel">${escapeHtml(cancelText)}</button>
-            <button type="button" class="btn btn-${variant}" data-action="confirm">${escapeHtml(confirmText)}</button>
+          <div class="cl-modal-footer">
+            <button type="button" class="cl-btn" data-action="cancel">${escapeHtml(cancelText)}</button>
+            <button type="button" class="cl-btn cl-btn-${variant}" data-action="confirm">${escapeHtml(confirmText)}</button>
           </div>
         </div>
       </div>
     `;
     document.body.appendChild(modalEl);
 
-    // Modal exige um gatilho com data-target; sintético porque não há um
+    // Modal exige um gatilho com data-cl-target; sintético porque não há um
     // botão real "abrindo" este modal (ele nasce já aberto).
     const triggerEl = document.createElement("button");
     triggerEl.type = "button";
-    triggerEl.setAttribute("data-target", `#${modalId}`);
+    triggerEl.setAttribute("data-cl-target", `#${modalId}`);
     triggerEl.style.display = "none";
     document.body.appendChild(triggerEl);
 
@@ -70,7 +70,7 @@ export function confirm(options = {}) {
 
     // Escape e clique fora chamam modal.hide() internamente, que dispara
     // este evento no gatilho (não no modalEl) — conta como cancelamento.
-    triggerEl.addEventListener("clarus:modal:hidden", () => finish(false));
+    triggerEl.addEventListener("cl:modal:hidden", () => finish(false));
 
     modal.show();
   });

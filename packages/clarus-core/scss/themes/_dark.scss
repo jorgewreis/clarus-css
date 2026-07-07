@@ -19,21 +19,21 @@ $dark-color-weights: (
 ) !default;
 
 [data-theme="dark"] {
-  --clarus-color-text: #f1f3f4;
-  --clarus-color-muted: #bdc1c6;
-  --clarus-color-border: #3c4043;
-  --clarus-color-surface: #202124;
-  --clarus-color-subtle: #2b2c2f;
-  --clarus-shadow-sm: 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 40%);
-  --clarus-shadow-md: 0 6px 12px rgb(0 0 0 / 55%), 0 3px 6px rgb(0 0 0 / 45%);
-  --clarus-shadow-lg: 0 15px 30px rgb(0 0 0 / 60%), 0 6px 12px rgb(0 0 0 / 50%);
-  --clarus-tooltip-bg: #{$color-gray-100};
-  --clarus-tooltip-text: #{$color-gray-900};
+  --cl-color-text: #f1f3f4;
+  --cl-color-muted: #bdc1c6;
+  --cl-color-border: #3c4043;
+  --cl-color-surface: #202124;
+  --cl-color-subtle: #2b2c2f;
+  --cl-shadow-sm: 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 40%);
+  --cl-shadow-md: 0 6px 12px rgb(0 0 0 / 55%), 0 3px 6px rgb(0 0 0 / 45%);
+  --cl-shadow-lg: 0 15px 30px rgb(0 0 0 / 60%), 0 6px 12px rgb(0 0 0 / 50%);
+  --cl-tooltip-bg: #{$color-gray-100};
+  --cl-tooltip-text: #{$color-gray-900};
 
   @each $name, $color in $theme-colors {
-    --clarus-color-#{$name}: #{color.mix($color, $color-white, map.get($dark-color-weights, $name))};
-    --clarus-alert-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
-    --clarus-alert-#{$name}-text: #{color.mix($color, $color-white, 70%)};
-    --clarus-feedback-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
+    --cl-color-#{$name}: #{color.mix($color, $color-white, map.get($dark-color-weights, $name))};
+    --cl-alert-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
+    --cl-alert-#{$name}-text: #{color.mix($color, $color-white, 70%)};
+    --cl-feedback-#{$name}-bg: #{color.mix($color, $color-gray-900, 20%)};
   }
 }

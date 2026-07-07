@@ -3,10 +3,10 @@ import { Tag } from "../../packages/clarus-js/js/tag.js";
 
 function buildTag() {
   const el = document.createElement("span");
-  el.className = "badge tag";
+  el.className = "cl-badge cl-tag";
   el.innerHTML = `
     Frontend
-    <button type="button" class="btn-close" data-dismiss="tag" aria-label="Remover"></button>
+    <button type="button" class="cl-btn-close" data-cl-dismiss="tag" aria-label="Remover"></button>
   `;
   document.body.appendChild(el);
 
@@ -26,7 +26,7 @@ describe("Tag", () => {
   it("clicar no .btn-close remove a tag do DOM", () => {
     const { el } = buildTag();
 
-    el.querySelector(".btn-close").click();
+    el.querySelector(".cl-btn-close").click();
 
     expect(document.body.contains(el)).toBe(false);
   });
@@ -39,22 +39,22 @@ describe("Tag", () => {
     expect(document.body.contains(el)).toBe(true);
   });
 
-  it("dispara clarus:tag:dismissed (cancelável) antes de remover", () => {
+  it("dispara cl:tag:dismissed (cancelável) antes de remover", () => {
     const { el } = buildTag();
     const handler = vi.fn();
-    el.addEventListener("clarus:tag:dismissed", handler);
+    el.addEventListener("cl:tag:dismissed", handler);
 
-    el.querySelector(".btn-close").click();
+    el.querySelector(".cl-btn-close").click();
 
     expect(handler).toHaveBeenCalledTimes(1);
     expect(handler.mock.calls[0][0].cancelable).toBe(true);
   });
 
-  it("preventDefault() em clarus:tag:dismissed cancela a remoção", () => {
+  it("preventDefault() em cl:tag:dismissed cancela a remoção", () => {
     const { el } = buildTag();
-    el.addEventListener("clarus:tag:dismissed", (event) => event.preventDefault());
+    el.addEventListener("cl:tag:dismissed", (event) => event.preventDefault());
 
-    el.querySelector(".btn-close").click();
+    el.querySelector(".cl-btn-close").click();
 
     expect(document.body.contains(el)).toBe(true);
   });
@@ -71,7 +71,7 @@ describe("Tag", () => {
     const { el, tag } = buildTag();
     tag.dispose();
 
-    el.querySelector(".btn-close").click();
+    el.querySelector(".cl-btn-close").click();
 
     expect(document.body.contains(el)).toBe(true);
     expect(Tag.getInstance(el)).toBeUndefined();

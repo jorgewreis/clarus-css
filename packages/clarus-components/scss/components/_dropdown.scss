@@ -1,12 +1,12 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.dropdown {
+.cl-dropdown {
   position: relative;
   display: inline-flex;
 }
 
-.dropdown-toggle::after {
+.cl-dropdown-toggle::after {
   display: inline-block;
   width: 0;
   height: 0;
@@ -18,31 +18,31 @@
   border-left: 5px solid transparent;
 }
 
-.dropdown-menu {
+.cl-dropdown-menu {
   position: absolute;
   display: none;
   min-width: 180px;
   margin: 0;
   padding: 6px 0;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-md);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
-  box-shadow: var(--clarus-shadow-md);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-md);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
+  box-shadow: var(--cl-shadow-md);
   z-index: 1000;
 }
 
-.dropdown-menu.show {
+.cl-dropdown-menu.is-open {
   display: block;
 }
 
-.dropdown-item {
+.cl-dropdown-item {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 8px 16px;
   border: none;
-  color: var(--clarus-color-text);
+  color: var(--cl-color-text);
   background-color: transparent;
   font-size: $font-size-md;
   text-align: left;
@@ -50,34 +50,34 @@
   cursor: pointer;
 }
 
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-subtle);
+.cl-dropdown-item:hover,
+.cl-dropdown-item:focus {
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-subtle);
   outline: none;
 }
 
-.dropdown-item.active {
+.cl-dropdown-item.is-active {
   color: color-contrast($clarus-color-primary);
-  background-color: var(--clarus-color-primary);
+  background-color: var(--cl-color-primary);
 }
 
-.dropdown-item.disabled {
-  color: var(--clarus-color-muted);
+.cl-dropdown-item.is-disabled {
+  color: var(--cl-color-muted);
   pointer-events: none;
   opacity: 0.6;
 }
 
-.dropdown-divider {
+.cl-dropdown-divider {
   height: 1px;
   margin: 6px 0;
   border: none;
-  background-color: var(--clarus-color-border);
+  background-color: var(--cl-color-border);
 }
 
-.dropdown-header {
+.cl-dropdown-header {
   padding: 4px 16px;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   text-transform: uppercase;

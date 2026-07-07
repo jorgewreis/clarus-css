@@ -15,97 +15,97 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
-        .stepper {
+        .cl-stepper {
             max-width: 600px;
         }
 
-        .step-panel {
+        .cl-step-panel {
             padding: 16px;
-            border: 1px solid var(--clarus-color-border);
-            border-radius: var(--clarus-radius-md);
+            border: 1px solid var(--cl-color-border);
+            border-radius: var(--cl-radius-md);
         }
     </style>
 </head>
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-2">Wizard horizontal — navegação next/prev, painéis e evento de validação</p>
-        <div class="stepper" data-clarus="stepper" id="stepper-wizard">
-            <ol class="stepper-header">
-                <li class="step step-active">
-                    <span class="step-indicator">1</span>
-                    <span class="step-label">Conta</span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Wizard horizontal — navegação next/prev, painéis e evento de validação</p>
+        <div class="cl-stepper" data-cl="stepper" id="stepper-wizard">
+            <ol class="cl-stepper-header">
+                <li class="cl-step cl-step-active">
+                    <span class="cl-step-indicator">1</span>
+                    <span class="cl-step-label">Conta</span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">2</span>
-                    <span class="step-label">Perfil</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">2</span>
+                    <span class="cl-step-label">Perfil</span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">3</span>
-                    <span class="step-label">Confirmação</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">3</span>
+                    <span class="cl-step-label">Confirmação</span>
                 </li>
             </ol>
-            <div class="stepper-content">
-                <div class="step-panel active">Passo 1 — dados da conta (e-mail e senha).</div>
-                <div class="step-panel">Passo 2 — dados do perfil (nome e avatar).</div>
-                <div class="step-panel">Passo 3 — revise e confirme os dados.</div>
+            <div class="cl-stepper-content">
+                <div class="cl-step-panel is-active">Passo 1 — dados da conta (e-mail e senha).</div>
+                <div class="cl-step-panel">Passo 2 — dados do perfil (nome e avatar).</div>
+                <div class="cl-step-panel">Passo 3 — revise e confirme os dados.</div>
             </div>
-            <div class="stepper-actions">
-                <button class="btn" type="button" data-stepper="prev">Anterior</button>
-                <button class="btn btn-primary" type="button" data-stepper="next">Próximo</button>
+            <div class="cl-stepper-actions">
+                <button class="cl-btn" type="button" data-stepper="prev">Anterior</button>
+                <button class="cl-btn cl-btn-primary" type="button" data-stepper="next">Próximo</button>
             </div>
         </div>
 
-        <p class="fs-sm fw-medium mt-4 mb-2">Estados (estático): concluído, ativo, erro e pendente</p>
-        <div class="stepper" id="stepper-states-claro">
-            <ol class="stepper-header">
-                <li class="step step-completed">
-                    <span class="step-indicator">1</span>
-                    <span class="step-label">Concluído</span>
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Estados (estático): concluído, ativo, erro e pendente</p>
+        <div class="cl-stepper" id="stepper-states-claro">
+            <ol class="cl-stepper-header">
+                <li class="cl-step cl-step-completed">
+                    <span class="cl-step-indicator">1</span>
+                    <span class="cl-step-label">Concluído</span>
                 </li>
-                <li class="step step-active">
-                    <span class="step-indicator">2</span>
-                    <span class="step-label">Ativo</span>
+                <li class="cl-step cl-step-active">
+                    <span class="cl-step-indicator">2</span>
+                    <span class="cl-step-label">Ativo</span>
                 </li>
-                <li class="step step-error">
-                    <span class="step-indicator">3</span>
-                    <span class="step-label">Erro</span>
+                <li class="cl-step cl-step-error">
+                    <span class="cl-step-indicator">3</span>
+                    <span class="cl-step-label">Erro</span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">4</span>
-                    <span class="step-label">Pendente</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">4</span>
+                    <span class="cl-step-label">Pendente</span>
                 </li>
             </ol>
         </div>
 
-        <p class="fs-sm fw-medium mt-4 mb-2">Vertical</p>
-        <div class="stepper stepper-vertical" id="stepper-vertical-claro">
-            <ol class="stepper-header">
-                <li class="step step-completed">
-                    <span class="step-indicator">1</span>
-                    <span class="step-content">
-                        <span class="step-label">Pedido recebido</span>
-                        <span class="step-description">Confirmado às 09:12</span>
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Vertical</p>
+        <div class="cl-stepper cl-stepper-vertical" id="stepper-vertical-claro">
+            <ol class="cl-stepper-header">
+                <li class="cl-step cl-step-completed">
+                    <span class="cl-step-indicator">1</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Pedido recebido</span>
+                        <span class="cl-step-description">Confirmado às 09:12</span>
                     </span>
                 </li>
-                <li class="step step-active">
-                    <span class="step-indicator">2</span>
-                    <span class="step-content">
-                        <span class="step-label">Em separação</span>
-                        <span class="step-description">Preparando os itens</span>
+                <li class="cl-step cl-step-active">
+                    <span class="cl-step-indicator">2</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Em separação</span>
+                        <span class="cl-step-description">Preparando os itens</span>
                     </span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">3</span>
-                    <span class="step-content">
-                        <span class="step-label">Enviado</span>
-                        <span class="step-description">Aguardando transportadora</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">3</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Enviado</span>
+                        <span class="cl-step-description">Aguardando transportadora</span>
                     </span>
                 </li>
             </ol>
@@ -113,52 +113,52 @@
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-2">Estados: concluído, ativo, erro e pendente</p>
-        <div class="stepper" id="stepper-states-dark">
-            <ol class="stepper-header">
-                <li class="step step-completed">
-                    <span class="step-indicator">1</span>
-                    <span class="step-label">Concluído</span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Estados: concluído, ativo, erro e pendente</p>
+        <div class="cl-stepper" id="stepper-states-dark">
+            <ol class="cl-stepper-header">
+                <li class="cl-step cl-step-completed">
+                    <span class="cl-step-indicator">1</span>
+                    <span class="cl-step-label">Concluído</span>
                 </li>
-                <li class="step step-active">
-                    <span class="step-indicator">2</span>
-                    <span class="step-label">Ativo</span>
+                <li class="cl-step cl-step-active">
+                    <span class="cl-step-indicator">2</span>
+                    <span class="cl-step-label">Ativo</span>
                 </li>
-                <li class="step step-error">
-                    <span class="step-indicator">3</span>
-                    <span class="step-label">Erro</span>
+                <li class="cl-step cl-step-error">
+                    <span class="cl-step-indicator">3</span>
+                    <span class="cl-step-label">Erro</span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">4</span>
-                    <span class="step-label">Pendente</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">4</span>
+                    <span class="cl-step-label">Pendente</span>
                 </li>
             </ol>
         </div>
 
-        <p class="fs-sm fw-medium mt-4 mb-2">Vertical</p>
-        <div class="stepper stepper-vertical" id="stepper-vertical-dark">
-            <ol class="stepper-header">
-                <li class="step step-completed">
-                    <span class="step-indicator">1</span>
-                    <span class="step-content">
-                        <span class="step-label">Pedido recebido</span>
-                        <span class="step-description">Confirmado às 09:12</span>
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Vertical</p>
+        <div class="cl-stepper cl-stepper-vertical" id="stepper-vertical-dark">
+            <ol class="cl-stepper-header">
+                <li class="cl-step cl-step-completed">
+                    <span class="cl-step-indicator">1</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Pedido recebido</span>
+                        <span class="cl-step-description">Confirmado às 09:12</span>
                     </span>
                 </li>
-                <li class="step step-active">
-                    <span class="step-indicator">2</span>
-                    <span class="step-content">
-                        <span class="step-label">Em separação</span>
-                        <span class="step-description">Preparando os itens</span>
+                <li class="cl-step cl-step-active">
+                    <span class="cl-step-indicator">2</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Em separação</span>
+                        <span class="cl-step-description">Preparando os itens</span>
                     </span>
                 </li>
-                <li class="step">
-                    <span class="step-indicator">3</span>
-                    <span class="step-content">
-                        <span class="step-label">Enviado</span>
-                        <span class="step-description">Aguardando transportadora</span>
+                <li class="cl-step">
+                    <span class="cl-step-indicator">3</span>
+                    <span class="cl-step-content">
+                        <span class="cl-step-label">Enviado</span>
+                        <span class="cl-step-description">Aguardando transportadora</span>
                     </span>
                 </li>
             </ol>

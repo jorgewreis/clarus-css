@@ -9,11 +9,11 @@ const HOVER_HIDE_DELAY = 100;
 
 export class Popover {
   constructor(triggerEl, options = {}) {
-    const targetSelector = triggerEl.getAttribute("data-target");
+    const targetSelector = triggerEl.getAttribute("data-cl-target");
     const popoverEl = targetSelector ? document.querySelector(targetSelector) : null;
 
     if (!popoverEl) {
-      throw new Error("Clarus.Popover: elemento não encontrado (data-target).");
+      throw new Error("Clarus.Popover: elemento não encontrado (data-cl-target).");
     }
 
     this.triggerEl = triggerEl;
@@ -34,7 +34,7 @@ export class Popover {
     idCounter += 1;
     if (!popoverEl.id) popoverEl.id = `clarus-popover-${idCounter}`;
 
-    const headerEl = popoverEl.querySelector(".popover-header");
+    const headerEl = popoverEl.querySelector(".cl-popover-header");
     if (headerEl) {
       if (!headerEl.id) headerEl.id = `clarus-popover-header-${idCounter}`;
       popoverEl.setAttribute("aria-labelledby", headerEl.id);
@@ -101,7 +101,7 @@ export class Popover {
   }
 
   _handleDismissClick(event) {
-    if (event.target.closest('[data-dismiss="popover"]')) {
+    if (event.target.closest('[data-cl-dismiss="popover"]')) {
       this.hide();
     }
   }
@@ -117,7 +117,7 @@ export class Popover {
       this.popoverEl.removeAttribute("data-theme");
     }
 
-    this.popoverEl.classList.add("show");
+    this.popoverEl.classList.add("is-open");
 
     const position = computePosition(this.triggerEl, this.popoverEl, {
       placement: this.placement,
@@ -136,20 +136,20 @@ export class Popover {
       });
     }
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:popover:shown", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:popover:shown", { bubbles: true }));
   }
 
   hide() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.popoverEl.classList.remove("show");
+    this.popoverEl.classList.remove("is-open");
     this.triggerEl.setAttribute("aria-expanded", "false");
 
     this._outsideClickCleanup?.();
     this._outsideClickCleanup = null;
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:popover:hidden", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:popover:hidden", { bubbles: true }));
   }
 
   toggle() {

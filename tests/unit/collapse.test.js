@@ -4,7 +4,7 @@ import { Collapse } from "../../packages/clarus-js/js/collapse.js";
 function buildCollapse({ startsOpen = false } = {}) {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
-    <button type="button" data-target="#painel-1" ${startsOpen ? 'aria-expanded="true"' : ""}>Alternar</button>
+    <button type="button" data-cl-target="#painel-1" ${startsOpen ? 'aria-expanded="true"' : ""}>Alternar</button>
     <div id="painel-1">Conteúdo</div>
   `;
   document.body.appendChild(wrapper);
@@ -29,9 +29,9 @@ describe("Collapse", () => {
     document.body.innerHTML = "";
   });
 
-  it("lança erro se data-target não aponta para um elemento existente", () => {
+  it("lança erro se data-cl-target não aponta para um elemento existente", () => {
     const trigger = document.createElement("button");
-    trigger.setAttribute("data-target", "#nao-existe");
+    trigger.setAttribute("data-cl-target", "#nao-existe");
     document.body.appendChild(trigger);
 
     expect(() => new Collapse(trigger)).toThrow();
@@ -59,12 +59,12 @@ describe("Collapse", () => {
     expect(trigger.getAttribute("aria-controls")).toBe(panel.id);
   });
 
-  it("toggle() abre e fecha, disparando os eventos clarus:collapse:shown/hidden", async () => {
+  it("toggle() abre e fecha, disparando os eventos cl:collapse:shown/hidden", async () => {
     const { trigger, panel, collapse } = buildCollapse();
     const shownHandler = vi.fn();
     const hiddenHandler = vi.fn();
-    trigger.addEventListener("clarus:collapse:shown", shownHandler);
-    trigger.addEventListener("clarus:collapse:hidden", hiddenHandler);
+    trigger.addEventListener("cl:collapse:shown", shownHandler);
+    trigger.addEventListener("cl:collapse:hidden", hiddenHandler);
 
     collapse.toggle();
     await flushMicrotasks();

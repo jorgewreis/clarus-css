@@ -15,8 +15,8 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
         section {
@@ -27,73 +27,73 @@
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
 
         <section>
-            <p class="fs-sm fw-medium mt-3 mb-1">Dropdown — auto-init via data-clarus, posicionamento, foco e teclado (setas, Escape, clique fora)</p>
-            <p class="fs-xs mb-2">Alinhamento padrão (<code class="font-mono">data-align="start"</code>, borda esquerda do menu = borda esquerda do botão):</p>
-            <div class="dropdown mr-4">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-clarus="dropdown" data-target="#menu-claro">
+            <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Dropdown — auto-init via data-cl, posicionamento, foco e teclado (setas, Escape, clique fora)</p>
+            <p class="u-fs-xs u-mb-2">Alinhamento padrão (<code class="u-font-mono">data-align="start"</code>, borda esquerda do menu = borda esquerda do botão):</p>
+            <div class="cl-dropdown u-mr-4">
+                <button type="button" class="cl-btn cl-btn-primary cl-dropdown-toggle" data-cl="dropdown" data-cl-target="#menu-claro">
                     Opções
                 </button>
-                <div class="dropdown-menu" id="menu-claro">
-                    <span class="dropdown-header">Conta</span>
-                    <a href="#" class="dropdown-item">Perfil</a>
-                    <a href="#" class="dropdown-item">Configurações</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item disabled">Item desabilitado</a>
-                    <button type="button" class="dropdown-item">Sair</button>
+                <div class="cl-dropdown-menu" id="menu-claro">
+                    <span class="cl-dropdown-header">Conta</span>
+                    <a href="#" class="cl-dropdown-item">Perfil</a>
+                    <a href="#" class="cl-dropdown-item">Configurações</a>
+                    <div class="cl-dropdown-divider"></div>
+                    <a href="#" class="cl-dropdown-item is-disabled">Item desabilitado</a>
+                    <button type="button" class="cl-dropdown-item">Sair</button>
                 </div>
             </div>
 
-            <p class="fs-xs mb-2 mt-3"><code class="font-mono">data-align="end"</code> (borda direita do menu = borda direita do botão):</p>
-            <div class="dropdown" style="margin-left: 300px;">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-clarus="dropdown" data-target="#menu-claro-end" data-align="end">
+            <p class="u-fs-xs u-mb-2 u-mt-3"><code class="u-font-mono">data-align="end"</code> (borda direita do menu = borda direita do botão):</p>
+            <div class="cl-dropdown" style="margin-left: 300px;">
+                <button type="button" class="cl-btn cl-btn-primary cl-dropdown-toggle" data-cl="dropdown" data-cl-target="#menu-claro-end" data-align="end">
                     Opções (end)
                 </button>
-                <div class="dropdown-menu" id="menu-claro-end">
-                    <a href="#" class="dropdown-item">Perfil</a>
-                    <a href="#" class="dropdown-item">Configurações</a>
-                    <button type="button" class="dropdown-item">Sair</button>
+                <div class="cl-dropdown-menu" id="menu-claro-end">
+                    <a href="#" class="cl-dropdown-item">Perfil</a>
+                    <a href="#" class="cl-dropdown-item">Configurações</a>
+                    <button type="button" class="cl-dropdown-item">Sair</button>
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="fs-sm fw-medium mb-1">Tooltip — auto-init via data-clarus, show/hide por hover/foco, 4 posicionamentos</p>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="top" title="Tooltip no topo">Top</button>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="bottom" title="Tooltip embaixo">Bottom</button>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="left" title="Tooltip à esquerda">Left</button>
-            <button type="button" class="btn" data-clarus="tooltip" data-placement="right" title="Tooltip à direita">Right</button>
+            <p class="u-fs-sm u-fw-medium u-mb-1">Tooltip — auto-init via data-cl, show/hide por hover/foco, 4 posicionamentos</p>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="top" title="Tooltip no topo">Top</button>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="bottom" title="Tooltip embaixo">Bottom</button>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="left" title="Tooltip à esquerda">Left</button>
+            <button type="button" class="cl-btn" data-cl="tooltip" data-placement="right" title="Tooltip à direita">Right</button>
         </section>
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
 
         <section>
-            <p class="fs-sm fw-medium mt-3 mb-1">Dropdown</p>
-            <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-clarus="dropdown" data-target="#menu-escuro">
+            <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Dropdown</p>
+            <div class="cl-dropdown">
+                <button type="button" class="cl-btn cl-btn-primary cl-dropdown-toggle" data-cl="dropdown" data-cl-target="#menu-escuro">
                     Opções
                 </button>
-                <div class="dropdown-menu" id="menu-escuro">
-                    <span class="dropdown-header">Conta</span>
-                    <a href="#" class="dropdown-item">Perfil</a>
-                    <a href="#" class="dropdown-item">Configurações</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item disabled">Item desabilitado</a>
-                    <button type="button" class="dropdown-item">Sair</button>
+                <div class="cl-dropdown-menu" id="menu-escuro">
+                    <span class="cl-dropdown-header">Conta</span>
+                    <a href="#" class="cl-dropdown-item">Perfil</a>
+                    <a href="#" class="cl-dropdown-item">Configurações</a>
+                    <div class="cl-dropdown-divider"></div>
+                    <a href="#" class="cl-dropdown-item is-disabled">Item desabilitado</a>
+                    <button type="button" class="cl-dropdown-item">Sair</button>
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="fs-sm fw-medium mb-1">Tooltip</p>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="top" title="Tooltip no topo">Top</button>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="bottom" title="Tooltip embaixo">Bottom</button>
-            <button type="button" class="btn mr-2" data-clarus="tooltip" data-placement="left" title="Tooltip à esquerda">Left</button>
-            <button type="button" class="btn" data-clarus="tooltip" data-placement="right" title="Tooltip à direita">Right</button>
+            <p class="u-fs-sm u-fw-medium u-mb-1">Tooltip</p>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="top" title="Tooltip no topo">Top</button>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="bottom" title="Tooltip embaixo">Bottom</button>
+            <button type="button" class="cl-btn u-mr-2" data-cl="tooltip" data-placement="left" title="Tooltip à esquerda">Left</button>
+            <button type="button" class="cl-btn" data-cl="tooltip" data-placement="right" title="Tooltip à direita">Right</button>
         </section>
     </div>
 

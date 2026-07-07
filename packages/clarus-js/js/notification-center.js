@@ -29,11 +29,11 @@ function formatTime(time) {
 // gatilho. Persistência opcional em localStorage (`data-storage="local"`).
 export class NotificationCenter {
   constructor(triggerEl, options = {}) {
-    const panelSelector = options.target ?? triggerEl.getAttribute("data-target");
+    const panelSelector = options.target ?? triggerEl.getAttribute("data-cl-target");
     const panelEl = panelSelector ? document.querySelector(panelSelector) : null;
 
     if (!panelEl) {
-      throw new Error("Clarus.NotificationCenter: painel não encontrado (data-target).");
+      throw new Error("Clarus.NotificationCenter: painel não encontrado (data-cl-target).");
     }
 
     this.triggerEl = triggerEl;
@@ -48,9 +48,9 @@ export class NotificationCenter {
     this._outsideClickCleanup = null;
     this.history = this._load();
 
-    this.badgeEl = triggerEl.querySelector(".notification-badge");
-    this.listEl = panelEl.querySelector(".notification-list");
-    this.emptyEl = panelEl.querySelector(".notification-empty");
+    this.badgeEl = triggerEl.querySelector(".cl-notification-badge");
+    this.listEl = panelEl.querySelector(".cl-notification-list");
+    this.emptyEl = panelEl.querySelector(".cl-notification-empty");
 
     document.body.appendChild(this.panelEl);
 
@@ -82,10 +82,10 @@ export class NotificationCenter {
   }
 
   _ensureToastContainer() {
-    let container = document.querySelector(".toast-container");
+    let container = document.querySelector(".cl-toast-container");
     if (!container) {
       container = document.createElement("div");
-      container.className = "toast-container";
+      container.className = "cl-toast-container";
       document.body.appendChild(container);
     }
     return container;
@@ -125,26 +125,26 @@ export class NotificationCenter {
 
     this._showToast({ title, body, variant, autohide, delay });
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:notification:pushed", { bubbles: true, detail: { record } }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:notification:pushed", { bubbles: true, detail: { record } }));
     return record.id;
   }
 
   _showToast({ title, body, variant, autohide, delay }) {
     const toastEl = document.createElement("div");
-    toastEl.className = `toast toast-${variant}`;
+    toastEl.className = `cl-toast cl-toast-${variant}`;
     if (delay != null) toastEl.setAttribute("data-delay", String(delay));
     if (!autohide) toastEl.setAttribute("data-autohide", "false");
     toastEl.innerHTML = `
-      <div class="toast-header">
+      <div class="cl-toast-header">
         <span>${escapeHtml(title)}</span>
-        <button type="button" class="btn-close" data-dismiss="toast" aria-label="Fechar"></button>
+        <button type="button" class="cl-btn-close" data-cl-dismiss="toast" aria-label="Fechar"></button>
       </div>
-      ${body ? `<div class="toast-body">${escapeHtml(body)}</div>` : ""}
+      ${body ? `<div class="cl-toast-body">${escapeHtml(body)}</div>` : ""}
     `;
     this.toastContainer.appendChild(toastEl);
 
     const toast = new Toast(toastEl);
-    toastEl.addEventListener("clarus:toast:hidden", () => {
+    toastEl.addEventListener("cl:toast:hidden", () => {
       toast.dispose();
       toastEl.remove();
     });
@@ -161,7 +161,7 @@ export class NotificationCenter {
     this.history = [];
     this._persist();
     this._render();
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:notification:cleared", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:notification:cleared", { bubbles: true }));
   }
 
   getAll() {
@@ -180,13 +180,13 @@ export class NotificationCenter {
       this.listEl.innerHTML = this.history
         .map(
           (record) => `
-        <li class="notification-item notification-item-${record.variant}${record.read ? "" : " notification-item-unread"}" data-id="${record.id}">
-          <div class="notification-item-content">
-            <p class="notification-item-title">${escapeHtml(record.title)}</p>
-            ${record.body ? `<p class="notification-item-text">${escapeHtml(record.body)}</p>` : ""}
-            <span class="notification-item-time">${formatTime(record.time)}</span>
+        <li class="cl-notification-item cl-notification-item-${record.variant}${record.read ? "" : " cl-notification-item-unread"}" data-id="${record.id}">
+          <div class="cl-notification-item-content">
+            <p class="cl-notification-item-title">${escapeHtml(record.title)}</p>
+            ${record.body ? `<p class="cl-notification-item-text">${escapeHtml(record.body)}</p>` : ""}
+            <span class="cl-notification-item-time">${formatTime(record.time)}</span>
           </div>
-          <button type="button" class="btn-close" data-notification-dismiss aria-label="Remover notificação"></button>
+          <button type="button" class="cl-btn-close" data-notification-dismiss aria-label="Remover notificação"></button>
         </li>`,
         )
         .join("");
@@ -208,7 +208,7 @@ export class NotificationCenter {
 
     const dismissBtn = event.target.closest("[data-notification-dismiss]");
     if (dismissBtn) {
-      const id = dismissBtn.closest(".notification-item")?.dataset.id;
+      const id = dismissBtn.closest(".cl-notification-item")?.dataset.id;
       if (id) this.remove(id);
     }
   }
@@ -224,7 +224,7 @@ export class NotificationCenter {
       this.panelEl.removeAttribute("data-theme");
     }
 
-    this.panelEl.classList.add("show");
+    this.panelEl.classList.add("is-open");
 
     const position = computePosition(this.triggerEl, this.panelEl, {
       placement: "bottom",
@@ -247,14 +247,14 @@ export class NotificationCenter {
       this.close();
     });
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:notification:opened", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:notification:opened", { bubbles: true }));
   }
 
   close() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.panelEl.classList.remove("show");
+    this.panelEl.classList.remove("is-open");
     this.panelEl.style.removeProperty("position");
     this.panelEl.style.removeProperty("top");
     this.panelEl.style.removeProperty("left");
@@ -263,7 +263,7 @@ export class NotificationCenter {
     this._outsideClickCleanup?.();
     this._outsideClickCleanup = null;
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:notification:closed", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:notification:closed", { bubbles: true }));
   }
 
   toggle() {

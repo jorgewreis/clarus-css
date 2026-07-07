@@ -6,15 +6,15 @@ function buildCarousel({ autoplay = false, interval } = {}) {
   const autoplayAttr = autoplay ? ` data-autoplay="true"` : "";
   const intervalAttr = interval ? ` data-interval="${interval}"` : "";
   container.innerHTML = `
-    <div class="carousel" id="carousel"${autoplayAttr}${intervalAttr}>
-      <div class="carousel-inner">
-        <div class="carousel-item active">Slide 1</div>
-        <div class="carousel-item">Slide 2</div>
-        <div class="carousel-item">Slide 3</div>
+    <div class="cl-carousel" id="carousel"${autoplayAttr}${intervalAttr}>
+      <div class="cl-carousel-inner">
+        <div class="cl-carousel-item is-active">Slide 1</div>
+        <div class="cl-carousel-item">Slide 2</div>
+        <div class="cl-carousel-item">Slide 3</div>
       </div>
-      <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
-      <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
-      <ol class="carousel-indicators">
+      <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+      <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+      <ol class="cl-carousel-indicators">
         <li><button type="button" aria-label="Slide 1"></button></li>
         <li><button type="button" aria-label="Slide 2"></button></li>
         <li><button type="button" aria-label="Slide 3"></button></li>
@@ -38,61 +38,61 @@ describe("Carousel", () => {
 
   it("define role/aria-roledescription e o primeiro slide como ativo", () => {
     const { el } = buildCarousel();
-    const items = el.querySelectorAll(".carousel-item");
+    const items = el.querySelectorAll(".cl-carousel-item");
     expect(el.getAttribute("role")).toBe("group");
     expect(el.getAttribute("aria-roledescription")).toBe("carousel");
-    expect(items[0].classList.contains("active")).toBe(true);
+    expect(items[0].classList.contains("is-active")).toBe(true);
     expect(items[0].getAttribute("aria-hidden")).toBe("false");
     expect(items[1].getAttribute("aria-hidden")).toBe("true");
   });
 
   it("next() avança e prev() volta, com wrap circular", () => {
     const { el, carousel } = buildCarousel();
-    const items = el.querySelectorAll(".carousel-item");
+    const items = el.querySelectorAll(".cl-carousel-item");
 
     carousel.next();
-    expect(items[1].classList.contains("active")).toBe(true);
+    expect(items[1].classList.contains("is-active")).toBe(true);
 
     carousel.prev();
-    expect(items[0].classList.contains("active")).toBe(true);
+    expect(items[0].classList.contains("is-active")).toBe(true);
 
     carousel.prev();
-    expect(items[2].classList.contains("active")).toBe(true); // wrap para o último
+    expect(items[2].classList.contains("is-active")).toBe(true); // wrap para o último
   });
 
   it("clicar no controle next avança o slide", () => {
     const { el } = buildCarousel();
-    el.querySelector(".carousel-control-next").click();
-    expect(el.querySelectorAll(".carousel-item")[1].classList.contains("active")).toBe(true);
+    el.querySelector(".cl-carousel-control-next").click();
+    expect(el.querySelectorAll(".cl-carousel-item")[1].classList.contains("is-active")).toBe(true);
   });
 
   it("clicar num indicador vai direto ao slide e marca aria-current", () => {
     const { el } = buildCarousel();
-    const indicators = el.querySelectorAll(".carousel-indicators button");
+    const indicators = el.querySelectorAll(".cl-carousel-indicators button");
     indicators[2].click();
-    expect(el.querySelectorAll(".carousel-item")[2].classList.contains("active")).toBe(true);
-    expect(indicators[2].classList.contains("active")).toBe(true);
+    expect(el.querySelectorAll(".cl-carousel-item")[2].classList.contains("is-active")).toBe(true);
+    expect(indicators[2].classList.contains("is-active")).toBe(true);
     expect(indicators[2].getAttribute("aria-current")).toBe("true");
   });
 
   it("ArrowRight/ArrowLeft/Home/End navegam pelo teclado", () => {
     const { el } = buildCarousel();
-    const items = el.querySelectorAll(".carousel-item");
+    const items = el.querySelectorAll(".cl-carousel-item");
 
     el.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
-    expect(items[1].classList.contains("active")).toBe(true);
+    expect(items[1].classList.contains("is-active")).toBe(true);
 
     el.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
-    expect(items[2].classList.contains("active")).toBe(true);
+    expect(items[2].classList.contains("is-active")).toBe(true);
 
     el.dispatchEvent(new KeyboardEvent("keydown", { key: "Home", bubbles: true }));
-    expect(items[0].classList.contains("active")).toBe(true);
+    expect(items[0].classList.contains("is-active")).toBe(true);
   });
 
-  it("dispara clarus:carousel:slid com from/to no detail", () => {
+  it("dispara cl:carousel:slid com from/to no detail", () => {
     const { el, carousel } = buildCarousel();
     const handler = vi.fn();
-    el.addEventListener("clarus:carousel:slid", handler);
+    el.addEventListener("cl:carousel:slid", handler);
 
     carousel.next();
 
@@ -106,14 +106,14 @@ describe("Carousel", () => {
 
     it("avança sozinho no intervalo e pausa no hover", () => {
       const { el } = buildCarousel({ autoplay: true, interval: 1000 });
-      const items = el.querySelectorAll(".carousel-item");
+      const items = el.querySelectorAll(".cl-carousel-item");
 
       vi.advanceTimersByTime(1000);
-      expect(items[1].classList.contains("active")).toBe(true);
+      expect(items[1].classList.contains("is-active")).toBe(true);
 
       el.dispatchEvent(new MouseEvent("mouseenter"));
       vi.advanceTimersByTime(3000);
-      expect(items[1].classList.contains("active")).toBe(true); // pausado, não avançou
+      expect(items[1].classList.contains("is-active")).toBe(true); // pausado, não avançou
     });
   });
 

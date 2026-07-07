@@ -3,15 +3,15 @@ import { Toast } from "../../packages/clarus-js/js/toast.js";
 
 function buildToast({ delay, autohide } = {}) {
   const el = document.createElement("div");
-  el.className = "toast";
+  el.className = "cl-toast";
   if (delay !== undefined) el.setAttribute("data-delay", String(delay));
   if (autohide !== undefined) el.setAttribute("data-autohide", String(autohide));
   el.innerHTML = `
-    <div class="toast-header">
+    <div class="cl-toast-header">
       <span>Título</span>
-      <button type="button" class="btn-close" data-dismiss="toast"></button>
+      <button type="button" class="cl-btn-close" data-cl-dismiss="toast"></button>
     </div>
-    <div class="toast-body">Corpo</div>
+    <div class="cl-toast-body">Corpo</div>
   `;
   document.body.appendChild(el);
 
@@ -58,21 +58,21 @@ describe("Toast", () => {
     expect(el.style.display).toBe("none");
   });
 
-  it("clicar em [data-dismiss=toast] fecha o toast", () => {
+  it("clicar em [data-cl-dismiss=toast] fecha o toast", () => {
     const { el, toast } = buildToast();
     toast.show();
 
-    el.querySelector('[data-dismiss="toast"]').click();
+    el.querySelector('[data-cl-dismiss="toast"]').click();
 
     expect(el.style.display).toBe("none");
   });
 
-  it("dispara clarus:toast:shown e clarus:toast:hidden", async () => {
+  it("dispara cl:toast:shown e cl:toast:hidden", async () => {
     const { el, toast } = buildToast();
     const shownHandler = vi.fn();
     const hiddenHandler = vi.fn();
-    el.addEventListener("clarus:toast:shown", shownHandler);
-    el.addEventListener("clarus:toast:hidden", hiddenHandler);
+    el.addEventListener("cl:toast:shown", shownHandler);
+    el.addEventListener("cl:toast:hidden", hiddenHandler);
 
     toast.show();
     await Promise.resolve();

@@ -24,11 +24,11 @@ export class Tooltip {
     this.id = `clarus-tooltip-${idCounter}`;
 
     this.tooltipEl = document.createElement("div");
-    this.tooltipEl.className = "tooltip";
+    this.tooltipEl.className = "cl-tooltip";
     this.tooltipEl.id = this.id;
     this.tooltipEl.setAttribute("role", "tooltip");
-    this.tooltipEl.innerHTML = '<div class="tooltip-arrow"></div><div class="tooltip-inner"></div>';
-    this.tooltipEl.querySelector(".tooltip-inner").textContent = this.title;
+    this.tooltipEl.innerHTML = '<div class="cl-tooltip-arrow"></div><div class="cl-tooltip-inner"></div>';
+    this.tooltipEl.querySelector(".cl-tooltip-inner").textContent = this.title;
     document.body.appendChild(this.tooltipEl);
 
     referenceEl.setAttribute("aria-describedby", this.id);
@@ -63,22 +63,22 @@ export class Tooltip {
       this.tooltipEl.removeAttribute("data-theme");
     }
 
-    this.tooltipEl.classList.add("show");
+    this.tooltipEl.classList.add("is-open");
 
     const position = computePosition(this.referenceEl, this.tooltipEl, { placement: this.placement, offset: 10 });
     applyPosition(this.tooltipEl, position);
     this.tooltipEl.setAttribute("data-placement", position.placement);
 
-    this.referenceEl.dispatchEvent(new CustomEvent("clarus:tooltip:shown", { bubbles: true }));
+    this.referenceEl.dispatchEvent(new CustomEvent("cl:tooltip:shown", { bubbles: true }));
   }
 
   hide() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.tooltipEl.classList.remove("show");
+    this.tooltipEl.classList.remove("is-open");
 
-    this.referenceEl.dispatchEvent(new CustomEvent("clarus:tooltip:hidden", { bubbles: true }));
+    this.referenceEl.dispatchEvent(new CustomEvent("cl:tooltip:hidden", { bubbles: true }));
   }
 
   toggle() {

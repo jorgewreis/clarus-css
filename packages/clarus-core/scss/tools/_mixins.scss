@@ -27,7 +27,7 @@
   @return "-#{$name}";
 }
 
-@mixin focus-ring($color: var(--clarus-color-primary)) {
+@mixin focus-ring($color: var(--cl-color-primary)) {
   outline: none;
   border-color: $color;
   box-shadow: 0 0 5px 2px $color;

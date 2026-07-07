@@ -4,25 +4,25 @@
 
 $grid-columns: 12;
 
-.row {
+.cl-row {
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--clarus-gutter-y) * -1);
-  margin-right: calc(var(--clarus-gutter-x) / -2);
-  margin-left: calc(var(--clarus-gutter-x) / -2);
+  margin-top: calc(var(--cl-gutter-y) * -1);
+  margin-right: calc(var(--cl-gutter-x) / -2);
+  margin-left: calc(var(--cl-gutter-x) / -2);
 }
 
-.row > * {
-  margin-top: var(--clarus-gutter-y);
-  padding-right: calc(var(--clarus-gutter-x) / 2);
-  padding-left: calc(var(--clarus-gutter-x) / 2);
+.cl-row > * {
+  margin-top: var(--cl-gutter-y);
+  padding-right: calc(var(--cl-gutter-x) / 2);
+  padding-left: calc(var(--cl-gutter-x) / 2);
 }
 
-.row-fluid {
+.cl-row-fluid {
   width: 100%;
 }
 
-.col-fluid {
+.cl-col-fluid {
   width: 100%;
 }
 
@@ -30,17 +30,17 @@ $grid-columns: 12;
   $infix: breakpoint-infix($breakpoint);
 
   @include media-breakpoint-up($breakpoint) {
-    .col#{$infix} {
+    .cl-col#{$infix} {
       flex: 1 0 0%;
     }
 
-    .col#{$infix}-auto {
+    .cl-col#{$infix}-auto {
       flex: 0 0 auto;
       width: auto;
     }
 
     @for $i from 1 through $grid-columns {
-      .col#{$infix}-#{$i} {
+      .cl-col#{$infix}-#{$i} {
         flex: 0 0 auto;
         width: math.percentage(math.div($i, $grid-columns));
       }

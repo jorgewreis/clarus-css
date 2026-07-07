@@ -15,8 +15,8 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
         section {
@@ -27,49 +27,49 @@
         .collapse-body {
             padding: 12px 16px;
             margin-top: 8px;
-            background-color: var(--clarus-color-subtle);
-            border-radius: var(--clarus-radius-sm);
+            background-color: var(--cl-color-subtle);
+            border-radius: var(--cl-radius-sm);
         }
     </style>
 </head>
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
 
         <section>
-            <p class="fs-sm fw-medium mb-2">Seção expansível independente (fechada por padrão)</p>
-            <button type="button" class="btn" data-clarus="collapse" data-target="#collapse-detalhes">
+            <p class="u-fs-sm u-fw-medium u-mb-2">Seção expansível independente (fechada por padrão)</p>
+            <button type="button" class="cl-btn" data-cl="collapse" data-cl-target="#collapse-detalhes">
                 Ver detalhes
             </button>
-            <div class="collapse" id="collapse-detalhes">
+            <div class="cl-collapse" id="collapse-detalhes">
                 <div class="collapse-body">
-                    Conteúdo adicional, revelado/ocultado via <code class="font-mono">Clarus.Collapse</code>,
-                    reaproveitando <code class="font-mono">collapse()</code>/<code class="font-mono">expand()</code>
-                    de <code class="font-mono">js/core/transition.js</code> (mesma infraestrutura do Accordion).
+                    Conteúdo adicional, revelado/ocultado via <code class="u-font-mono">Clarus.Collapse</code>,
+                    reaproveitando <code class="u-font-mono">collapse()</code>/<code class="u-font-mono">expand()</code>
+                    de <code class="u-font-mono">js/core/transition.js</code> (mesma infraestrutura do Accordion).
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="fs-sm fw-medium mb-2">Iniciando aberto (aria-expanded="true")</p>
-            <button type="button" class="btn" data-clarus="collapse" data-target="#collapse-aberto" aria-expanded="true">
+            <p class="u-fs-sm u-fw-medium u-mb-2">Iniciando aberto (aria-expanded="true")</p>
+            <button type="button" class="cl-btn" data-cl="collapse" data-cl-target="#collapse-aberto" aria-expanded="true">
                 Ocultar termos
             </button>
-            <div class="collapse" id="collapse-aberto">
-                <div class="collapse-body">Este painel começa visível porque o gatilho já tem <code class="font-mono">aria-expanded="true"</code>.</div>
+            <div class="cl-collapse" id="collapse-aberto">
+                <div class="collapse-body">Este painel começa visível porque o gatilho já tem <code class="u-font-mono">aria-expanded="true"</code>.</div>
             </div>
         </section>
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
 
         <section>
-            <button type="button" class="btn" data-clarus="collapse" data-target="#collapse-escuro">
+            <button type="button" class="cl-btn" data-cl="collapse" data-cl-target="#collapse-escuro">
                 Ver detalhes
             </button>
-            <div class="collapse" id="collapse-escuro">
+            <div class="cl-collapse" id="collapse-escuro">
                 <div class="collapse-body">Conteúdo revelado sob demanda, mesmo comportamento do tema claro.</div>
             </div>
         </section>

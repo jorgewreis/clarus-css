@@ -1,10 +1,10 @@
 @use "settings" as *;
 
-// Bloco padrão para listas/telas vazias, 100% CSS. `.empty-state-icon` é um
+// Bloco padrão para listas/telas vazias, 100% CSS. `.cl-empty-state-icon` é um
 // slot vazio (o consumidor põe seu próprio SVG/emoji/ilustração dentro) — ao
 // contrário do ícone do Alert Dialog, aqui não há um conjunto fixo de
 // variantes de estado para gerar via CSS.
-.empty-state {
+.cl-empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@
   text-align: center;
 }
 
-.empty-state-icon {
+.cl-empty-state-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,21 +20,21 @@
   height: 64px;
   margin-bottom: 16px;
   border-radius: 50%;
-  color: var(--clarus-color-muted);
-  background-color: var(--clarus-color-subtle);
+  color: var(--cl-color-muted);
+  background-color: var(--cl-color-subtle);
   font-size: 28px;
 }
 
-.empty-state-title {
+.cl-empty-state-title {
   margin: 0;
-  color: var(--clarus-color-text);
+  color: var(--cl-color-text);
   font-size: $font-size-lg;
   font-weight: $font-weight-medium;
 }
 
-.empty-state-text {
+.cl-empty-state-text {
   max-width: 360px;
   margin: 4px 0 20px;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
   font-size: $font-size-sm;
 }

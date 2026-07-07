@@ -4,13 +4,13 @@ import { Popover } from "../../packages/clarus-js/js/popover.js";
 function buildPopover({ trigger = "click" } = {}) {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
-    <button type="button" id="trigger" data-target="#myPopover" data-trigger="${trigger}">Abrir</button>
-    <div class="popover" id="myPopover">
-      <div class="popover-arrow"></div>
-      <div class="popover-header">Título</div>
-      <div class="popover-body">
+    <button type="button" id="trigger" data-cl-target="#myPopover" data-trigger="${trigger}">Abrir</button>
+    <div class="cl-popover" id="myPopover">
+      <div class="cl-popover-arrow"></div>
+      <div class="cl-popover-header">Título</div>
+      <div class="cl-popover-body">
         <button type="button" id="innerBtn">Ação interna</button>
-        <button type="button" data-dismiss="popover" id="dismissBtn">Fechar</button>
+        <button type="button" data-cl-dismiss="popover" id="dismissBtn">Fechar</button>
       </div>
     </div>
   `;
@@ -38,7 +38,7 @@ describe("Popover", () => {
     expect(popoverEl.parentElement).toBe(document.body);
     expect(popoverEl.getAttribute("role")).toBe("dialog");
     expect(popoverEl.getAttribute("aria-modal")).toBe("false");
-    expect(popoverEl.getAttribute("aria-labelledby")).toBe(popoverEl.querySelector(".popover-header").id);
+    expect(popoverEl.getAttribute("aria-labelledby")).toBe(popoverEl.querySelector(".cl-popover-header").id);
     expect(triggerEl.getAttribute("aria-controls")).toBe(popoverEl.id);
     expect(triggerEl.getAttribute("aria-expanded")).toBe("false");
   });
@@ -48,11 +48,11 @@ describe("Popover", () => {
       const { triggerEl, popoverEl } = buildPopover();
 
       triggerEl.click();
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
       expect(triggerEl.getAttribute("aria-expanded")).toBe("true");
 
       triggerEl.click();
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
       expect(triggerEl.getAttribute("aria-expanded")).toBe("false");
     });
 
@@ -69,16 +69,16 @@ describe("Popover", () => {
 
       popoverEl.querySelector("#innerBtn").click();
 
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
     });
 
-    it("elemento com data-dismiss=popover fecha o painel", () => {
+    it("elemento com data-cl-dismiss=popover fecha o painel", () => {
       const { triggerEl, popoverEl } = buildPopover();
       triggerEl.click();
 
       popoverEl.querySelector("#dismissBtn").click();
 
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("clique fora fecha o painel", async () => {
@@ -88,7 +88,7 @@ describe("Popover", () => {
 
       document.body.click();
 
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("Escape fecha e devolve o foco ao gatilho", () => {
@@ -97,7 +97,7 @@ describe("Popover", () => {
 
       document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
 
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
       expect(document.activeElement).toBe(triggerEl);
     });
 
@@ -108,12 +108,12 @@ describe("Popover", () => {
       expect(document.body.style.overflow).toBe("");
     });
 
-    it("dispara clarus:popover:shown e clarus:popover:hidden", () => {
+    it("dispara cl:popover:shown e cl:popover:hidden", () => {
       const { triggerEl, popover } = buildPopover();
       const shownHandler = vi.fn();
       const hiddenHandler = vi.fn();
-      triggerEl.addEventListener("clarus:popover:shown", shownHandler);
-      triggerEl.addEventListener("clarus:popover:hidden", hiddenHandler);
+      triggerEl.addEventListener("cl:popover:shown", shownHandler);
+      triggerEl.addEventListener("cl:popover:hidden", hiddenHandler);
 
       popover.show();
       expect(shownHandler).toHaveBeenCalledTimes(1);
@@ -131,12 +131,12 @@ describe("Popover", () => {
       const { triggerEl, popoverEl } = buildPopover({ trigger: "hover" });
 
       triggerEl.dispatchEvent(new MouseEvent("mouseenter"));
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
 
       triggerEl.dispatchEvent(new MouseEvent("mouseleave"));
-      expect(popoverEl.classList.contains("show")).toBe(true); // ainda dentro do delay
+      expect(popoverEl.classList.contains("is-open")).toBe(true); // ainda dentro do delay
       vi.advanceTimersByTime(150);
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("mover do gatilho para o próprio popover cancela o fechamento", () => {
@@ -148,7 +148,7 @@ describe("Popover", () => {
       popoverEl.dispatchEvent(new MouseEvent("mouseenter"));
       vi.advanceTimersByTime(150);
 
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
     });
   });
 
@@ -157,10 +157,10 @@ describe("Popover", () => {
       const { triggerEl, popoverEl } = buildPopover({ trigger: "focus" });
 
       triggerEl.dispatchEvent(new Event("focus"));
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
 
       triggerEl.dispatchEvent(new FocusEvent("focusout", { relatedTarget: document.body }));
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("focusout do gatilho para dentro do painel mantém aberto", () => {
@@ -169,7 +169,7 @@ describe("Popover", () => {
       triggerEl.dispatchEvent(new Event("focus"));
       triggerEl.dispatchEvent(new FocusEvent("focusout", { relatedTarget: popoverEl.querySelector("#innerBtn") }));
 
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
     });
   });
 
@@ -181,17 +181,17 @@ describe("Popover", () => {
       triggerEl.dispatchEvent(new MouseEvent("mouseenter"));
       triggerEl.dispatchEvent(new Event("focus"));
 
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("só abre/fecha via API programática", () => {
       const { popoverEl, popover } = buildPopover({ trigger: "manual" });
 
       popover.show();
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
 
       popover.hide();
-      expect(popoverEl.classList.contains("show")).toBe(false);
+      expect(popoverEl.classList.contains("is-open")).toBe(false);
     });
 
     it("clique fora não fecha (sem onClickOutside registrado)", async () => {
@@ -201,7 +201,7 @@ describe("Popover", () => {
 
       document.body.click();
 
-      expect(popoverEl.classList.contains("show")).toBe(true);
+      expect(popoverEl.classList.contains("is-open")).toBe(true);
     });
   });
 

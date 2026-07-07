@@ -6,12 +6,12 @@ let idCounter = 0;
 export class Tabs {
   constructor(tablistEl) {
     this.tablistEl = tablistEl;
-    this.tabs = Array.from(tablistEl.querySelectorAll(".nav-link"));
+    this.tabs = Array.from(tablistEl.querySelectorAll(".cl-nav-link"));
 
     tablistEl.setAttribute("role", "tablist");
 
     this.tabs.forEach((tab) => {
-      const isActive = tab.classList.contains("active");
+      const isActive = tab.classList.contains("is-active");
 
       idCounter += 1;
       if (!tab.id) tab.id = `clarus-tab-${idCounter}`;
@@ -20,7 +20,7 @@ export class Tabs {
       tab.setAttribute("aria-selected", String(isActive));
       tab.setAttribute("tabindex", isActive ? "0" : "-1");
 
-      const paneSelector = tab.getAttribute("data-target");
+      const paneSelector = tab.getAttribute("data-cl-target");
       const pane = paneSelector ? document.querySelector(paneSelector) : null;
 
       if (pane) {
@@ -43,13 +43,13 @@ export class Tabs {
   }
 
   _handleClick(event) {
-    const tab = event.target.closest(".nav-link:not(.disabled)");
+    const tab = event.target.closest(".cl-nav-link:not(.is-disabled)");
     if (!tab || !this.tabs.includes(tab)) return;
     this.show(tab);
   }
 
   _handleKeydown(event) {
-    const enabledTabs = this.tabs.filter((tab) => !tab.classList.contains("disabled"));
+    const enabledTabs = this.tabs.filter((tab) => !tab.classList.contains("is-disabled"));
     const currentIndex = enabledTabs.indexOf(document.activeElement);
     if (currentIndex === -1) return;
 
@@ -68,22 +68,22 @@ export class Tabs {
   }
 
   show(tab) {
-    if (tab.classList.contains("active")) return;
+    if (tab.classList.contains("is-active")) return;
 
     this.tabs.forEach((otherTab) => {
       const isActive = otherTab === tab;
 
-      otherTab.classList.toggle("active", isActive);
+      otherTab.classList.toggle("is-active", isActive);
       otherTab.setAttribute("aria-selected", String(isActive));
       otherTab.setAttribute("tabindex", isActive ? "0" : "-1");
 
-      const paneSelector = otherTab.getAttribute("data-target");
+      const paneSelector = otherTab.getAttribute("data-cl-target");
       const pane = paneSelector ? document.querySelector(paneSelector) : null;
-      pane?.classList.toggle("active", isActive);
+      pane?.classList.toggle("is-active", isActive);
     });
 
     tab.dispatchEvent(
-      new CustomEvent("clarus:tab:changed", { bubbles: true, detail: { target: tab.getAttribute("data-target") } }),
+      new CustomEvent("cl:tab:changed", { bubbles: true, detail: { target: tab.getAttribute("data-cl-target") } }),
     );
   }
 

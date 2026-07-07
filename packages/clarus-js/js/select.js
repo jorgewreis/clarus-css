@@ -20,7 +20,7 @@ export class Select {
     this.toggleEl.setAttribute("aria-haspopup", "listbox");
     this.menuEl.setAttribute("role", "listbox");
 
-    this.toggleEl.addEventListener("clarus:dropdown:shown", () => {
+    this.toggleEl.addEventListener("cl:dropdown:shown", () => {
       this.menuEl.style.width = `${this.toggleEl.offsetWidth}px`;
     });
 
@@ -36,26 +36,26 @@ export class Select {
 
   _buildMarkup() {
     const wrapper = document.createElement("div");
-    wrapper.className = "dropdown form-select-dropdown";
+    wrapper.className = "cl-dropdown cl-form-select-dropdown";
 
     const toggle = document.createElement("button");
     toggle.type = "button";
-    toggle.className = "form-select";
+    toggle.className = "cl-form-select";
     if (this.size === "sm" || this.size === "lg") {
-      toggle.classList.add(`form-select-${this.size}`);
+      toggle.classList.add(`cl-form-select-${this.size}`);
     }
     toggle.disabled = this.selectEl.disabled;
 
     const menu = document.createElement("div");
-    menu.className = "dropdown-menu";
+    menu.className = "cl-dropdown-menu";
 
     Array.from(this.selectEl.options).forEach((option) => {
       const item = document.createElement("button");
       item.type = "button";
-      item.className = "dropdown-item";
+      item.className = "cl-dropdown-item";
       item.setAttribute("role", "option");
       item.textContent = option.textContent;
-      if (option.disabled) item.classList.add("disabled");
+      if (option.disabled) item.classList.add("is-disabled");
       menu.appendChild(item);
     });
 
@@ -75,13 +75,13 @@ export class Select {
 
     Array.from(this.menuEl.children).forEach((item, index) => {
       const isSelected = index === this.selectEl.selectedIndex;
-      item.classList.toggle("active", isSelected);
+      item.classList.toggle("is-active", isSelected);
       item.setAttribute("aria-selected", String(isSelected));
     });
   }
 
   _handleItemClick(event) {
-    const item = event.target.closest(".dropdown-item:not(.disabled)");
+    const item = event.target.closest(".cl-dropdown-item:not(.is-disabled)");
     if (!item) return;
 
     const index = Array.from(this.menuEl.children).indexOf(item);
@@ -90,7 +90,7 @@ export class Select {
 
     this.selectEl.dispatchEvent(new Event("change", { bubbles: true }));
     this.selectEl.dispatchEvent(
-      new CustomEvent("clarus:select:changed", { bubbles: true, detail: { value: this.selectEl.value } }),
+      new CustomEvent("cl:select:changed", { bubbles: true, detail: { value: this.selectEl.value } }),
     );
   }
 

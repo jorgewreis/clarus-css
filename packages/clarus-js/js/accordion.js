@@ -10,10 +10,10 @@ export class Accordion {
     this.exclusive = accordionEl.getAttribute("data-multiple") !== "true";
     this.items = [];
 
-    const buttons = Array.from(accordionEl.querySelectorAll(".accordion-button"));
+    const buttons = Array.from(accordionEl.querySelectorAll(".cl-accordion-button"));
 
     buttons.forEach((button) => {
-      const panel = button.closest(".accordion-item").querySelector(".accordion-collapse");
+      const panel = button.closest(".cl-accordion-item").querySelector(".cl-accordion-collapse");
 
       idCounter += 1;
       if (!panel.id) panel.id = `clarus-accordion-panel-${idCounter}`;
@@ -61,14 +61,14 @@ export class Accordion {
   _open(entry) {
     entry.button.setAttribute("aria-expanded", "true");
     expand(entry.panel).then(() => {
-      entry.button.dispatchEvent(new CustomEvent("clarus:accordion:shown", { bubbles: true }));
+      entry.button.dispatchEvent(new CustomEvent("cl:accordion:shown", { bubbles: true }));
     });
   }
 
   _close(entry) {
     entry.button.setAttribute("aria-expanded", "false");
     collapse(entry.panel).then(() => {
-      entry.button.dispatchEvent(new CustomEvent("clarus:accordion:hidden", { bubbles: true }));
+      entry.button.dispatchEvent(new CustomEvent("cl:accordion:hidden", { bubbles: true }));
     });
   }
 

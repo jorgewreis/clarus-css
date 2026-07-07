@@ -6,11 +6,11 @@ const instances = createInstanceRegistry();
 
 export class Offcanvas {
   constructor(triggerEl, options = {}) {
-    const targetSelector = triggerEl.getAttribute("data-target");
+    const targetSelector = triggerEl.getAttribute("data-cl-target");
     const offcanvasEl = targetSelector ? document.querySelector(targetSelector) : null;
 
     if (!offcanvasEl) {
-      throw new Error("Clarus.Offcanvas: elemento não encontrado (data-target).");
+      throw new Error("Clarus.Offcanvas: elemento não encontrado (data-cl-target).");
     }
 
     this.triggerEl = triggerEl;
@@ -48,7 +48,7 @@ export class Offcanvas {
   }
 
   _handleDismissClick(event) {
-    if (event.target.closest('[data-dismiss="offcanvas"]')) {
+    if (event.target.closest('[data-cl-dismiss="offcanvas"]')) {
       this.hide();
     }
   }
@@ -59,15 +59,15 @@ export class Offcanvas {
 
     if (this.hasBackdrop) {
       this._backdropEl = document.createElement("div");
-      this._backdropEl.className = "offcanvas-backdrop";
+      this._backdropEl.className = "cl-offcanvas-backdrop";
       document.body.appendChild(this._backdropEl);
-      // Força reflow antes de adicionar `.show` para a transição de opacidade
+      // Força reflow antes de adicionar `.is-open` para a transição de opacidade
       // rodar (elemento recém-criado começa sem a classe).
       void this._backdropEl.offsetHeight;
-      this._backdropEl.classList.add("show");
+      this._backdropEl.classList.add("is-open");
     }
 
-    this.offcanvasEl.classList.add("show");
+    this.offcanvasEl.classList.add("is-open");
     lockScroll();
 
     this._focusTrap = createFocusTrap(this.offcanvasEl);
@@ -89,14 +89,14 @@ export class Offcanvas {
       });
     }
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:offcanvas:shown", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:offcanvas:shown", { bubbles: true }));
   }
 
   hide() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.offcanvasEl.classList.remove("show");
+    this.offcanvasEl.classList.remove("is-open");
     unlockScroll();
 
     this._backdropEl?.remove();
@@ -110,7 +110,7 @@ export class Offcanvas {
 
     this.triggerEl.focus();
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:offcanvas:hidden", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:offcanvas:hidden", { bubbles: true }));
   }
 
   toggle() {

@@ -15,11 +15,11 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
-        .progress {
+        .cl-progress {
             max-width: 480px;
         }
     </style>
@@ -27,96 +27,96 @@
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Spinner - neutro e cores de estado</p>
-        <span class="spinner mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-success mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-warning mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-danger mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-info" role="status" aria-label="Carregando"></span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - neutro e cores de estado</p>
+        <span class="cl-spinner u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-success u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-warning u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-danger u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-info" role="status" aria-label="Carregando"></span>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Spinner - tamanhos</p>
-        <span class="spinner spinner-primary spinner-sm mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary spinner-lg" role="status" aria-label="Carregando"></span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - tamanhos</p>
+        <span class="cl-spinner cl-spinner-primary cl-spinner-sm u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary cl-spinner-lg" role="status" aria-label="Carregando"></span>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - valores</p>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="--clarus-progress-value: 25">25%</div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - valores</p>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 25">25%</div>
         </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-success" style="--clarus-progress-value: 50">50%</div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-success" style="--cl-progress-value: 50">50%</div>
         </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-warning" style="--clarus-progress-value: 75">75%</div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-warning" style="--cl-progress-value: 75">75%</div>
         </div>
-        <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-danger" style="--clarus-progress-value: 100">100%</div>
-        </div>
-
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - tamanhos</p>
-        <div class="progress progress-sm mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60"></div>
-        </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60"></div>
-        </div>
-        <div class="progress progress-lg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60">60%</div>
+        <div class="cl-progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-danger" style="--cl-progress-value: 100">100%</div>
         </div>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - listrado e animado</p>
-        <div class="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary progress-bar-striped progress-bar-animated" style="--clarus-progress-value: 70"></div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - tamanhos</p>
+        <div class="cl-progress cl-progress-sm u-mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress cl-progress-lg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60">60%</div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - listrado e animado</p>
+        <div class="cl-progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary cl-progress-bar-striped cl-progress-bar-animated" style="--cl-progress-value: 70"></div>
         </div>
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Spinner - neutro e cores de estado</p>
-        <span class="spinner mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-success mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-warning mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-danger mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-info" role="status" aria-label="Carregando"></span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - neutro e cores de estado</p>
+        <span class="cl-spinner u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-success u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-warning u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-danger u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-info" role="status" aria-label="Carregando"></span>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Spinner - tamanhos</p>
-        <span class="spinner spinner-primary spinner-sm mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary mr-2" role="status" aria-label="Carregando"></span>
-        <span class="spinner spinner-primary spinner-lg" role="status" aria-label="Carregando"></span>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - tamanhos</p>
+        <span class="cl-spinner cl-spinner-primary cl-spinner-sm u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary u-mr-2" role="status" aria-label="Carregando"></span>
+        <span class="cl-spinner cl-spinner-primary cl-spinner-lg" role="status" aria-label="Carregando"></span>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - valores</p>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="--clarus-progress-value: 25">25%</div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - valores</p>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 25">25%</div>
         </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-success" style="--clarus-progress-value: 50">50%</div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-success" style="--cl-progress-value: 50">50%</div>
         </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-warning" style="--clarus-progress-value: 75">75%</div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-warning" style="--cl-progress-value: 75">75%</div>
         </div>
-        <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-danger" style="--clarus-progress-value: 100">100%</div>
-        </div>
-
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - tamanhos</p>
-        <div class="progress progress-sm mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60"></div>
-        </div>
-        <div class="progress mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60"></div>
-        </div>
-        <div class="progress progress-lg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary" style="--clarus-progress-value: 60">60%</div>
+        <div class="cl-progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-danger" style="--cl-progress-value: 100">100%</div>
         </div>
 
-        <p class="fs-sm fw-medium mt-3 mb-1">Progress - listrado e animado</p>
-        <div class="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-primary progress-bar-striped progress-bar-animated" style="--clarus-progress-value: 70"></div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - tamanhos</p>
+        <div class="cl-progress cl-progress-sm u-mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress cl-progress-lg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60">60%</div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - listrado e animado</p>
+        <div class="cl-progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary cl-progress-bar-striped cl-progress-bar-animated" style="--cl-progress-value: 70"></div>
         </div>
     </div>
 

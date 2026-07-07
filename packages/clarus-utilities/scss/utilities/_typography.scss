@@ -1,62 +1,62 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.text-start {
+.u-text-start {
   text-align: left;
 }
 
-.text-center {
+.u-text-center {
   text-align: center;
 }
 
-.text-end {
+.u-text-end {
   text-align: right;
 }
 
-.text-lowercase {
+.u-text-lowercase {
   text-transform: lowercase;
 }
 
-.text-uppercase {
+.u-text-uppercase {
   text-transform: uppercase;
 }
 
-.text-capitalize {
+.u-text-capitalize {
   text-transform: capitalize;
 }
 
-.text-truncate {
+.u-text-truncate {
   @include truncate;
 }
 
-.fw-regular {
+.u-fw-regular {
   font-weight: $font-weight-regular;
 }
 
-.fw-medium {
+.u-fw-medium {
   font-weight: $font-weight-medium;
 }
 
-.fs-xs {
+.u-fs-xs {
   font-size: $font-size-xs;
 }
 
-.fs-sm {
+.u-fs-sm {
   font-size: $font-size-sm;
 }
 
-.fs-md {
+.u-fs-md {
   font-size: $font-size-md;
 }
 
-.fs-lg {
+.u-fs-lg {
   font-size: $font-size-lg;
 }
 
-.font-sans {
-  font-family: var(--clarus-font-sans);
+.u-font-sans {
+  font-family: var(--cl-font-sans);
 }
 
-.font-mono {
-  font-family: var(--clarus-font-mono);
+.u-font-mono {
+  font-family: var(--cl-font-mono);
 }

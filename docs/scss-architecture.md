@@ -82,14 +82,14 @@ Define a base estrutural do framework:
 - Grid baseado em Flexbox.
 - Breakpoints convencionais, amplamente adotados.
 
-O gutter do grid (`.row`/`.col-*`) é implementado via padding + margin negativo
-controlados pelas CSS Custom Properties `--clarus-gutter-x`/`--clarus-gutter-y`
+O gutter do grid (`.cl-row`/`.cl-col-*`) é implementado via padding + margin negativo
+controlados pelas CSS Custom Properties `--cl-gutter-x`/`--cl-gutter-y`
 (não via `gap` do flexbox), porque `gap` não é descontado da largura em
-porcentagem das colunas numeradas (`.col-6`, `.col-md-4`), o que causaria
-estouro de linha. As classes `.g-*`/`.gx-*`/`.gy-*` (em `utilities/_spacing.scss`)
-controlam essas variáveis e só têm efeito dentro de uma `.row`. Para `gap`
+porcentagem das colunas numeradas (`.cl-col-6`, `.cl-col-md-4`), o que causaria
+estouro de linha. As classes `.u-g-*`/`.u-gx-*`/`.u-gy-*` (em `utilities/_spacing.scss`)
+controlam essas variáveis e só têm efeito dentro de uma `.cl-row`. Para `gap`
 literal em qualquer container flex/grid fora do sistema de colunas, use
-`.gap-*`/`.gap-x-*`/`.gap-y-*`.
+`.u-gap-*`/`.u-gap-x-*`/`.u-gap-y-*`.
 
 ### forms
 

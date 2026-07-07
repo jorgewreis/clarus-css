@@ -29,8 +29,8 @@ describe("Select", () => {
     const { select } = buildSelect();
 
     expect(select.style.display).toBe("none");
-    expect(document.querySelector(".form-select")).not.toBeNull();
-    expect(document.querySelectorAll(".dropdown-item")).toHaveLength(3);
+    expect(document.querySelector(".cl-form-select")).not.toBeNull();
+    expect(document.querySelectorAll(".cl-dropdown-item")).toHaveLength(3);
   });
 
   it("o toggle mostra o texto da opção selecionada inicialmente", () => {
@@ -47,13 +47,13 @@ describe("Select", () => {
 
   it("a opção desabilitada vira um .dropdown-item.disabled", () => {
     const { instance } = buildSelect();
-    const items = instance.menuEl.querySelectorAll(".dropdown-item");
-    expect(items[2].classList.contains("disabled")).toBe(true);
+    const items = instance.menuEl.querySelectorAll(".cl-dropdown-item");
+    expect(items[2].classList.contains("is-disabled")).toBe(true);
   });
 
   it("clicar num item atualiza o <select> nativo, o texto do toggle e o estado aria-selected", () => {
     const { select, instance } = buildSelect();
-    const items = instance.menuEl.querySelectorAll(".dropdown-item");
+    const items = instance.menuEl.querySelectorAll(".cl-dropdown-item");
 
     items[1].click();
 
@@ -63,14 +63,14 @@ describe("Select", () => {
     expect(items[0].getAttribute("aria-selected")).toBe("false");
   });
 
-  it("clicar num item dispara change nativo e clarus:select:changed", () => {
+  it("clicar num item dispara change nativo e cl:select:changed", () => {
     const { select, instance } = buildSelect();
     const changeHandler = vi.fn();
     const clarusHandler = vi.fn();
     select.addEventListener("change", changeHandler);
-    select.addEventListener("clarus:select:changed", clarusHandler);
+    select.addEventListener("cl:select:changed", clarusHandler);
 
-    instance.menuEl.querySelectorAll(".dropdown-item")[1].click();
+    instance.menuEl.querySelectorAll(".cl-dropdown-item")[1].click();
 
     expect(changeHandler).toHaveBeenCalledTimes(1);
     expect(clarusHandler).toHaveBeenCalledTimes(1);
@@ -80,7 +80,7 @@ describe("Select", () => {
   it("clicar num item desabilitado não altera a seleção", () => {
     const { select, instance } = buildSelect();
 
-    instance.menuEl.querySelectorAll(".dropdown-item")[2].click();
+    instance.menuEl.querySelectorAll(".cl-dropdown-item")[2].click();
 
     expect(select.value).toBe("São Paulo");
   });
@@ -90,6 +90,6 @@ describe("Select", () => {
     instance.dispose();
 
     expect(select.style.display).toBe("");
-    expect(document.querySelector(".form-select")).toBeNull();
+    expect(document.querySelector(".cl-form-select")).toBeNull();
   });
 });

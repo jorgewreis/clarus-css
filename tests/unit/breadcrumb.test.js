@@ -11,14 +11,14 @@ function mockCollapseQuery(matches) {
 
 function buildBreadcrumb({ maxItems, itemCount = 5 } = {}) {
   const list = document.createElement("ol");
-  list.className = "breadcrumb";
+  list.className = "cl-breadcrumb";
   if (maxItems) list.setAttribute("data-max-items", String(maxItems));
 
   for (let i = 1; i <= itemCount; i += 1) {
     const li = document.createElement("li");
-    li.className = "breadcrumb-item";
+    li.className = "cl-breadcrumb-item";
     if (i === itemCount) {
-      li.classList.add("active");
+      li.classList.add("is-active");
       li.textContent = `Nível ${i}`;
     } else {
       li.innerHTML = `<a href="#nivel-${i}">Nível ${i}</a>`;
@@ -45,7 +45,7 @@ describe("Breadcrumb", () => {
   it("aplica a classe de truncamento em todos os links (e no item ativo sem link)", () => {
     mockCollapseQuery(false);
     const { list } = buildBreadcrumb();
-    const truncatable = list.querySelectorAll(".breadcrumb-item-truncate");
+    const truncatable = list.querySelectorAll(".cl-breadcrumb-item-truncate");
     expect(truncatable).toHaveLength(5);
   });
 
@@ -53,8 +53,8 @@ describe("Breadcrumb", () => {
     mockCollapseQuery(false);
     const { list } = buildBreadcrumb({ maxItems: 3 });
 
-    expect(list.querySelector(".breadcrumb-more")).toBeNull();
-    list.querySelectorAll(".breadcrumb-item").forEach((item) => {
+    expect(list.querySelector(".cl-breadcrumb-more")).toBeNull();
+    list.querySelectorAll(".cl-breadcrumb-item").forEach((item) => {
       expect(item.style.display).not.toBe("none");
     });
   });
@@ -64,9 +64,9 @@ describe("Breadcrumb", () => {
     const { list, breadcrumb } = buildBreadcrumb({ maxItems: 3 });
 
     expect(breadcrumb.isCollapsed).toBe(true);
-    expect(list.querySelector(".breadcrumb-more")).not.toBeNull();
+    expect(list.querySelector(".cl-breadcrumb-more")).not.toBeNull();
 
-    const items = list.querySelectorAll(".breadcrumb-item");
+    const items = list.querySelectorAll(".cl-breadcrumb-item");
     expect(items[0].style.display).not.toBe("none"); // primeiro
     expect(items[items.length - 1].style.display).not.toBe("none"); // último
   });
@@ -75,15 +75,15 @@ describe("Breadcrumb", () => {
     mockCollapseQuery(true);
     const { list } = buildBreadcrumb({ maxItems: 5, itemCount: 4 });
 
-    expect(list.querySelector(".breadcrumb-more")).toBeNull();
+    expect(list.querySelector(".cl-breadcrumb-more")).toBeNull();
   });
 
   it("o dropdown do item '…' lista os níveis ocultos com o texto original", () => {
     mockCollapseQuery(true);
     buildBreadcrumb({ maxItems: 3 });
 
-    const menu = document.querySelector(".dropdown-menu");
-    const labels = Array.from(menu.querySelectorAll(".dropdown-item")).map((el) => el.textContent);
+    const menu = document.querySelector(".cl-dropdown-menu");
+    const labels = Array.from(menu.querySelectorAll(".cl-dropdown-item")).map((el) => el.textContent);
     expect(labels).toEqual(["Nível 2", "Nível 3", "Nível 4"]);
   });
 
@@ -93,9 +93,9 @@ describe("Breadcrumb", () => {
 
     breadcrumb.dispose();
 
-    expect(list.querySelector(".breadcrumb-more")).toBeNull();
+    expect(list.querySelector(".cl-breadcrumb-more")).toBeNull();
     expect(Breadcrumb.getInstance(list)).toBeUndefined();
-    list.querySelectorAll(".breadcrumb-item").forEach((item) => {
+    list.querySelectorAll(".cl-breadcrumb-item").forEach((item) => {
       expect(item.style.display).not.toBe("none");
     });
   });

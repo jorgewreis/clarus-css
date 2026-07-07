@@ -15,12 +15,12 @@
             flex-direction: column;
             gap: 16px;
             padding: 24px;
-            background-color: var(--clarus-color-subtle);
+            background-color: var(--cl-color-subtle);
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
         .theme-panel > div {
@@ -29,46 +29,46 @@
 
         #resultado {
             font-size: 0.85rem;
-            color: var(--clarus-color-muted);
+            color: var(--cl-color-muted);
         }
     </style>
 </head>
 <body>
 
-    <h2 class="fs-lg fw-medium" style="padding: 24px 24px 0;">Claro</h2>
+    <h2 class="u-fs-lg u-fw-medium" style="padding: 24px 24px 0;">Claro</h2>
     <div class="theme-panel">
-        <p class="fs-sm fw-medium mb-0">Arraste um arquivo para a área abaixo (ou clique)</p>
-        <div class="file-upload">
-            <input type="file" class="file-input" id="arquivo-1">
-            <label for="arquivo-1" class="file-label file-label-dropzone" data-clarus="file-drop">
+        <p class="u-fs-sm u-fw-medium u-mb-0">Arraste um arquivo para a área abaixo (ou clique)</p>
+        <div class="cl-file-upload">
+            <input type="file" class="cl-file-input" id="arquivo-1">
+            <label for="arquivo-1" class="cl-file-label cl-file-label-dropzone" data-cl="file-drop">
                 <span>Arraste um arquivo aqui</span>
-                <span class="file-dropzone-hint">ou clique para escolher</span>
+                <span class="cl-file-dropzone-hint">ou clique para escolher</span>
             </label>
         </div>
         <p id="resultado">Nenhum arquivo selecionado.</p>
 
-        <p class="fs-sm fw-medium mb-0">Botão padrão (mesma funcionalidade, sem o visual de dropzone)</p>
-        <div class="file-upload">
-            <input type="file" class="file-input" id="arquivo-2">
-            <label for="arquivo-2" class="file-label" data-clarus="file-drop">Escolher arquivo</label>
+        <p class="u-fs-sm u-fw-medium u-mb-0">Botão padrão (mesma funcionalidade, sem o visual de dropzone)</p>
+        <div class="cl-file-upload">
+            <input type="file" class="cl-file-input" id="arquivo-2">
+            <label for="arquivo-2" class="cl-file-label" data-cl="file-drop">Escolher arquivo</label>
         </div>
 
-        <p class="fs-sm fw-medium mb-0">Desabilitado</p>
-        <div class="file-upload">
-            <input type="file" class="file-input" id="arquivo-3" disabled>
-            <label for="arquivo-3" class="file-label file-label-dropzone" data-clarus="file-drop">
+        <p class="u-fs-sm u-fw-medium u-mb-0">Desabilitado</p>
+        <div class="cl-file-upload">
+            <input type="file" class="cl-file-input" id="arquivo-3" disabled>
+            <label for="arquivo-3" class="cl-file-label cl-file-label-dropzone" data-cl="file-drop">
                 <span>Desabilitado</span>
             </label>
         </div>
     </div>
 
-    <h2 class="fs-lg fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--clarus-color-surface); color: var(--clarus-color-text); margin: 0;">Escuro</h2>
+    <h2 class="u-fs-lg u-fw-medium" data-theme="dark" style="padding: 24px 24px 0; background-color: var(--cl-color-surface); color: var(--cl-color-text); margin: 0;">Escuro</h2>
     <div class="theme-panel" data-theme="dark">
-        <div class="file-upload">
-            <input type="file" class="file-input" id="arquivo-dark">
-            <label for="arquivo-dark" class="file-label file-label-dropzone" data-clarus="file-drop">
+        <div class="cl-file-upload">
+            <input type="file" class="cl-file-input" id="arquivo-dark">
+            <label for="arquivo-dark" class="cl-file-label cl-file-label-dropzone" data-cl="file-drop">
                 <span>Arraste um arquivo aqui</span>
-                <span class="file-dropzone-hint">ou clique para escolher</span>
+                <span class="cl-file-dropzone-hint">ou clique para escolher</span>
             </label>
         </div>
     </div>

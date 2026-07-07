@@ -6,11 +6,11 @@ let idCounter = 0;
 
 export class Collapse {
   constructor(triggerEl) {
-    const targetSelector = triggerEl.getAttribute("data-target");
+    const targetSelector = triggerEl.getAttribute("data-cl-target");
     const collapseEl = targetSelector ? document.querySelector(targetSelector) : null;
 
     if (!collapseEl) {
-      throw new Error("Clarus.Collapse: elemento não encontrado (data-target).");
+      throw new Error("Clarus.Collapse: elemento não encontrado (data-cl-target).");
     }
 
     this.triggerEl = triggerEl;
@@ -42,7 +42,7 @@ export class Collapse {
 
     this.triggerEl.setAttribute("aria-expanded", "true");
     expand(this.collapseEl).then(() => {
-      this.triggerEl.dispatchEvent(new CustomEvent("clarus:collapse:shown", { bubbles: true }));
+      this.triggerEl.dispatchEvent(new CustomEvent("cl:collapse:shown", { bubbles: true }));
     });
   }
 
@@ -52,7 +52,7 @@ export class Collapse {
 
     this.triggerEl.setAttribute("aria-expanded", "false");
     collapse(this.collapseEl).then(() => {
-      this.triggerEl.dispatchEvent(new CustomEvent("clarus:collapse:hidden", { bubbles: true }));
+      this.triggerEl.dispatchEvent(new CustomEvent("cl:collapse:hidden", { bubbles: true }));
     });
   }
 

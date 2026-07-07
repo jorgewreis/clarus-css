@@ -1,7 +1,7 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.breadcrumb {
+.cl-breadcrumb {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -12,29 +12,29 @@
   font-size: $font-size-sm;
 }
 
-.breadcrumb-item {
+.cl-breadcrumb-item {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
-  color: var(--clarus-color-muted);
+.cl-breadcrumb-item + .cl-breadcrumb-item::before {
+  color: var(--cl-color-muted);
   content: "/";
 }
 
-.breadcrumb-item a {
-  color: var(--clarus-color-primary);
+.cl-breadcrumb-item a {
+  color: var(--cl-color-primary);
   text-decoration: none;
 }
 
-.breadcrumb-item a:hover {
+.cl-breadcrumb-item a:hover {
   text-decoration: underline;
 }
 
-.breadcrumb-item.active {
-  color: var(--clarus-color-text);
+.cl-breadcrumb-item.is-active {
+  color: var(--cl-color-text);
 }
 
 // Breadcrumb avançado (js/breadcrumb.js): trunca labels longos com reticências
@@ -42,7 +42,7 @@
 // realmente transborda) e, em telas pequenas, recolhe os níveis
 // intermediários num único item "…" que abre um dropdown (js/dropdown.js)
 // com os links ocultos.
-.breadcrumb-item-truncate {
+.cl-breadcrumb-item-truncate {
   display: inline-block;
   max-width: 160px;
   vertical-align: bottom;
@@ -50,10 +50,10 @@
   @include truncate;
 }
 
-.breadcrumb-more {
+.cl-breadcrumb-more {
   padding: 0;
   border: none;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
   background: none;
   font-size: inherit;
   font-family: inherit;
@@ -61,6 +61,6 @@
   cursor: pointer;
 }
 
-.breadcrumb-more:hover {
-  color: var(--clarus-color-text);
+.cl-breadcrumb-more:hover {
+  color: var(--cl-color-text);
 }

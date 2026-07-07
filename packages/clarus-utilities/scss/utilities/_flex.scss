@@ -5,47 +5,47 @@
   $infix: breakpoint-infix($breakpoint);
 
   @include media-breakpoint-up($breakpoint) {
-    .align-items#{$infix}-start {
+    .u-align-items#{$infix}-start {
       align-items: flex-start;
     }
 
-    .align-items#{$infix}-center {
+    .u-align-items#{$infix}-center {
       align-items: center;
     }
 
-    .align-items#{$infix}-end {
+    .u-align-items#{$infix}-end {
       align-items: flex-end;
     }
 
-    .justify-content#{$infix}-start {
+    .u-justify-content#{$infix}-start {
       justify-content: flex-start;
     }
 
-    .justify-content#{$infix}-center {
+    .u-justify-content#{$infix}-center {
       justify-content: center;
     }
 
-    .justify-content#{$infix}-end {
+    .u-justify-content#{$infix}-end {
       justify-content: flex-end;
     }
 
-    .justify-content#{$infix}-around {
+    .u-justify-content#{$infix}-around {
       justify-content: space-around;
     }
 
-    .justify-content#{$infix}-between {
+    .u-justify-content#{$infix}-between {
       justify-content: space-between;
     }
 
-    .align-self#{$infix}-start {
+    .u-align-self#{$infix}-start {
       align-self: flex-start;
     }
 
-    .align-self#{$infix}-center {
+    .u-align-self#{$infix}-center {
       align-self: center;
     }
 
-    .align-self#{$infix}-end {
+    .u-align-self#{$infix}-end {
       align-self: flex-end;
     }
   }

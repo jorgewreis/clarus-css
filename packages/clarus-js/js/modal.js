@@ -6,16 +6,16 @@ const instances = createInstanceRegistry();
 
 export class Modal {
   constructor(triggerEl, options = {}) {
-    const targetSelector = triggerEl.getAttribute("data-target");
+    const targetSelector = triggerEl.getAttribute("data-cl-target");
     const modalEl = targetSelector ? document.querySelector(targetSelector) : null;
 
     if (!modalEl) {
-      throw new Error("Clarus.Modal: elemento do modal não encontrado (data-target).");
+      throw new Error("Clarus.Modal: elemento do modal não encontrado (data-cl-target).");
     }
 
     this.triggerEl = triggerEl;
     this.modalEl = modalEl;
-    this.dialogEl = modalEl.querySelector(".modal-dialog") ?? modalEl;
+    this.dialogEl = modalEl.querySelector(".cl-modal-dialog") ?? modalEl;
     this.staticBackdrop = (options.backdrop ?? modalEl.getAttribute("data-backdrop")) === "static";
     this.isOpen = false;
     this._focusTrap = null;
@@ -47,7 +47,7 @@ export class Modal {
   }
 
   _handleDismissClick(event) {
-    if (event.target.closest('[data-dismiss="modal"]')) {
+    if (event.target.closest('[data-cl-dismiss="modal"]')) {
       this.hide();
     }
   }
@@ -56,7 +56,7 @@ export class Modal {
     if (this.isOpen) return;
     this.isOpen = true;
 
-    this.modalEl.classList.add("show");
+    this.modalEl.classList.add("is-open");
     lockScroll();
 
     this._focusTrap = createFocusTrap(this.dialogEl);
@@ -66,14 +66,14 @@ export class Modal {
       this._outsideClickCleanup = onClickOutside(this.dialogEl, () => this.hide());
     }
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:modal:shown", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:modal:shown", { bubbles: true }));
   }
 
   hide() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.modalEl.classList.remove("show");
+    this.modalEl.classList.remove("is-open");
     unlockScroll();
 
     this._focusTrap?.deactivate();
@@ -84,7 +84,7 @@ export class Modal {
 
     this.triggerEl.focus();
 
-    this.triggerEl.dispatchEvent(new CustomEvent("clarus:modal:hidden", { bubbles: true }));
+    this.triggerEl.dispatchEvent(new CustomEvent("cl:modal:hidden", { bubbles: true }));
   }
 
   toggle() {

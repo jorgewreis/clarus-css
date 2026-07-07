@@ -44,7 +44,7 @@ arquitetura do projeto.
 
 | | |
 | --- | --- |
-| **Híbrido por design** | Componentes prontos (`.btn`, `.card`, `.modal`) e utilitários atômicos (`.d-flex`, `.mt-3`, `.gx-2`) convivem na mesma folha de estilo, com uma convenção de nomes que evita colisão entre os dois mundos. |
+| **Híbrido por design** | Componentes prontos (`.cl-btn`, `.cl-card`, `.cl-modal`) e utilitários atômicos (`.u-d-flex`, `.u-mt-3`, `.u-gx-2`) convivem na mesma folha de estilo, com uma convenção de nomes (`cl-`/`u-`/`is-`) que evita colisão entre os dois mundos. |
 | **Zero dependências** | Nenhuma dependência de runtime — nem framework JS, nem CDN externo para fontes. HTML, CSS e JavaScript nativo, prontos para colar direto em qualquer página. |
 | **Dark mode nativo** | Suporte a tema escuro desde a v0.1, via CSS Custom Properties e um único atributo (`data-theme="dark"`) — sem plugin, sem JS extra. |
 | **Acessibilidade não é opcional** | ARIA, foco e navegação por teclado são parte da API de todo componente interativo desde o início, não um retrofit. |
@@ -82,24 +82,24 @@ a tipografia cai no `sans-serif`/`monospace` do sistema:
 
 ## Início rápido
 
-Um componente interativo se inicializa sozinho via `data-clarus` — basta incluir
+Um componente interativo se inicializa sozinho via `data-cl` — basta incluir
 o CSS e o JS e escrever o HTML:
 
 ```html
 <link rel="stylesheet" href="node_modules/clarus-css/dist/css/clarus.min.css">
 
-<button type="button" class="btn btn-primary" data-clarus="modal" data-target="#meuModal">
+<button type="button" class="cl-btn cl-btn-primary" data-cl="modal" data-cl-target="#meuModal">
   Abrir modal
 </button>
 
-<div class="modal" id="meuModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Título</h3>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+<div class="cl-modal" id="meuModal">
+  <div class="cl-modal-dialog">
+    <div class="cl-modal-content">
+      <div class="cl-modal-header">
+        <h3 class="cl-modal-title">Título</h3>
+        <button type="button" class="cl-btn-close" data-cl-dismiss="modal" aria-label="Fechar"></button>
       </div>
-      <div class="modal-body">Conteúdo do modal.</div>
+      <div class="cl-modal-body">Conteúdo do modal.</div>
     </div>
   </div>
 </div>
@@ -108,13 +108,13 @@ o CSS e o JS e escrever o HTML:
 ```
 
 Todo componente interativo compartilha a mesma API (`.show()`, `.hide()`,
-`.toggle()`, `.dispose()`, `getInstance()` e eventos DOM `clarus:*`). Os
+`.toggle()`, `.dispose()`, `getInstance()` e eventos DOM `cl:*`). Os
 conceitos gerais estão em
 [Componentes interativos](guide.md#19-componentes-interativos-conceitos-gerais-da-api-javascript).
 
 ## Componentes
 
-- **Layout:** containers, grid Flexbox (`.row`/`.col-*`).
+- **Layout:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`).
 - **Formulários:** controles, tamanhos, validação visual, select customizado, upload de arquivo estilizado.
 - **Conteúdo:** botões, cards (incluindo variante clicável e horizontal), alertas, badges, tabelas.
 - **Navegação:** navbar, dropdown, tabs, paginação, breadcrumbs.
@@ -130,13 +130,13 @@ escrever nenhum código. O passo a passo de uso de cada um está no
 ## Customização e dark mode
 
 Todos os tokens visuais são expostos como CSS Custom Properties (prefixo
-`--clarus-`). Para customizar, redefina a variável no seu próprio CSS — sem
+`--cl-`). Para customizar, redefina a variável no seu próprio CSS — sem
 fork, sem recompilar:
 
 ```css
 :root {
-  --clarus-color-primary: #6d28d9;
-  --clarus-radius-md: 10px;
+  --cl-color-primary: #6d28d9;
+  --cl-radius-md: 10px;
 }
 ```
 

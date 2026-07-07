@@ -4,15 +4,15 @@
 // Segmented Control (scss/components/_segmented-control.scss): um
 // `<input type="radio">` por estrela, exclusivo dentro do grupo. A marcação
 // espera os pares input+label em ordem DECRESCENTE de valor (5, 4, 3...) com
-// `.rating` em `row-reverse`, o truque clássico de CSS pra destacar "a
+// `.cl-rating` em `row-reverse`, o truque clássico de CSS pra destacar "a
 // estrela clicada e todas à esquerda dela" usando só `~` (combinador de
 // irmãos gerais, que só enxerga o que vem DEPOIS no DOM).
-.rating {
+.cl-rating {
   display: inline-flex;
   flex-direction: row-reverse;
 }
 
-.rating-input {
+.cl-rating-input {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -24,35 +24,35 @@
   border: 0;
 }
 
-.rating-star {
+.cl-rating-star {
   padding: 2px;
-  color: var(--clarus-color-border);
+  color: var(--cl-color-border);
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
 }
 
-.rating-input:checked ~ .rating-star,
-.rating-star:hover,
-.rating-star:hover ~ .rating-star {
-  color: var(--clarus-color-warning);
+.cl-rating-input:checked ~ .cl-rating-star,
+.cl-rating-star:hover,
+.cl-rating-star:hover ~ .cl-rating-star {
+  color: var(--cl-color-warning);
 }
 
-.rating-input:focus-visible + .rating-star {
-  border-radius: var(--clarus-radius-sm);
-  outline: 2px solid var(--clarus-color-primary);
+.cl-rating-input:focus-visible + .cl-rating-star {
+  border-radius: var(--cl-radius-sm);
+  outline: 2px solid var(--cl-color-primary);
   outline-offset: 2px;
 }
 
-.rating-input:disabled + .rating-star {
+.cl-rating-input:disabled + .cl-rating-star {
   opacity: 0.5;
   pointer-events: none;
 }
 
-.rating-sm .rating-star {
+.cl-rating-sm .cl-rating-star {
   font-size: 16px;
 }
 
-.rating-lg .rating-star {
+.cl-rating-lg .cl-rating-star {
   font-size: 32px;
 }

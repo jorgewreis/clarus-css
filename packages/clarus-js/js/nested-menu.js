@@ -5,40 +5,40 @@ import { autoInit, createInstanceRegistry } from "./core/register.js";
 
 const instances = createInstanceRegistry();
 
-// Itens focáveis de um nível de menu: `.dropdown-item` diretos (folhas) e o
-// item de cada `.dropdown-submenu` (que abre o próximo nível). Ignora
+// Itens focáveis de um nível de menu: `.cl-dropdown-item` diretos (folhas) e o
+// item de cada `.cl-dropdown-submenu` (que abre o próximo nível). Ignora
 // divisores/headers e itens desabilitados.
 function levelItems(menuEl) {
   const items = [];
   for (const child of menuEl.children) {
     let item = null;
-    if (child.classList.contains("dropdown-item")) {
+    if (child.classList.contains("cl-dropdown-item")) {
       item = child;
-    } else if (child.classList.contains("dropdown-submenu")) {
-      item = child.querySelector(":scope > .dropdown-item");
+    } else if (child.classList.contains("cl-dropdown-submenu")) {
+      item = child.querySelector(":scope > .cl-dropdown-item");
     }
-    if (item && !item.classList.contains("disabled")) items.push(item);
+    if (item && !item.classList.contains("is-disabled")) items.push(item);
   }
   return items;
 }
 
 function isSubmenuParent(item) {
-  return item.classList.contains("dropdown-item-submenu");
+  return item.classList.contains("cl-dropdown-item-submenu");
 }
 
 // Nested Menu (Etapa 10): Dropdown com submenus recursivos. Reaproveita a
-// marcação/estilo do Dropdown (`.dropdown-menu`/`.dropdown-item`); cada submenu
-// é um `.dropdown-menu` dentro de um `.dropdown-submenu`. Hover abre por CSS
+// marcação/estilo do Dropdown (`.cl-dropdown-menu`/`.cl-dropdown-item`); cada submenu
+// é um `.cl-dropdown-menu` dentro de um `.cl-dropdown-submenu`. Hover abre por CSS
 // (scss/components/_nested-menu.scss); aqui ficam clique, teclado (setas entre
 // níveis) e o flip de borda. Componente próprio (não estende o Dropdown) porque
 // a navegação por teclado é por nível, não linear sobre todos os itens.
 export class NestedMenu {
   constructor(toggleEl, options = {}) {
-    const targetSelector = toggleEl.getAttribute("data-target");
+    const targetSelector = toggleEl.getAttribute("data-cl-target");
     const rootMenu = targetSelector ? document.querySelector(targetSelector) : toggleEl.nextElementSibling;
 
     if (!rootMenu) {
-      throw new Error("Clarus.NestedMenu: elemento do menu não encontrado (data-target).");
+      throw new Error("Clarus.NestedMenu: elemento do menu não encontrado (data-cl-target).");
     }
 
     this.toggleEl = toggleEl;
@@ -53,8 +53,8 @@ export class NestedMenu {
     this.toggleEl.setAttribute("aria-haspopup", "menu");
     this.toggleEl.setAttribute("aria-expanded", "false");
     this.rootMenu.setAttribute("role", "menu");
-    this.rootMenu.querySelectorAll(".dropdown-menu").forEach((menu) => menu.setAttribute("role", "menu"));
-    this.rootMenu.querySelectorAll(".dropdown-item-submenu").forEach((item) => {
+    this.rootMenu.querySelectorAll(".cl-dropdown-menu").forEach((menu) => menu.setAttribute("role", "menu"));
+    this.rootMenu.querySelectorAll(".cl-dropdown-item-submenu").forEach((item) => {
       item.setAttribute("aria-haspopup", "menu");
       item.setAttribute("aria-expanded", "false");
     });
@@ -85,7 +85,7 @@ export class NestedMenu {
 
   _submenuOf(parentItem) {
     const submenu = parentItem.nextElementSibling;
-    return submenu && submenu.classList.contains("dropdown-menu") ? submenu : null;
+    return submenu && submenu.classList.contains("cl-dropdown-menu") ? submenu : null;
   }
 
   _applyFlip(parentItem) {
@@ -95,7 +95,7 @@ export class NestedMenu {
     const rect = parentItem.getBoundingClientRect();
     const width = submenu.offsetWidth || 180;
     const viewportWidth = document.documentElement.clientWidth;
-    parentItem.parentElement.classList.toggle("dropdown-submenu-left", rect.right + width > viewportWidth);
+    parentItem.parentElement.classList.toggle("cl-dropdown-submenu-left", rect.right + width > viewportWidth);
   }
 
   _openSubmenu(parentItem, focusFirst) {
@@ -103,16 +103,16 @@ export class NestedMenu {
     if (!submenu) return;
 
     // Fecha submenus irmãos abertos no mesmo nível (só um por nível).
-    const level = parentItem.closest(".dropdown-menu");
-    level.querySelectorAll(":scope > .dropdown-submenu > .dropdown-menu.show").forEach((sibling) => {
+    const level = parentItem.closest(".cl-dropdown-menu");
+    level.querySelectorAll(":scope > .cl-dropdown-submenu > .cl-dropdown-menu.is-open").forEach((sibling) => {
       if (sibling !== submenu) {
-        sibling.classList.remove("show");
+        sibling.classList.remove("is-open");
         sibling.previousElementSibling?.setAttribute("aria-expanded", "false");
       }
     });
 
     this._applyFlip(parentItem);
-    submenu.classList.add("show");
+    submenu.classList.add("is-open");
     parentItem.setAttribute("aria-expanded", "true");
     if (focusFirst) levelItems(submenu)[0]?.focus();
   }
@@ -121,21 +121,21 @@ export class NestedMenu {
     const submenu = this._submenuOf(parentItem);
     if (!submenu) return;
 
-    submenu.querySelectorAll(".dropdown-menu.show").forEach((nested) => {
-      nested.classList.remove("show");
+    submenu.querySelectorAll(".cl-dropdown-menu.is-open").forEach((nested) => {
+      nested.classList.remove("is-open");
       nested.previousElementSibling?.setAttribute("aria-expanded", "false");
     });
-    submenu.classList.remove("show");
-    parentItem.parentElement.classList.remove("dropdown-submenu-left");
+    submenu.classList.remove("is-open");
+    parentItem.parentElement.classList.remove("cl-dropdown-submenu-left");
     parentItem.setAttribute("aria-expanded", "false");
   }
 
   _closeAllSubmenus() {
-    this.rootMenu.querySelectorAll(".dropdown-menu.show").forEach((submenu) => {
-      submenu.classList.remove("show");
+    this.rootMenu.querySelectorAll(".cl-dropdown-menu.is-open").forEach((submenu) => {
+      submenu.classList.remove("is-open");
       submenu.previousElementSibling?.setAttribute("aria-expanded", "false");
     });
-    this.rootMenu.querySelectorAll(".dropdown-submenu-left").forEach((wrapper) => wrapper.classList.remove("dropdown-submenu-left"));
+    this.rootMenu.querySelectorAll(".cl-dropdown-submenu-left").forEach((wrapper) => wrapper.classList.remove("cl-dropdown-submenu-left"));
   }
 
   _handleToggleClick(event) {
@@ -144,12 +144,12 @@ export class NestedMenu {
   }
 
   _handleMenuClick(event) {
-    const item = event.target.closest(".dropdown-item");
-    if (!item || item.classList.contains("disabled")) return;
+    const item = event.target.closest(".cl-dropdown-item");
+    if (!item || item.classList.contains("is-disabled")) return;
 
     if (isSubmenuParent(item)) {
       event.preventDefault();
-      if (this._submenuOf(item)?.classList.contains("show")) {
+      if (this._submenuOf(item)?.classList.contains("is-open")) {
         this._closeSubmenu(item);
       } else {
         this._openSubmenu(item, false);
@@ -163,13 +163,13 @@ export class NestedMenu {
   }
 
   _handleMenuMouseover(event) {
-    const hoveredParent = event.target.closest(".dropdown-item-submenu");
+    const hoveredParent = event.target.closest(".cl-dropdown-item-submenu");
 
-    // Fecha submenus abertos por teclado (`.show`) que não estão no caminho do
+    // Fecha submenus abertos por teclado (`.is-open`) que não estão no caminho do
     // item sob o mouse, pra hover e teclado não deixarem dois ramos abertos.
-    this.rootMenu.querySelectorAll(".dropdown-menu.show").forEach((submenu) => {
+    this.rootMenu.querySelectorAll(".cl-dropdown-menu.is-open").forEach((submenu) => {
       if (!submenu.contains(event.target) && submenu !== hoveredParent?.nextElementSibling) {
-        submenu.classList.remove("show");
+        submenu.classList.remove("is-open");
         submenu.previousElementSibling?.setAttribute("aria-expanded", "false");
       }
     });
@@ -179,13 +179,13 @@ export class NestedMenu {
 
   _handleMenuKeydown(event) {
     const active = document.activeElement;
-    if (!active?.classList?.contains("dropdown-item")) return;
+    if (!active?.classList?.contains("cl-dropdown-item")) return;
 
-    const menu = active.closest(".dropdown-menu");
+    const menu = active.closest(".cl-dropdown-menu");
     const items = levelItems(menu);
     const index = items.indexOf(active);
     const parentWrapper = menu.parentElement;
-    const inSubmenu = parentWrapper?.classList.contains("dropdown-submenu");
+    const inSubmenu = parentWrapper?.classList.contains("cl-dropdown-submenu");
 
     switch (event.key) {
       case "ArrowDown":
@@ -205,7 +205,7 @@ export class NestedMenu {
       case "ArrowLeft":
         if (inSubmenu) {
           event.preventDefault();
-          const parentItem = parentWrapper.querySelector(":scope > .dropdown-item");
+          const parentItem = parentWrapper.querySelector(":scope > .cl-dropdown-item");
           this._closeSubmenu(parentItem);
           parentItem.focus();
         }
@@ -214,7 +214,7 @@ export class NestedMenu {
       case " ":
         if (isSubmenuParent(active)) {
           event.preventDefault();
-          if (this._submenuOf(active)?.classList.contains("show")) {
+          if (this._submenuOf(active)?.classList.contains("is-open")) {
             this._closeSubmenu(active);
           } else {
             this._openSubmenu(active, true);
@@ -225,7 +225,7 @@ export class NestedMenu {
         if (inSubmenu) {
           event.preventDefault();
           event.stopPropagation();
-          const parentItem = parentWrapper.querySelector(":scope > .dropdown-item");
+          const parentItem = parentWrapper.querySelector(":scope > .cl-dropdown-item");
           this._closeSubmenu(parentItem);
           parentItem.focus();
         } else {
@@ -250,7 +250,7 @@ export class NestedMenu {
       this.rootMenu.removeAttribute("data-theme");
     }
 
-    this.rootMenu.classList.add("show");
+    this.rootMenu.classList.add("is-open");
 
     const position = computePosition(this.toggleEl, this.rootMenu, {
       placement: this.placement,
@@ -267,7 +267,7 @@ export class NestedMenu {
       this.hide();
     });
 
-    this.toggleEl.dispatchEvent(new CustomEvent("clarus:nested-menu:shown", { bubbles: true }));
+    this.toggleEl.dispatchEvent(new CustomEvent("cl:nested-menu:shown", { bubbles: true }));
   }
 
   hide() {
@@ -275,7 +275,7 @@ export class NestedMenu {
     this.isOpen = false;
 
     this._closeAllSubmenus();
-    this.rootMenu.classList.remove("show");
+    this.rootMenu.classList.remove("is-open");
     this.rootMenu.style.removeProperty("position");
     this.rootMenu.style.removeProperty("top");
     this.rootMenu.style.removeProperty("left");
@@ -284,7 +284,7 @@ export class NestedMenu {
     this._outsideClickCleanup?.();
     this._outsideClickCleanup = null;
 
-    this.toggleEl.dispatchEvent(new CustomEvent("clarus:nested-menu:hidden", { bubbles: true }));
+    this.toggleEl.dispatchEvent(new CustomEvent("cl:nested-menu:hidden", { bubbles: true }));
   }
 
   toggle() {

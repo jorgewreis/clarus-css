@@ -29,7 +29,7 @@ describe("Tooltip", () => {
 
   it("cria o elemento .tooltip em document.body, ligado por aria-describedby", () => {
     const { el } = buildTooltip();
-    const tooltipEl = document.querySelector(".tooltip");
+    const tooltipEl = document.querySelector(".cl-tooltip");
 
     expect(tooltipEl).not.toBeNull();
     expect(tooltipEl.parentElement).toBe(document.body);
@@ -46,20 +46,20 @@ describe("Tooltip", () => {
     const { el, tooltip } = buildTooltip();
 
     el.dispatchEvent(new MouseEvent("mouseenter"));
-    expect(tooltip.tooltipEl.classList.contains("show")).toBe(true);
+    expect(tooltip.tooltipEl.classList.contains("is-open")).toBe(true);
 
     el.dispatchEvent(new MouseEvent("mouseleave"));
-    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+    expect(tooltip.tooltipEl.classList.contains("is-open")).toBe(false);
   });
 
   it("focus mostra e blur esconde", () => {
     const { el, tooltip } = buildTooltip();
 
     el.dispatchEvent(new FocusEvent("focus"));
-    expect(tooltip.tooltipEl.classList.contains("show")).toBe(true);
+    expect(tooltip.tooltipEl.classList.contains("is-open")).toBe(true);
 
     el.dispatchEvent(new FocusEvent("blur"));
-    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+    expect(tooltip.tooltipEl.classList.contains("is-open")).toBe(false);
   });
 
   it("Escape esconde o tooltip quando aberto", () => {
@@ -68,15 +68,15 @@ describe("Tooltip", () => {
 
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
 
-    expect(tooltip.tooltipEl.classList.contains("show")).toBe(false);
+    expect(tooltip.tooltipEl.classList.contains("is-open")).toBe(false);
   });
 
-  it("dispara clarus:tooltip:shown e clarus:tooltip:hidden", () => {
+  it("dispara cl:tooltip:shown e cl:tooltip:hidden", () => {
     const { el, tooltip } = buildTooltip();
     const shownHandler = vi.fn();
     const hiddenHandler = vi.fn();
-    el.addEventListener("clarus:tooltip:shown", shownHandler);
-    el.addEventListener("clarus:tooltip:hidden", hiddenHandler);
+    el.addEventListener("cl:tooltip:shown", shownHandler);
+    el.addEventListener("cl:tooltip:hidden", hiddenHandler);
 
     tooltip.show();
     expect(shownHandler).toHaveBeenCalledTimes(1);
@@ -104,7 +104,7 @@ describe("Tooltip", () => {
     const { el, tooltip } = buildTooltip();
     tooltip.dispose();
 
-    expect(document.querySelector(".tooltip")).toBeNull();
+    expect(document.querySelector(".cl-tooltip")).toBeNull();
     expect(Tooltip.getInstance(el)).toBeUndefined();
   });
 });

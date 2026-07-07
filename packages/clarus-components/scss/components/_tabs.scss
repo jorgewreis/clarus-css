@@ -1,22 +1,22 @@
-.tabs {
+.cl-tabs {
   display: flex;
-  border-bottom: 1px solid var(--clarus-color-border);
+  border-bottom: 1px solid var(--cl-color-border);
 }
 
-.tabs .nav-link {
+.cl-tabs .cl-nav-link {
   margin-bottom: -1px;
   border-bottom: 2px solid transparent;
-  border-radius: var(--clarus-radius-sm) var(--clarus-radius-sm) 0 0;
+  border-radius: var(--cl-radius-sm) var(--cl-radius-sm) 0 0;
 }
 
-.tabs .nav-link.active {
-  border-bottom-color: var(--clarus-color-primary);
+.cl-tabs .cl-nav-link.is-active {
+  border-bottom-color: var(--cl-color-primary);
 }
 
-.tab-content > .tab-pane {
+.cl-tab-content > .cl-tab-pane {
   display: none;
 }
 
-.tab-content > .tab-pane.active {
+.cl-tab-content > .cl-tab-pane.is-active {
   display: block;
 }

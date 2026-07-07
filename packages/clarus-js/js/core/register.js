@@ -16,7 +16,7 @@ export function createInstanceRegistry() {
 
 export function autoInit(name, Ctor) {
   const init = () => {
-    document.querySelectorAll(`[data-clarus="${name}"]`).forEach((el) => {
+    document.querySelectorAll(`[data-cl="${name}"]`).forEach((el) => {
       if (!Ctor.getInstance(el)) new Ctor(el);
     });
   };

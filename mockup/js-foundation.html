@@ -19,17 +19,17 @@
             margin-bottom: 320px;
         }
 
-        /* Harness manual desta fase: ainda não existe .dropdown-menu (Fase 8)
-           nem .modal (Fase 9), então o painel flutuante e o painel com focus
+        /* Harness manual desta fase: ainda não existe .cl-dropdown-menu (Fase 8)
+           nem .cl-modal (Fase 9), então o painel flutuante e o painel com focus
            trap usam estilo inline sobre os tokens já existentes. */
         .floating-panel {
             width: 220px;
             padding: 12px 16px;
-            border: 1px solid var(--clarus-color-border);
-            border-radius: var(--clarus-radius-md);
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
-            box-shadow: var(--clarus-shadow-md);
+            border: 1px solid var(--cl-color-border);
+            border-radius: var(--cl-radius-md);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+            box-shadow: var(--cl-shadow-md);
         }
 
         .trap-panel {
@@ -48,59 +48,59 @@
         .trap-panel-body {
             width: 320px;
             padding: 20px;
-            border-radius: var(--clarus-radius-md);
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
-            box-shadow: var(--clarus-shadow-lg);
+            border-radius: var(--cl-radius-md);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+            box-shadow: var(--cl-shadow-lg);
         }
 
         .collapse-panel {
             padding: 12px 16px;
-            border: 1px solid var(--clarus-color-border);
+            border: 1px solid var(--cl-color-border);
             border-top: none;
-            border-radius: 0 0 var(--clarus-radius-md) var(--clarus-radius-md);
-            color: var(--clarus-color-text);
+            border-radius: 0 0 var(--cl-radius-md) var(--cl-radius-md);
+            color: var(--cl-color-text);
         }
 
         .collapse-trigger {
-            border-radius: var(--clarus-radius-md) var(--clarus-radius-md) 0 0;
+            border-radius: var(--cl-radius-md) var(--cl-radius-md) 0 0;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="fs-lg fw-medium mb-3">Fase 7 — Infraestrutura JS compartilhada</h1>
+    <h1 class="u-fs-lg u-fw-medium u-mb-3">Fase 7 — Infraestrutura JS compartilhada</h1>
 
     <section>
-        <h2 class="fs-md fw-medium mb-2">1. Posicionamento (Clarus.core.computePosition)</h2>
-        <p class="fs-sm mb-3">O painel reposiciona (com flip) relativo ao botão. Role a página para testar o flip perto das bordas.</p>
-        <button type="button" class="btn btn-primary" id="positioning-trigger">Alternar painel posicionado</button>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">1. Posicionamento (Clarus.core.computePosition)</h2>
+        <p class="u-fs-sm u-mb-3">O painel reposiciona (com flip) relativo ao botão. Role a página para testar o flip perto das bordas.</p>
+        <button type="button" class="cl-btn cl-btn-primary" id="positioning-trigger">Alternar painel posicionado</button>
         <div class="floating-panel" id="positioning-panel" style="display: none;">
-            Painel posicionado via <code class="font-mono">computePosition()</code>, com flip automático quando não cabe no viewport.
+            Painel posicionado via <code class="u-font-mono">computePosition()</code>, com flip automático quando não cabe no viewport.
         </div>
     </section>
 
     <section>
-        <h2 class="fs-md fw-medium mb-2">2. Foco, teclado e overlay (Clarus.core.createFocusTrap / onEscapeKey / lockScroll / onClickOutside)</h2>
-        <p class="fs-sm mb-3">Abre um painel com scroll da página bloqueado, foco preso via Tab/Shift+Tab, fecha com Escape ou clique fora.</p>
-        <button type="button" class="btn btn-primary" id="trap-trigger">Abrir painel com focus trap</button>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">2. Foco, teclado e overlay (Clarus.core.createFocusTrap / onEscapeKey / lockScroll / onClickOutside)</h2>
+        <p class="u-fs-sm u-mb-3">Abre um painel com scroll da página bloqueado, foco preso via Tab/Shift+Tab, fecha com Escape ou clique fora.</p>
+        <button type="button" class="cl-btn cl-btn-primary" id="trap-trigger">Abrir painel com focus trap</button>
         <div class="trap-panel" id="trap-panel">
             <div class="trap-panel-body" id="trap-panel-body">
-                <p class="fs-md fw-medium mb-2">Painel com focus trap</p>
-                <p class="fs-sm mb-3">Tab/Shift+Tab ciclam apenas entre estes três controles. Escape ou clique fora fecha.</p>
-                <input type="text" class="form-control mb-2" placeholder="Campo de teste">
-                <button type="button" class="btn mr-2">Ação secundária</button>
-                <button type="button" class="btn btn-primary" id="trap-close">Fechar</button>
+                <p class="u-fs-md u-fw-medium u-mb-2">Painel com focus trap</p>
+                <p class="u-fs-sm u-mb-3">Tab/Shift+Tab ciclam apenas entre estes três controles. Escape ou clique fora fecha.</p>
+                <input type="text" class="cl-form-control u-mb-2" placeholder="Campo de teste">
+                <button type="button" class="cl-btn u-mr-2">Ação secundária</button>
+                <button type="button" class="cl-btn cl-btn-primary" id="trap-close">Fechar</button>
             </div>
         </div>
     </section>
 
     <section>
-        <h2 class="fs-md fw-medium mb-2">3. Transição / collapse (Clarus.core.collapse / expand)</h2>
-        <p class="fs-sm mb-3">Expande/recolhe com transição de altura (respeita <code class="font-mono">prefers-reduced-motion</code>).</p>
-        <button type="button" class="btn btn-primary collapse-trigger" id="collapse-trigger" aria-expanded="false">Alternar painel</button>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">3. Transição / collapse (Clarus.core.collapse / expand)</h2>
+        <p class="u-fs-sm u-mb-3">Expande/recolhe com transição de altura (respeita <code class="u-font-mono">prefers-reduced-motion</code>).</p>
+        <button type="button" class="cl-btn cl-btn-primary collapse-trigger" id="collapse-trigger" aria-expanded="false">Alternar painel</button>
         <div class="collapse-panel" id="collapse-panel" style="display: none;">
-            Conteúdo revelado via <code class="font-mono">expand()</code>/<code class="font-mono">collapse()</code>, animando a altura com <code class="font-mono">transitionend</code>.
+            Conteúdo revelado via <code class="u-font-mono">expand()</code>/<code class="u-font-mono">collapse()</code>, animando a altura com <code class="u-font-mono">transitionend</code>.
         </div>
     </section>
 

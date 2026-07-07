@@ -7,11 +7,11 @@ const instances = createInstanceRegistry();
 
 export class Dropdown {
   constructor(toggleEl, options = {}) {
-    const targetSelector = toggleEl.getAttribute("data-target");
+    const targetSelector = toggleEl.getAttribute("data-cl-target");
     const menuEl = targetSelector ? document.querySelector(targetSelector) : toggleEl.nextElementSibling;
 
     if (!menuEl) {
-      throw new Error("Clarus.Dropdown: elemento do menu não encontrado (data-target).");
+      throw new Error("Clarus.Dropdown: elemento do menu não encontrado (data-cl-target).");
     }
 
     this.toggleEl = toggleEl;
@@ -55,14 +55,14 @@ export class Dropdown {
   }
 
   _handleMenuClick(event) {
-    if (event.target.closest(".dropdown-item")) {
+    if (event.target.closest(".cl-dropdown-item")) {
       this.hide();
       this.toggleEl.focus();
     }
   }
 
   _handleMenuKeydown(event) {
-    const items = Array.from(this.menuEl.querySelectorAll(".dropdown-item:not(.disabled)"));
+    const items = Array.from(this.menuEl.querySelectorAll(".cl-dropdown-item:not(.is-disabled)"));
     const currentIndex = items.indexOf(document.activeElement);
 
     if (event.key === "ArrowDown") {
@@ -85,7 +85,7 @@ export class Dropdown {
       this.menuEl.removeAttribute("data-theme");
     }
 
-    this.menuEl.classList.add("show");
+    this.menuEl.classList.add("is-open");
 
     const position = computePosition(this.toggleEl, this.menuEl, {
       placement: this.placement,
@@ -96,7 +96,7 @@ export class Dropdown {
 
     this.toggleEl.setAttribute("aria-expanded", "true");
 
-    const firstItem = this.menuEl.querySelector(".dropdown-item:not(.disabled)");
+    const firstItem = this.menuEl.querySelector(".cl-dropdown-item:not(.is-disabled)");
     firstItem?.focus();
 
     this._outsideClickCleanup = onClickOutside(this.menuEl, (event) => {
@@ -104,14 +104,14 @@ export class Dropdown {
       this.hide();
     });
 
-    this.toggleEl.dispatchEvent(new CustomEvent("clarus:dropdown:shown", { bubbles: true }));
+    this.toggleEl.dispatchEvent(new CustomEvent("cl:dropdown:shown", { bubbles: true }));
   }
 
   hide() {
     if (!this.isOpen) return;
     this.isOpen = false;
 
-    this.menuEl.classList.remove("show");
+    this.menuEl.classList.remove("is-open");
     this.menuEl.style.removeProperty("position");
     this.menuEl.style.removeProperty("top");
     this.menuEl.style.removeProperty("left");
@@ -120,7 +120,7 @@ export class Dropdown {
     this._outsideClickCleanup?.();
     this._outsideClickCleanup = null;
 
-    this.toggleEl.dispatchEvent(new CustomEvent("clarus:dropdown:hidden", { bubbles: true }));
+    this.toggleEl.dispatchEvent(new CustomEvent("cl:dropdown:hidden", { bubbles: true }));
   }
 
   toggle() {

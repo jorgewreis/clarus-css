@@ -8,7 +8,7 @@ export class Breadcrumb {
   constructor(listEl, options = {}) {
     this.listEl = listEl;
     this.maxItems = Number(options.maxItems ?? listEl.getAttribute("data-max-items") ?? 4);
-    this.items = Array.from(listEl.children).filter((el) => el.classList.contains("breadcrumb-item"));
+    this.items = Array.from(listEl.children).filter((el) => el.classList.contains("cl-breadcrumb-item"));
     this.isCollapsed = false;
     this._moreItem = null;
     this._dropdown = null;
@@ -39,7 +39,7 @@ export class Breadcrumb {
   // corte.
   _setupTruncation() {
     const targets = this.items.map((item) => item.querySelector("a") ?? item);
-    targets.forEach((target) => target.classList.add("breadcrumb-item-truncate"));
+    targets.forEach((target) => target.classList.add("cl-breadcrumb-item-truncate"));
 
     const measure = () => {
       targets.forEach((target) => {
@@ -72,7 +72,7 @@ export class Breadcrumb {
 
   // Mantém o primeiro e o último nível visíveis; os intermediários viram um
   // único item "…" com dropdown (mesma composição de js/select.js: monta o
-  // toggle + `.dropdown-menu` como irmãos e deixa o Dropdown reposicionar).
+  // toggle + `.cl-dropdown-menu` como irmãos e deixa o Dropdown reposicionar).
   _collapse() {
     const hiddenItems = this.items.slice(1, -1);
     hiddenItems.forEach((item) => {
@@ -80,22 +80,22 @@ export class Breadcrumb {
     });
 
     const moreItem = document.createElement("li");
-    moreItem.className = "breadcrumb-item";
+    moreItem.className = "cl-breadcrumb-item";
 
     const toggle = document.createElement("button");
     toggle.type = "button";
-    toggle.className = "breadcrumb-more";
+    toggle.className = "cl-breadcrumb-more";
     toggle.setAttribute("aria-label", "Mostrar níveis ocultos");
     toggle.textContent = "…";
 
     const menu = document.createElement("div");
-    menu.className = "dropdown-menu";
+    menu.className = "cl-dropdown-menu";
 
     hiddenItems.forEach((item) => {
       const source = item.querySelector("a") ?? item;
       const isLink = source.tagName === "A";
       const link = document.createElement(isLink ? "a" : "span");
-      link.className = "dropdown-item";
+      link.className = "cl-dropdown-item";
       link.textContent = source.textContent.trim();
       if (isLink) link.href = source.getAttribute("href");
       menu.appendChild(link);

@@ -2,29 +2,29 @@
 
 // Linha divisória, 100% CSS. `<hr class="divider">` para o traço simples;
 // `<div class="divider">` (não pode ser `<hr>`, que não aceita filhos) com
-// `.divider-label` para o texto centralizado, flanqueado por duas linhas via
+// `.cl-divider-label` para o texto centralizado, flanqueado por duas linhas via
 // pseudo-elementos.
-.divider {
+.cl-divider {
   margin: 16px 0;
   border: 0;
-  border-top: 1px solid var(--clarus-color-border);
+  border-top: 1px solid var(--cl-color-border);
 }
 
-.divider:not(hr) {
+.cl-divider:not(hr) {
   display: flex;
   align-items: center;
   border-top: none;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
   font-size: $font-size-sm;
 }
 
-.divider:not(hr)::before,
-.divider:not(hr)::after {
+.cl-divider:not(hr)::before,
+.cl-divider:not(hr)::after {
   flex: 1;
   content: "";
-  border-top: 1px solid var(--clarus-color-border);
+  border-top: 1px solid var(--cl-color-border);
 }
 
-.divider-label {
+.cl-divider-label {
   padding: 0 12px;
 }

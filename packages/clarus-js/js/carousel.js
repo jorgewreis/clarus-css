@@ -5,18 +5,18 @@ const instances = createInstanceRegistry();
 export class Carousel {
   constructor(carouselEl) {
     this.carouselEl = carouselEl;
-    this.inner = carouselEl.querySelector(".carousel-inner");
-    this.items = Array.from(carouselEl.querySelectorAll(".carousel-item"));
-    this.indicators = Array.from(carouselEl.querySelectorAll(".carousel-indicators button"));
-    this.prevBtn = carouselEl.querySelector(".carousel-control-prev");
-    this.nextBtn = carouselEl.querySelector(".carousel-control-next");
+    this.inner = carouselEl.querySelector(".cl-carousel-inner");
+    this.items = Array.from(carouselEl.querySelectorAll(".cl-carousel-item"));
+    this.indicators = Array.from(carouselEl.querySelectorAll(".cl-carousel-indicators button"));
+    this.prevBtn = carouselEl.querySelector(".cl-carousel-control-prev");
+    this.nextBtn = carouselEl.querySelector(".cl-carousel-control-next");
 
     this.interval = Number(carouselEl.getAttribute("data-interval")) || 5000;
     this.autoplay = carouselEl.getAttribute("data-autoplay") === "true";
     this.timer = null;
 
     this.index = Math.max(
-      this.items.findIndex((item) => item.classList.contains("active")),
+      this.items.findIndex((item) => item.classList.contains("is-active")),
       0,
     );
 
@@ -59,17 +59,17 @@ export class Carousel {
   }
 
   _render() {
-    if (this.inner && !this.carouselEl.classList.contains("carousel-fade")) {
+    if (this.inner && !this.carouselEl.classList.contains("cl-carousel-fade")) {
       this.inner.style.transform = `translateX(-${this.index * 100}%)`;
     }
 
     this.items.forEach((item, i) => {
-      item.classList.toggle("active", i === this.index);
+      item.classList.toggle("is-active", i === this.index);
       item.setAttribute("aria-hidden", String(i !== this.index));
     });
 
     this.indicators.forEach((btn, i) => {
-      btn.classList.toggle("active", i === this.index);
+      btn.classList.toggle("is-active", i === this.index);
       btn.setAttribute("aria-current", String(i === this.index));
     });
   }
@@ -86,7 +86,7 @@ export class Carousel {
     this._render();
 
     this.carouselEl.dispatchEvent(
-      new CustomEvent("clarus:carousel:slid", { bubbles: true, detail: { from, to } }),
+      new CustomEvent("cl:carousel:slid", { bubbles: true, detail: { from, to } }),
     );
   }
 

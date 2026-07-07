@@ -1,58 +1,58 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.accordion {
+.cl-accordion {
   display: flex;
   flex-direction: column;
 }
 
-.accordion-item {
+.cl-accordion-item {
   overflow: hidden;
-  border: 1px solid var(--clarus-color-border);
+  border: 1px solid var(--cl-color-border);
 }
 
-.accordion-item + .accordion-item {
+.cl-accordion-item + .cl-accordion-item {
   border-top: none;
 }
 
-.accordion-item:first-child {
-  border-top-left-radius: var(--clarus-radius-md);
-  border-top-right-radius: var(--clarus-radius-md);
+.cl-accordion-item:first-child {
+  border-top-left-radius: var(--cl-radius-md);
+  border-top-right-radius: var(--cl-radius-md);
 }
 
-.accordion-item:last-child {
-  border-bottom-right-radius: var(--clarus-radius-md);
-  border-bottom-left-radius: var(--clarus-radius-md);
+.cl-accordion-item:last-child {
+  border-bottom-right-radius: var(--cl-radius-md);
+  border-bottom-left-radius: var(--cl-radius-md);
 }
 
-.accordion-header {
+.cl-accordion-header {
   margin: 0;
 }
 
-.accordion-button {
+.cl-accordion-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 14px 16px;
   border: none;
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   text-align: left;
   cursor: pointer;
 }
 
-.accordion-button:hover {
-  background-color: var(--clarus-color-subtle);
+.cl-accordion-button:hover {
+  background-color: var(--cl-color-subtle);
 }
 
-.accordion-button:focus {
+.cl-accordion-button:focus {
   @include focus-ring;
 }
 
-.accordion-button::after {
+.cl-accordion-button::after {
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -64,15 +64,15 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.accordion-button[aria-expanded="true"]::after {
+.cl-accordion-button[aria-expanded="true"]::after {
   transform: rotate(-135deg);
 }
 
-.accordion-collapse {
+.cl-accordion-collapse {
   overflow: hidden;
 }
 
-.accordion-body {
+.cl-accordion-body {
   padding: 16px;
-  border-top: 1px solid var(--clarus-color-border);
+  border-top: 1px solid var(--cl-color-border);
 }

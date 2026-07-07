@@ -1,6 +1,6 @@
 @use "settings" as *;
 
-.toast-container {
+.cl-toast-container {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -11,35 +11,35 @@
   width: 300px;
 }
 
-.toast {
+.cl-toast {
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-md);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
-  box-shadow: var(--clarus-shadow-md);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-md);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
+  box-shadow: var(--cl-shadow-md);
 }
 
-.toast-header {
+.cl-toast-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  border-bottom: 1px solid var(--clarus-color-border);
+  border-bottom: 1px solid var(--cl-color-border);
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
 }
 
-.toast-body {
+.cl-toast-body {
   padding: 12px;
   font-size: $font-size-sm;
 }
 
 @each $name, $color in $theme-colors {
-  .toast-#{$name} .toast-header {
-    color: var(--clarus-alert-#{$name}-text);
-    background-color: var(--clarus-alert-#{$name}-bg);
+  .cl-toast-#{$name} .cl-toast-header {
+    color: var(--cl-alert-#{$name}-text);
+    background-color: var(--cl-alert-#{$name}-bg);
   }
 }

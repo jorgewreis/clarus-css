@@ -3,10 +3,10 @@ import { autoInit, createInstanceRegistry } from "./core/register.js";
 const instances = createInstanceRegistry();
 
 // Evolui o upload de arquivo (scss/forms/_forms.scss, Fase 6) com
-// arrastar-e-soltar sobre o `.file-label`. Auto-init com
-// `data-clarus="file-drop"` no próprio `<label for="...">` — o input nativo
+// arrastar-e-soltar sobre o `.cl-file-label`. Auto-init com
+// `data-cl="file-drop"` no próprio `<label for="...">` — o input nativo
 // associado é resolvido pelo atributo `for`, mesmo vínculo que já existe
-// entre `.file-input`/`.file-label`.
+// entre `.cl-file-input`/`.cl-file-label`.
 export class FileDrop {
   constructor(labelEl) {
     const inputEl = document.getElementById(labelEl.getAttribute("for"));

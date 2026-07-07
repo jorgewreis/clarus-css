@@ -5,10 +5,10 @@ function buildDropdown() {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
     <button type="button" id="toggle">Abrir</button>
-    <div class="dropdown-menu" id="menu">
-      <a href="#" class="dropdown-item">Item 1</a>
-      <a href="#" class="dropdown-item">Item 2</a>
-      <a href="#" class="dropdown-item disabled">Item 3 (desabilitado)</a>
+    <div class="cl-dropdown-menu" id="menu">
+      <a href="#" class="cl-dropdown-item">Item 1</a>
+      <a href="#" class="cl-dropdown-item">Item 2</a>
+      <a href="#" class="cl-dropdown-item is-disabled">Item 3 (desabilitado)</a>
     </div>
   `;
   document.body.appendChild(wrapper);
@@ -42,7 +42,7 @@ describe("Dropdown", () => {
     const { menu, toggle, dropdown } = buildDropdown();
     dropdown.show();
 
-    expect(menu.classList.contains("show")).toBe(true);
+    expect(menu.classList.contains("is-open")).toBe(true);
     expect(toggle.getAttribute("aria-expanded")).toBe("true");
     expect(document.activeElement.textContent).toBe("Item 1");
   });
@@ -52,7 +52,7 @@ describe("Dropdown", () => {
     dropdown.show();
     dropdown.hide();
 
-    expect(menu.classList.contains("show")).toBe(false);
+    expect(menu.classList.contains("is-open")).toBe(false);
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
   });
 
@@ -60,18 +60,18 @@ describe("Dropdown", () => {
     const { menu, dropdown } = buildDropdown();
 
     dropdown.toggle();
-    expect(menu.classList.contains("show")).toBe(true);
+    expect(menu.classList.contains("is-open")).toBe(true);
 
     dropdown.toggle();
-    expect(menu.classList.contains("show")).toBe(false);
+    expect(menu.classList.contains("is-open")).toBe(false);
   });
 
-  it("dispara clarus:dropdown:shown e clarus:dropdown:hidden", () => {
+  it("dispara cl:dropdown:shown e cl:dropdown:hidden", () => {
     const { toggle, dropdown } = buildDropdown();
     const shownHandler = vi.fn();
     const hiddenHandler = vi.fn();
-    toggle.addEventListener("clarus:dropdown:shown", shownHandler);
-    toggle.addEventListener("clarus:dropdown:hidden", hiddenHandler);
+    toggle.addEventListener("cl:dropdown:shown", shownHandler);
+    toggle.addEventListener("cl:dropdown:hidden", hiddenHandler);
 
     dropdown.show();
     expect(shownHandler).toHaveBeenCalledTimes(1);
@@ -84,7 +84,7 @@ describe("Dropdown", () => {
     const { menu, dropdown } = buildDropdown();
     dropdown.show();
 
-    const items = menu.querySelectorAll(".dropdown-item:not(.disabled)");
+    const items = menu.querySelectorAll(".cl-dropdown-item:not(.is-disabled)");
     items[0].focus();
 
     menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
@@ -100,7 +100,7 @@ describe("Dropdown", () => {
 
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
 
-    expect(menu.classList.contains("show")).toBe(false);
+    expect(menu.classList.contains("is-open")).toBe(false);
     expect(document.activeElement).toBe(toggle);
   });
 
@@ -108,9 +108,9 @@ describe("Dropdown", () => {
     const { toggle, menu, dropdown } = buildDropdown();
     dropdown.show();
 
-    menu.querySelector(".dropdown-item").click();
+    menu.querySelector(".cl-dropdown-item").click();
 
-    expect(menu.classList.contains("show")).toBe(false);
+    expect(menu.classList.contains("is-open")).toBe(false);
     expect(document.activeElement).toBe(toggle);
   });
 

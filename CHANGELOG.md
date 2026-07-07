@@ -7,6 +7,32 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Changed
+
+- **BREAKING** — Fase 0 da refundação técnica rumo à v1.0.0
+  (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
+  - Rename mecânico de toda a API pública com prefixo `cl-`, para não colidir
+    com classes de outras bibliotecas/CSS de terceiros na mesma página: toda
+    classe de componente ganha o prefixo `cl-` (`.btn` → `.cl-btn`,
+    `.dropdown-menu` → `.cl-dropdown-menu` etc.), utilitários passam a usar
+    `u-` (`.d-flex` → `.u-d-flex`, `.mt-3` → `.u-mt-3`), e os estados
+    controlados por JavaScript usam `.is-*` (`.show` → `.is-open`, `.active`
+    → `.is-active`, `.disabled` → `.is-disabled`; `.is-valid`/`.is-invalid`
+    já seguiam a convenção). Tokens CSS (`--clarus-*` → `--cl-*`), o atributo
+    de auto-init (`data-clarus` → `data-cl`) e os atributos de alvo/dispensa
+    (`data-target`/`data-dismiss` → `data-cl-target`/`data-cl-dismiss`)
+    seguem o mesmo prefixo, assim como os eventos DOM customizados
+    (`clarus:*` → `cl:*`). O global JavaScript (`window.Clarus`) e o nome do
+    pacote npm (`clarus-css`) **não mudam**. Afeta todo HTML que consome o
+    framework — quem atualizar precisa migrar as classes/atributos/eventos
+    citados acima.
+  - Reestruturação do repositório em monorepo (npm workspaces):
+    `scss/`/`js/` viram `packages/{clarus-core,clarus-components,
+    clarus-utilities,clarus-js,clarus-fonts}/`. Não afeta o consumo do
+    pacote publicado (`dist/`, `clarus-css/scss`, `clarus-css/js/*`
+    continuam nos mesmos caminhos), só a organização interna do
+    repositório-fonte.
+
 ### Added
 
 - Etapa 10 do roadmap de paridade (`docs/gap-analysis-componentes.md`), os dois

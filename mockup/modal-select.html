@@ -16,15 +16,15 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
         section {
             margin-bottom: 24px;
         }
 
-        .form-select-dropdown {
+        .cl-form-select-dropdown {
             width: 220px;
         }
     </style>
@@ -32,55 +32,55 @@
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro</h2>
 
         <section>
-            <p class="fs-sm fw-medium mt-3 mb-1">Modal — auto-init via data-clarus, focus trap, Escape, clique fora, scroll bloqueado</p>
-            <button type="button" class="btn btn-primary mr-2" data-clarus="modal" data-target="#modal-claro">Abrir modal</button>
-            <button type="button" class="btn mr-2" data-clarus="modal" data-target="#modal-claro-sm">Modal pequeno</button>
-            <button type="button" class="btn" data-clarus="modal" data-target="#modal-claro-static">Backdrop estático</button>
+            <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Modal — auto-init via data-cl, focus trap, Escape, clique fora, scroll bloqueado</p>
+            <button type="button" class="cl-btn cl-btn-primary u-mr-2" data-cl="modal" data-cl-target="#modal-claro">Abrir modal</button>
+            <button type="button" class="cl-btn u-mr-2" data-cl="modal" data-cl-target="#modal-claro-sm">Modal pequeno</button>
+            <button type="button" class="cl-btn" data-cl="modal" data-cl-target="#modal-claro-static">Backdrop estático</button>
 
-            <div class="modal" id="modal-claro">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Confirmar ação</h3>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+            <div class="cl-modal" id="modal-claro">
+                <div class="cl-modal-dialog">
+                    <div class="cl-modal-content">
+                        <div class="cl-modal-header">
+                            <h3 class="cl-modal-title">Confirmar ação</h3>
+                            <button type="button" class="cl-btn-close" data-cl-dismiss="modal" aria-label="Fechar"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="cl-modal-body">
                             <p>Este modal reaproveita a infraestrutura da Fase 7: focus trap (Tab/Shift+Tab), fecha com Escape ou clique fora, e bloqueia o scroll da página enquanto aberto.</p>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+                        <div class="cl-modal-footer">
+                            <button type="button" class="cl-btn" data-cl-dismiss="modal">Cancelar</button>
+                            <button type="button" class="cl-btn cl-btn-primary" data-cl-dismiss="modal">Confirmar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal" id="modal-claro-sm">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Modal pequeno</h3>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+            <div class="cl-modal" id="modal-claro-sm">
+                <div class="cl-modal-dialog cl-modal-sm">
+                    <div class="cl-modal-content">
+                        <div class="cl-modal-header">
+                            <h3 class="cl-modal-title">Modal pequeno</h3>
+                            <button type="button" class="cl-btn-close" data-cl-dismiss="modal" aria-label="Fechar"></button>
                         </div>
-                        <div class="modal-body">
-                            <p>Variante <code class="font-mono">.modal-sm</code>.</p>
+                        <div class="cl-modal-body">
+                            <p>Variante <code class="u-font-mono">.modal-sm</code>.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal" id="modal-claro-static" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Backdrop estático</h3>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+            <div class="cl-modal" id="modal-claro-static" data-backdrop="static">
+                <div class="cl-modal-dialog">
+                    <div class="cl-modal-content">
+                        <div class="cl-modal-header">
+                            <h3 class="cl-modal-title">Backdrop estático</h3>
+                            <button type="button" class="cl-btn-close" data-cl-dismiss="modal" aria-label="Fechar"></button>
                         </div>
-                        <div class="modal-body">
-                            <p>Com <code class="font-mono">data-backdrop="static"</code>, Escape e clique fora não fecham — só o botão de fechar ou dismiss.</p>
+                        <div class="cl-modal-body">
+                            <p>Com <code class="u-font-mono">data-backdrop="static"</code>, Escape e clique fora não fecham — só o botão de fechar ou dismiss.</p>
                         </div>
                     </div>
                 </div>
@@ -88,11 +88,11 @@
         </section>
 
         <section>
-            <p class="fs-sm fw-medium mb-1">Select customizado — auto-init via data-clarus, reaproveita o Dropdown (Fase 8)</p>
-            <div class="form-row gap-x-2">
-                <div class="form-col">
-                    <label for="select-claro" class="form-label form-size-md">Padrão</label>
-                    <select class="form-select-dropdown" id="select-claro" data-clarus="select">
+            <p class="u-fs-sm u-fw-medium u-mb-1">Select customizado — auto-init via data-cl, reaproveita o Dropdown (Fase 8)</p>
+            <div class="cl-form-row u-gap-x-2">
+                <div class="cl-form-col">
+                    <label for="select-claro" class="cl-form-label cl-form-size-md">Padrão</label>
+                    <select class="cl-form-select-dropdown" id="select-claro" data-cl="select">
                         <option>Selecione um estado</option>
                         <option>São Paulo</option>
                         <option>Rio de Janeiro</option>
@@ -100,17 +100,17 @@
                         <option>Bahia</option>
                     </select>
                 </div>
-                <div class="form-col">
-                    <label for="select-claro-sm" class="form-label form-size-md">Small</label>
-                    <select class="form-select-dropdown" id="select-claro-sm" data-clarus="select" data-size="sm">
+                <div class="cl-form-col">
+                    <label for="select-claro-sm" class="cl-form-label cl-form-size-md">Small</label>
+                    <select class="cl-form-select-dropdown" id="select-claro-sm" data-cl="select" data-size="sm">
                         <option>Pequeno</option>
                         <option>Médio</option>
                         <option>Grande</option>
                     </select>
                 </div>
-                <div class="form-col">
-                    <label for="select-claro-disabled" class="form-label form-size-md">Desabilitado</label>
-                    <select class="form-select-dropdown" id="select-claro-disabled" data-clarus="select" disabled>
+                <div class="cl-form-col">
+                    <label for="select-claro-disabled" class="cl-form-label cl-form-size-md">Desabilitado</label>
+                    <select class="cl-form-select-dropdown" id="select-claro-disabled" data-cl="select" disabled>
                         <option>Indisponível</option>
                     </select>
                 </div>
@@ -119,25 +119,25 @@
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro</h2>
 
         <section>
-            <p class="fs-sm fw-medium mt-3 mb-1">Modal</p>
-            <button type="button" class="btn btn-primary" data-clarus="modal" data-target="#modal-escuro">Abrir modal</button>
+            <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Modal</p>
+            <button type="button" class="cl-btn cl-btn-primary" data-cl="modal" data-cl-target="#modal-escuro">Abrir modal</button>
 
-            <div class="modal" id="modal-escuro">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Confirmar ação</h3>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
+            <div class="cl-modal" id="modal-escuro">
+                <div class="cl-modal-dialog">
+                    <div class="cl-modal-content">
+                        <div class="cl-modal-header">
+                            <h3 class="cl-modal-title">Confirmar ação</h3>
+                            <button type="button" class="cl-btn-close" data-cl-dismiss="modal" aria-label="Fechar"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="cl-modal-body">
                             <p>Mesmo comportamento do tema claro.</p>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+                        <div class="cl-modal-footer">
+                            <button type="button" class="cl-btn" data-cl-dismiss="modal">Cancelar</button>
+                            <button type="button" class="cl-btn cl-btn-primary" data-cl-dismiss="modal">Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -145,8 +145,8 @@
         </section>
 
         <section>
-            <p class="fs-sm fw-medium mb-1">Select customizado</p>
-            <select class="form-select-dropdown" id="select-escuro" data-clarus="select">
+            <p class="u-fs-sm u-fw-medium u-mb-1">Select customizado</p>
+            <select class="cl-form-select-dropdown" id="select-escuro" data-cl="select">
                 <option>Selecione um estado</option>
                 <option>São Paulo</option>
                 <option>Rio de Janeiro</option>

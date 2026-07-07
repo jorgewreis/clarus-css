@@ -1,52 +1,52 @@
 @use "settings" as *;
 
-.tooltip {
+.cl-tooltip {
   position: absolute;
   z-index: 1080;
   display: none;
   max-width: 220px;
 }
 
-.tooltip.show {
+.cl-tooltip.is-open {
   display: block;
 }
 
-.tooltip-inner {
+.cl-tooltip-inner {
   padding: 6px 10px;
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-tooltip-text);
-  background-color: var(--clarus-tooltip-bg);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-tooltip-text);
+  background-color: var(--cl-tooltip-bg);
   font-size: $font-size-xs;
   text-align: center;
 }
 
-.tooltip-arrow {
+.cl-tooltip-arrow {
   position: absolute;
   width: 8px;
   height: 8px;
-  background-color: var(--clarus-tooltip-bg);
+  background-color: var(--cl-tooltip-bg);
   transform: rotate(45deg);
 }
 
-.tooltip[data-placement="top"] .tooltip-arrow {
+.cl-tooltip[data-placement="top"] .cl-tooltip-arrow {
   bottom: -4px;
   left: 50%;
   margin-left: -4px;
 }
 
-.tooltip[data-placement="bottom"] .tooltip-arrow {
+.cl-tooltip[data-placement="bottom"] .cl-tooltip-arrow {
   top: -4px;
   left: 50%;
   margin-left: -4px;
 }
 
-.tooltip[data-placement="left"] .tooltip-arrow {
+.cl-tooltip[data-placement="left"] .cl-tooltip-arrow {
   top: 50%;
   right: -4px;
   margin-top: -4px;
 }
 
-.tooltip[data-placement="right"] .tooltip-arrow {
+.cl-tooltip[data-placement="right"] .cl-tooltip-arrow {
   top: 50%;
   left: -4px;
   margin-top: -4px;

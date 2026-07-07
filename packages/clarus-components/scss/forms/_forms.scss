@@ -1,7 +1,7 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.form-row {
+.cl-form-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@
   min-height: 10px;
 }
 
-.form-col {
+.cl-form-col {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -19,135 +19,135 @@
   justify-content: flex-end;
 }
 
-.form-label {
+.cl-form-label {
   width: 120px;
   margin-left: 8px;
   margin-bottom: 2px;
-  color: var(--clarus-color-muted);
+  color: var(--cl-color-muted);
   font-size: $font-size-sm;
   font-weight: $font-weight-regular;
 
   @include truncate;
 }
 
-.form-text {
+.cl-form-text {
   width: 120px;
   margin-top: 4px;
   padding: 4px 8px;
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-muted);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-muted);
   font-size: $font-size-xs;
   font-weight: $font-weight-regular;
 
   @include truncate;
 }
 
-.valid-feedback,
-.invalid-feedback {
+.cl-valid-feedback,
+.cl-invalid-feedback {
   display: none;
   width: 120px;
   margin-top: 2px;
   padding: 4px 8px;
-  border-radius: var(--clarus-radius-sm);
+  border-radius: var(--cl-radius-sm);
   font-size: $font-size-xs;
   font-weight: $font-weight-regular;
 
   @include truncate;
 }
 
-.valid-feedback {
-  color: var(--clarus-color-success);
-  background-color: var(--clarus-feedback-success-bg);
+.cl-valid-feedback {
+  color: var(--cl-color-success);
+  background-color: var(--cl-feedback-success-bg);
 }
 
-.invalid-feedback {
-  color: var(--clarus-color-danger);
-  background-color: var(--clarus-feedback-danger-bg);
+.cl-invalid-feedback {
+  color: var(--cl-color-danger);
+  background-color: var(--cl-feedback-danger-bg);
 }
 
-.is-valid ~ .valid-feedback,
-.is-invalid ~ .invalid-feedback {
+.is-valid ~ .cl-valid-feedback,
+.is-invalid ~ .cl-invalid-feedback {
   display: block;
 }
 
-.form-control {
+.cl-form-control {
   height: 38px;
   padding: 0 7px;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
 }
 
-.form-control::placeholder {
-  color: var(--clarus-color-muted);
+.cl-form-control::placeholder {
+  color: var(--cl-color-muted);
 }
 
-.form-control:focus {
+.cl-form-control:focus {
   @include focus-ring;
 }
 
-.form-control:disabled {
-  color: var(--clarus-color-muted);
-  background-color: var(--clarus-color-subtle);
+.cl-form-control:disabled {
+  color: var(--cl-color-muted);
+  background-color: var(--cl-color-subtle);
   opacity: 0.4;
   pointer-events: none;
 }
 
-.form-control:read-only {
-  background-color: var(--clarus-color-subtle);
+.cl-form-control:read-only {
+  background-color: var(--cl-color-subtle);
   cursor: default;
 }
 
-.form-control-sm {
+.cl-form-control-sm {
   height: 30px;
   font-size: $font-size-xs;
 }
 
-.form-control-lg {
+.cl-form-control-lg {
   height: 46px;
   font-size: $font-size-md;
 }
 
-.form-size-sm {
+.cl-form-size-sm {
   width: 120px;
 }
 
-.form-size-md {
+.cl-form-size-md {
   width: 180px;
 }
 
-.form-size-lg {
+.cl-form-size-lg {
   width: 240px;
 }
 
-.form-size-xl {
+.cl-form-size-xl {
   width: 300px;
 }
 
-.form-size-xxl {
+.cl-form-size-xxl {
   width: 360px;
 }
 
-.form-control.is-valid {
-  border-color: var(--clarus-color-success);
+.cl-form-control.is-valid {
+  border-color: var(--cl-color-success);
 }
 
-.form-control.is-valid:focus {
-  @include focus-ring(var(--clarus-color-success));
+.cl-form-control.is-valid:focus {
+  @include focus-ring(var(--cl-color-success));
 }
 
-.form-control.is-invalid {
-  border-color: var(--clarus-color-danger);
+.cl-form-control.is-invalid {
+  border-color: var(--cl-color-danger);
 }
 
-.form-control.is-invalid:focus {
-  @include focus-ring(var(--clarus-color-danger));
+.cl-form-control.is-invalid:focus {
+  @include focus-ring(var(--cl-color-danger));
 }
 
-.form-select {
+.cl-form-select {
   display: flex;
   flex: 1;
   align-items: center;
@@ -155,17 +155,17 @@
   width: 100%;
   height: 38px;
   padding: 0 7px;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   text-align: left;
   cursor: pointer;
 }
 
-.form-select::after {
+.cl-form-select::after {
   flex-shrink: 0;
   display: inline-block;
   width: 0;
@@ -177,33 +177,33 @@
   border-left: 5px solid transparent;
 }
 
-.form-select:focus {
+.cl-form-select:focus {
   @include focus-ring;
 }
 
-.form-select:disabled {
-  color: var(--clarus-color-muted);
-  background-color: var(--clarus-color-subtle);
+.cl-form-select:disabled {
+  color: var(--cl-color-muted);
+  background-color: var(--cl-color-subtle);
   opacity: 0.4;
   pointer-events: none;
 }
 
-.form-select-sm {
+.cl-form-select-sm {
   height: 30px;
   font-size: $font-size-xs;
 }
 
-.form-select-lg {
+.cl-form-select-lg {
   height: 46px;
   font-size: $font-size-md;
 }
 
-.file-upload {
+.cl-file-upload {
   position: relative;
   display: inline-flex;
 }
 
-.file-input {
+.cl-file-input {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -215,15 +215,15 @@
   border: 0;
 }
 
-.file-label {
+.cl-file-label {
   display: inline-flex;
   align-items: center;
   height: 38px;
   padding: 0 14px;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-subtle);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-subtle);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   cursor: pointer;
@@ -231,42 +231,42 @@
   transition: filter 0.15s ease-in-out;
 }
 
-.file-label:hover {
+.cl-file-label:hover {
   filter: brightness(0.96);
 }
 
-.file-input:focus + .file-label {
+.cl-file-input:focus + .cl-file-label {
   @include focus-ring;
 }
 
-.file-input:disabled + .file-label {
-  color: var(--clarus-color-muted);
+.cl-file-input:disabled + .cl-file-label {
+  color: var(--cl-color-muted);
   opacity: 0.4;
   pointer-events: none;
   cursor: default;
 }
 
-.file-label-sm {
+.cl-file-label-sm {
   height: 30px;
   padding: 0 10px;
   font-size: $font-size-xs;
 }
 
-.file-label-lg {
+.cl-file-label-lg {
   height: 46px;
   padding: 0 18px;
   font-size: $font-size-lg;
 }
 
 // Drag-and-drop (js/file-drop.js): estado visual ao arrastar um arquivo por
-// cima do `.file-label`, e uma variante maior (dropzone) para quando o alvo
-// de soltar precisa ser mais generoso que o botão padrão de `.file-label`.
-.file-label.is-dragover {
-  border-color: var(--clarus-color-primary);
-  background-color: var(--clarus-color-subtle);
+// cima do `.cl-file-label`, e uma variante maior (dropzone) para quando o alvo
+// de soltar precisa ser mais generoso que o botão padrão de `.cl-file-label`.
+.cl-file-label.is-dragover {
+  border-color: var(--cl-color-primary);
+  background-color: var(--cl-color-subtle);
 }
 
-.file-label-dropzone {
+.cl-file-label-dropzone {
   flex-direction: column;
   gap: 4px;
   width: 100%;
@@ -278,37 +278,37 @@
   text-align: center;
 }
 
-.file-label-dropzone .file-dropzone-hint {
-  color: var(--clarus-color-muted);
+.cl-file-label-dropzone .cl-file-dropzone-hint {
+  color: var(--cl-color-muted);
   font-size: $font-size-xs;
   font-weight: $font-weight-regular;
 }
 
-// Input Group: funde `.form-control` (ou `.form-select`/`.btn`) com "addons"
+// Input Group: funde `.cl-form-control` (ou `.cl-form-select`/`.cl-btn`) com "addons"
 // de texto/ícone de prefixo/sufixo, reaproveitando os tokens visuais do
-// próprio `.form-control` (borda, cor, radius). 100% CSS — a altura do addon
+// próprio `.cl-form-control` (borda, cor, radius). 100% CSS — a altura do addon
 // acompanha a do controle via `align-items: stretch` (herdado), sem precisar
 // fixar `height` nele.
-.input-group {
+.cl-input-group {
   display: flex;
   align-items: stretch;
   width: 100%;
 }
 
-.input-group > .form-control,
-.input-group > .form-select {
+.cl-input-group > .cl-form-control,
+.cl-input-group > .cl-form-select {
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
 }
 
-.input-group-text {
+.cl-input-group-text {
   display: flex;
   align-items: center;
   padding: 0 12px;
-  border: 1px solid var(--clarus-color-border);
-  color: var(--clarus-color-muted);
-  background-color: var(--clarus-color-subtle);
+  border: 1px solid var(--cl-color-border);
+  color: var(--cl-color-muted);
+  background-color: var(--cl-color-subtle);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   white-space: nowrap;
@@ -317,41 +317,41 @@
 // Funde as bordas dos itens adjacentes (remove a dupla borda) e mantém o
 // item focado por cima da sobreposição de -1px, senão a borda de foco fica
 // parcialmente escondida atrás do vizinho.
-.input-group > :not(:first-child) {
+.cl-input-group > :not(:first-child) {
   margin-left: -1px;
 }
 
-.input-group > :focus,
-.input-group > :focus-within {
+.cl-input-group > :focus,
+.cl-input-group > :focus-within {
   position: relative;
   z-index: 1;
 }
 
-.input-group > * {
+.cl-input-group > * {
   border-radius: 0;
 }
 
-.input-group > :first-child {
-  border-top-left-radius: var(--clarus-radius-sm);
-  border-bottom-left-radius: var(--clarus-radius-sm);
+.cl-input-group > :first-child {
+  border-top-left-radius: var(--cl-radius-sm);
+  border-bottom-left-radius: var(--cl-radius-sm);
 }
 
-.input-group > :last-child {
-  border-top-right-radius: var(--clarus-radius-sm);
-  border-bottom-right-radius: var(--clarus-radius-sm);
+.cl-input-group > :last-child {
+  border-top-right-radius: var(--cl-radius-sm);
+  border-bottom-right-radius: var(--cl-radius-sm);
 }
 
-.input-group-sm > .form-control,
-.input-group-sm > .form-select,
-.input-group-sm > .input-group-text {
+.cl-input-group-sm > .cl-form-control,
+.cl-input-group-sm > .cl-form-select,
+.cl-input-group-sm > .cl-input-group-text {
   height: 30px;
   padding: 0 8px;
   font-size: $font-size-xs;
 }
 
-.input-group-lg > .form-control,
-.input-group-lg > .form-select,
-.input-group-lg > .input-group-text {
+.cl-input-group-lg > .cl-form-control,
+.cl-input-group-lg > .cl-form-select,
+.cl-input-group-lg > .cl-input-group-text {
   height: 46px;
   padding: 0 16px;
   font-size: $font-size-lg;

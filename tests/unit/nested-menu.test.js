@@ -4,22 +4,22 @@ import { NestedMenu } from "../../packages/clarus-js/js/nested-menu.js";
 function build() {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
-    <button type="button" id="toggle" class="dropdown-toggle">Menu</button>
-    <div class="dropdown-menu" id="root">
-      <a href="#" class="dropdown-item" id="leaf1">Novo</a>
-      <div class="dropdown-submenu">
-        <button type="button" class="dropdown-item dropdown-item-submenu" id="sub1">Compartilhar</button>
-        <div class="dropdown-menu" id="submenu1">
-          <a href="#" class="dropdown-item" id="leaf2">E-mail</a>
-          <div class="dropdown-submenu">
-            <button type="button" class="dropdown-item dropdown-item-submenu" id="sub2">Redes</button>
-            <div class="dropdown-menu" id="submenu2">
-              <a href="#" class="dropdown-item" id="leaf3">Twitter</a>
+    <button type="button" id="toggle" class="cl-dropdown-toggle">Menu</button>
+    <div class="cl-dropdown-menu" id="root">
+      <a href="#" class="cl-dropdown-item" id="leaf1">Novo</a>
+      <div class="cl-dropdown-submenu">
+        <button type="button" class="cl-dropdown-item cl-dropdown-item-submenu" id="sub1">Compartilhar</button>
+        <div class="cl-dropdown-menu" id="submenu1">
+          <a href="#" class="cl-dropdown-item" id="leaf2">E-mail</a>
+          <div class="cl-dropdown-submenu">
+            <button type="button" class="cl-dropdown-item cl-dropdown-item-submenu" id="sub2">Redes</button>
+            <div class="cl-dropdown-menu" id="submenu2">
+              <a href="#" class="cl-dropdown-item" id="leaf3">Twitter</a>
             </div>
           </div>
         </div>
       </div>
-      <a href="#" class="dropdown-item" id="leaf4">Excluir</a>
+      <a href="#" class="cl-dropdown-item" id="leaf4">Excluir</a>
     </div>
   `;
   document.body.appendChild(wrapper);
@@ -58,7 +58,7 @@ describe("NestedMenu", () => {
     const { toggle, menu } = build();
     menu.show();
 
-    expect(document.getElementById("root").classList.contains("show")).toBe(true);
+    expect(document.getElementById("root").classList.contains("is-open")).toBe(true);
     expect(toggle.getAttribute("aria-expanded")).toBe("true");
     expect(document.activeElement.id).toBe("leaf1");
   });
@@ -69,9 +69,9 @@ describe("NestedMenu", () => {
 
     document.getElementById("sub1").click();
 
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(true);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(true);
     expect(document.getElementById("sub1").getAttribute("aria-expanded")).toBe("true");
-    expect(document.getElementById("root").classList.contains("show")).toBe(true);
+    expect(document.getElementById("root").classList.contains("is-open")).toBe(true);
   });
 
   it("clicar de novo no item de submenu fecha o submenu", () => {
@@ -82,7 +82,7 @@ describe("NestedMenu", () => {
     sub1.click();
     sub1.click();
 
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(false);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(false);
     expect(sub1.getAttribute("aria-expanded")).toBe("false");
   });
 
@@ -92,7 +92,7 @@ describe("NestedMenu", () => {
 
     document.getElementById("leaf1").click();
 
-    expect(document.getElementById("root").classList.contains("show")).toBe(false);
+    expect(document.getElementById("root").classList.contains("is-open")).toBe(false);
     expect(document.activeElement).toBe(toggle);
   });
 
@@ -114,11 +114,11 @@ describe("NestedMenu", () => {
 
     document.getElementById("sub1").focus();
     press("ArrowRight");
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(true);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(true);
     expect(document.activeElement.id).toBe("leaf2");
 
     press("ArrowLeft");
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(false);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(false);
     expect(document.activeElement.id).toBe("sub1");
   });
 
@@ -130,17 +130,17 @@ describe("NestedMenu", () => {
     press("ArrowRight"); // abre submenu1, foca leaf2
     press("Escape");
 
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(false);
-    expect(document.getElementById("root").classList.contains("show")).toBe(true);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(false);
+    expect(document.getElementById("root").classList.contains("is-open")).toBe(true);
     expect(document.activeElement.id).toBe("sub1");
   });
 
-  it("dispara clarus:nested-menu:shown e :hidden", () => {
+  it("dispara cl:nested-menu:shown e :hidden", () => {
     const { toggle, menu } = build();
     const shown = vi.fn();
     const hidden = vi.fn();
-    toggle.addEventListener("clarus:nested-menu:shown", shown);
-    toggle.addEventListener("clarus:nested-menu:hidden", hidden);
+    toggle.addEventListener("cl:nested-menu:shown", shown);
+    toggle.addEventListener("cl:nested-menu:hidden", hidden);
 
     menu.show();
     expect(shown).toHaveBeenCalledTimes(1);
@@ -155,7 +155,7 @@ describe("NestedMenu", () => {
     document.getElementById("sub1").click();
     menu.hide();
 
-    expect(document.getElementById("submenu1").classList.contains("show")).toBe(false);
+    expect(document.getElementById("submenu1").classList.contains("is-open")).toBe(false);
   });
 
   it("dispose() remove o registro da instância", () => {

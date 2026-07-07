@@ -5,7 +5,7 @@ function buildFileDrop({ disabled = false } = {}) {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `
     <input type="file" id="arquivo" ${disabled ? "disabled" : ""}>
-    <label for="arquivo" class="file-label file-label-dropzone">Arraste um arquivo</label>
+    <label for="arquivo" class="cl-file-label cl-file-label-dropzone">Arraste um arquivo</label>
   `;
   document.body.appendChild(wrapper);
 

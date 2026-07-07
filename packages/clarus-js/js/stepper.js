@@ -5,12 +5,12 @@ const instances = createInstanceRegistry();
 export class Stepper {
   constructor(stepperEl) {
     this.stepperEl = stepperEl;
-    this.steps = Array.from(stepperEl.querySelectorAll(".step"));
+    this.steps = Array.from(stepperEl.querySelectorAll(".cl-step"));
     this.linear = stepperEl.getAttribute("data-linear") !== "false";
 
-    const contentPanels = Array.from(stepperEl.querySelectorAll(".step-panel"));
+    const contentPanels = Array.from(stepperEl.querySelectorAll(".cl-step-panel"));
     this.panels = this.steps.map((step, i) =>
-      step.dataset.target ? stepperEl.querySelector(step.dataset.target) : contentPanels[i],
+      step.dataset.clTarget ? stepperEl.querySelector(step.dataset.clTarget) : contentPanels[i],
     );
 
     this.prevBtn = stepperEl.querySelector('[data-stepper="prev"]');
@@ -18,7 +18,7 @@ export class Stepper {
     this.finished = false;
 
     this.current = Math.max(
-      this.steps.findIndex((step) => step.classList.contains("step-active")),
+      this.steps.findIndex((step) => step.classList.contains("cl-step-active")),
       0,
     );
 
@@ -59,16 +59,16 @@ export class Stepper {
       const isActive = i === this.current && !this.finished;
       const isCompleted = i < this.current || this.finished;
 
-      step.classList.toggle("step-active", isActive);
-      step.classList.toggle("step-completed", isCompleted);
+      step.classList.toggle("cl-step-active", isActive);
+      step.classList.toggle("cl-step-completed", isCompleted);
       step.setAttribute("aria-current", isActive ? "step" : "false");
 
       const clickable = this.linear ? isCompleted : true;
-      step.classList.toggle("step-clickable", clickable);
+      step.classList.toggle("cl-step-clickable", clickable);
       step.setAttribute("tabindex", clickable ? "0" : "-1");
 
       const panel = this.panels[i];
-      if (panel) panel.classList.toggle("active", i === this.current);
+      if (panel) panel.classList.toggle("is-active", i === this.current);
     });
 
     if (this.prevBtn) this.prevBtn.disabled = this.current === 0 && !this.finished;
@@ -79,7 +79,7 @@ export class Stepper {
     const target = Math.max(0, Math.min(to, this.steps.length - 1));
     if (target === from && !this.finished) return false;
 
-    const before = new CustomEvent("clarus:stepper:beforechange", {
+    const before = new CustomEvent("cl:stepper:beforechange", {
       bubbles: true,
       cancelable: true,
       detail: { from, to: target },
@@ -92,7 +92,7 @@ export class Stepper {
     this._render();
 
     this.stepperEl.dispatchEvent(
-      new CustomEvent("clarus:stepper:changed", { bubbles: true, detail: { from, to: target } }),
+      new CustomEvent("cl:stepper:changed", { bubbles: true, detail: { from, to: target } }),
     );
     return true;
   }
@@ -112,11 +112,11 @@ export class Stepper {
 
   setError(index, hasError = true) {
     const step = this.steps[index];
-    if (step) step.classList.toggle("step-error", hasError);
+    if (step) step.classList.toggle("cl-step-error", hasError);
   }
 
   complete() {
-    const before = new CustomEvent("clarus:stepper:beforechange", {
+    const before = new CustomEvent("cl:stepper:beforechange", {
       bubbles: true,
       cancelable: true,
       detail: { from: this.current, to: this.current, completing: true },
@@ -126,7 +126,7 @@ export class Stepper {
 
     this.finished = true;
     this._render();
-    this.stepperEl.dispatchEvent(new CustomEvent("clarus:stepper:completed", { bubbles: true }));
+    this.stepperEl.dispatchEvent(new CustomEvent("cl:stepper:completed", { bubbles: true }));
     return true;
   }
 

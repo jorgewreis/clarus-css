@@ -1,6 +1,6 @@
 @use "settings" as *;
 
-.modal {
+.cl-modal {
   position: fixed;
   inset: 0;
   z-index: 1050;
@@ -11,57 +11,57 @@
   background-color: rgb(0 0 0 / 50%);
 }
 
-.modal.show {
+.cl-modal.is-open {
   display: flex;
 }
 
-.modal-dialog {
+.cl-modal-dialog {
   width: 100%;
   max-width: 480px;
 }
 
-.modal-dialog.modal-sm {
+.cl-modal-dialog.cl-modal-sm {
   max-width: 320px;
 }
 
-.modal-dialog.modal-lg {
+.cl-modal-dialog.cl-modal-lg {
   max-width: 720px;
 }
 
-.modal-content {
+.cl-modal-content {
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 32px);
-  border-radius: var(--clarus-radius-md);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-surface);
-  box-shadow: var(--clarus-shadow-lg);
+  border-radius: var(--cl-radius-md);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-surface);
+  box-shadow: var(--cl-shadow-lg);
 }
 
-.modal-header {
+.cl-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--clarus-color-border);
+  border-bottom: 1px solid var(--cl-color-border);
 }
 
-.modal-title {
+.cl-modal-title {
   margin: 0;
   font-size: $font-size-lg;
   font-weight: $font-weight-medium;
 }
 
-.modal-body {
+.cl-modal-body {
   padding: 20px;
   overflow-y: auto;
 }
 
-.modal-footer {
+.cl-modal-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   padding: 16px 20px;
-  border-top: 1px solid var(--clarus-color-border);
+  border-top: 1px solid var(--cl-color-border);
 }

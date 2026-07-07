@@ -26,7 +26,7 @@ export class Toast {
   }
 
   _handleDismissClick(event) {
-    if (event.target.closest('[data-dismiss="toast"]')) {
+    if (event.target.closest('[data-cl-dismiss="toast"]')) {
       this.hide();
     }
   }
@@ -36,7 +36,7 @@ export class Toast {
     this.isOpen = true;
 
     expand(this.toastEl).then(() => {
-      this.toastEl.dispatchEvent(new CustomEvent("clarus:toast:shown", { bubbles: true }));
+      this.toastEl.dispatchEvent(new CustomEvent("cl:toast:shown", { bubbles: true }));
     });
 
     if (this.autohide) {
@@ -52,7 +52,7 @@ export class Toast {
     this._hideTimer = null;
 
     collapse(this.toastEl).then(() => {
-      this.toastEl.dispatchEvent(new CustomEvent("clarus:toast:hidden", { bubbles: true }));
+      this.toastEl.dispatchEvent(new CustomEvent("cl:toast:hidden", { bubbles: true }));
     });
   }
 

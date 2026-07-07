@@ -4,15 +4,15 @@ import { Tabs } from "../../packages/clarus-js/js/tabs.js";
 function buildTabs() {
   const container = document.createElement("div");
   container.innerHTML = `
-    <div class="tabs" id="tablist">
-      <a href="#" class="nav-link active" data-target="#pane1">Perfil</a>
-      <a href="#" class="nav-link" data-target="#pane2">Segurança</a>
-      <a href="#" class="nav-link disabled" data-target="#pane3">Notificações</a>
+    <div class="cl-tabs" id="tablist">
+      <a href="#" class="cl-nav-link is-active" data-cl-target="#pane1">Perfil</a>
+      <a href="#" class="cl-nav-link" data-cl-target="#pane2">Segurança</a>
+      <a href="#" class="cl-nav-link is-disabled" data-cl-target="#pane3">Notificações</a>
     </div>
-    <div class="tab-content">
-      <div class="tab-pane active" id="pane1">Conteúdo 1</div>
-      <div class="tab-pane" id="pane2">Conteúdo 2</div>
-      <div class="tab-pane" id="pane3">Conteúdo 3</div>
+    <div class="cl-tab-content">
+      <div class="cl-tab-pane is-active" id="pane1">Conteúdo 1</div>
+      <div class="cl-tab-pane" id="pane2">Conteúdo 2</div>
+      <div class="cl-tab-pane" id="pane3">Conteúdo 3</div>
     </div>
   `;
   document.body.appendChild(container);
@@ -33,7 +33,7 @@ describe("Tabs", () => {
 
   it("define role=tablist/tab/tabpanel e aria-selected/tabindex conforme o estado inicial", () => {
     const { tablistEl } = buildTabs();
-    const links = tablistEl.querySelectorAll(".nav-link");
+    const links = tablistEl.querySelectorAll(".cl-nav-link");
 
     expect(tablistEl.getAttribute("role")).toBe("tablist");
     expect(links[0].getAttribute("role")).toBe("tab");
@@ -49,35 +49,35 @@ describe("Tabs", () => {
 
   it("clicar numa aba ativa ela e o painel correspondente, desativando as demais", () => {
     const { container } = buildTabs();
-    const links = container.querySelectorAll(".nav-link");
+    const links = container.querySelectorAll(".cl-nav-link");
 
     links[1].click();
 
-    expect(links[1].classList.contains("active")).toBe(true);
-    expect(links[0].classList.contains("active")).toBe(false);
-    expect(document.getElementById("pane2").classList.contains("active")).toBe(true);
-    expect(document.getElementById("pane1").classList.contains("active")).toBe(false);
+    expect(links[1].classList.contains("is-active")).toBe(true);
+    expect(links[0].classList.contains("is-active")).toBe(false);
+    expect(document.getElementById("pane2").classList.contains("is-active")).toBe(true);
+    expect(document.getElementById("pane1").classList.contains("is-active")).toBe(false);
   });
 
   it("clicar numa aba desabilitada não faz nada", () => {
     const { container } = buildTabs();
-    const links = container.querySelectorAll(".nav-link");
+    const links = container.querySelectorAll(".cl-nav-link");
 
     links[2].click();
 
-    expect(links[2].classList.contains("active")).toBe(false);
-    expect(links[0].classList.contains("active")).toBe(true);
+    expect(links[2].classList.contains("is-active")).toBe(false);
+    expect(links[0].classList.contains("is-active")).toBe(true);
   });
 
   it("ArrowRight/ArrowLeft navegam pulando abas desabilitadas", () => {
     const { container } = buildTabs();
-    const links = container.querySelectorAll(".nav-link");
+    const links = container.querySelectorAll(".cl-nav-link");
     links[0].focus();
 
     container.querySelector("#tablist").dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
     // só existem 2 abas habilitadas (0 e 1); da 0 avança pra 1.
     expect(document.activeElement).toBe(links[1]);
-    expect(links[1].classList.contains("active")).toBe(true);
+    expect(links[1].classList.contains("is-active")).toBe(true);
 
     container.querySelector("#tablist").dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
     // de volta pra 0, pulando a aba desabilitada (2).
@@ -86,7 +86,7 @@ describe("Tabs", () => {
 
   it("End move para a última aba habilitada, não para a última aba do DOM", () => {
     const { container } = buildTabs();
-    const links = container.querySelectorAll(".nav-link");
+    const links = container.querySelectorAll(".cl-nav-link");
     links[0].focus();
 
     container.querySelector("#tablist").dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
@@ -94,11 +94,11 @@ describe("Tabs", () => {
     expect(document.activeElement).toBe(links[1]);
   });
 
-  it("dispara clarus:tab:changed com o target no detail", () => {
+  it("dispara cl:tab:changed com o target no detail", () => {
     const { container } = buildTabs();
-    const links = container.querySelectorAll(".nav-link");
+    const links = container.querySelectorAll(".cl-nav-link");
     const handler = vi.fn();
-    links[1].addEventListener("clarus:tab:changed", handler);
+    links[1].addEventListener("cl:tab:changed", handler);
 
     links[1].click();
 

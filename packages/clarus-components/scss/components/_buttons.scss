@@ -1,16 +1,16 @@
 @use "settings" as *;
 @use "tools" as *;
 
-.btn {
+.cl-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 38px;
   padding: 0 12px;
-  border: 1px solid var(--clarus-color-border);
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-subtle);
+  border: 1px solid var(--cl-color-border);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-subtle);
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   text-decoration: none;
@@ -18,70 +18,70 @@
   transition: filter 0.15s ease-in-out;
 }
 
-.btn:hover {
+.cl-btn:hover {
   filter: brightness(0.92);
 }
 
-.btn:active {
+.cl-btn:active {
   filter: brightness(0.85);
 }
 
-.btn:focus {
+.cl-btn:focus {
   @include focus-ring;
 }
 
-.btn:disabled,
-.btn.disabled {
+.cl-btn:disabled,
+.cl-btn.is-disabled {
   opacity: 0.4;
   pointer-events: none;
 }
 
 @each $name, $color in $theme-colors {
-  .btn-#{$name} {
+  .cl-btn-#{$name} {
     color: color-contrast($color);
-    background-color: var(--clarus-color-#{$name});
-    border-color: var(--clarus-color-#{$name});
+    background-color: var(--cl-color-#{$name});
+    border-color: var(--cl-color-#{$name});
   }
 
-  .btn-outline-#{$name} {
-    color: var(--clarus-color-#{$name});
+  .cl-btn-outline-#{$name} {
+    color: var(--cl-color-#{$name});
     background-color: transparent;
-    border-color: var(--clarus-color-#{$name});
+    border-color: var(--cl-color-#{$name});
   }
 
-  .btn-outline-#{$name}:hover,
-  .btn-outline-#{$name}:active {
+  .cl-btn-outline-#{$name}:hover,
+  .cl-btn-outline-#{$name}:active {
     color: color-contrast($color);
-    background-color: var(--clarus-color-#{$name});
+    background-color: var(--cl-color-#{$name});
   }
 }
 
-.btn-sm {
+.cl-btn-sm {
   min-height: 30px;
   padding: 0 8px;
   font-size: $font-size-sm;
 }
 
-.btn-lg {
+.cl-btn-lg {
   min-height: 46px;
   padding: 0 16px;
   font-size: $font-size-lg;
 }
 
-.btn-close {
+.cl-btn-close {
   position: relative;
   width: 20px;
   height: 20px;
   padding: 0;
   border: none;
-  border-radius: var(--clarus-radius-sm);
-  color: var(--clarus-color-muted);
+  border-radius: var(--cl-radius-sm);
+  color: var(--cl-color-muted);
   background-color: transparent;
   cursor: pointer;
 }
 
-.btn-close::before,
-.btn-close::after {
+.cl-btn-close::before,
+.cl-btn-close::after {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -91,19 +91,19 @@
   content: "";
 }
 
-.btn-close::before {
+.cl-btn-close::before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.btn-close::after {
+.cl-btn-close::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.btn-close:hover {
-  color: var(--clarus-color-text);
-  background-color: var(--clarus-color-subtle);
+.cl-btn-close:hover {
+  color: var(--cl-color-text);
+  background-color: var(--cl-color-subtle);
 }
 
-.btn-close:focus {
+.cl-btn-close:focus {
   @include focus-ring;
 }

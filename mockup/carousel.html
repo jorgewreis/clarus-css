@@ -15,11 +15,11 @@
         }
 
         [data-theme="dark"].theme-panel {
-            color: var(--clarus-color-text);
-            background-color: var(--clarus-color-surface);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
         }
 
-        .carousel {
+        .cl-carousel {
             max-width: 560px;
         }
 
@@ -41,50 +41,50 @@
 <body>
 
     <div class="theme-panel">
-        <h2 class="fs-lg fw-medium">Claro — slide (padrão)</h2>
+        <h2 class="u-fs-lg u-fw-medium">Claro — slide (padrão)</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-2">Setas, indicadores, teclado (setas/Home/End) e swipe</p>
-        <div class="carousel" data-clarus="carousel" id="carousel-slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active"><div class="slide slide-1">Slide 1</div></div>
-                <div class="carousel-item"><div class="slide slide-2">Slide 2</div></div>
-                <div class="carousel-item"><div class="slide slide-3">Slide 3</div></div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Setas, indicadores, teclado (setas/Home/End) e swipe</p>
+        <div class="cl-carousel" data-cl="carousel" id="carousel-slide">
+            <div class="cl-carousel-inner">
+                <div class="cl-carousel-item is-active"><div class="slide slide-1">Slide 1</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-2">Slide 2</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-3">Slide 3</div></div>
             </div>
-            <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
-            <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
-            <ol class="carousel-indicators">
+            <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+            <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <ol class="cl-carousel-indicators">
                 <li><button type="button" aria-label="Ir para o slide 1"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 2"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 3"></button></li>
             </ol>
         </div>
 
-        <p class="fs-sm fw-medium mt-4 mb-2">Slide com autoplay + setas só no hover (.carousel-hover-controls) — pausa no hover/foco</p>
-        <div class="carousel carousel-hover-controls" data-clarus="carousel" data-autoplay="true" data-interval="3000" id="carousel-slide-autoplay">
-            <div class="carousel-inner">
-                <div class="carousel-item active"><div class="slide slide-1">Auto 1</div></div>
-                <div class="carousel-item"><div class="slide slide-2">Auto 2</div></div>
-                <div class="carousel-item"><div class="slide slide-3">Auto 3</div></div>
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Slide com autoplay + setas só no hover (.carousel-hover-controls) — pausa no hover/foco</p>
+        <div class="cl-carousel cl-carousel-hover-controls" data-cl="carousel" data-autoplay="true" data-interval="3000" id="carousel-slide-autoplay">
+            <div class="cl-carousel-inner">
+                <div class="cl-carousel-item is-active"><div class="slide slide-1">Auto 1</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-2">Auto 2</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-3">Auto 3</div></div>
             </div>
-            <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
-            <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
-            <ol class="carousel-indicators">
+            <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+            <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <ol class="cl-carousel-indicators">
                 <li><button type="button" aria-label="Ir para o slide 1"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 2"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 3"></button></li>
             </ol>
         </div>
 
-        <p class="fs-sm fw-medium mt-4 mb-2">Variante fade com autoplay (data-autoplay, data-interval)</p>
-        <div class="carousel carousel-fade" data-clarus="carousel" data-autoplay="true" data-interval="3000" id="carousel-fade">
-            <div class="carousel-inner">
-                <div class="carousel-item active"><div class="slide slide-1">Fade 1</div></div>
-                <div class="carousel-item"><div class="slide slide-2">Fade 2</div></div>
-                <div class="carousel-item"><div class="slide slide-3">Fade 3</div></div>
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Variante fade com autoplay (data-autoplay, data-interval)</p>
+        <div class="cl-carousel cl-carousel-fade" data-cl="carousel" data-autoplay="true" data-interval="3000" id="carousel-fade">
+            <div class="cl-carousel-inner">
+                <div class="cl-carousel-item is-active"><div class="slide slide-1">Fade 1</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-2">Fade 2</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-3">Fade 3</div></div>
             </div>
-            <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
-            <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
-            <ol class="carousel-indicators">
+            <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+            <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <ol class="cl-carousel-indicators">
                 <li><button type="button" aria-label="Ir para o slide 1"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 2"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 3"></button></li>
@@ -93,18 +93,18 @@
     </div>
 
     <div class="theme-panel" data-theme="dark">
-        <h2 class="fs-lg fw-medium">Escuro — slide (padrão)</h2>
+        <h2 class="u-fs-lg u-fw-medium">Escuro — slide (padrão)</h2>
 
-        <p class="fs-sm fw-medium mt-3 mb-2">Setas, indicadores, teclado (setas/Home/End) e swipe</p>
-        <div class="carousel" data-clarus="carousel" id="carousel-slide-dark">
-            <div class="carousel-inner">
-                <div class="carousel-item active"><div class="slide slide-1">Slide 1</div></div>
-                <div class="carousel-item"><div class="slide slide-2">Slide 2</div></div>
-                <div class="carousel-item"><div class="slide slide-3">Slide 3</div></div>
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Setas, indicadores, teclado (setas/Home/End) e swipe</p>
+        <div class="cl-carousel" data-cl="carousel" id="carousel-slide-dark">
+            <div class="cl-carousel-inner">
+                <div class="cl-carousel-item is-active"><div class="slide slide-1">Slide 1</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-2">Slide 2</div></div>
+                <div class="cl-carousel-item"><div class="slide slide-3">Slide 3</div></div>
             </div>
-            <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
-            <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
-            <ol class="carousel-indicators">
+            <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+            <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <ol class="cl-carousel-indicators">
                 <li><button type="button" aria-label="Ir para o slide 1"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 2"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 3"></button></li>

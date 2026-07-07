@@ -4,7 +4,7 @@
 // Spinner giratório: um anel com um lado transparente que roda continuamente.
 // A cor herda de `currentColor` (via `border-*-color`), permitindo colorir com
 // utilitários de texto ou com as variantes de estado abaixo.
-.spinner {
+.cl-spinner {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -15,21 +15,21 @@
   animation: clarus-spin 0.7s linear infinite;
 }
 
-.spinner-sm {
+.cl-spinner-sm {
   width: 16px;
   height: 16px;
   border-width: 2px;
 }
 
-.spinner-lg {
+.cl-spinner-lg {
   width: 40px;
   height: 40px;
   border-width: 4px;
 }
 
 @each $name, $color in $theme-colors {
-  .spinner-#{$name} {
-    color: var(--clarus-color-#{$name});
+  .cl-spinner-#{$name} {
+    color: var(--cl-color-#{$name});
   }
 }
 
@@ -39,45 +39,45 @@
   }
 }
 
-// Barra de progresso linear. A largura do `.progress-bar` é controlada por
-// `--clarus-progress-value` (0–100) ou diretamente por `style="width"`.
-.progress {
+// Barra de progresso linear. A largura do `.cl-progress-bar` é controlada por
+// `--cl-progress-value` (0–100) ou diretamente por `style="width"`.
+.cl-progress {
   display: flex;
   height: 8px;
   overflow: hidden;
-  background-color: var(--clarus-color-subtle);
-  border-radius: var(--clarus-radius-sm);
+  background-color: var(--cl-color-subtle);
+  border-radius: var(--cl-radius-sm);
 }
 
-.progress-bar {
+.cl-progress-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(var(--clarus-progress-value, 0) * 1%);
+  width: calc(var(--cl-progress-value, 0) * 1%);
   height: 100%;
   color: color-contrast($clarus-color-primary);
-  background-color: var(--clarus-color-primary);
+  background-color: var(--cl-color-primary);
   font-size: $font-size-xs;
   transition: width 0.3s ease;
 }
 
 @each $name, $color in $theme-colors {
-  .progress-bar-#{$name} {
+  .cl-progress-bar-#{$name} {
     color: color-contrast($color);
-    background-color: var(--clarus-color-#{$name});
+    background-color: var(--cl-color-#{$name});
   }
 }
 
-.progress-sm {
+.cl-progress-sm {
   height: 4px;
 }
 
-.progress-lg {
+.cl-progress-lg {
   height: 16px;
 }
 
-// Faixas diagonais opcionais, animáveis com `.progress-bar-animated`.
-.progress-bar-striped {
+// Faixas diagonais opcionais, animáveis com `.cl-progress-bar-animated`.
+.cl-progress-bar-striped {
   background-image: linear-gradient(
     45deg,
     rgb(255 255 255 / 15%) 25%,
@@ -91,7 +91,7 @@
   background-size: 16px 16px;
 }
 
-.progress-bar-animated {
+.cl-progress-bar-animated {
   animation: clarus-progress-stripes 1s linear infinite;
 }
 
@@ -106,11 +106,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spinner {
+  .cl-spinner {
     animation-duration: 1.5s;
   }
 
-  .progress-bar-animated {
+  .cl-progress-bar-animated {
     animation: none;
   }
 }
