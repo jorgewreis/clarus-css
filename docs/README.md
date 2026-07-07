@@ -28,6 +28,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 
 [Input](components/input.md) · [Input Group](components/input-group.md) ·
 [Select customizado](components/select.md) · [Combobox](components/combobox.md) ·
+[Datepicker / Timepicker](components/datepicker.md) ·
 [Checkbox](components/checkbox.md) ·
 [Radio](components/radio.md) · [Switch](components/switch.md) ·
 [File Upload](components/file-upload.md)

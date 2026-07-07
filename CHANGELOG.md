@@ -9,6 +9,31 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Fase final pré-v1.0.0, sub-fase 5.4 — Datepicker/Timepicker
+  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): duas
+  abordagens, conforme o rascunho original. **CSS-only**:
+  `<input type="date">`/`<input type="time">` herdam `.cl-form-control`
+  normalmente; corrige o indicador nativo (ícone calendário/relógio) no
+  tema escuro, invisível por padrão sobre `--cl-color-surface` escuro.
+  **Datepicker customizado (JS)**, `packages/clarus-js/js/datepicker.js`:
+  calendário completo seguindo o padrão
+  [WAI-ARIA Date Picker Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/)
+  adaptado a popup não-modal — `role="combobox"`/`aria-haspopup="grid"` no
+  input, `role="grid"`/`"row"`/`"gridcell"` na grade, roving `tabindex`
+  (dias são focáveis de verdade, ao contrário do Combobox). Teclado
+  completo: `ArrowRight`/`ArrowLeft`/`ArrowUp`/`ArrowDown` (cruzam
+  semana/mês), `Home`/`End`, `PageUp`/`PageDown` (mês),
+  `Shift+PageUp`/`Shift+PageDown` (ano), `Enter`/`Space` seleciona,
+  `Escape` fecha sem alterar o valor. Reusa `js/core/positioning.js`.
+  17 testes unitários (incluídos dois bugs reais pegos e corrigidos
+  durante o desenvolvimento: `aria-expanded` não é permitido no role
+  implícito `textbox`, exigindo `role="combobox"`; e as setas do teclado
+  não tinham efeito nenhum com foco no input, porque o handler de teclado
+  do grid só reagia com foco já num dia — corrigido com um handler
+  dedicado no input que abre/move o foco pro grid em `ArrowDown`/`ArrowUp`).
+  Mockup em `mockup/datepicker.html`, documentado em
+  [`docs/components/datepicker.md`](docs/components/datepicker.md).
+
 - Fase final pré-v1.0.0, sub-fase 5.3 — componente Combobox/Autocomplete
   (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): `<input>` de
   texto com listbox de sugestões que filtra por substring conforme o
