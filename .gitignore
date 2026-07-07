@@ -12,4 +12,4 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 
 # Docs internas (planos provisórios, gap-analysis, guia de comandos) — só local.
-docs/internal/
+# docs/internal/
