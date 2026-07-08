@@ -1,6 +1,6 @@
 {
   "name": "clarus-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI oficial do Clarus CSS — build de SCSS customizado, scaffolding de marca (data-brand) e análise de tamanho de bundle.",
   "keywords": [
     "cli",

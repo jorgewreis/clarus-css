@@ -1,7 +1,6 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { createElement, createRef } from "react";
+import { act, createElement, createRef } from "react";
 import { createRoot } from "react-dom/client";
-import { act } from "react-dom/test-utils";
 import { ModalTrigger, ModalPanel, DropdownTrigger, DropdownMenu, TabList } from "../../packages/clarus-react/src/index.js";
 
 let container;

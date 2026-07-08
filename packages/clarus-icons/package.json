@@ -1,6 +1,6 @@
 {
   "name": "clarus-icons",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Ícones SVG opcionais para o Clarus CSS, gerados a partir do conjunto Lucide (ISC) — tree-shakeable, zero dependências em runtime.",
   "keywords": [
     "icons",
