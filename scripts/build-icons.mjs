@@ -5,8 +5,7 @@ import { fileURLToPath } from "node:url";
 // Gera packages/clarus-icons/ a partir do `lucide-static` (devDependency,
 // só usado em build-time — o pacote publicado não tem dependência de
 // runtime nenhuma, mesma filosofia do resto do Clarus). Ver
-// docs/guides/icons.md e docs/internal/plans/2026-07-07-plano-final-pre-v1.md
-// (sub-fase 5.7) pro contexto da decisão.
+// docs/guides/icons.md pro contexto da decisão.
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const sourceDir = path.join(rootDir, "node_modules", "lucide-static", "icons");

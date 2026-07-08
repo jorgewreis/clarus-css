@@ -7,6 +7,47 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-07-08
+
+> As versões `0.3.1`–`0.6.0` foram tags de checkpoint cortadas em sequência
+> rápida durante o mesmo arco contínuo de desenvolvimento rumo à v1.0.0
+> (sem changelog próprio por versão) — todo o trabalho acumulado desde a
+> `0.3.0` está consolidado nesta entrada única, que corresponde ao corte
+> da primeira versão estável do framework.
+
+### Added
+
+- **Templates prontos e página comparativa**: 4 templates
+  completos e prontos pra copiar em `mockup/templates/` (`dashboard.html`,
+  `auth.html`, `landing.html`, `admin.html`), montados só com componentes/
+  utilitários já publicados (`dist/css`/`dist/js`), com tema escuro
+  funcional (mesmo mecanismo de `docs/guides/dark-mode.md`) — referenciados
+  em `docs/README.md#templates-prontos`. Nova página
+  [`docs/comparison.md`](docs/comparison.md) ("Clarus vs Bootstrap vs
+  Tailwind CSS"): tabelas de filosofia, tamanho de bundle, dependências e
+  tema escuro nativo, com dados públicos e reproduzíveis (arquivos
+  oficiais publicados de cada framework, medidos localmente com o mesmo
+  método do gate de CI — `gzip` nível 9) em vez de números estimados;
+  benchmarks de performance ao vivo marcados explicitamente como
+  "pendente de metodologia" em vez de omitidos silenciosamente.
+
+### Fixed
+
+- `.cl-empty-state[hidden]` não escondia o elemento: `.cl-empty-state`
+  define `display: flex` em `@layer components`, e author styles sempre
+  vencem a regra `[hidden] { display: none }` do user-agent stylesheet,
+  mesmo dentro de `@layer` — sem uma regra author explícita pro atributo
+  `hidden`, ele não tinha efeito nenhum. Descoberto ao construir o
+  template `dashboard.html` (sub-fase 5.13): `DataTable`
+  (`packages/clarus-js/js/datatable.js`) alterna esse atributo em
+  `this.emptyEl`/`this.errorEl`, então o estado vazio/erro ficava sempre
+  visível por baixo da tabela com dados — inclusive no mockup oficial
+  (`mockup/datatable.html`, baseline visual atualizada). Corrigido com
+  `.cl-empty-state[hidden] { display: none; }` em
+  `packages/clarus-components/scss/components/_empty-state.scss`, mesmo
+  padrão já usado em `.cl-notification-badge[hidden]`/
+  `.cl-notification-empty[hidden]`.
+
 ### Changed
 
 - Dogfooding do `clarus-icons`: emoji usados como placeholder de ícone em
@@ -32,8 +73,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
-- Fase final pré-v1.0.0, sub-fase 5.8 — DX e supply-chain
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P1): `.d.ts`
+- **DX e supply-chain**: `.d.ts`
   hand-escritos para toda a API JS pública (`packages/clarus-js/js/*.d.ts`,
   um por módulo + `clarus.d.ts` agregador + `global.d.ts` pro uso via
   `<script>`), validados por `npm run types:check` (`tsc --noEmit`) contra
@@ -53,9 +93,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   (`mockup/kitchen-sink.html`) com um exemplo compacto de cada componente,
   dois temas — smoke test visual rápido, referenciada em `docs/README.md`.
 
-- Fase final pré-v1.0.0, sub-fase 5.7 (parte 2/N) — presets de tema,
-  `clarus-cli`, tokens de gráficos, forms extras e wrapper React
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P3):
+- **Presets de tema, `clarus-cli`, tokens de gráficos, forms extras e wrapper React**:
   - Dois novos presets de marca em
     `packages/clarus-core/scss/themes/_brands.scss`: `corporate`
     (azul-marinho sóbrio) e `vibrant` (laranja energético) — mesma técnica
@@ -110,9 +148,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     sem casos fictícios nem métricas inventadas, aguardando projetos reais.
   - `.github/workflows/ci.yml` ganhou o gate `npm run types:check`.
 
-- Fase final pré-v1.0.0, sub-fase 5.7 (ecossistema, parte 1/N) — pacote
-  `clarus-icons` (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`,
-  P3): 1994 ícones SVG do conjunto [Lucide](https://lucide.dev) (ISC),
+- **Pacote `clarus-icons`**: 1994 ícones SVG do conjunto [Lucide](https://lucide.dev) (ISC),
   gerados em build-time a partir do devDependency `lucide-static`
   (`scripts/build-icons.mjs`, `npm run build:icons`) — o pacote publicado
   não tem nenhuma dependência de runtime. Dois formatos de consumo: SVG
@@ -127,8 +163,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   (`LICENSE` MIT do Clarus + `LICENSE-LUCIDE.txt` ISC/Feather) distribuídas
   junto do pacote.
 
-- Fase final pré-v1.0.0, sub-fases 5.10/5.11 — excelência de produto
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`, P2):
+- **Matriz de compatibilidade e guia de migração externa**:
   `docs/reference/browser-support.md` ganhou uma **matriz de
   compatibilidade explícita por feature** (`@layer`, `color-mix()`/OKLCH,
   `@container`, `:focus-visible`, `prefers-reduced-motion`) — navegador
@@ -140,8 +175,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   também uma lacuna no índice (`docs/README.md`): DataTable, Command
   Palette e Tree View (sub-fases 5.5/5.6) não estavam listados.
 
-- Fase final pré-v1.0.0, sub-fase 5.6 — Command Palette e Tree View
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
+- **Command Palette e Tree View**:
   `packages/clarus-js/js/command-palette.js`, diálogo de busca/comandos
   disparado por botão ou por atalho global (`data-cl-shortcut="mod+k"`),
   combinando o overlay/focus trap do Modal com o filtro/navegação por
@@ -157,8 +191,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   e `docs/components/tree-view.md`. Budget de tamanho do JS: 17.25 KB
   gzip de um teto de 24 KB.
 
-- Fase final pré-v1.0.0, sub-fase 5.5 — DataTable v1
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`):
+- **DataTable v1**:
   `packages/clarus-js/js/datatable.js`, camada JS opcional sobre uma
   [Table](docs/components/table.md) comum — ordenação por coluna
   (`data-cl-sort`, ciclo asc → desc → nenhuma, `aria-sort` seguindo o
@@ -177,16 +210,14 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 - Budget de tamanho do JS (`scripts/size.mjs`, gate `npm run size:check`)
   recalibrado de 14 KB pra **24 KB gzip** (`js/clarus.min.js`). O teto de
-  14 KB foi fixado na Fase 0/3, antes da decisão de trazer a Fase 4 inteira
-  (Combobox, Datepicker, DataTable, Command palette, Tree view) pra esta
-  fase final — com Combobox+Datepicker já em 13.82 KB, não sobrevivia ao
-  resto do escopo aprovado.
+  14 KB foi fixado antes da decisão de incluir Combobox, Datepicker,
+  DataTable, Command Palette e Tree View no bundle — com Combobox+Datepicker
+  já em 13.82 KB, não sobrevivia ao resto do escopo aprovado.
 
 ### Added
 
-- Fase final pré-v1.0.0, sub-fase 5.4 — Datepicker/Timepicker
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): duas
-  abordagens, conforme o rascunho original. **CSS-only**:
+- **Datepicker/Timepicker**: duas
+  abordagens. **CSS-only**:
   `<input type="date">`/`<input type="time">` herdam `.cl-form-control`
   normalmente; corrige o indicador nativo (ícone calendário/relógio) no
   tema escuro, invisível por padrão sobre `--cl-color-surface` escuro.
@@ -209,8 +240,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   Mockup em `mockup/datepicker.html`, documentado em
   [`docs/components/datepicker.md`](docs/components/datepicker.md).
 
-- Fase final pré-v1.0.0, sub-fase 5.3 — componente Combobox/Autocomplete
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): `<input>` de
+- **Combobox/Autocomplete**: `<input>` de
   texto com listbox de sugestões que filtra por substring conforme o
   usuário digita, seguindo o padrão
   [WAI-ARIA Combobox (List Autocomplete)](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
@@ -228,8 +258,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   `mockup/combobox.html`, documentado em
   [`docs/components/combobox.md`](docs/components/combobox.md).
 
-- Fase final pré-v1.0.0, sub-fase 5.2 — theming multi-brand
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): suporte a
+- **Theming multi-brand**: suporte a
   `data-brand="x"` sobre a camada de tokens semânticos existente,
   sobrescrevendo só a cor de ação primária (`--cl-color-primary` e os
   tokens derivados de alert/feedback) — `secondary`/`success`/`warning`/
@@ -243,8 +272,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   a limitação conhecida de `color-contrast()` (texto de preenchimento
   sólido calculado em build a partir do primary padrão, não por marca).
 
-- Fase final pré-v1.0.0, sub-fase 5.1 — layout avançado
-  (`docs/internal/plans/2026-07-07-plano-final-pre-v1.md`): três novas
+- **Layout avançado**: três novas
   primitivas de layout CSS-only, `.cl-stack` (empilhamento vertical com
   `gap`), `.cl-cluster` (grupo horizontal com quebra automática) e
   `.cl-sidebar` (aside de largura fixa + conteúdo flexível, com variante
@@ -258,8 +286,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   [`docs/guides/layout-advanced.md`](docs/guides/layout-advanced.md), com
   exemplo em `mockup/layout.html`.
 
-- Fase 3 do plano mestre — qualidade, A11y e performance como gate
-  (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
+- **Qualidade, A11y e performance como gate de CI**:
   - Gate `npm run test:a11y` (axe-core via Playwright, regras WCAG 2.1
     A/AA) sobre todo mockup em `mockup/*.html`, rodando no CI a cada PR.
     Descobriu e corrigiu violações reais de contraste em texto sobre
@@ -274,7 +301,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     componente, com link pra seção "A11y" de cada página.
   - Budgets de tamanho como blocker no CI: `npm run size:check` falha o
     build se `layout` (core), `components`, `clarus` (full) ou o JS
-    ultrapassarem os tetos do plano mestre (12/18/32/14 KB gzip). Relatório
+    ultrapassarem os tetos definidos (12/18/32/14 KB gzip). Relatório
     de tamanho gzip desta release (`npm run size`):
 
     | Distribuição | Bruto | Gzip | Budget |
@@ -292,8 +319,8 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
-- Fase 2 do plano mestre — documentação profissional: `guide.md` (76KB, um
-  arquivo só, desatualizado em relação ao rename da Fase 0) é substituído
+- **Documentação profissional**: `guide.md` (76KB, um
+  arquivo só, desatualizado em relação ao rename da API) é substituído
   por `docs/`, estruturada por categoria: `getting-started/` (instalação,
   uso), `guides/` (theming, dark mode, acessibilidade, migração),
   `components/` (38 arquivos, um por componente/controle, template padrão:
@@ -301,15 +328,15 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   exemplo — todo conteúdo verificado contra o SCSS/JS atual, não copiado do
   guia antigo), `reference/` (design tokens, arquitetura SCSS, suporte a
   navegadores, relatório de contraste, definições) e `contributing/`.
-  `docs/internal/` (planos provisórios, gap-analysis, guia de comandos)
-  agora é gitignored (preservado localmente, `git rm --cached`).
+  Documentos internos de planejamento (planos provisórios, gap-analysis,
+  guia de comandos) mantidos fora da documentação pública; removidos do
+  repositório após o corte da v1.0.0, papel encerrado.
   `definitions.md`/`scss-architecture.md` movidos para `docs/reference/`.
   `package.json > files` publica a nova `docs/` pública (exceto `internal/`).
   Referências cruzadas (README raiz, CONTRIBUTING, templates de PR)
   atualizadas para os novos caminhos.
 
-- **BREAKING** — Fase 0 da refundação técnica rumo à v1.0.0
-  (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`):
+- **BREAKING** — Refundação técnica rumo à v1.0.0:
   - Rename mecânico de toda a API pública com prefixo `cl-`, para não colidir
     com classes de outras bibliotecas/CSS de terceiros na mesma página: toda
     classe de componente ganha o prefixo `cl-` (`.btn` → `.cl-btn`,
@@ -367,8 +394,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
-- Fase 1 do plano mestre (`docs/internal/plans/2026-07-06-plano-mestre-clarus-v1.md`) —
-  componentes e refinamentos, já na convenção `cl-`/`@layer`/tokens da Fase 0:
+- **Componentes e refinamentos Cirrus**, já na convenção `cl-`/`@layer`/tokens:
   - Checkbox/radio/switch 100% CSS (`packages/clarus-components/scss/forms/_check-radio-switch.scss`):
     `.cl-check`/`.cl-radio`/`.cl-switch`, técnica de input oculto + label
     irmã (mesma do Segmented Control/Rating). Estados checked/disabled/
@@ -391,8 +417,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     exemplos adicionados a `mockup/pagination-breadcrumbs.html`,
     `mockup/accordion-tabs-toast.html`, `mockup/tag.html`.
 
-- Etapa 10 do roadmap de paridade (`docs/gap-analysis-componentes.md`), os dois
-  itens de maior complexidade — fecha todos os gaps remanescentes priorizados:
+- **Notification Center e Nested Menu**:
   - Notification Center (`scss/components/_notification-center.scss`,
     `js/notification-center.js`): orquestra múltiplas instâncias de
     `Clarus.Toast` e mantém um histórico. `push({title, body, variant})` empilha
@@ -414,10 +439,9 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     (`getInstance()`/`show()`/`hide()`/`toggle()`/`dispose()`) e eventos
     `clarus:nested-menu:shown`/`-hidden`. Mockup `mockup/nested-menu.html`.
     Testes em `tests/unit/nested-menu.test.js`.
-- Etapa 9 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
-  evoluções de componentes existentes:
+- **File Input Drag-and-Drop e Hover Card**:
   - File Input Drag-and-Drop (`js/file-drop.js`): evolui
-    `.file-upload`/`.file-input`/`.file-label` (Fase 6) com
+    `.file-upload`/`.file-input`/`.file-label` com
     `dragenter`/`dragover`/`dragleave`/`drop`, sincronizando o arquivo
     solto com o `<input type="file">` nativo (dispara `change` nativo).
     Estado visual `.is-dragover` e variante `.file-label-dropzone`. Mockup
@@ -427,17 +451,15 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     composição do Popover já existente com `data-trigger="hover"`, sem
     JavaScript novo — só um ajuste visual (largura + layout de avatar ao
     lado do texto). Mockup `mockup/hover-card.html`.
-- Etapa 8 do roadmap de paridade (`docs/gap-analysis-componentes.md`):
-  Badge dismissível / Tag (`scss/components/_tag.scss`, `js/tag.js`).
-  `.tag` estende `.badge` (Fase 2) e `.btn-close` (Fase 3), só ajustando o
-  tamanho do botão de fechar (14×14px) para caber num badge. Primeiro item
-  do roadmap pós-Top-10 que precisa de JavaScript, de forma mínima:
+- **Badge dismissível / Tag** (`scss/components/_tag.scss`, `js/tag.js`).
+  `.tag` estende `.badge` e `.btn-close`, só ajustando o
+  tamanho do botão de fechar (14×14px) para caber num badge. Precisa de
+  JavaScript, de forma mínima:
   `Clarus.Tag` só ouve o clique em `[data-dismiss="tag"]` e dispara o
   evento cancelável `clarus:tag:dismissed` antes de remover o elemento do
   DOM (`preventDefault()` bloqueia a remoção). Mockup `mockup/tag.html`.
   Testes unitários em `tests/unit/tag.test.js`.
-- Etapa 7 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
-  quick wins 100% CSS:
+- **Quick wins 100% CSS**:
   - Divider (`scss/components/_divider.scss`): `<hr class="divider">` para
     o traço simples; `<div class="divider">` com `.divider-label` para
     texto centralizado, via `::before`/`::after`. Mockup
@@ -451,8 +473,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     Segmented Control (`<input type="radio">` por estrela, `row-reverse` +
     combinador de irmãos gerais). Tamanhos `.rating-sm`/`-lg`. Mockup
     `mockup/rating.html`.
-- Etapa 6 do roadmap de paridade (`docs/gap-analysis-componentes.md`),
-  primeira etapa pós Top-10:
+- **Input Group e Alert Dialog**:
   - Input Group (`scss/forms/_forms.scss`): `.input-group`/`.input-group-text`,
     100% CSS. Funde `.form-control`/`.form-select`/`.btn` com addons de
     prefixo/sufixo, bordas adjacentes sem duplicação e altura do addon
@@ -467,8 +488,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
     `title`/`message`/`confirmText`/`cancelText`/`variant`. Mockup
     `mockup/alert-dialog.html`.
   - Testes unitários (Vitest) para `confirm()` (`tests/unit/confirm.test.js`).
-- Etapa 5 do roadmap de paridade (`docs/gap-analysis-componentes.md`), que
-  fecha o Top-10 de gaps frente aos frameworks líderes:
+- **Segmented Control, Skeletons, Timeline, Collapse standalone e Breadcrumb avançado**:
   - Componente Segmented Control (`scss/components/_segmented-control.scss`):
     `.segmented-control`/`.segmented-item`/`.segmented-label`, 100% CSS.
     Modo exclusivo (`<input type="radio">`) ou inclusivo (`<input
@@ -548,7 +568,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   **cancelável** `clarus:stepper:beforechange` (hook de validação por passo),
   `clarus:stepper:changed` e `clarus:stepper:completed`. Linear por padrão
   (`data-linear`), `aria-current="step"` e navegação por teclado. Mockup
-  `mockup/stepper.html`. Terceiro item (Etapa 3) do roadmap de paridade.
+  `mockup/stepper.html`.
 - Breakpoint adicional `xxxl` (1920px, `scss/settings/_breakpoints.scss`),
   para monitores externos Full HD sem escala — gera automaticamente
   `.col-xxxl-*`, `.container-xxxl` e todos os utilitários responsivos
@@ -563,8 +583,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   remove o backdrop visual mantendo Escape/clique fora ativos. `Clarus.Offcanvas`
   com `getInstance()`/`.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
   `clarus:offcanvas:shown`/`-hidden`, `data-dismiss="offcanvas"`. Mockup
-  `mockup/offcanvas-popover.html`. Primeiro item (Etapa 4) do roadmap de
-  paridade.
+  `mockup/offcanvas-popover.html`.
 - Componente Popover (`scss/components/_popover.scss`, `js/popover.js`):
   painel flutuante com conteúdo rico (`.popover-header`/`-body`/`-footer`),
   posicionado via `computePosition()`/`applyPosition()` (como Dropdown/Tooltip),
@@ -574,8 +593,7 @@ e este projeto adere a [Semantic Versioning](https://semver.org/lang/pt-BR/).
   `focusout`/`relatedTarget`) ou `"manual"` (sem listeners automáticos).
   `Clarus.Popover` com `getInstance()`/`.show()`/`.hide()`/`.toggle()`/
   `.dispose()`, eventos `clarus:popover:shown`/`-hidden`, `data-dismiss="popover"`.
-  Mockup `mockup/offcanvas-popover.html`. Segundo item (Etapa 4) do roadmap de
-  paridade.
+  Mockup `mockup/offcanvas-popover.html`.
 
 ### Changed
 

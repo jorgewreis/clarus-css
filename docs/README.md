@@ -98,6 +98,24 @@ Pacotes opcionais, publicados separadamente do core:
 [Showcase de produção](showcase.md) — 🚧 em construção, aguardando casos
 de uso reais.
 
+## Templates prontos
+
+4 templates completos (HTML + CSS/JS já publicados) para copiar como
+ponto de partida — não substituem os mockups individuais, são páginas
+reais montadas com os componentes existentes:
+
+[`mockup/templates/dashboard.html`](../mockup/templates/dashboard.html) ·
+[`mockup/templates/auth.html`](../mockup/templates/auth.html) ·
+[`mockup/templates/landing.html`](../mockup/templates/landing.html) ·
+[`mockup/templates/admin.html`](../mockup/templates/admin.html)
+
+## Comparação com outros frameworks
+
+[Clarus vs Bootstrap vs Tailwind CSS](comparison.md) — filosofia, tamanho
+de bundle, dependências e tema escuro, com dados públicos e
+reproduzíveis (sem benchmarks de performance ao vivo, marcados como
+pendente de metodologia).
+
 ## Referência
 
 - [Design tokens](reference/design-tokens.md) — lista completa de tokens

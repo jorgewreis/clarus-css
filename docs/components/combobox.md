@@ -4,7 +4,7 @@ Um `<input>` de texto com uma listbox de sugestões que filtra conforme o
 usuário digita — diferente do [Select](select.md) (que troca a aparência
 de um `<select>` inteiro), o Combobox é sempre texto livre com sugestões,
 seguindo o padrão [WAI-ARIA Combobox (List Autocomplete)](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).
-Reusa `js/core/positioning.js` (mesmo posicionamento do [Dropdown](dropdown.md))
+Reusa `packages/clarus-js/js/core/positioning.js` (mesmo posicionamento do [Dropdown](dropdown.md))
 e a classe `.cl-dropdown-menu`/`.cl-dropdown-item` para a listbox flutuante.
 
 ## Visão geral

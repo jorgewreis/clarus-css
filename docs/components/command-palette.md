@@ -67,9 +67,9 @@ clicar no botão.
 `role="dialog"` + `aria-modal="true"` no painel, `role="combobox"` +
 `aria-autocomplete="list"` + `aria-controls`/`aria-expanded` no input,
 `role="listbox"` na lista, `role="option"` + `aria-selected` em cada item.
-Foco preso dentro do diálogo (`js/core/focus.js`, mesmo mecanismo do
+Foco preso dentro do diálogo (`packages/clarus-js/js/core/focus.js`, mesmo mecanismo do
 Modal) enquanto aberto; scroll da página travado
-(`js/core/overlay.js#lockScroll`). O foco **nunca sai do input** — a opção
+(`packages/clarus-js/js/core/overlay.js#lockScroll`). O foco **nunca sai do input** — a opção
 destacada é comunicada via `aria-activedescendant`, como no Combobox.
 
 Teclado (com foco no input, painel aberto):

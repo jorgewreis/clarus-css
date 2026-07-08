@@ -83,6 +83,29 @@ Depreciações passam por **duas versões minor** antes de remoção:
   pública coberta pelo guia de migração, atualização de
   [`docs/guides/migration-v1.md`](docs/guides/migration-v1.md).
 
+## Processo de release
+
+Só quem mantém o projeto corta releases. Passo a passo, na ordem:
+
+1. Garantir que `main` está com `npm run build && npm run lint && npm test`,
+   `npm run test:visual`, `npm run test:a11y`, `npm run contrast:check` e
+   `npm run size:check` verdes.
+2. Atualizar a versão em `package.json` (raiz) seguindo
+   [semver](#semver-e-depreciação).
+3. Mover o conteúdo de `## [Unreleased]` no `CHANGELOG.md` para uma nova
+   seção `## [x.y.z] - AAAA-MM-DD`, deixando `## [Unreleased]` vazio no
+   topo para a próxima leva de mudanças.
+4. `npm pack --dry-run` para conferir que `files`/`exports` do
+   `package.json` publicam exatamente o esperado (sem docs internos, sem
+   artefato de teste).
+5. Commit dessas mudanças, depois `git tag vx.y.z` e `git push origin main
+   --tags`.
+6. O push da tag dispara `.github/workflows/release.yml`: reroda a suíte
+   completa e publica `clarus-css`, `clarus-icons`, `clarus-cli` e
+   `clarus-react` no npm com `--provenance`. `clarus-icons`/`clarus-cli`/
+   `clarus-react` têm versionamento próprio (independente da tag/raiz) —
+   só bumpe a versão deles quando o pacote específico mudar.
+
 ## Reportando bugs e propondo funcionalidades
 
 Use os templates de issue (`.github/ISSUE_TEMPLATE/`) ao abrir uma issue —

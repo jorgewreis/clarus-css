@@ -1,5 +1,14 @@
 # Clarus CSS — Definições Iniciais do Projeto
 
+> Este documento registra a especificação e as decisões de arquitetura
+> firmadas na concepção do projeto — filosofia, stack, convenções de
+> nomenclatura e API (seções 1–20) permanecem a referência vigente. A
+> seção 21 (catálogo por componente) reflete o estado em que cada trecho
+> foi escrito e não é atualizada retroativamente a cada componente novo;
+> para o catálogo completo e sempre atual, use
+> [`docs/README.md#componentes`](../README.md#componentes) e
+> [`docs/components/`](../components/).
+
 ## 1. Visão Geral
 
 Clarus CSS é um framework CSS open source, de uso recorrente nos projetos pessoais e profissionais do autor, com distribuição pública como produto para qualquer desenvolvedor que precise construir interfaces web com HTML, CSS e JavaScript de forma direta, consistente e reutilizável.
@@ -70,7 +79,7 @@ As classes e componentes devem ser pensados para:
 O sistema de layout será baseado em Flexbox.
 
 O grid deve seguir uma abordagem convencional de 12 colunas, com breakpoints
-(`scss/settings/_breakpoints.scss`) calibrados pelas larguras lógicas de tela
+(`packages/clarus-core/scss/settings/_breakpoints.scss`) calibrados pelas larguras lógicas de tela
 mais comuns do mercado atual, não por números arbitrários:
 
 - `sm` (640px) — tablets pequenos/phablets
@@ -166,26 +175,36 @@ O projeto será licenciado sob MIT.
 
 Essa licença confirma a intenção de permitir uso amplo, modificação, cópia, redistribuição e uso comercial, preservando apenas os requisitos básicos de atribuição e inclusão do aviso de licença.
 
-## 15. Estrutura Inicial do Repositório
+## 15. Estrutura do Repositório
 
-A estrutura-alvo do repositório deve evoluir para algo próximo de:
+A estrutura evoluiu de um único diretório `scss/`/`js/` (intenção original
+desta seção) para um monorepo por pacote, separando cada camada da
+arquitetura (ver [scss-architecture.md](scss-architecture.md)):
 
 ```text
 clarus-css/
-├── assets/
-├── docs/
-├── dist/
-├── js/
-├── mockup/
-├── scss/
+├── assets/                  # fontes self-hosted
+├── dist/                    # CSS/JS compilados (gitignored, gerado por `npm run build`)
+├── docs/                    # documentação pública
+├── mockup/                  # exemplo funcional por componente + templates prontos
+├── packages/
+│   ├── clarus-core/         # tokens, base, layout, temas
+│   ├── clarus-components/   # componentes e formulários (SCSS)
+│   ├── clarus-utilities/    # utilitários atômicos (SCSS)
+│   ├── clarus-fonts/        # @font-face self-hosted
+│   ├── clarus-js/           # API JavaScript de todos os componentes interativos
+│   ├── clarus-icons/        # pacote opcional de ícones (Lucide)
+│   ├── clarus-cli/          # CLI opcional (build/theme/analyze)
+│   └── clarus-react/        # wrapper React fino (opcional)
+├── scripts/                 # build, migração, contraste, tamanho
+├── scss/                    # ponto de entrada Sass que agrega os pacotes acima
+├── tests/                   # unit (Vitest), a11y e visual (Playwright)
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── package.json
 └── README.md
 ```
-
-A estrutura atual pode ser ajustada progressivamente, mas deve convergir para separar fonte, distribuição, documentação e exemplos.
 
 ## 16. Boas Práticas de Engenharia
 
@@ -234,7 +253,7 @@ As duas pendências desta seção (antes "a definir posteriormente") foram decid
 Opção "Indigo autoral": paleta própria, escolhida por dar ao Clarus uma
 identidade cromática distinta dos azuis e paletas genéricas mais comuns em
 frameworks de UI (uma paleta de placeholder chegou a ser usada em
-`scss/settings/_colors.scss` durante o desenvolvimento inicial), reforçando o
+`packages/clarus-core/scss/settings/_colors.scss` durante o desenvolvimento inicial), reforçando o
 posicionamento de identidade visual própria (seção 4).
 
 - Cores de estado:
@@ -247,11 +266,11 @@ posicionamento de identidade visual própria (seção 4).
   que existia antes desta implementação (`$color-primary` e `$color-info`
   com o mesmo valor).
 - Escala neutra com 9 degraus cheios (100 a 900, sem lacunas), já
-  implementada em `scss/settings/_colors.scss`: `#F8FAFC`, `#F1F5F9`,
+  implementada em `packages/clarus-core/scss/settings/_colors.scss`: `#F8FAFC`, `#F1F5F9`,
   `#E2E8F0`, `#CBD5E1`, `#94A3B8`, `#64748B`, `#475569`, `#334155`,
   `#1E293B`.
 - Variantes de `primary`/`success`/`warning`/`danger`/`info` para o dark
-  mode já implementadas em `scss/themes/_dark.scss` (token
+  mode já implementadas em `packages/clarus-core/scss/themes/_dark.scss` (token
   `--cl-color-#{nome}`, recalculado via `color.mix()` com um peso por
   cor no mapa `$dark-color-weights`); `alert-*-bg`/`-text` continuam
   recalculados à parte para o tema escuro.
@@ -264,7 +283,7 @@ Pro no monoespaçado (`$font-family-mono`, sem alteração).
 - Os arquivos da fonte (`.woff2`, licença OFL) já são self-hosted, distribuídos
   junto ao pacote em `assets/fonts/plus-jakarta-sans/` (incluindo o
   `OFL.txt` da fonte, requisito da licença), com `@font-face` declarado em
-  `scss/base/_typography.scss` no lugar do antigo `@import
+  `packages/clarus-core/scss/base/_typography.scss` no lugar do antigo `@import
   url("https://fonts.googleapis.com/...")` — cumprindo a meta de
   "dependência externa zero em tempo de execução" (seção 6) para a fonte
   principal. O monoespaçado (Source Code Pro) permanece via `@import` do
@@ -321,18 +340,20 @@ Pro no monoespaçado (`$font-family-mono`, sem alteração).
 ## 21. Componentes do Framework
 
 Esta seção documenta, por grupo de componente, as classes CSS, tokens e
-módulos JavaScript entregues pelo framework — a referência funcional
-completa da versão atual. Todo componente/grupo tem um mockup dedicado em
-`mockup/` (HTML puro consumindo os arquivos gerados em `dist/css/`/
-`dist/js/`), usado tanto como exemplo de uso quanto como fixture dos testes
-visuais (seção 22).
+módulos JavaScript entregues pelo framework até o momento em que cada
+trecho foi escrito (ver nota no topo do documento — componentes
+adicionados depois têm sua própria página em
+[`docs/components/`](../components/), não um adendo aqui). Todo
+componente/grupo tem um mockup dedicado em `mockup/` (HTML puro consumindo
+os arquivos gerados em `dist/css/`/`dist/js/`), usado tanto como exemplo de
+uso quanto como fixture dos testes visuais (seção 22).
 
 ### Botões
 
 Variantes sólidas e outline por cor de estado
 (`.btn-primary/success/warning/danger/info`, `.cl-btn-outline-*`), tamanhos
 (`.cl-btn-sm`/`.cl-btn-lg`) e estados de hover/active/focus/disabled. A função
-`color-contrast()` (`scss/tools/_mixins.scss`) garante contraste WCAG AA em
+`color-contrast()` (`packages/clarus-core/scss/tools/_mixins.scss`) garante contraste WCAG AA em
 cada variante — reaproveitada por cards, alertas, modal e navbar.
 
 Mockup: `mockup/buttons.html`.
@@ -342,7 +363,7 @@ Mockup: `mockup/buttons.html`.
 Badges sólidos com tamanhos (`.cl-badge-sm`/`.cl-badge-lg`), reaproveitados por
 cards, navbar e tabelas. Alertas com fundo tintado por estado (`.cl-alert-*`),
 via tokens `--cl-alert-*-bg`/`-text` com suporte a dark mode, usando as
-funções `tint-color()`/`shade-color()` (`scss/tools/_mixins.scss`). Os dois
+funções `tint-color()`/`shade-color()` (`packages/clarus-core/scss/tools/_mixins.scss`). Os dois
 componentes compartilham o mesmo padrão de variante de cor de estado
 (success/warning/danger/info), também usado por tabelas.
 
@@ -355,7 +376,7 @@ Combina botões, badges e tipografia base num contêiner:
 `.cl-card-text`, tamanhos (`.cl-card-sm`/`.cl-card-lg`). O `.cl-card-header` suporta a
 variante título + botão de fechar (`.cl-btn-close`, reaproveitável em
 modal/toast). Utilitários de sombra (`.u-shadow-sm`/`.u-shadow`/`.u-shadow-lg`,
-`scss/utilities/_shadow.scss`) dão elevação ao card. `.cl-card-clickable` +
+`packages/clarus-utilities/scss/utilities/_shadow.scss`) dão elevação ao card. `.cl-card-clickable` +
 `.cl-stretched-link` tornam o card inteiro clicável/focável sem aninhar
 elementos interativos; `.cl-card-horizontal` muda o eixo para linha, ajustando
 raio/borda do header/footer para a lateral.
@@ -401,7 +422,7 @@ Mockup: `mockup/forms-advanced.html`.
 
 ### Infraestrutura JS Compartilhada
 
-Módulos internos em `js/core/` (ES modules, sem dependências externas)
+Módulos internos em `packages/clarus-js/js/core/` (ES modules, sem dependências externas)
 usados por todos os componentes interativos, sem componente visual próprio:
 
 - `positioning.js` — `computePosition()`/`applyPosition()`, com flip
@@ -419,7 +440,7 @@ usados por todos os componentes interativos, sem componente visual próprio:
   inicialização automática (`data-cl="..."`) e registro de instância
   (`getInstance()`) usado por todo componente interativo.
 
-Reexportado como `Clarus.core` pelo bundle único (`js/clarus.js` →
+Reexportado como `Clarus.core` pelo bundle único (`packages/clarus-js/js/clarus.js` →
 `dist/js/clarus.js`) e também importável de forma granular
 (`clarus-css/js/core/positioning`, etc.), alinhado com a API JavaScript
 definida na seção 20.
@@ -430,12 +451,12 @@ transição, sem componente visual final).
 ### Dropdown e Tooltip
 
 `.cl-dropdown-toggle`/`.cl-dropdown-menu`/`.cl-dropdown-item`/`.cl-dropdown-divider`/
-`.cl-dropdown-header` (`scss/components/_dropdown.scss`). `.cl-tooltip`/
+`.cl-dropdown-header` (`packages/clarus-components/scss/components/_dropdown.scss`). `.cl-tooltip`/
 `.cl-tooltip-inner`/`.cl-tooltip-arrow` com 4 posicionamentos
-(`scss/components/_tooltips.scss`), usando os tokens
+(`packages/clarus-components/scss/components/_tooltips.scss`), usando os tokens
 `--cl-tooltip-bg`/`-text` (invertidos no dark mode).
 
-`js/dropdown.js` e `js/tooltip.js` seguem a API da seção 20: auto-init via
+`packages/clarus-js/js/dropdown.js` e `packages/clarus-js/js/tooltip.js` seguem a API da seção 20: auto-init via
 `data-cl="dropdown"`/`"tooltip"`, `Clarus.Dropdown`/`Clarus.Tooltip` com
 `getInstance()`, `.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
 `cl:dropdown:shown`/`-hidden` e `cl:tooltip:shown`/`-hidden`.
@@ -444,7 +465,7 @@ item, fora do menu ou com Escape (foco retorna ao toggle). Tooltip
 mostra/esconde por hover/foco/blur e Escape, com `aria-describedby` ligando
 o elemento de referência ao tooltip.
 
-`computePosition()` (`js/core/positioning.js`) suporta a opção `align`
+`computePosition()` (`packages/clarus-js/js/core/positioning.js`) suporta a opção `align`
 (`"start"`/`"center"`/`"end"`) para o eixo cruzado, além do `placement`. O
 Dropdown usa `data-align` no toggle (padrão `"start"`, alinhamento à esquerda)
 com offset de 4px em relação ao toggle; `.cl-dropdown-menu` tem
@@ -457,15 +478,15 @@ Mockup: `mockup/dropdown-tooltip.html`.
 ### Modal e Select Customizado
 
 Modal: `.cl-modal`/`.cl-modal-dialog`/`.cl-modal-content`/`.cl-modal-header`/
-`.cl-modal-title`/`.cl-modal-body`/`.cl-modal-footer` (`scss/components/_modal.scss`),
-com tamanhos `.cl-modal-sm`/`.cl-modal-lg` no `.cl-modal-dialog`. `js/modal.js`
+`.cl-modal-title`/`.cl-modal-body`/`.cl-modal-footer` (`packages/clarus-components/scss/components/_modal.scss`),
+com tamanhos `.cl-modal-sm`/`.cl-modal-lg` no `.cl-modal-dialog`. `packages/clarus-js/js/modal.js`
 (`Clarus.Modal`) reaproveita a infraestrutura JS compartilhada:
 `lockScroll()` enquanto aberto, `createFocusTrap()` no `.cl-modal-dialog`,
 `onEscapeKey()` e `onClickOutside()` para fechar (foco retorna ao gatilho);
 dismiss via qualquer elemento com `data-cl-dismiss="modal"`;
 `data-backdrop="static"` no `.cl-modal` desativa fechar por Escape/clique fora.
 
-Select customizado: `js/select.js` (`Clarus.Select`) gera a marcação
+Select customizado: `packages/clarus-js/js/select.js` (`Clarus.Select`) gera a marcação
 (`.cl-form-select` + `.cl-dropdown-menu`/`.cl-dropdown-item` por `<option>`) a partir
 de um `<select>` nativo (`data-cl="select"`, oculto mas mantido em
 sincronia para submissão de formulário) e **compõe uma instância de
@@ -476,32 +497,32 @@ listeners externos), além de `cl:select:changed`. ARIA usa
 `role="listbox"`/`"option"`/`aria-selected` (semântica mais correta para
 este caso, em vez de `"menu"`/`"menuitem"` herdado do Dropdown). Tamanhos
 via `data-size="sm"/"lg"` no `<select>` (`.cl-form-select-sm`/`-lg`,
-`scss/forms/_forms.scss`).
+`packages/clarus-components/scss/forms/_forms.scss`).
 
 Mockup: `mockup/modal-select.html`.
 
 ### Accordion, Tabs e Toast
 
 Os três reaproveitam a infraestrutura de transição/collapse
-(`js/core/transition.js`).
+(`packages/clarus-js/js/core/transition.js`).
 
 **Accordion** (`.cl-accordion`/`.cl-accordion-item`/`.cl-accordion-header`/
 `.cl-accordion-button`/`.cl-accordion-collapse`/`.cl-accordion-body`,
-`scss/components/_accordion.scss`): `js/accordion.js` usa `collapse()`/
+`packages/clarus-components/scss/components/_accordion.scss`): `packages/clarus-js/js/accordion.js` usa `collapse()`/
 `expand()` de `Clarus.core` para animar a altura de cada painel; só um
 painel aberto por vez por padrão (`data-multiple="true"` permite vários
 simultâneos).
 
-**Tabs** (`.cl-tabs`/`.cl-tab-content`/`.cl-tab-pane`, `scss/components/_tabs.scss`,
+**Tabs** (`.cl-tabs`/`.cl-tab-content`/`.cl-tab-pane`, `packages/clarus-components/scss/components/_tabs.scss`,
 reaproveitando `.cl-nav-link` da Navbar com um indicador de sublinhado escopado
-a `.cl-tabs`): `js/tabs.js` alterna `.is-active` no link e no painel
+a `.cl-tabs`): `packages/clarus-js/js/tabs.js` alterna `.is-active` no link e no painel
 correspondente, com navegação por ArrowLeft/ArrowRight/Home/End entre as
 abas habilitadas (`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`,
 `tabindex` roving), disparando `cl:tab:changed`.
 
 **Toast** (`.cl-toast-container`/`.cl-toast`/`.cl-toast-header`/`.cl-toast-body`,
 variantes de cor de estado via `.toast-#{nome}`,
-`scss/components/_toasts.scss`): `js/toast.js` usa `expand()`/`collapse()`
+`packages/clarus-components/scss/components/_toasts.scss`): `packages/clarus-js/js/toast.js` usa `expand()`/`collapse()`
 para mostrar/esconder, com timer de auto-dismiss configurável (`data-delay`,
 `data-autohide="false"` para desativar) e dismiss via
 `data-cl-dismiss="toast"`. Instâncias são criadas no auto-init mas só ficam
@@ -519,7 +540,7 @@ de estado (`.spinner-#{nome}`) via os tokens `--cl-color-*`; a cor herda
 de `currentColor`, permitindo colorir também com utilitários de texto.
 
 Barra de progresso `.cl-progress`/`.cl-progress-bar`
-(`scss/components/_spinner.scss`): a largura do preenchimento é controlada por
+(`packages/clarus-components/scss/components/_spinner.scss`): a largura do preenchimento é controlada por
 `--cl-progress-value` (0–100) ou por `style="width"`, com transição suave.
 Tamanhos (`.cl-progress-sm`/`.cl-progress-lg`), variantes de cor de estado
 (`.progress-bar-#{nome}`, reaproveitando `color-contrast()` como botões/badges)
@@ -533,8 +554,8 @@ Mockup: `mockup/spinner-progress.html`.
 ### Carousel
 
 Carrossel de slides (`.cl-carousel`/`.cl-carousel-inner`/`.cl-carousel-item`,
-`scss/components/_carousel.scss`). O layout padrão é "slide": `.cl-carousel-inner`
-é uma trilha flex e `js/carousel.js` a desloca por `translateX(-index*100%)`;
+`packages/clarus-components/scss/components/_carousel.scss`). O layout padrão é "slide": `.cl-carousel-inner`
+é uma trilha flex e `packages/clarus-js/js/carousel.js` a desloca por `translateX(-index*100%)`;
 o recorte (`overflow: hidden`) fica no `.cl-carousel` (elemento parado), não na
 trilha, senão a área de recorte se moveria junto e cortaria os slides
 seguintes. A variante `.cl-carousel-fade` empilha os slides e anima a opacidade.
@@ -543,7 +564,7 @@ Controles `.cl-carousel-control-prev`/`-next` (setas) e `.cl-carousel-indicators
 modificador opcional `.cl-carousel-hover-controls` esconde as setas até o
 hover/foco (`:focus-within`) do carrossel.
 
-`js/carousel.js` (`Clarus.Carousel`) segue a API da seção 20: auto-init via
+`packages/clarus-js/js/carousel.js` (`Clarus.Carousel`) segue a API da seção 20: auto-init via
 `data-cl="carousel"`, `Clarus.Carousel.getInstance()`, métodos
 `.next()`/`.prev()`/`.goTo(i)`/`.pause()`/`.dispose()`, evento
 `cl:carousel:slid` (`detail: { from, to }`). Navegação por teclado
@@ -558,7 +579,7 @@ Mockup: `mockup/carousel.html`.
 
 ### Stepper
 
-Stepper/Wizard (`.cl-stepper`/`.cl-stepper-header`/`.cl-step`, `scss/components/_stepper.scss`).
+Stepper/Wizard (`.cl-stepper`/`.cl-stepper-header`/`.cl-step`, `packages/clarus-components/scss/components/_stepper.scss`).
 Cada `.cl-step` tem um `.cl-step-indicator` (círculo com número, ou um "check" em SVG
 quando concluído) e um `.cl-step-label`; a variante `.cl-stepper-vertical` empilha os
 passos com `.cl-step-content` (label + `.cl-step-description`). Estados por passo:
@@ -569,7 +590,7 @@ especificidade da regra base do conector. Opcionalmente há painéis de conteúd
 (`.cl-step-panel`, só o ativo visível) e ações de navegação (`.cl-stepper-actions` com
 botões `[data-stepper="prev"]`/`[data-stepper="next"]`).
 
-`js/stepper.js` (`Clarus.Stepper`) segue a API da seção 20: auto-init via
+`packages/clarus-js/js/stepper.js` (`Clarus.Stepper`) segue a API da seção 20: auto-init via
 `data-cl="stepper"`, `getInstance()`, métodos `.next()`/`.prev()`/`.goTo(i)`/
 `.setError(i, bool)`/`.complete()`/`.dispose()`. Antes de cada troca dispara o
 evento **cancelável** `cl:stepper:beforechange` (`detail: { from, to }`) —
@@ -584,11 +605,11 @@ Mockup: `mockup/stepper.html`.
 
 ### Offcanvas
 
-Painel deslizante (`.cl-offcanvas`, `scss/components/_offcanvas.scss`), com o
+Painel deslizante (`.cl-offcanvas`, `packages/clarus-components/scss/components/_offcanvas.scss`), com o
 mesmo mecanismo de overlay do Modal (bloqueio de scroll, focus trap,
 fechamento por Escape/clique fora), aplicado de forma independente (não
-compõe `js/modal.js` — segue o padrão já usado por Accordion/Tabs/Toast, cada
-um reaproveitando os módulos de `js/core/` por si). Modificadores de posição
+compõe `packages/clarus-js/js/modal.js` — segue o padrão já usado por Accordion/Tabs/Toast, cada
+um reaproveitando os módulos de `packages/clarus-js/js/core/` por si). Modificadores de posição
 obrigatórios `.cl-offcanvas-start`/`-end`/`-top`/`-bottom` definem o eixo de
 tamanho (largura para start/end, altura para top/bottom) e a direção inicial
 do `transform`; `.cl-offcanvas-header`/`-title`/`-body`/`-footer` seguem o mesmo
@@ -596,7 +617,7 @@ padrão do Modal (reaproveitando `.cl-btn-close`). O `.cl-offcanvas-backdrop` é
 dinamicamente pelo JS (não fica fixo ao painel, como no Modal, porque o painel
 não cobre a tela inteira).
 
-`js/offcanvas.js` (`Clarus.Offcanvas`) segue a API da seção 20: auto-init via
+`packages/clarus-js/js/offcanvas.js` (`Clarus.Offcanvas`) segue a API da seção 20: auto-init via
 `data-cl="offcanvas"`, `data-cl-target` no gatilho, `getInstance()`,
 `.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
 `cl:offcanvas:shown`/`-hidden`. `data-cl-dismiss="offcanvas"` fecha a partir
@@ -609,14 +630,14 @@ particularidade de implementação: como `visibility: hidden` mantém
 fato focável depois que o navegador processa a transição de visibilidade —
 por isso a ativação do focus trap é adiada por um duplo
 `requestAnimationFrame` (mesma técnica já usada por `collapse()`/`expand()`
-em `js/core/transition.js`).
+em `packages/clarus-js/js/core/transition.js`).
 
 Mockup: `mockup/offcanvas-popover.html`.
 
 ### Popover
 
 Painel flutuante com conteúdo rico (`.cl-popover`/`.cl-popover-header`/`-body`/
-`-footer`, `scss/components/_popover.scss`), posicionado com a mesma técnica
+`-footer`, `packages/clarus-components/scss/components/_popover.scss`), posicionado com a mesma técnica
 do Tooltip (`.cl-popover-arrow`, quadrado rotacionado 45°) mas com aparência de
 card de superfície (`--cl-color-surface`/`-border`, `--cl-shadow-md`)
 em vez do chip escuro do tooltip, já que pode conter elementos interativos.
@@ -624,7 +645,7 @@ em vez do chip escuro do tooltip, já que pode conter elementos interativos.
 interativo) com `aria-modal="false"` — é um overlay leve, sem focus trap e sem
 bloqueio de scroll (diferente de Modal/Offcanvas).
 
-`js/popover.js` (`Clarus.Popover`) é independente (não compõe `Tooltip` nem
+`packages/clarus-js/js/popover.js` (`Clarus.Popover`) é independente (não compõe `Tooltip` nem
 `Dropdown`), reaproveitando apenas `positioning.js`
 (`computePosition`/`applyPosition`, como Dropdown/Tooltip) e
 `onClickOutside`/`onEscapeKey`. Segue a API da seção 20
@@ -645,11 +666,11 @@ Mockup: `mockup/offcanvas-popover.html`.
 ### Segmented Control
 
 Grupo de botões com estado selecionado (`.cl-segmented-control`/`.cl-segmented-item`/
-`.cl-segmented-label`, `scss/components/_segmented-control.scss`), 100% CSS.
+`.cl-segmented-label`, `packages/clarus-components/scss/components/_segmented-control.scss`), 100% CSS.
 Modo exclusivo: `<input type="radio">` (mesmo `name` em todos os itens do
 grupo). Modo inclusivo: `<input type="checkbox">`, cada item
 seleciona/deseleciona de forma independente. O `<input>` fica visualmente
-oculto (mesma técnica de `.cl-file-input`, `scss/forms/_forms.scss`) e o
+oculto (mesma técnica de `.cl-file-input`, `packages/clarus-components/scss/forms/_forms.scss`) e o
 `<label>` irmão recebe o estilo — o item selecionado reaproveita
 `color-contrast()` (mesma função de botões/badges/pagination) para garantir
 contraste. Tamanhos `.cl-segmented-control-sm`/`-lg`.
@@ -658,7 +679,7 @@ Mockup: `mockup/segmented-control.html`.
 
 ### Skeletons
 
-Placeholder de carregamento (`.cl-skeleton`, `scss/components/_skeleton.scss`),
+Placeholder de carregamento (`.cl-skeleton`, `packages/clarus-components/scss/components/_skeleton.scss`),
 100% CSS. Variantes `.cl-skeleton-text`/`-circle`/`-rect`; tamanho/forma
 controlados por largura/altura inline ou pelo elemento host. Animação padrão
 "pulse" (oscila a opacidade); variante `.cl-skeleton-wave` substitui por um
@@ -670,22 +691,22 @@ Mockup: `mockup/skeletons.html`.
 ### Timeline
 
 Linha do tempo (`.cl-timeline`/`.cl-timeline-item`/`.cl-timeline-marker`/
-`.cl-timeline-content`, `scss/components/_timeline.scss`), 100% CSS, vertical por
+`.cl-timeline-content`, `packages/clarus-components/scss/components/_timeline.scss`), 100% CSS, vertical por
 padrão (`.cl-timeline-horizontal` inverte o eixo). Estados por item: padrão
 (pendente), `.cl-timeline-active`, `.cl-timeline-completed` (marcador com "check",
 mesmo ícone do Stepper) e `.cl-timeline-failed`, reaproveitando os tokens de cor
 de estado (`--cl-color-primary/success/danger`). O conector entre
 marcadores fica na cor de sucesso depois de um item concluído, mesma lógica
-de progresso do Stepper (`scss/components/_stepper.scss`).
+de progresso do Stepper (`packages/clarus-components/scss/components/_stepper.scss`).
 
 Mockup: `mockup/timeline.html`.
 
 ### Collapse (standalone)
 
-Extrai o padrão `collapse()`/`expand()` de `js/core/transition.js` — já usado
+Extrai o padrão `collapse()`/`expand()` de `packages/clarus-js/js/core/transition.js` — já usado
 internamente pelo Accordion — para uma seção expansível independente, sem
-precisar de um accordion completo. `.cl-collapse` (`scss/components/_collapse.scss`)
-só define o `overflow: hidden` exigido pela animação de `height`. `js/collapse.js`
+precisar de um accordion completo. `.cl-collapse` (`packages/clarus-components/scss/components/_collapse.scss`)
+só define o `overflow: hidden` exigido pela animação de `height`. `packages/clarus-js/js/collapse.js`
 (`Clarus.Collapse`) segue a API da seção 20: auto-init via
 `data-cl="collapse"` no gatilho com `data-cl-target`, `getInstance()`,
 `.show()`/`.hide()`/`.toggle()`/`.dispose()`, eventos
@@ -696,27 +717,26 @@ Mockup: `mockup/collapse.html`.
 
 ### Breadcrumb Avançado
 
-Estende `.cl-breadcrumb`/`.cl-breadcrumb-item` (Fase 5, `scss/components/_breadcrumbs.scss`)
-com truncamento e colapso automático em telas pequenas, via `js/breadcrumb.js`
+Estende `.cl-breadcrumb`/`.cl-breadcrumb-item` (`packages/clarus-components/scss/components/_breadcrumbs.scss`)
+com truncamento e colapso automático em telas pequenas, via `packages/clarus-js/js/breadcrumb.js`
 (`Clarus.Breadcrumb`, auto-init com `data-cl="breadcrumb"` na lista,
 `data-max-items` configurável). Cada label ganha `.cl-breadcrumb-item-truncate`
 (reticências por CSS); labels que realmente transbordam (medido só depois de
 `document.fonts.ready`, por causa da tipografia self-hosted da seção 18.2)
-ganham um `Tooltip` (`js/tooltip.js`) com o texto completo. Abaixo do
+ganham um `Tooltip` (`packages/clarus-js/js/tooltip.js`) com o texto completo. Abaixo do
 breakpoint `sm` (640px), se a lista tiver mais itens que `data-max-items`,
 os níveis intermediários são substituídos por um único item `.cl-breadcrumb-more`
-("…") que **compõe um `Dropdown`** (`js/dropdown.js`, mesmo padrão de
-composição do Select customizado da Fase 9) com os links ocultos — mantém
+("…") que **compõe um `Dropdown`** (`packages/clarus-js/js/dropdown.js`, mesmo padrão de
+composição do Select customizado) com os links ocultos — mantém
 sempre o primeiro e o último nível visíveis.
 
-Mockup: `mockup/pagination-breadcrumbs.html` (exemplo avançado adicionado ao
-mockup já existente da Fase 5).
+Mockup: `mockup/pagination-breadcrumbs.html`.
 
 ### Input Group
 
 Funde `.cl-form-control` (ou `.cl-form-select`/`.cl-btn`) com "addons" de texto/ícone
 de prefixo/sufixo (`.cl-input-group`/`.cl-input-group-text`,
-`scss/forms/_forms.scss`), 100% CSS. A altura do addon acompanha a do
+`packages/clarus-components/scss/forms/_forms.scss`), 100% CSS. A altura do addon acompanha a do
 controle via `align-items: stretch` (sem precisar fixar `height`); as bordas
 adjacentes são fundidas (sem dupla borda) e só as pontas do grupo mantêm o
 radius. Tamanhos `.cl-input-group-sm`/`-lg`.
@@ -725,12 +745,12 @@ Mockup: `mockup/input-group.html`.
 
 ### Alert Dialog / Confirm
 
-Variante do Modal (`scss/components/_alert-dialog.scss`, estende
+Variante do Modal (`packages/clarus-components/scss/components/_alert-dialog.scss`, estende
 `.cl-modal`/`.cl-modal-dialog`/`.cl-modal-content`/`.cl-modal-footer` sem duplicar
 layout) para confirmação, 100% programática — ao contrário dos demais
 componentes (auto-init declarativo via `data-cl`), é montada na hora por
-`Clarus.confirm(options)` (`js/confirm.js`), sem precisar de marcação
-pré-declarada na página. Internamente reaproveita `js/modal.js` (foco,
+`Clarus.confirm(options)` (`packages/clarus-js/js/confirm.js`), sem precisar de marcação
+pré-declarada na página. Internamente reaproveita `packages/clarus-js/js/modal.js` (foco,
 teclado, overlay) com um gatilho sintético. Retorna uma `Promise<boolean>`:
 `true` se o botão de confirmação for clicado, `false` se cancelado ou
 fechado por Escape/clique fora. Opções: `title`, `message`, `confirmText`,
@@ -742,7 +762,7 @@ Mockup: `mockup/alert-dialog.html`.
 
 ### Divider
 
-Linha divisória (`scss/components/_divider.scss`), 100% CSS.
+Linha divisória (`packages/clarus-components/scss/components/_divider.scss`), 100% CSS.
 `<hr class="divider">` para o traço simples; `<div class="divider">` (não
 pode ser `<hr>`, que não aceita filhos) com `.cl-divider-label` para texto
 centralizado, flanqueado por duas linhas via pseudo-elementos.
@@ -752,7 +772,7 @@ Mockup: `mockup/divider.html`.
 ### Empty State
 
 Bloco padrão para listas/telas vazias (`.cl-empty-state`,
-`scss/components/_empty-state.scss`), 100% CSS: `.cl-empty-state-icon` (slot
+`packages/clarus-components/scss/components/_empty-state.scss`), 100% CSS: `.cl-empty-state-icon` (slot
 vazio para o consumidor colocar seu próprio SVG/emoji/ilustração),
 `.cl-empty-state-title`, `.cl-empty-state-text` e ação opcional reaproveitando os
 botões existentes.
@@ -761,7 +781,7 @@ Mockup: `mockup/empty-state.html`.
 
 ### Rating / Stars
 
-Avaliação por estrelas (`.cl-rating`/`.cl-rating-star`, `scss/components/_rating.scss`),
+Avaliação por estrelas (`.cl-rating`/`.cl-rating-star`, `packages/clarus-components/scss/components/_rating.scss`),
 100% CSS — mesma técnica de input oculto + label irmão do Segmented Control
 (seção anterior): um `<input type="radio">` por estrela, exclusivo dentro do
 grupo. A marcação usa os pares input+label em ordem decrescente de valor
@@ -773,11 +793,11 @@ Mockup: `mockup/rating.html`.
 
 ### Badge Dismissível / Tag
 
-Tag removível (`.cl-tag`, `scss/components/_tag.scss`), estendendo `.cl-badge`
-(Fase 2) e `.cl-btn-close` (Fase 3) sem duplicar estilos — só ajusta o
-tamanho do botão de fechar (14×14px) para caber num badge. Primeiro item
-do roadmap pós-Top-10 que precisa de JavaScript, mas de forma mínima:
-`js/tag.js` (`Clarus.Tag`) só ouve o clique em `[data-cl-dismiss="tag"]`.
+Tag removível (`.cl-tag`, `packages/clarus-components/scss/components/_tag.scss`), estendendo
+`.cl-badge` e `.cl-btn-close` sem duplicar estilos — só ajusta o
+tamanho do botão de fechar (14×14px) para caber num badge. Precisa de
+JavaScript, mas de forma mínima:
+`packages/clarus-js/js/tag.js` (`Clarus.Tag`) só ouve o clique em `[data-cl-dismiss="tag"]`.
 Antes de remover o elemento do DOM, dispara o evento **cancelável**
 `cl:tag:dismissed` (mesmo espírito de `cl:stepper:beforechange`) —
 `preventDefault()` bloqueia a remoção.
@@ -786,8 +806,8 @@ Mockup: `mockup/tag.html`.
 
 ### File Input Drag-and-Drop
 
-Evolui o upload de arquivo (`.cl-file-upload`/`.cl-file-input`/`.cl-file-label`,
-Fase 6) com arrastar-e-soltar. `js/file-drop.js` (`Clarus.FileDrop`)
+Evolui o upload de arquivo (`.cl-file-upload`/`.cl-file-input`/`.cl-file-label`)
+com arrastar-e-soltar. `packages/clarus-js/js/file-drop.js` (`Clarus.FileDrop`)
 auto-inicia via `data-cl="file-drop"` no próprio `<label for="...">`
 (o input associado é resolvido pelo atributo `for`, o mesmo vínculo que já
 existe entre `.cl-file-input`/`.cl-file-label`); escuta `dragenter`/`dragover`/
@@ -801,8 +821,8 @@ Mockup: `mockup/file-drop.html`.
 
 ### Hover Card
 
-Não é um componente novo — composição do Popover (`scss/components/_popover.scss`,
-`js/popover.js`) com `data-trigger="hover"` (já suportado desde a Fase 8) e
+Não é um componente novo — composição do Popover (`packages/clarus-components/scss/components/_popover.scss`,
+`packages/clarus-js/js/popover.js`) com `data-trigger="hover"` (já suportado) e
 conteúdo mais rico (ex. avatar + bio). O único ajuste é visual: o
 modificador `.cl-popover-hover-card` alarga o popover (320px) e alinha um
 layout de linha (avatar ao lado do texto) no `.cl-popover-body`.
@@ -813,7 +833,7 @@ Mockup: `mockup/hover-card.html`.
 
 - **Teste funcional de JavaScript:** Vitest com `jsdom` (`vitest.config.mjs`,
   `tests/unit/`), cobrindo estado, atributos ARIA e eventos disparados por
-  cada componente interativo e pelos módulos de `js/core/` (posicionamento,
+  cada componente interativo e pelos módulos de `packages/clarus-js/js/core/` (posicionamento,
   overlay, foco, transição). Executado via `npm test`.
 - **Teste visual (regressão de CSS):** Playwright (`playwright.config.mjs`,
   `tests/visual/`), com screenshots de baseline por mockup e testes de

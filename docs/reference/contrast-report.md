@@ -21,8 +21,8 @@ e AAA:
 - **7:1** — AAA, opcional.
 
 `npm run contrast -- --strict` sai com código de erro se algum par ficar
-abaixo do mínimo AA — reservado para uso futuro como gate de CI (Fase 3 do
-plano de evolução).
+abaixo do mínimo AA — é o comando rodado pelo gate `contrast:check` do CI
+(`.github/workflows/ci.yml`).
 
 ## Por que o tema escuro precisa de pesos próprios
 

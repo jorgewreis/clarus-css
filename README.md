@@ -24,16 +24,17 @@ profissionais, e é distribuído publicamente como produto para qualquer
 desenvolvedor que precise construir interfaces consistentes sem carregar
 React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 
-> **Status:** `0.5.0`, reta final rumo à `1.0.0`. Base completa (monorepo,
+> **Status:** `1.0.0`, primeira versão estável. Base completa (monorepo,
 > `@layer`, tokens OKLCH, layout, grid, utilitários, formulários com validação
-> visual, select customizado e upload de arquivo) mais um catálogo de mais de
-> 35 componentes — dos elementos de conteúdo e navegação aos interativos
-> (modal, dropdown, tabs, carousel, stepper e mais), todos com dark mode nativo
-> e uma API JavaScript consistente. Qualidade é gate de CI, não promessa: todo
-> componente passa por regressão visual (Playwright), auditoria de
-> acessibilidade automatizada (axe-core, WCAG 2.1 A/AA), checagem de contraste
-> e budget de tamanho a cada PR. O catálogo atual está em
-> [Componentes](#componentes); o histórico por versão, no
+> visual) mais um catálogo de mais de 45 componentes — dos elementos de
+> conteúdo e navegação aos interativos avançados (Combobox, Datepicker,
+> DataTable, Command Palette, Tree View e mais), todos com dark mode nativo,
+> suporte a múltiplas marcas (`data-brand`) e uma API JavaScript consistente
+> com tipos TypeScript (`.d.ts`) inclusos. Qualidade é gate de CI, não
+> promessa: todo componente passa por regressão visual (Playwright),
+> auditoria de acessibilidade automatizada (axe-core, WCAG 2.1 A/AA),
+> checagem de contraste e budget de tamanho a cada PR. O catálogo atual está
+> em [Componentes](#componentes); o histórico por versão, no
 > [`CHANGELOG.md`](CHANGELOG.md).
 
 Este README é a **visão geral** do projeto. Para aprender a usar cada recurso em
@@ -50,10 +51,12 @@ arquitetura do projeto.
 | --- | --- |
 | **Híbrido por design** | Componentes prontos (`.cl-btn`, `.cl-card`, `.cl-modal`) e utilitários atômicos (`.u-d-flex`, `.u-mt-3`, `.u-gx-2`) convivem na mesma folha de estilo, com uma convenção de nomes (`cl-`/`u-`/`is-`) que evita colisão entre os dois mundos. |
 | **Zero dependências** | Nenhuma dependência de runtime — nem framework JS, nem CDN externo para fontes. HTML, CSS e JavaScript nativo, prontos para colar direto em qualquer página. |
-| **Dark mode nativo** | Suporte a tema escuro desde a v0.1, via CSS Custom Properties e um único atributo (`data-theme="dark"`) — sem plugin, sem JS extra. |
+| **Dark mode nativo** | Suporte a tema escuro desde a primeira versão, via CSS Custom Properties e um único atributo (`data-theme="dark"`) — sem plugin, sem JS extra. |
+| **Multi-marca** | `data-brand="x"` troca a cor de ação primária em runtime, sem recompilar CSS — combina com `data-theme="dark"` automaticamente (ver [Theming](docs/guides/theming.md#multi-brand)). |
 | **Acessibilidade não é opcional** | ARIA, foco e navegação por teclado são parte da API de todo componente interativo desde o início, não um retrofit — e um gate `axe-core` no CI garante isso a cada PR (ver [matriz de acessibilidade](docs/reference/accessibility-matrix.md)). |
 | **Curva de aprendizado familiar** | Nomenclatura de classes e grid seguem convenções amplamente adotadas — quem já usou um framework CSS de componentes se sente em casa em minutos. |
 | **Customização sem fork** | Toda a identidade visual (cores, espaçamento, tipografia, raios, sombras) é exposta via CSS Custom Properties — sobrescreva sem recompilar. |
+| **TypeScript incluso** | `.d.ts` hand-escritos para toda a API JS pública — autocomplete e checagem de tipos sem reescrever nada em TS. |
 
 ## Instalação
 
@@ -119,21 +122,27 @@ conceitos gerais estão em
 
 ## Componentes
 
-- **Layout:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`).
-- **Formulários:** controles, select customizado, checkbox/radio/switch,
-  upload de arquivo (com drag-and-drop), input group.
-- **Conteúdo:** botões, cards, alertas, badges/tags, tabelas, tiles, divider,
-  empty state, skeleton.
-- **Navegação:** navbar, dropdown, nested menu, tabs, paginação, breadcrumbs,
-  accordion, collapse, stepper.
-- **Overlay:** modal, alert dialog, offcanvas, tooltip, popover.
+- **Layout:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`), Stack/Cluster/
+  Sidebar, sticky e utilitários de `@container`.
+- **Formulários:** controles, select customizado, Combobox, Datepicker/
+  Timepicker, checkbox/radio/switch, Range/Slider, upload de arquivo (com
+  drag-and-drop e versão avançada com progresso), input group.
+- **Conteúdo:** botões, cards, alertas, badges/tags, tabelas, DataTable
+  (sort/filtro/paginação/estados), tiles, divider, empty state, skeleton.
+- **Navegação:** navbar, dropdown, nested menu, tabs, Tree View, paginação,
+  breadcrumbs, accordion, collapse, stepper.
+- **Overlay:** modal, alert dialog, offcanvas, tooltip, popover, Command
+  Palette.
 - **Feedback:** toast, notification center, spinner, progress bar.
 - **Interação avançada:** carousel, rating, segmented control, timeline.
 
 Cada componente tem um exemplo funcional dedicado (claro + escuro) em
 [`mockup/`](mockup) — a forma mais rápida de ver o framework em ação sem
 escrever nenhum código. O passo a passo de uso de cada um está na
-[documentação de componentes](docs/README.md#componentes).
+[documentação de componentes](docs/README.md#componentes). Prefere ver tudo
+já montado numa página real? [`mockup/templates/`](mockup/templates) tem 4
+templates prontos pra copiar (dashboard, autenticação, landing page e painel
+administrativo).
 
 ## Customização e dark mode
 
@@ -152,6 +161,23 @@ O dark mode é ativado por um único atributo (`<html data-theme="dark">`), sem
 JavaScript obrigatório. Detalhes em [Theming](docs/guides/theming.md)
 e [Dark mode](docs/guides/dark-mode.md).
 
+## Ecossistema
+
+Pacotes opcionais, publicados separadamente do core:
+
+- [`clarus-icons`](packages/clarus-icons/README.md) — ícones SVG (Lucide),
+  tree-shakeable, zero dependências em runtime.
+- [`clarus-cli`](packages/clarus-cli/README.md) — CLI (`build`/`theme`/
+  `analyze`) para projetos consumidores.
+- [`clarus-react`](packages/clarus-react/README.md) — wrapper React fino
+  (Modal/Dropdown/Tabs), delega pro JS vanilla existente.
+
+## Comparação com outros frameworks
+
+Avaliando o Clarus contra outras opções? [Clarus vs Bootstrap vs Tailwind
+CSS](docs/comparison.md) — filosofia, tamanho de bundle, dependências e dark
+mode nativo, com dados públicos e reproduzíveis.
+
 ## Documentação
 
 - [`docs/README.md`](docs/README.md) — **documentação completa**: guias de
@@ -161,12 +187,16 @@ e [Dark mode](docs/guides/dark-mode.md).
   catálogo técnico de cada componente (classes, tokens, módulos JS).
 - [`docs/reference/scss-architecture.md`](docs/reference/scss-architecture.md) — arquitetura dos
   módulos SCSS e do pipeline de build.
+- [`docs/reference/browser-support.md`](docs/reference/browser-support.md) — alvo de
+  navegadores e matriz de compatibilidade por feature moderna.
 - [`docs/reference/accessibility-matrix.md`](docs/reference/accessibility-matrix.md) — teclado,
   ARIA e gestão de foco por componente.
 - [`docs/reference/contrast-report.md`](docs/reference/contrast-report.md) — auditoria WCAG dos
   tokens de cor nos dois temas.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente e
-  convenções de contribuição.
+- [`docs/guides/migration-external.md`](docs/guides/migration-external.md) — migrando de outro
+  framework CSS pro Clarus.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — como rodar o projeto localmente,
+  convenções de contribuição e processo de release.
 - [`CHANGELOG.md`](CHANGELOG.md) — histórico de mudanças, seguindo
   [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
   [Semantic Versioning](https://semver.org/lang/pt-BR/).

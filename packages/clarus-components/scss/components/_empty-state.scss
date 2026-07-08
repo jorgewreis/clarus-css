@@ -14,6 +14,16 @@
     text-align: center;
   }
 
+  // `[hidden]` sozinho não bastaria: a regra do user-agent stylesheet
+  // perde pra `display: flex` acima (author styles sempre vencem UA
+  // styles, mesmo em `@layer`) — sem isso, `.cl-empty-state[hidden]`
+  // continua visível (bug real pego no DataTable, que alterna esse
+  // atributo em `js/datatable.js`). Mesmo padrão já usado em
+  // `.cl-notification-badge[hidden]`/`.cl-notification-empty[hidden]`.
+  .cl-empty-state[hidden] {
+    display: none;
+  }
+
   .cl-empty-state-icon {
     display: flex;
     align-items: center;

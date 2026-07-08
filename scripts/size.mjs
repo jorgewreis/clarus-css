@@ -12,7 +12,7 @@ const outFile = path.join(rootDir, "docs", "reference", "size-baseline.json");
 
 // Arquivos minificados publicados que compõem as distribuições do pacote
 // (ver `exports`/`files` em package.json). Servem de base para os budgets
-// de tamanho da Fase 3 (gate no CI).
+// de tamanho (gate no CI).
 const targets = [
   "css/layout.min.css",
   "css/forms.min.css",
@@ -23,17 +23,13 @@ const targets = [
   "js/clarus.min.js",
 ];
 
-// Budgets gzip (bytes) do plano mestre (docs/internal/plans/), calibrados
-// ao baseline medido nesta fase — `layout` é a distribuição "core"
-// (reset/base/grid/tokens). `forms`/`helpers`/`fonts` não têm meta própria
-// no plano; ficam de fora do gate (só informativos abaixo).
+// Budgets gzip (bytes) — `layout` é a distribuição "core" (reset/base/grid/
+// tokens). `forms`/`helpers`/`fonts` não têm teto próprio; ficam de fora do
+// gate (só informativos abaixo).
 //
-// `js/clarus.min.js` recalibrado de 14 KB pra 24 KB em 2026-07-07 (plano
-// final pré-v1.0.0, sub-fase 5.4): o teto de 14 KB foi fixado na Fase 0,
-// antes da decisão de trazer a Fase 4 inteira (Combobox, Datepicker,
-// DataTable, Command palette, Tree view) pra esta fase final — com
-// Combobox+Datepicker já em 13.82 KB, o teto original não sobrevivia ao
-// resto do escopo aprovado.
+// `js/clarus.min.js`: 24 KB — cobre o bundle JS completo (Combobox,
+// Datepicker, DataTable, Command Palette, Tree View e o restante dos
+// componentes interativos).
 const budgets = {
   "css/layout.min.css": 12 * 1024,
   "css/components.min.css": 18 * 1024,

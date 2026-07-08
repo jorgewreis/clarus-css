@@ -34,7 +34,7 @@ botões, switch, badge).
 - **Ações à direita** (padrão) ou **embaixo**: adicione
   `.cl-tile-actions-bottom` no `.cl-tile` para `.cl-tile-actions` quebrar
   para uma segunda linha, alinhada à direita.
-- **Clicável**: `.cl-tile-clickable` + [`.cl-stretched-link`](card.md#cl-stretched-link)
+- **Clicável**: `.cl-tile-clickable` + [`.cl-stretched-link`](card.md#cl-card-clickable)
   num link dentro do `.cl-tile-body` — o tile inteiro fica clicável/focável
   sem aninhar um `<a>` ao redor de tudo.
 - **Tamanho**: `.cl-tile-sm`, `.cl-tile-lg`; sem sufixo = padrão.

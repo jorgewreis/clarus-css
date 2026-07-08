@@ -16,7 +16,7 @@ Referência completa dos tokens do Clarus CSS. Ver
 | `--cl-color-subtle` | Fundo levemente destacado (hover, header de card) |
 | `--cl-color-white` / `--cl-color-black` | Acromáticos, sem variação por tema |
 
-### Aliases por papel (`tokens/_semantic.scss`)
+### Aliases por papel (`packages/clarus-core/scss/tokens/_semantic.scss`)
 
 Mesmos valores dos acima, com nome por função — use estes quando o nome
 comunica melhor a intenção no seu código:
@@ -31,7 +31,7 @@ comunica melhor a intenção no seu código:
 | `--cl-color-action-primary` | `--cl-color-primary` |
 | `--cl-color-action-danger` | `--cl-color-danger` |
 
-### Gráficos (`tokens/_charts.scss`)
+### Gráficos (`packages/clarus-core/scss/tokens/_charts.scss`)
 
 Agnósticos de biblioteca — ver [guia de gráficos](../guides/charts.md).
 

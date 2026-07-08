@@ -1,6 +1,6 @@
 # Datepicker / Timepicker
 
-Duas abordagens complementares, conforme o rascunho original: **CSS-only**
+Duas abordagens complementares: **CSS-only**
 (`<input type="date">`/`<input type="time">` nativo, só estilizado) para
 quem quer o seletor do próprio sistema operacional/navegador, e um
 **Datepicker JS customizado** (`.cl-datepicker`) para quando o design
@@ -42,7 +42,7 @@ correspondente com o dia já marcado como selecionado.
 
 `.cl-datepicker` (wrapper posicionador) > `input[role="combobox"]` +
 `.cl-datepicker-panel` (reanexado a `document.body`, posicionado via
-`core/positioning.js`) > `.cl-datepicker-header` (`.cl-datepicker-nav` ×2 +
+`packages/clarus-js/js/core/positioning.js`) > `.cl-datepicker-header` (`.cl-datepicker-nav` ×2 +
 `.cl-datepicker-title`) + `.cl-datepicker-grid[role="grid"]` (uma
 `.cl-datepicker-week[role="row"]` por semana, cada uma com 7
 `.cl-datepicker-day[role="gridcell"]`).

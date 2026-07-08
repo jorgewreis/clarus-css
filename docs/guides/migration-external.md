@@ -8,9 +8,9 @@ ecossistema pros equivalentes do Clarus — não é uma migração automatizada
 (classes e comportamento não são 1:1 em todo canto), mas cobre os casos mais
 frequentes.
 
-> Procurando pela migração de uma versão **antiga do Clarus** (rename `cl-`
-> da Fase 0) para a v1.0.0? Isso é [`migration-v1.md`](migration-v1.md), um
-> guia diferente.
+> Procurando pela migração de uma versão **antiga do Clarus** (rename da
+> API pública pra prefixo `cl-`) para a v1.0.0? Isso é
+> [`migration-v1.md`](migration-v1.md), um guia diferente.
 
 ## Como o Clarus nomeia as coisas
 
