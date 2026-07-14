@@ -1,4 +1,4 @@
-import { computePosition, applyPosition } from "./core/positioning.js";
+import { computePosition, applyPosition, watchPosition } from "./core/positioning.js";
 import { onEscapeKey } from "./core/focus.js";
 import { autoInit, createInstanceRegistry } from "./core/register.js";
 
@@ -22,6 +22,8 @@ export class Tooltip {
     this.placement = options.placement ?? referenceEl.getAttribute("data-placement") ?? "top";
     this.isOpen = false;
     this.id = `clarus-tooltip-${idCounter}`;
+    this._positionCleanup = null;
+    this._originalDescribedBy = referenceEl.getAttribute("aria-describedby");
 
     this.tooltipEl = document.createElement("div");
     this.tooltipEl.className = "cl-tooltip";
@@ -67,6 +69,10 @@ export class Tooltip {
 
     const position = computePosition(this.referenceEl, this.tooltipEl, { placement: this.placement, offset: 10 });
     applyPosition(this.tooltipEl, position);
+    this._positionCleanup = watchPosition(this.referenceEl, this.tooltipEl, {
+      placement: this.placement,
+      offset: 10,
+    });
     this.tooltipEl.setAttribute("data-placement", position.placement);
 
     this.referenceEl.dispatchEvent(new CustomEvent("cl:tooltip:shown", { bubbles: true }));
@@ -77,6 +83,8 @@ export class Tooltip {
     this.isOpen = false;
 
     this.tooltipEl.classList.remove("is-open");
+    this._positionCleanup?.();
+    this._positionCleanup = null;
 
     this.referenceEl.dispatchEvent(new CustomEvent("cl:tooltip:hidden", { bubbles: true }));
   }
@@ -96,7 +104,8 @@ export class Tooltip {
     this.referenceEl.removeEventListener("focus", this._handleShow);
     this.referenceEl.removeEventListener("blur", this._handleHide);
     this._removeEscapeListener();
-    this.referenceEl.removeAttribute("aria-describedby");
+    if (this._originalDescribedBy === null) this.referenceEl.removeAttribute("aria-describedby");
+    else this.referenceEl.setAttribute("aria-describedby", this._originalDescribedBy);
     this.tooltipEl.remove();
     instances.delete(this.referenceEl);
   }

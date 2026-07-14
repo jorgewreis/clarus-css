@@ -6,54 +6,57 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: flex-start;
     justify-content: flex-start;
+    gap: 12px 16px;
     width: 100%;
-    min-height: 10px;
   }
 
   .cl-form-col {
     display: flex;
+    flex: 1 1 240px;
     flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    justify-content: flex-end;
+    align-items: stretch;
+    min-width: 0;
+    gap: 4px;
   }
 
   .cl-form-label {
-    width: 120px;
-    margin-left: 8px;
-    margin-bottom: 2px;
+    width: auto;
+    margin: 0;
     color: var(--cl-color-muted);
     font-size: $font-size-sm;
     font-weight: $font-weight-regular;
-
-    @include truncate;
   }
 
   .cl-form-text {
-    width: 120px;
-    margin-top: 4px;
-    padding: 4px 8px;
-    border-radius: var(--cl-radius-sm);
+    width: auto;
+    margin: 0;
     color: var(--cl-color-muted);
     font-size: $font-size-xs;
     font-weight: $font-weight-regular;
+  }
 
-    @include truncate;
+  .cl-form-text,
+  .cl-valid-feedback,
+  .cl-invalid-feedback {
+    min-height: 1.25rem;
+    padding: 3px 8px;
+    border-radius: var(--cl-radius-sm);
+  }
+
+  .cl-form-text {
+    color: var(--cl-color-muted);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
   }
 
   .cl-valid-feedback,
   .cl-invalid-feedback {
     display: none;
-    width: 120px;
-    margin-top: 2px;
-    padding: 4px 8px;
-    border-radius: var(--cl-radius-sm);
     font-size: $font-size-xs;
     font-weight: $font-weight-regular;
 
-    @include truncate;
   }
 
   .cl-valid-feedback {
@@ -72,7 +75,9 @@
   }
 
   .cl-form-control {
-    height: 38px;
+    width: 100%;
+    min-width: 0;
+    height: var(--cl-control-height);
     padding: 0 7px;
     border: 1px solid var(--cl-color-border);
     border-radius: var(--cl-radius-sm);
@@ -86,7 +91,7 @@
     color: var(--cl-color-muted);
   }
 
-  .cl-form-control:focus {
+  .cl-form-control:focus-visible {
     @include focus-ring;
   }
 
@@ -103,12 +108,12 @@
   }
 
   .cl-form-control-sm {
-    height: 30px;
+    height: var(--cl-control-height-sm);
     font-size: $font-size-xs;
   }
 
   .cl-form-control-lg {
-    height: 46px;
+    height: var(--cl-control-height-lg);
     font-size: $font-size-md;
   }
 
@@ -136,7 +141,7 @@
     border-color: var(--cl-color-success);
   }
 
-  .cl-form-control.is-valid:focus {
+  .cl-form-control.is-valid:focus-visible {
     @include focus-ring(var(--cl-color-success));
   }
 
@@ -144,7 +149,7 @@
     border-color: var(--cl-color-danger);
   }
 
-  .cl-form-control.is-invalid:focus {
+  .cl-form-control.is-invalid:focus-visible {
     @include focus-ring(var(--cl-color-danger));
   }
 
@@ -178,7 +183,7 @@
     border-left: 5px solid transparent;
   }
 
-  .cl-form-select:focus {
+  .cl-form-select:focus-visible {
     @include focus-ring;
   }
 
@@ -236,7 +241,7 @@
     filter: brightness(0.96);
   }
 
-  .cl-file-input:focus + .cl-file-label {
+  .cl-file-input:focus-visible + .cl-file-label {
     @include focus-ring;
   }
 
@@ -322,7 +327,7 @@
     margin-left: -1px;
   }
 
-  .cl-input-group > :focus,
+  .cl-input-group > :focus-visible,
   .cl-input-group > :focus-within {
     position: relative;
     z-index: 1;

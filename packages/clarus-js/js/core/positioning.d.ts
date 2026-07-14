@@ -5,6 +5,7 @@ export interface ComputePositionOptions {
   placement?: Placement;
   align?: Align;
   offset?: number;
+  padding?: number;
 }
 
 export interface Position {
@@ -20,3 +21,9 @@ export function computePosition(
 ): Position;
 
 export function applyPosition(floatingEl: HTMLElement, position: Position): void;
+
+export function watchPosition(
+  referenceEl: Element,
+  floatingEl: HTMLElement,
+  options?: ComputePositionOptions
+): () => void;

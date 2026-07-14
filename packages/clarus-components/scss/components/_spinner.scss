@@ -57,7 +57,7 @@
     justify-content: center;
     width: calc(var(--cl-progress-value, 0) * 1%);
     height: 100%;
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
     font-size: $font-size-xs;
     transition: width 0.3s ease;

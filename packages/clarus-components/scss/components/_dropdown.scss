@@ -32,7 +32,7 @@
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
     box-shadow: var(--cl-shadow-md);
-    z-index: 1000;
+    z-index: var(--cl-z-dropdown);
   }
 
   .cl-dropdown-menu.is-open {
@@ -54,14 +54,14 @@
   }
 
   .cl-dropdown-item:hover,
-  .cl-dropdown-item:focus {
+  .cl-dropdown-item:focus-visible {
     color: var(--cl-color-text);
     background-color: var(--cl-color-subtle);
     outline: none;
   }
 
   .cl-dropdown-item.is-active {
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
   }
 

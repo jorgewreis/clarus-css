@@ -26,18 +26,19 @@
     font-weight: $font-weight-medium;
     text-decoration: none;
     cursor: pointer;
-    transition: filter 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
   .cl-btn:hover {
-    filter: brightness(0.92);
+    --cl-btn-bg: var(--cl-btn-hover-bg, var(--cl-color-subtle));
   }
 
   .cl-btn:active {
-    filter: brightness(0.85);
+    --cl-btn-bg: var(--cl-btn-active-bg, var(--cl-color-border));
   }
 
-  .cl-btn:focus {
+  .cl-btn:focus-visible {
     @include focus-ring;
   }
 
@@ -49,9 +50,11 @@
 
   @each $name, $color in $theme-colors {
     .cl-btn-#{$name} {
-      --cl-btn-color: #{color-contrast($color)};
+      --cl-btn-color: var(--cl-color-on-#{$name});
       --cl-btn-bg: var(--cl-color-#{$name});
       --cl-btn-border-color: var(--cl-color-#{$name});
+      --cl-btn-hover-bg: var(--cl-color-#{$name});
+      --cl-btn-active-bg: var(--cl-color-#{$name});
     }
 
     .cl-btn-outline-#{$name} {
@@ -62,7 +65,7 @@
 
     .cl-btn-outline-#{$name}:hover,
     .cl-btn-outline-#{$name}:active {
-      --cl-btn-color: #{color-contrast($color)};
+      --cl-btn-color: var(--cl-color-on-#{$name});
       --cl-btn-bg: var(--cl-color-#{$name});
     }
   }
@@ -115,7 +118,7 @@
     background-color: var(--cl-color-subtle);
   }
 
-  .cl-btn-close:focus {
+  .cl-btn-close:focus-visible {
     @include focus-ring;
   }
 }

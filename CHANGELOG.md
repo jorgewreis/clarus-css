@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- consolidates visual tokens for spacing, control heights, overlay layers and
+  contrast-aware content colors;
+- refines focus-visible states, responsive form controls and overlay widths;
+- improves dropdown, tooltip, popover and datepicker positioning on resize and
+  scroll, while restoring DOM/style state on disposal;
+- strengthens modal/offcanvas/accordion/tabs semantics and adds manual tab
+  activation;
+- adds typed DataTable sorting and busy-state feedback;
+- hardens date parsing, transition fallback and scroll-lock restoration.
+
 Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),

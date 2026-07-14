@@ -28,6 +28,7 @@ export class Accordion {
       if (!startsOpen) {
         panel.style.display = "none";
       }
+      panel.hidden = !startsOpen;
 
       const entry = { button, panel, handleClick: () => this._toggle(entry) };
       this.items.push(entry);
@@ -60,6 +61,7 @@ export class Accordion {
 
   _open(entry) {
     entry.button.setAttribute("aria-expanded", "true");
+    entry.panel.hidden = false;
     expand(entry.panel).then(() => {
       entry.button.dispatchEvent(new CustomEvent("cl:accordion:shown", { bubbles: true }));
     });
@@ -68,6 +70,7 @@ export class Accordion {
   _close(entry) {
     entry.button.setAttribute("aria-expanded", "false");
     collapse(entry.panel).then(() => {
+      entry.panel.hidden = true;
       entry.button.dispatchEvent(new CustomEvent("cl:accordion:hidden", { bubbles: true }));
     });
   }

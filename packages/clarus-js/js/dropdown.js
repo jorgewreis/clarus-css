@@ -1,4 +1,4 @@
-import { computePosition, applyPosition } from "./core/positioning.js";
+import { computePosition, applyPosition, watchPosition } from "./core/positioning.js";
 import { onClickOutside } from "./core/overlay.js";
 import { onEscapeKey } from "./core/focus.js";
 import { autoInit, createInstanceRegistry } from "./core/register.js";
@@ -20,12 +20,20 @@ export class Dropdown {
     this.align = options.align ?? toggleEl.getAttribute("data-align") ?? "start";
     this.isOpen = false;
     this._outsideClickCleanup = null;
+    this._positionCleanup = null;
+    this._originalParent = this.menuEl.parentNode;
+    this._originalNextSibling = this.menuEl.nextSibling;
 
     document.body.appendChild(this.menuEl);
 
     this.toggleEl.setAttribute("aria-haspopup", "menu");
     this.toggleEl.setAttribute("aria-expanded", "false");
+    this.toggleEl.setAttribute("aria-controls", this.menuEl.id || `cl-dropdown-${Math.random().toString(36).slice(2)}`);
+    if (!this.menuEl.id) this.menuEl.id = this.toggleEl.getAttribute("aria-controls");
     this.menuEl.setAttribute("role", "menu");
+    this.menuEl.querySelectorAll(".cl-dropdown-item").forEach((item) => {
+      if (!item.hasAttribute("role")) item.setAttribute("role", "menuitem");
+    });
 
     this._handleToggleClick = this._handleToggleClick.bind(this);
     this._handleMenuKeydown = this._handleMenuKeydown.bind(this);
@@ -71,6 +79,16 @@ export class Dropdown {
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       items[(currentIndex - 1 + items.length) % items.length]?.focus();
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      items[0]?.focus();
+    } else if (event.key === "End") {
+      event.preventDefault();
+      items[items.length - 1]?.focus();
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      this.hide();
+      this.toggleEl.focus();
     }
   }
 
@@ -93,6 +111,11 @@ export class Dropdown {
       offset: 4,
     });
     applyPosition(this.menuEl, position);
+    this._positionCleanup = watchPosition(this.toggleEl, this.menuEl, {
+      placement: this.placement,
+      align: this.align,
+      offset: 4,
+    });
 
     this.toggleEl.setAttribute("aria-expanded", "true");
 
@@ -119,6 +142,8 @@ export class Dropdown {
 
     this._outsideClickCleanup?.();
     this._outsideClickCleanup = null;
+    this._positionCleanup?.();
+    this._positionCleanup = null;
 
     this.toggleEl.dispatchEvent(new CustomEvent("cl:dropdown:hidden", { bubbles: true }));
   }
@@ -137,6 +162,9 @@ export class Dropdown {
     this.toggleEl.removeEventListener("click", this._handleToggleClick);
     this.menuEl.removeEventListener("keydown", this._handleMenuKeydown);
     this.menuEl.removeEventListener("click", this._handleMenuClick);
+    if (this._originalParent) {
+      this._originalParent.insertBefore(this.menuEl, this._originalNextSibling);
+    }
     instances.delete(this.toggleEl);
   }
 }

@@ -205,11 +205,11 @@ describe("Popover", () => {
     });
   });
 
-  it("dispose() remove listeners, o painel do DOM e o registro da instância", () => {
-    const { triggerEl, popover } = buildPopover();
+  it("dispose() restaura o painel e remove listeners e registro da instância", () => {
+    const { wrapper, triggerEl, popover } = buildPopover();
     popover.dispose();
 
     expect(Popover.getInstance(triggerEl)).toBeUndefined();
-    expect(document.getElementById("myPopover")).toBeNull();
+    expect(wrapper.querySelector("#myPopover")).not.toBeNull();
   });
 });

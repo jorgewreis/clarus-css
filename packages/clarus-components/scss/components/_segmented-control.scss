@@ -58,7 +58,7 @@
   }
 
   .cl-segmented-input:checked + .cl-segmented-label {
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
   }
 

@@ -93,6 +93,21 @@ Circular só é usado em dois lugares deliberadamente (radio, spinner) — o
 resto do framework é quadrado/arredondado por decisão de design, não por
 limitação técnica.
 
+## Espaçamento, elevação e controles
+
+Os valores mais usados também ficam disponíveis em runtime para que
+componentes e extensões mantenham a mesma escala visual:
+
+| Token | Papel |
+|---|---|
+| `--cl-space-0` … `--cl-space-5` | Escala de espaçamento baseada em `$spacers` |
+| `--cl-z-dropdown` … `--cl-z-tooltip` | Camadas padronizadas para overlays |
+| `--cl-control-height` / `--cl-control-height-sm` / `--cl-control-height-lg` | Alturas dos controles de formulário |
+| `--cl-color-on-primary` … `--cl-color-on-info` | Cor de conteúdo sobre cada cor de tema |
+
+Use `--cl-color-on-{nome}` em texto e ícones sobre fundos de tema. Isso
+permite que uma marca altere o contraste sem duplicar regras de componente.
+
 ## Sombra
 
 | Token |

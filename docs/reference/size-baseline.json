@@ -1,34 +1,34 @@
 {
-  "measuredAt": "2026-07-08T16:03:48.044Z",
+  "measuredAt": "2026-07-14T10:23:48.259Z",
   "unit": "bytes",
   "files": {
     "css/layout.min.css": {
-      "bytes": 18747,
-      "gzipBytes": 4228
+      "bytes": 19449,
+      "gzipBytes": 4443
     },
     "css/forms.min.css": {
-      "bytes": 25570,
-      "gzipBytes": 5634
+      "bytes": 26407,
+      "gzipBytes": 5848
     },
     "css/components.min.css": {
-      "bytes": 59201,
-      "gzipBytes": 11053
+      "bytes": 61553,
+      "gzipBytes": 11389
     },
     "css/helpers.min.css": {
-      "bytes": 47435,
-      "gzipBytes": 8464
+      "bytes": 48137,
+      "gzipBytes": 8650
     },
     "css/fonts.min.css": {
       "bytes": 1505,
       "gzipBytes": 409
     },
     "css/clarus.min.css": {
-      "bytes": 115045,
-      "gzipBytes": 18607
+      "bytes": 117532,
+      "gzipBytes": 18999
     },
     "js/clarus.min.js": {
-      "bytes": 89458,
-      "gzipBytes": 18996
+      "bytes": 93838,
+      "gzipBytes": 19961
     }
   }
 }

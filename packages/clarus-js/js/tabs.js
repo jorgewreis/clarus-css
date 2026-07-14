@@ -7,6 +7,7 @@ export class Tabs {
   constructor(tablistEl) {
     this.tablistEl = tablistEl;
     this.tabs = Array.from(tablistEl.querySelectorAll(".cl-nav-link"));
+    this.manualActivation = tablistEl.getAttribute("data-tabs-activation") === "manual";
 
     tablistEl.setAttribute("role", "tablist");
 
@@ -26,6 +27,8 @@ export class Tabs {
       if (pane) {
         pane.setAttribute("role", "tabpanel");
         pane.setAttribute("aria-labelledby", tab.id);
+        pane.setAttribute("tabindex", "0");
+        pane.hidden = !isActive;
       }
     });
 
@@ -62,9 +65,9 @@ export class Tabs {
     if (nextIndex === null) return;
 
     event.preventDefault();
-    const nextTab = enabledTabs[nextIndex];
-    nextTab.focus();
-    this.show(nextTab);
+      const nextTab = enabledTabs[nextIndex];
+      nextTab.focus();
+      if (!this.manualActivation) this.show(nextTab);
   }
 
   show(tab) {
@@ -80,6 +83,7 @@ export class Tabs {
       const paneSelector = otherTab.getAttribute("data-cl-target");
       const pane = paneSelector ? document.querySelector(paneSelector) : null;
       pane?.classList.toggle("is-active", isActive);
+      if (pane) pane.hidden = !isActive;
     });
 
     tab.dispatchEvent(

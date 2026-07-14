@@ -39,6 +39,18 @@
     --cl-gutter-x: #{map.get($spacers, 4)};
     --cl-gutter-y: 0px;
 
+    @each $name, $space in $spacers {
+      --cl-space-#{$name}: #{$space};
+    }
+
+    @each $name, $z-index in $z-indexes {
+      --cl-z-#{$name}: #{$z-index};
+    }
+
+    --cl-control-height: 38px;
+    --cl-control-height-sm: 30px;
+    --cl-control-height-lg: 46px;
+
     // Referência dos limiares usados pelos utilitários `@container` (ver
     // `packages/clarus-utilities/scss/utilities/_container-queries.scss`).
     // Só informativas: a condição de um `@container` precisa de um valor
@@ -56,6 +68,7 @@
 
     @each $name, $color in $theme-colors {
       --cl-color-#{$name}: #{rgb-fallback($color)};
+      --cl-color-on-#{$name}: #{color-contrast($color)};
       --cl-alert-#{$name}-bg: #{rgb-fallback(tint-color($color))};
       --cl-alert-#{$name}-text: #{rgb-fallback(shade-color($color))};
     }
@@ -80,6 +93,7 @@
 
       @each $name, $color in $theme-colors {
         --cl-color-#{$name}: #{$color};
+        --cl-color-on-#{$name}: #{color-contrast($color)};
         --cl-alert-#{$name}-bg: #{tint-color($color)};
         --cl-alert-#{$name}-text: #{shade-color($color)};
       }

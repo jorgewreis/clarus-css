@@ -11,6 +11,7 @@ export class Select {
 
     this.selectEl = selectEl;
     this.size = selectEl.getAttribute("data-size");
+    this._originalDisplay = selectEl.style.display;
 
     this._buildMarkup();
     this._syncFromNativeSelect();
@@ -25,7 +26,9 @@ export class Select {
     });
 
     this._handleItemClick = this._handleItemClick.bind(this);
+    this._handleNativeChange = this._handleNativeChange.bind(this);
     this.menuEl.addEventListener("click", this._handleItemClick);
+    this.selectEl.addEventListener("change", this._handleNativeChange);
 
     instances.set(selectEl, this);
   }
@@ -94,6 +97,10 @@ export class Select {
     );
   }
 
+  _handleNativeChange() {
+    this._syncFromNativeSelect();
+  }
+
   show() {
     this.dropdown.show();
   }
@@ -109,8 +116,9 @@ export class Select {
   dispose() {
     this.dropdown.dispose();
     this.menuEl.removeEventListener("click", this._handleItemClick);
+    this.selectEl.removeEventListener("change", this._handleNativeChange);
     this.wrapperEl.remove();
-    this.selectEl.style.display = "";
+    this.selectEl.style.display = this._originalDisplay;
     instances.delete(this.selectEl);
   }
 }

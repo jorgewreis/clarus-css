@@ -58,6 +58,10 @@ Teclado (com foco numa aba): `ArrowLeft`/`ArrowRight` move e ativa a
 aba anterior/próxima (pulando desabilitadas), `Home`/`End` vai pra
 primeira/última.
 
+Para separar navegação e ativação, use `data-tabs-activation="manual"` no
+grupo. Nesse modo as setas apenas movem o foco; `Enter` ou `Espaço` ativa a
+aba focada.
+
 ## API JS
 
 Auto-init via `data-cl="tabs"`. `Tabs.getInstance(el)`.

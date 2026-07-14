@@ -10,7 +10,7 @@
 @layer components {
   .cl-popover {
     position: absolute;
-    z-index: 1070;
+    z-index: var(--cl-z-offcanvas);
     display: none;
     max-width: 280px;
     color: var(--cl-color-text);

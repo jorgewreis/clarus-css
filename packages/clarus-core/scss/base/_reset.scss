@@ -15,4 +15,8 @@
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
   }
+
+  [hidden] {
+    display: none !important;
+  }
 }

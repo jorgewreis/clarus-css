@@ -42,14 +42,14 @@
     position: absolute;
     display: none;
     flex-direction: column;
-    width: 320px;
+    width: min(320px, calc(100vw - 2 * var(--cl-space-3)));
     max-height: 420px;
     border: 1px solid var(--cl-color-border);
     border-radius: var(--cl-radius-md);
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
     box-shadow: var(--cl-shadow-md);
-    z-index: 1080;
+    z-index: var(--cl-z-notification);
   }
 
   .cl-notification-center.is-open {

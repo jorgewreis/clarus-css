@@ -4,13 +4,21 @@ function prefersReducedMotion() {
 
 function waitForHeightTransition(el) {
   return new Promise((resolve) => {
-    const handleEnd = (event) => {
-      if (event.target !== el || event.propertyName !== "height") return;
+    let settled = false;
+    const settle = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
       el.removeEventListener("transitionend", handleEnd);
       resolve();
     };
+    const handleEnd = (event) => {
+      if (event.target !== el || event.propertyName !== "height") return;
+      settle();
+    };
 
     el.addEventListener("transitionend", handleEnd);
+    const timeout = window.setTimeout(settle, 450);
   });
 }
 

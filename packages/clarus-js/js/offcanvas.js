@@ -24,6 +24,12 @@ export class Offcanvas {
 
     offcanvasEl.setAttribute("role", "dialog");
     offcanvasEl.setAttribute("aria-modal", "true");
+    offcanvasEl.setAttribute("aria-hidden", "true");
+    const titleEl = offcanvasEl.querySelector(".cl-offcanvas-title");
+    if (titleEl) {
+      if (!titleEl.id) titleEl.id = `cl-offcanvas-title-${Math.random().toString(36).slice(2)}`;
+      offcanvasEl.setAttribute("aria-labelledby", titleEl.id);
+    }
 
     this._handleTriggerClick = this._handleTriggerClick.bind(this);
     this._handleDismissClick = this._handleDismissClick.bind(this);
@@ -68,6 +74,7 @@ export class Offcanvas {
     }
 
     this.offcanvasEl.classList.add("is-open");
+    this.offcanvasEl.setAttribute("aria-hidden", "false");
     lockScroll();
 
     this._focusTrap = createFocusTrap(this.offcanvasEl);
@@ -97,6 +104,7 @@ export class Offcanvas {
     this.isOpen = false;
 
     this.offcanvasEl.classList.remove("is-open");
+    this.offcanvasEl.setAttribute("aria-hidden", "true");
     unlockScroll();
 
     this._backdropEl?.remove();

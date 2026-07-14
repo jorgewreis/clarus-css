@@ -62,7 +62,7 @@
 
   // Passo ativo.
   .cl-step-active .cl-step-indicator {
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
     border-color: var(--cl-color-primary);
   }
