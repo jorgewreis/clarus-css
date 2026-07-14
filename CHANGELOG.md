@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- consolidates visual tokens for spacing, control heights, overlay layers and
+- atualiza as baselines visuais Linux dos mockups após o refinamento dos componentes;\n- consolidates visual tokens for spacing, control heights, overlay layers and
   contrast-aware content colors;
 - refines focus-visible states, responsive form controls and overlay widths;
 - improves dropdown, tooltip, popover and datepicker positioning on resize and
