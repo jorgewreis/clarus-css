@@ -64,4 +64,4 @@ Nenhuma — 100% CSS.
 </div>
 ```
 
-Mockup: [`mockup/skeletons.html`](../../mockup/skeletons.html).
+Mockup: [laboratório do componente](../../mockup/feedback-actions.html#skeleton).

@@ -1,4 +1,5 @@
 @use "settings" as *;
+@use "tools" as *;
 
 // Badge dismissível / Tag: reaproveita `.cl-badge`
 // (scss/components/_badges.scss) e `.cl-btn-close`
@@ -7,12 +8,48 @@
 // o texto e o "x". O dismiss em si é feito por js/tag.js (Clarus.Tag).
 @layer components {
   .cl-tag {
-    gap: 6px;
+    gap: 0;
+    padding: 0 0 0 8px;
+  }
+
+  // O texto fica em um elemento próprio quando a tag puder ser truncada. A
+  // string integral permanece no DOM, portanto continua disponível para AT.
+  .cl-tag-label {
+    min-width: 0;
+  }
+
+  .cl-tag-truncate {
+    max-inline-size: min(100%, var(--cl-tag-max-inline-size, 20rem));
+  }
+
+  .cl-tag-truncate .cl-tag-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cl-tag-icon {
+    display: inline-grid;
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    margin-right: 4px;
+    place-items: center;
+  }
+
+  .cl-tag-icon .cl-icon {
+    width: 12px;
+    height: 12px;
+    stroke: currentcolor;
   }
 
   .cl-tag .cl-btn-close {
-    width: 14px;
-    height: 14px;
+    width: calc(var(--cl-badge-height) - 2px);
+    height: calc(var(--cl-badge-height) - 2px);
+    flex: 0 0 calc(var(--cl-badge-height) - 2px);
+    margin-left: 4px;
+    border-radius: 0;
+    background-color: transparent;
 
     // Herda a cor de texto do badge (contraste automático por variante) em vez
     // do cinza fixo do `.cl-btn-close`, pra o "x" ter contraste em qualquer fundo;
@@ -24,6 +61,7 @@
 
   .cl-tag .cl-btn-close::before,
   .cl-tag .cl-btn-close::after {
+    top: calc(50% + 1px);
     width: 8px;
   }
 
@@ -45,72 +83,132 @@
   .cl-tag-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0;
   }
 
-  // Escala de tamanho própria da tag (independente de `.cl-badge-sm/-lg`,
-  // que continuam existindo pra badges sem dismiss).
-  .cl-tag-xs {
-    min-height: 16px;
-    padding: 0 6px;
-    font-size: 0.625rem;
+  // O botão já possui foco próprio; o contorno no contêiner evidencia qual
+  // tag será removida, especialmente em grupos densos.
+  .cl-tag:focus-within {
+    @include focus-ring;
   }
 
-  .cl-tag-xs .cl-btn-close {
-    width: 11px;
-    height: 11px;
+  .cl-tag.is-loading,
+  .cl-tag[aria-busy="true"] {
+    --cl-badge-bg: var(--cl-color-warning);
+    --cl-badge-color: var(--cl-color-black);
+    --cl-badge-border: transparent;
+
+    cursor: progress;
   }
 
-  .cl-tag-xs .cl-btn-close::before,
-  .cl-tag-xs .cl-btn-close::after {
-    width: 6px;
-  }
-
-  .cl-tag-sm {
-    min-height: 18px;
-    padding: 0 7px;
-    font-size: $font-size-xs;
-  }
-
-  .cl-tag-sm .cl-btn-close {
+  // Usa o spinner do próprio Clarus. A classe é opt-in no markup para que o
+  // conteúdo de uma tag carregando continue explícito e sem DOM implícito.
+  .cl-tag.is-loading .cl-spinner,
+  .cl-tag[aria-busy="true"] .cl-spinner {
     width: 12px;
     height: 12px;
+    flex: 0 0 12px;
+    margin: 0 6px 0 4px;
+    border-width: 2px;
+    color: var(--cl-color-black);
   }
 
-  .cl-tag-sm .cl-btn-close::before,
-  .cl-tag-sm .cl-btn-close::after {
-    width: 7px;
+  .cl-tag.is-loading .cl-btn-close,
+  .cl-tag[aria-busy="true"] .cl-btn-close {
+    display: none;
   }
 
-  .cl-tag-lg {
-    min-height: 26px;
-    padding: 0 12px;
-    font-size: $font-size-sm;
+  .cl-tag-group .cl-tag + .cl-tag {
+    border-inline-start-color: color-mix(in srgb, currentcolor 24%, transparent);
   }
 
-  .cl-tag-lg .cl-btn-close {
-    width: 16px;
-    height: 16px;
+  .cl-tag-group .cl-tag {
+    padding-inline-start: calc(var(--cl-badge-height) + 2px);
+    transition: background-color 0.1s ease-in-out;
   }
 
-  .cl-tag-lg .cl-btn-close::before,
-  .cl-tag-lg .cl-btn-close::after {
-    width: 9px;
+  .cl-tag-group .cl-btn-close {
+    pointer-events: none;
+    opacity: 0;
   }
 
-  .cl-tag-xl {
-    min-height: 32px;
-    padding: 0 14px;
-    font-size: $font-size-md;
+  .cl-tag-group .cl-tag:hover .cl-btn-close,
+  .cl-tag-group .cl-tag:focus-within .cl-btn-close {
+    pointer-events: auto;
+    opacity: 0.7;
   }
 
-  .cl-tag-xl .cl-btn-close {
-    width: 18px;
-    height: 18px;
+  .cl-tag-group .cl-tag:hover,
+  .cl-tag-group .cl-tag:focus-within {
+    background-color: color-mix(in srgb, currentcolor 18%, transparent);
   }
 
-  .cl-tag-xl .cl-btn-close::before,
-  .cl-tag-xl .cl-btn-close::after {
-    width: 10px;
+  // Um botão de overflow representa as tags não exibidas. A abertura da lista
+  // ou popover é responsabilidade da composição que o utiliza.
+  .cl-tag-overflow {
+    --cl-badge-bg: transparent;
+    --cl-badge-color: var(--cl-color-primary);
+    --cl-badge-border: transparent;
+
+    width: var(--cl-badge-height);
+    height: var(--cl-badge-height);
+    min-width: var(--cl-badge-height);
+    padding: 0;
+    border: 0;
+    appearance: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    line-height: 0;
   }
+
+  .cl-tag-overflow .cl-icon {
+    display: block;
+    flex: 0 0 13px;
+    width: 13px;
+    height: 13px;
+    stroke: currentcolor;
+  }
+
+  .cl-tag-overflow:hover,
+  .cl-tag-group .cl-tag-overflow:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .cl-tag-group .cl-tag-overflow {
+    padding-inline-start: 0;
+  }
+
+  .cl-tag-overflow:focus-visible {
+    @include focus-ring;
+  }
+
+  .cl-tag-group .cl-btn-close:hover {
+    color: inherit;
+    background-color: transparent;
+    opacity: 0.7;
+  }
+
+  .cl-tag-protected {
+    pointer-events: none;
+  }
+
+  .cl-tag-lock {
+    display: inline-grid;
+    width: calc(var(--cl-badge-height) - 2px);
+    height: calc(var(--cl-badge-height) - 2px);
+    margin-left: 4px;
+    place-items: center;
+  }
+
+  .cl-tag-lock svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentcolor;
+    stroke-width: 2;
+  }
+
 }

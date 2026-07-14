@@ -132,6 +132,6 @@ Reusa `--cl-color-border`/`-surface`/`-text`/`-muted`/`-primary`,
 </script>
 ```
 
-Mockup: [`mockup/datepicker.html`](../../mockup/datepicker.html) (inclui o
+Mockup: [laboratório do componente](../../mockup/forms.html#datepicker) (inclui o
 Datepicker customizado e os `<input type="date">`/`"time"` nativos lado a
 lado).

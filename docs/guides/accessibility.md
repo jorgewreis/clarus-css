@@ -60,10 +60,10 @@ Toda transição de altura acionada por JS (Collapse, Accordion, Toast via
 `packages/clarus-js/js/core/transition.js`) verifica
 `window.matchMedia("(prefers-reduced-motion: reduce)")` e pula direto para
 o estado final — sem animação — quando o usuário pediu menos movimento no
-sistema operacional. Transições puramente CSS (hover, focus-ring,
-`filter`/`opacity` em botões) não são pausadas automaticamente; se você
-adicionar animações CSS próprias, envolva-as em
-`@media (prefers-reduced-motion: no-preference)`.
+sistema operacional. A camada base do CSS também reduz automaticamente
+transições e animações declaradas pelo framework quando essa preferência está
+ativa. Se você adicionar uma animação própria, preserve o estado final e
+teste o comportamento com `prefers-reduced-motion: reduce`.
 
 ## Contraste de cor
 
@@ -89,7 +89,8 @@ de apoio é definido por você.
 A regressão visual (`npm run test:visual`, Playwright) cobre
 carregamento/interação sem erros de console, mas não é um gate de
 acessibilidade. `npm run test:a11y` roda o axe-core (regras WCAG 2.1 A/AA)
-contra todo mockup em `mockup/*.html` e falha o build ao encontrar
+ contra cada laboratório em `mockup/*.html` (claro e escuro) e contra as
+ fontes executáveis em `mockup/examples/*.html`; o build falha ao encontrar
 violações (nome acessível ausente, contraste insuficiente, papel ARIA
 inválido etc.) — roda no CI a cada PR. Veja a cobertura por componente na
 [matriz de acessibilidade](../reference/accessibility-matrix.md).

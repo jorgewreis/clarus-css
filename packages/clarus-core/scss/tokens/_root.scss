@@ -50,6 +50,17 @@
     --cl-control-height: 38px;
     --cl-control-height-sm: 30px;
     --cl-control-height-lg: 46px;
+    --cl-control-padding-x: 12px;
+    --cl-control-padding-x-sm: 8px;
+    --cl-control-padding-x-lg: 16px;
+    --cl-focus-width: 2px;
+    --cl-focus-offset: 2px;
+    --cl-focus-ring-alpha: 22%;
+    --cl-transition-fast: 150ms;
+    --cl-transition-normal: 220ms;
+    --cl-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --cl-border-width: 1px;
+    --cl-disabled-opacity: 0.5;
 
     // Referência dos limiares usados pelos utilitários `@container` (ver
     // `packages/clarus-utilities/scss/utilities/_container-queries.scss`).

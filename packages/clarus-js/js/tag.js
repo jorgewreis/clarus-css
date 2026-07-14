@@ -8,9 +8,12 @@ const instances = createInstanceRegistry();
 export class Tag {
   constructor(tagEl) {
     this.tagEl = tagEl;
+    this._isLoading = tagEl.classList.contains("is-loading") || tagEl.getAttribute("aria-busy") === "true";
 
     this._handleClick = this._handleClick.bind(this);
     tagEl.addEventListener("click", this._handleClick);
+
+    this.setLoading(this._isLoading);
 
     instances.set(tagEl, this);
   }
@@ -20,7 +23,7 @@ export class Tag {
   }
 
   _handleClick(event) {
-    if (event.target.closest('[data-cl-dismiss="tag"]')) {
+    if (!this._isLoading && event.target.closest('[data-cl-dismiss="tag"]')) {
       this.dismiss();
     }
   }
@@ -28,11 +31,31 @@ export class Tag {
   // Dispara um evento cancelável antes de remover (mesmo espírito de
   // cl:stepper:beforechange): preventDefault() bloqueia a remoção.
   dismiss() {
+    if (this._isLoading) return false;
+
     const event = new CustomEvent("cl:tag:dismissed", { bubbles: true, cancelable: true });
     this.tagEl.dispatchEvent(event);
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented) return false;
 
     this.tagEl.remove();
+    return true;
+  }
+
+  // Estado útil enquanto uma remoção ou atualização assíncrona está pendente.
+  // Além da aparência, bloqueia o dismiss e comunica o estado a AT.
+  setLoading(loading) {
+    this._isLoading = Boolean(loading);
+    this.tagEl.classList.toggle("is-loading", this._isLoading);
+    if (this._isLoading) {
+      this.tagEl.setAttribute("aria-busy", "true");
+    } else {
+      this.tagEl.removeAttribute("aria-busy");
+    }
+
+    const dismissButton = this.tagEl.querySelector('[data-cl-dismiss="tag"]');
+    if (dismissButton) dismissButton.disabled = this._isLoading;
+
+    return this;
   }
 
   dispose() {

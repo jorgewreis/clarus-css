@@ -6,7 +6,9 @@ componente em [Componentes](../README.md#componentes); os padrões
 compartilhados entre vários componentes (foco visível, focus trap,
 `prefers-reduced-motion` etc.) estão no [guia de acessibilidade](../guides/accessibility.md).
 
-Todo mockup em `mockup/*.html` roda no gate `npm run test:a11y` (axe-core via
+Todo laboratório em `mockup/*.html` roda no gate `npm run test:a11y` em tema
+claro e escuro. As fontes executáveis em `mockup/examples/*.html` também são
+verificadas por axe-core via
 Playwright, regras WCAG 2.1 A/AA) no CI — um componente só é considerado
 "coberto" abaixo se aparecer em algum mockup testado. Contraste de cor é verificado em dois níveis complementares:
 pares de token conhecidos (`npm run contrast`, ver

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Divider</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+            background-color: var(--cl-color-subtle);
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        .theme-panel {
+            max-width: 360px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+<div class="theme-panel">
+        <p class="u-mb-0">Texto acima do divisor simples.</p>
+        <hr class="cl-divider">
+        <p class="u-mb-0">Texto abaixo.</p>
+
+        <div class="cl-divider"><span class="cl-divider-label">ou</span></div>
+
+        <p class="u-mb-0">Continue com e-mail e senha.</p>
+
+        <div class="cl-divider"><span class="cl-divider-label">Seção 3</span></div>
+    </div>
+
+
+</body>
+</html>

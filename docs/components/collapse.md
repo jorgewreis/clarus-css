@@ -75,4 +75,4 @@ Nenhum próprio — o conteúdo interno usa suas próprias cores/espaçamento.
 </div>
 ```
 
-Mockup: [`mockup/collapse.html`](../../mockup/collapse.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#collapse).

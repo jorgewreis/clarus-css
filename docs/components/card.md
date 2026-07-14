@@ -108,4 +108,4 @@ Nenhuma — 100% CSS.
 </div>
 ```
 
-Mockup: [`mockup/cards.html`](../../mockup/cards.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#card).

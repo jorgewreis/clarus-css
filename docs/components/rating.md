@@ -88,4 +88,4 @@ hover), `--cl-color-primary` (anel de foco).
 </fieldset>
 ```
 
-Mockup: [`mockup/rating.html`](../../mockup/rating.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#rating).

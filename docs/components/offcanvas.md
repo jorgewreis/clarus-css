@@ -99,4 +99,4 @@ Auto-init via `data-cl="offcanvas"` **no gatilho**. `Offcanvas.getInstance(trigg
 </div>
 ```
 
-Mockup: [`mockup/offcanvas-popover.html`](../../mockup/offcanvas-popover.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#offcanvas).

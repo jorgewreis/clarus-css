@@ -7,10 +7,13 @@ import { fileURLToPath } from "node:url";
 const rootDir = path.dirname(path.dirname(path.dirname(fileURLToPath(import.meta.url))));
 const mockupDir = path.join(rootDir, "mockup");
 const mockups = readdirSync(mockupDir).filter((file) => file.endsWith(".html"));
+const examplesDir = path.join(mockupDir, "examples");
+const examples = readdirSync(examplesDir).filter((file) => file.endsWith(".html"));
 
-for (const file of mockups) {
-  test(`${file} não tem violações de A11y (axe, WCAG 2.1 AA)`, async ({ page }) => {
-    await page.goto(`file://${path.join(mockupDir, file)}`);
+for (const file of [...mockups, ...examples.map((file) => `examples/${file}`)]) {
+  for (const theme of file.startsWith("examples/") || file === "kitchen-sink.html" ? ["light"] : ["light", "dark"]) {
+  test(`${file} (${theme}) não tem violações de A11y (axe, WCAG 2.1 AA)`, async ({ page }) => {
+    await page.goto(`file://${path.join(mockupDir, file)}?theme=${theme}`);
     await page.waitForTimeout(200);
 
     const results = await new AxeBuilder({ page })
@@ -23,4 +26,5 @@ for (const file of mockups) {
 
     expect(results.violations, `Violações de A11y em ${file}:\n${details}`).toHaveLength(0);
   });
+  }
 }

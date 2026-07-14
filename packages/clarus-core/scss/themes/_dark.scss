@@ -40,6 +40,16 @@
     --cl-color-border: #{rgb-fallback($dark-border)};
     --cl-color-surface: #{rgb-fallback($dark-surface)};
     --cl-color-subtle: #{rgb-fallback($dark-subtle)};
+    --cl-color-bg-surface: var(--cl-color-surface);
+    --cl-color-bg-subtle: var(--cl-color-subtle);
+    --cl-color-surface-raised: var(--cl-color-surface);
+    --cl-color-surface-interactive: var(--cl-color-subtle);
+    --cl-color-text-primary: var(--cl-color-text);
+    --cl-color-text-muted: var(--cl-color-muted);
+    --cl-color-border-default: var(--cl-color-border);
+    --cl-color-focus: var(--cl-color-primary);
+    --cl-color-action-primary: var(--cl-color-primary);
+    --cl-color-action-danger: var(--cl-color-danger);
     --cl-shadow-sm: 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 40%);
     --cl-shadow-md: 0 6px 12px rgb(0 0 0 / 55%), 0 3px 6px rgb(0 0 0 / 45%);
     --cl-shadow-lg: 0 15px 30px rgb(0 0 0 / 60%), 0 6px 12px rgb(0 0 0 / 50%);
@@ -61,6 +71,16 @@
       --cl-color-border: #{$dark-border};
       --cl-color-surface: #{$dark-surface};
       --cl-color-subtle: #{$dark-subtle};
+      --cl-color-bg-surface: var(--cl-color-surface);
+      --cl-color-bg-subtle: var(--cl-color-subtle);
+      --cl-color-surface-raised: var(--cl-color-surface);
+      --cl-color-surface-interactive: var(--cl-color-subtle);
+      --cl-color-text-primary: var(--cl-color-text);
+      --cl-color-text-muted: var(--cl-color-muted);
+      --cl-color-border-default: var(--cl-color-border);
+      --cl-color-focus: var(--cl-color-primary);
+      --cl-color-action-primary: var(--cl-color-primary);
+      --cl-color-action-danger: var(--cl-color-danger);
       --cl-tooltip-bg: #{$color-gray-100};
       --cl-tooltip-text: #{$color-gray-900};
 

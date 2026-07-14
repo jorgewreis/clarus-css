@@ -71,5 +71,5 @@ ligado), `--cl-color-border` (knob desligado), `--cl-radius-md` (trilho),
 </div>
 ```
 
-Mockup: [`mockup/check-radio-switch.html`](../../mockup/check-radio-switch.html).
-Uso combinado com Tile: [`mockup/tile.html`](../../mockup/tile.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#tile).
+Uso combinado com Tile: [laboratório de conteúdo e dados](../../mockup/content-data.html#tile).

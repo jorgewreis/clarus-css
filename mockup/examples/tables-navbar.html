@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Tables & Navbar</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+            background-color: var(--cl-color-subtle);
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+<div class="theme-panel">
+        <nav class="cl-navbar u-mb-3">
+            <a href="#" class="cl-navbar-brand">Clarus</a>
+            <ul class="cl-navbar-nav">
+                <li><a href="#" class="cl-nav-link is-active">Início</a></li>
+                <li><a href="#" class="cl-nav-link">Projetos <span class="cl-badge cl-badge-primary cl-badge-sm">3</span></a></li>
+                <li><a href="#" class="cl-nav-link is-disabled">Configurações</a></li>
+            </ul>
+            <button type="button" class="cl-btn cl-btn-primary cl-btn-sm">Entrar</button>
+        </nav>
+
+        <div class="cl-table-responsive">
+            <table class="cl-table cl-table-striped cl-table-hover">
+                <thead>
+                    <tr>
+                        <th>Projeto</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Landing page</td>
+                        <td>Jorge</td>
+                        <td>Em andamento</td>
+                    </tr>
+                    <tr class="cl-table-success">
+                        <td>API de pagamentos</td>
+                        <td>Equipe backend</td>
+                        <td>Concluído</td>
+                    </tr>
+                    <tr class="cl-table-danger">
+                        <td>Migração de banco</td>
+                        <td>Equipe infra</td>
+                        <td>Bloqueado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table class="cl-table cl-table-sm cl-table-bordered u-mt-3">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qtd.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>table-sm + table-bordered</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+</html>

@@ -139,4 +139,4 @@ Usa `--cl-color-border`, `--cl-color-surface`, `--cl-color-subtle`
 </nav>
 ```
 
-Mockup: [`mockup/pagination-breadcrumbs.html`](../../mockup/pagination-breadcrumbs.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#pagination).

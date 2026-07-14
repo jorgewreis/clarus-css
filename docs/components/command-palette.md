@@ -128,4 +128,4 @@ próprios de cor.
 </script>
 ```
 
-Mockup: [`mockup/command-palette.html`](../../mockup/command-palette.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#command-palette).

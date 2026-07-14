@@ -74,4 +74,4 @@ de outro lugar, não de um atributo estático; é assim que
 <button type="button" class="cl-btn-close" data-cl="tooltip" title="Fechar" aria-label="Fechar"></button>
 ```
 
-Mockup: [`mockup/dropdown-tooltip.html`](../../mockup/dropdown-tooltip.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#tooltip).

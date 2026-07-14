@@ -84,4 +84,4 @@ Nenhuma — 100% CSS. Para ordenação/filtro/paginação, use o
 </div>
 ```
 
-Mockup: [`mockup/tables-navbar.html`](../../mockup/tables-navbar.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#table).

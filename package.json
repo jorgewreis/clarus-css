@@ -86,6 +86,7 @@
     "size:check": "node scripts/size.mjs --check",
     "contrast": "node scripts/contrast.mjs",
     "contrast:check": "node scripts/contrast.mjs --strict",
+    "docs:check": "node scripts/check-docs.mjs",
     "types:check": "tsc --noEmit -p tsconfig.types.json",
     "prepublishOnly": "npm run build && npm test"
   },

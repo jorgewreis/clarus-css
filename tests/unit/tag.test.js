@@ -67,6 +67,22 @@ describe("Tag", () => {
     expect(document.body.contains(el)).toBe(false);
   });
 
+  it("setLoading bloqueia o dismiss e informa aria-busy", () => {
+    const { el, tag } = buildTag();
+    const dismissButton = el.querySelector(".cl-btn-close");
+
+    expect(tag.setLoading(true)).toBe(tag);
+    expect(el.classList.contains("is-loading")).toBe(true);
+    expect(el.getAttribute("aria-busy")).toBe("true");
+    expect(dismissButton.disabled).toBe(true);
+    expect(tag.dismiss()).toBe(false);
+    expect(document.body.contains(el)).toBe(true);
+
+    tag.setLoading(false);
+    expect(el.hasAttribute("aria-busy")).toBe(false);
+    expect(dismissButton.disabled).toBe(false);
+  });
+
   it("dispose() remove o listener e o registro da instância (sem remover a tag)", () => {
     const { el, tag } = buildTag();
     tag.dispose();

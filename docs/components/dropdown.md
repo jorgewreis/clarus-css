@@ -100,4 +100,4 @@ Auto-init via `data-cl="dropdown"`. `Dropdown.getInstance(el)` (`el` é o
 </div>
 ```
 
-Mockup: [`mockup/dropdown-tooltip.html`](../../mockup/dropdown-tooltip.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#dropdown).

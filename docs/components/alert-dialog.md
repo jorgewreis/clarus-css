@@ -96,4 +96,4 @@ Os mesmos do [Modal](modal.md) — sem tokens próprios além de
 </script>
 ```
 
-Mockup: [`mockup/alert-dialog.html`](../../mockup/alert-dialog.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#alert-dialog).

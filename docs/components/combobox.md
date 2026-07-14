@@ -120,4 +120,4 @@ soma `max-height: 240px` + scroll interno para listas longas.
 </script>
 ```
 
-Mockup: [`mockup/combobox.html`](../../mockup/combobox.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#combobox).

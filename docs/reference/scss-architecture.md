@@ -178,6 +178,13 @@ Camada `tokens` (só redefine `--cl-*`; não define novas regras de layout).
   `data-cl-target`/`data-cl-dismiss`; eventos DOM customizados: `cl:*`.
 - Evitar estilos globais agressivos.
 - Preferir CSS Custom Properties para valores que usuários podem sobrescrever.
+- Centralizar valores de interação em tokens (`--cl-focus-*`, `--cl-transition-*`
+  e `--cl-ease-*`) em vez de repetir durações ou anéis de foco.
+- Todo componente interativo deve declarar foco visível, estado desabilitado e
+  comportamento compatível com `prefers-reduced-motion`.
+- Controles e superfícies devem declarar um `background-color` explícito por
+  meio de token semântico; `transparent` fica reservado a trilhas, backdrops
+  ou variantes cuja transparência faça parte da API visual.
 - Preferir variáveis Sass para valores usados em geração de classes.
 
 ## Pipeline de Build

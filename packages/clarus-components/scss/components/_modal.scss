@@ -8,7 +8,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: var(--cl-space-4);
     background-color: rgb(0 0 0 / 50%);
   }
 
@@ -32,7 +32,8 @@
   .cl-modal-content {
     display: flex;
     flex-direction: column;
-    max-height: calc(100vh - 32px);
+    max-height: calc(100vh - 2 * var(--cl-space-4));
+    border: var(--cl-border-width) solid var(--cl-color-border-default);
     border-radius: var(--cl-radius-md);
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);

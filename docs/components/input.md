@@ -86,5 +86,5 @@ Nenhuma — 100% CSS. Para o `<select>` com dropdown customizado (JS), ver
 </div>
 ```
 
-Mockups: [`mockup/forms-advanced.html`](../../mockup/forms-advanced.html),
-[`mockup/layout.html`](../../mockup/layout.html).
+Mockups: [`mockup/forms.html#input`](../../mockup/forms.html#input),
+[`mockup/foundations.html#layout`](../../mockup/forms.html#input).

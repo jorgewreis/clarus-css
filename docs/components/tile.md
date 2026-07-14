@@ -109,4 +109,4 @@ Sem tokens de componente próprios — usa `--cl-color-border`,
 </div>
 ```
 
-Mockup: [`mockup/tile.html`](../../mockup/tile.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#tile).

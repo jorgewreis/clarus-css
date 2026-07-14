@@ -86,4 +86,4 @@ Os mesmos do [Dropdown](dropdown.md) e de
 </script>
 ```
 
-Mockup: [`mockup/modal-select.html`](../../mockup/modal-select.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#select).

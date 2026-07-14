@@ -1,9 +1,9 @@
 # Templates prontos
 
 4 páginas completas, prontas para copiar como ponto de partida de um
-projeto real — diferente do resto de [`mockup/`](../), que demonstra um
-componente por vez, cada arquivo aqui monta vários componentes juntos numa
-página só, exatamente como ela apareceria em produção.
+projeto real — diferente dos [laboratórios de `mockup/`](../README.md), que
+documentam componentes e suas configurações, cada arquivo aqui monta vários
+componentes juntos numa página só, exatamente como ela apareceria em produção.
 
 Todos usam só CSS/JS já publicado (`../../dist/`) — sem build, sem
 dependência nova — e têm tema escuro funcional (botão no topo, mesmo

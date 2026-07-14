@@ -18,6 +18,9 @@
 
     // Bordas
     --cl-color-border-default: var(--cl-color-border);
+    --cl-color-focus: var(--cl-color-primary);
+    --cl-color-surface-raised: var(--cl-color-surface);
+    --cl-color-surface-interactive: var(--cl-color-subtle);
 
     // Ação (mapeiam para a cor de tema correspondente — existem para dar um
     // nome estável a "a cor de ação primária", independente de qual token

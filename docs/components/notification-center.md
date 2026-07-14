@@ -113,4 +113,4 @@ por variante), `--cl-radius-md`, `--cl-shadow-md`.
 </script>
 ```
 
-Mockup: [`mockup/notification-center.html`](../../mockup/notification-center.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#notification-center).

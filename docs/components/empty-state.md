@@ -62,4 +62,4 @@ Nenhuma — 100% CSS.
 </div>
 ```
 
-Mockup: [`mockup/empty-state.html`](../../mockup/empty-state.html).
+Mockup: [laboratório do componente](../../mockup/feedback-actions.html#empty-state).

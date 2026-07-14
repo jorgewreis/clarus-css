@@ -1,7 +1,8 @@
 # Design tokens
 
-Referência completa dos tokens do Clarus CSS. Ver
-[Theming](../guides/theming.md) para como customizá-los.
+Referência completa dos tokens do Clarus CSS. Escolha primeiro o token pelo
+papel que ele desempenha; consulte [Theming](../guides/theming.md) para
+customizá-lo em runtime ou via Sass.
 
 ## Cor — primitivo → semântico → componente
 
@@ -25,6 +26,7 @@ comunica melhor a intenção no seu código:
 |---|---|
 | `--cl-color-bg-surface` | `--cl-color-surface` |
 | `--cl-color-bg-subtle` | `--cl-color-subtle` |
+| `--cl-color-surface-raised` | `--cl-color-surface` |
 | `--cl-color-text-primary` | `--cl-color-text` |
 | `--cl-color-text-muted` | `--cl-color-muted` |
 | `--cl-color-border-default` | `--cl-color-border` |
@@ -64,10 +66,20 @@ Seis papéis, cada um com 3 tokens derivados automaticamente do primitivo
 
 ### Componente
 
-Alguns componentes expõem tokens próprios, com fallback pra um token
-semântico — sobrescrevíveis por instância. Ver a página do componente para
-a lista (ex.: `.cl-btn` → `--cl-btn-bg`/`--cl-btn-color`/`--cl-btn-border-color`,
-documentado em [`../components/button.md`](../components/button.md)).
+Componentes expõem tokens próprios quando precisam de uma API de customização
+local. Eles têm fallback para um token semântico e podem ser alterados sem
+`!important`:
+
+```css
+.meu-botao-especial {
+  --cl-btn-bg: var(--cl-color-action-primary);
+}
+```
+
+Consulte a página do componente para a lista completa. Por exemplo,
+`.cl-btn` documenta `--cl-btn-bg`, `--cl-btn-color` e
+`--cl-btn-border-color`. Prefira nomes de intenção, como
+`--cl-color-action-primary`, em vez de nomes baseados no valor da cor.
 
 ## Tipografia
 
@@ -103,7 +115,23 @@ componentes e extensões mantenham a mesma escala visual:
 | `--cl-space-0` … `--cl-space-5` | Escala de espaçamento baseada em `$spacers` |
 | `--cl-z-dropdown` … `--cl-z-tooltip` | Camadas padronizadas para overlays |
 | `--cl-control-height` / `--cl-control-height-sm` / `--cl-control-height-lg` | Alturas dos controles de formulário |
+| `--cl-control-padding-x` / `--cl-control-padding-x-sm` / `--cl-control-padding-x-lg` | Padding horizontal dos controles |
+| `--cl-border-width` | Espessura padrão de bordas |
+| `--cl-disabled-opacity` | Opacidade visual de controles desabilitados |
 | `--cl-color-on-primary` … `--cl-color-on-info` | Cor de conteúdo sobre cada cor de tema |
+
+## Interação e movimento
+
+| Token | Papel |
+|---|---|
+| `--cl-color-focus` | Cor semântica do foco de teclado |
+| `--cl-focus-width` / `--cl-focus-offset` | Geometria do anel de foco |
+| `--cl-focus-ring-alpha` | Intensidade do halo de foco |
+| `--cl-transition-fast` / `--cl-transition-normal` | Durações de transição |
+| `--cl-ease-standard` | Curva de movimento padrão |
+
+O framework respeita `prefers-reduced-motion: reduce`, reduzindo transições e
+animações CSS ao mínimo sem remover estados ou interações.
 
 Use `--cl-color-on-{nome}` em texto e ícones sobre fundos de tema. Isso
 permite que uma marca altere o contraste sem duplicar regras de componente.

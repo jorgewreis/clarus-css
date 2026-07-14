@@ -114,4 +114,4 @@ Auto-init via `data-cl="modal"` **no gatilho**. `Modal.getInstance(triggerEl)`.
 ```
 
 Para o mesmo padrão sem escrever HTML, ver [Alert Dialog](alert-dialog.md)
-(`Clarus.confirm()`). Mockup: [`mockup/modal-select.html`](../../mockup/modal-select.html).
+(`Clarus.confirm()`). Mockup: [laboratório do componente](../../mockup/overlays-commands.html#modal).

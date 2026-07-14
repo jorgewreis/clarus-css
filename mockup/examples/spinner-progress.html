@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Spinner & Progress</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        html[data-theme="dark"] body {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        .cl-progress {
+            max-width: 480px;
+        }
+
+        .spinner-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .spinner-context {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--cl-color-muted);
+            font-size: var(--cl-font-size-sm);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <div class="theme-panel">
+<p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - neutro e cores de estado</p>
+        <div class="spinner-row">
+            <span class="cl-spinner" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-primary" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-success" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-warning" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-danger" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-info" role="status" aria-label="Carregando"></span>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - tamanhos</p>
+        <div class="spinner-row">
+            <span class="cl-spinner cl-spinner-primary cl-spinner-sm" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-primary" role="status" aria-label="Carregando"></span>
+            <span class="cl-spinner cl-spinner-primary cl-spinner-lg" role="status" aria-label="Carregando"></span>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Spinner - em contexto</p>
+        <span class="spinner-context" role="status"><span class="cl-spinner cl-spinner-sm" aria-hidden="true"></span>Atualizando dados…</span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - valores</p>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-label="Progresso: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 25"></div>
+        </div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-label="Progresso: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-success" style="--cl-progress-value: 50"></div>
+        </div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-label="Progresso: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-warning" style="--cl-progress-value: 75"></div>
+        </div>
+        <div class="cl-progress" role="progressbar" aria-label="Progresso: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-danger" style="--cl-progress-value: 100"></div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - tamanhos</p>
+        <div class="cl-progress cl-progress-sm u-mb-2" role="progressbar" aria-label="Progresso: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress u-mb-2" role="progressbar" aria-label="Progresso: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60"></div>
+        </div>
+        <div class="cl-progress cl-progress-lg" role="progressbar" aria-label="Progresso: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary" style="--cl-progress-value: 60">60%</div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - listrado e animado</p>
+        <div class="cl-progress" role="progressbar" aria-label="Progresso: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar cl-progress-bar-primary cl-progress-bar-striped cl-progress-bar-animated" style="--cl-progress-value: 70"></div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - rótulo externo</p>
+        <div class="cl-progress-meta"><span>Upload de anexos</span><span class="cl-progress-value">3 de 8 arquivos</span></div>
+        <div class="cl-progress" role="progressbar" aria-label="Upload de anexos" aria-valuetext="3 de 8 arquivos enviados" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 38"></div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - indeterminado</p>
+        <div class="cl-progress cl-progress-indeterminate" role="progressbar" aria-label="Processando pagamento" aria-valuetext="Progresso indeterminado" aria-busy="true">
+            <div class="cl-progress-bar"></div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - concluído e erro</p>
+        <div class="cl-progress cl-progress-complete" role="progressbar" aria-label="Exportação concluída: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 100"></div>
+        </div>
+        <span class="cl-progress-status"><span class="cl-progress-status-icon" aria-hidden="true"><svg class="cl-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Exportação concluída</span>
+        <div class="cl-progress cl-progress-error u-mt-2" role="progressbar" aria-label="Envio interrompido: 62%" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 62"></div>
+        </div>
+        <span class="cl-progress-status cl-progress-status-danger">Envio interrompido. Tente novamente.</span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Progress - meta e início perceptível</p>
+        <div class="cl-progress-meta"><span>Meta mensal</span><span class="cl-progress-value">42% · meta: 70%</span></div>
+        <div class="cl-progress" role="progressbar" aria-label="Meta mensal: 42%, meta de 70%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 42"></div><span class="cl-progress-marker" style="--cl-progress-marker-value: 70" aria-hidden="true"></span>
+        </div>
+        <div class="cl-progress-meta u-mt-2"><span>Preparando upload</span><span class="cl-progress-value">1%</span></div>
+        <div class="cl-progress cl-progress-minimum" role="progressbar" aria-label="Preparando upload: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">
+            <div class="cl-progress-bar" style="--cl-progress-value: 1"></div>
+        </div>
+    </div>
+
+</body>
+</html>

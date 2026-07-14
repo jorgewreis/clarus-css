@@ -5,8 +5,11 @@ O guia de contribuição vive na raiz do repositório —
 automaticamente em issues/PRs. Cobre:
 
 - Pré-requisitos e setup local.
-- Scripts (`build`, `lint`, `test`, `test:visual`, `contrast`, `size`).
+- Scripts (`build`, `lint`, `test`, `test:visual`, `test:a11y`, `contrast`,
+  `size`, `docs:check`).
 - Convenções de SCSS e o fluxo pra criar um componente novo.
+- Contrato editorial: cada componente precisa manter implementação, exemplo,
+  documentação, testes e acessibilidade alinhados.
 - Semver e política de depreciação.
 - Checklist de Pull Request.
 

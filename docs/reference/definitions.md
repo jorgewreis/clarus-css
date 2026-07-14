@@ -362,7 +362,7 @@ Variantes sólidas e outline por cor de estado
 `color-contrast()` (`packages/clarus-core/scss/tools/_mixins.scss`) garante contraste WCAG AA em
 cada variante — reaproveitada por cards, alertas, modal e navbar.
 
-Mockup: `mockup/buttons.html`.
+Mockup: `mockup/feedback-actions.html#button`.
 
 ### Badges e Alertas
 
@@ -373,7 +373,7 @@ funções `tint-color()`/`shade-color()` (`packages/clarus-core/scss/tools/_mixi
 componentes compartilham o mesmo padrão de variante de cor de estado
 (success/warning/danger/info), também usado por tabelas.
 
-Mockup: `mockup/badges-alerts.html`.
+Mockup: `mockup/feedback-actions.html#badge`.
 
 ### Cards
 
@@ -387,7 +387,7 @@ modal/toast). Utilitários de sombra (`.u-shadow-sm`/`.u-shadow`/`.u-shadow-lg`,
 elementos interativos; `.cl-card-horizontal` muda o eixo para linha, ajustando
 raio/borda do header/footer para a lateral.
 
-Mockup: `mockup/cards.html`.
+Mockup: `mockup/content-data.html#card`.
 
 ### Tabelas e Navbar
 
@@ -400,7 +400,7 @@ Dropdown é feita compondo os dois componentes): `.cl-navbar-brand`/
 `.cl-navbar-nav`/`.cl-nav-link`, com estados `.is-active`/`.is-disabled`, reaproveitando
 botões e badges para o conteúdo interno.
 
-Mockup: `mockup/tables-navbar.html`.
+Mockup: `mockup/content-data.html#table`.
 
 ### Paginação e Breadcrumbs
 
@@ -409,7 +409,7 @@ Paginação: `.cl-page-link` com estados `.is-active`/`.is-disabled`, reaproveit
 Breadcrumbs: `.cl-breadcrumb-item` com separador via `::before` e estado
 `.is-active`. Ambos são auxiliares de navegação, sem JavaScript.
 
-Mockup: `mockup/pagination-breadcrumbs.html`.
+Mockup: `mockup/navigation-disclosure.html#pagination`.
 
 ### Formulários Avançados
 
@@ -424,7 +424,7 @@ teclado), com rótulo estilizado via `<label for>`, tamanhos
 (`.cl-file-label-sm`/`-lg`) e estado desabilitado. Todo o grupo é 100% CSS, sem
 dependência de JavaScript.
 
-Mockup: `mockup/forms-advanced.html`.
+Mockup: `mockup/forms.html#input`.
 
 ### Infraestrutura JS Compartilhada
 
@@ -451,7 +451,7 @@ Reexportado como `Clarus.core` pelo bundle único (`packages/clarus-js/js/clarus
 (`clarus-css/js/core/positioning`, etc.), alinhado com a API JavaScript
 definida na seção 20.
 
-Mockup: `mockup/js-foundation.html` (harness de posicionamento, foco e
+Mockup: `mockup/foundations.html#js-foundation` (harness de posicionamento, foco e
 transição, sem componente visual final).
 
 ### Dropdown e Tooltip
@@ -479,7 +479,7 @@ com offset de 4px em relação ao toggle; `.cl-dropdown-menu` tem
 como bloco normal antes do JS aplicar a posição (o que quebraria o cálculo
 de alinhamento `start`/`end`).
 
-Mockup: `mockup/dropdown-tooltip.html`.
+Mockup: `mockup/overlays-commands.html#dropdown`.
 
 ### Modal e Select Customizado
 
@@ -505,7 +505,7 @@ este caso, em vez de `"menu"`/`"menuitem"` herdado do Dropdown). Tamanhos
 via `data-size="sm"/"lg"` no `<select>` (`.cl-form-select-sm`/`-lg`,
 `packages/clarus-components/scss/forms/_forms.scss`).
 
-Mockup: `mockup/modal-select.html`.
+Mockup: `mockup/overlays-commands.html#modal`.
 
 ### Accordion, Tabs e Toast
 
@@ -535,7 +535,7 @@ para mostrar/esconder, com timer de auto-dismiss configurável (`data-delay`,
 visíveis quando `.show()` é chamado (tipicamente após alguma ação), via
 `Clarus.Toast.getInstance(el).show()`.
 
-Mockup: `mockup/accordion-tabs-toast.html`.
+Mockup: `mockup/navigation-disclosure.html#accordion`.
 
 ### Spinner e Progress
 
@@ -555,7 +555,7 @@ e faixas diagonais opcionais (`.cl-progress-bar-striped`, animáveis com
 (spinner desacelera, listras param). ARIA fica a cargo do consumidor
 (`role="status"` no spinner, `role="progressbar"` + `aria-valuenow` na barra).
 
-Mockup: `mockup/spinner-progress.html`.
+Mockup: `mockup/feedback-actions.html#progress`.
 
 ### Carousel
 
@@ -581,7 +581,7 @@ intervalo por `data-interval`, em ms) que pausa no hover/foco. `role="group"`
 nos indicadores; `aria-live` fica `off` no autoplay e `polite` sem ele. As
 transições respeitam `prefers-reduced-motion`.
 
-Mockup: `mockup/carousel.html`.
+Mockup: `mockup/content-data.html#carousel`.
 
 ### Stepper
 
@@ -607,7 +607,7 @@ o cabeçalho só navega para passos já concluídos; `data-linear="false"` liber
 pular para qualquer passo. Acessibilidade: `aria-current="step"` no passo ativo,
 passos clicáveis navegáveis por teclado (Enter/Espaço).
 
-Mockup: `mockup/stepper.html`.
+Mockup: `mockup/navigation-disclosure.html#stepper`.
 
 ### Offcanvas
 
@@ -638,7 +638,7 @@ por isso a ativação do focus trap é adiada por um duplo
 `requestAnimationFrame` (mesma técnica já usada por `collapse()`/`expand()`
 em `packages/clarus-js/js/core/transition.js`).
 
-Mockup: `mockup/offcanvas-popover.html`.
+Mockup: `mockup/overlays-commands.html#offcanvas`.
 
 ### Popover
 
@@ -667,7 +667,7 @@ auto-init, sem nenhum listener automático — só API programática, no espíri
 do Toast). `data-cl-dismiss="popover"` fecha a partir de qualquer elemento
 interno; `data-placement`/`data-align` controlam o posicionamento.
 
-Mockup: `mockup/offcanvas-popover.html`.
+Mockup: `mockup/overlays-commands.html#offcanvas`.
 
 ### Segmented Control
 
@@ -681,7 +681,7 @@ oculto (mesma técnica de `.cl-file-input`, `packages/clarus-components/scss/for
 `color-contrast()` (mesma função de botões/badges/pagination) para garantir
 contraste. Tamanhos `.cl-segmented-control-sm`/`-lg`.
 
-Mockup: `mockup/segmented-control.html`.
+Mockup: `mockup/forms.html#segmented-control`.
 
 ### Skeletons
 
@@ -692,7 +692,7 @@ controlados por largura/altura inline ou pelo elemento host. Animação padrão
 brilho que varre da esquerda pra direita via pseudo-elemento. Ambas
 desativadas em `prefers-reduced-motion: reduce`.
 
-Mockup: `mockup/skeletons.html`.
+Mockup: `mockup/feedback-actions.html#skeleton`.
 
 ### Timeline
 
@@ -705,7 +705,7 @@ de estado (`--cl-color-primary/success/danger`). O conector entre
 marcadores fica na cor de sucesso depois de um item concluído, mesma lógica
 de progresso do Stepper (`packages/clarus-components/scss/components/_stepper.scss`).
 
-Mockup: `mockup/timeline.html`.
+Mockup: `mockup/content-data.html#timeline`.
 
 ### Collapse (standalone)
 
@@ -719,7 +719,7 @@ só define o `overflow: hidden` exigido pela animação de `height`. `packages/c
 `cl:collapse:shown`/`-hidden`, `aria-expanded`/`aria-controls` geridos
 automaticamente. Estado inicial aberto via `aria-expanded="true"` no gatilho.
 
-Mockup: `mockup/collapse.html`.
+Mockup: `mockup/navigation-disclosure.html#collapse`.
 
 ### Breadcrumb Avançado
 
@@ -736,7 +736,7 @@ os níveis intermediários são substituídos por um único item `.cl-breadcrumb
 composição do Select customizado) com os links ocultos — mantém
 sempre o primeiro e o último nível visíveis.
 
-Mockup: `mockup/pagination-breadcrumbs.html`.
+Mockup: `mockup/navigation-disclosure.html#pagination`.
 
 ### Input Group
 
@@ -747,7 +747,7 @@ controle via `align-items: stretch` (sem precisar fixar `height`); as bordas
 adjacentes são fundidas (sem dupla borda) e só as pontas do grupo mantêm o
 radius. Tamanhos `.cl-input-group-sm`/`-lg`.
 
-Mockup: `mockup/input-group.html`.
+Mockup: `mockup/forms.html#input-group`.
 
 ### Alert Dialog / Confirm
 
@@ -764,7 +764,7 @@ fechado por Escape/clique fora. Opções: `title`, `message`, `confirmText`,
 confirmação, reaproveitando `color-contrast()`). O foco volta para o
 elemento que estava focado antes da chamada (o botão que abriu o diálogo).
 
-Mockup: `mockup/alert-dialog.html`.
+Mockup: `mockup/overlays-commands.html#alert-dialog`.
 
 ### Divider
 
@@ -773,7 +773,7 @@ Linha divisória (`packages/clarus-components/scss/components/_divider.scss`), 1
 pode ser `<hr>`, que não aceita filhos) com `.cl-divider-label` para texto
 centralizado, flanqueado por duas linhas via pseudo-elementos.
 
-Mockup: `mockup/divider.html`.
+Mockup: `mockup/foundations.html#divider`.
 
 ### Empty State
 
@@ -783,7 +783,7 @@ vazio para o consumidor colocar seu próprio SVG/emoji/ilustração),
 `.cl-empty-state-title`, `.cl-empty-state-text` e ação opcional reaproveitando os
 botões existentes.
 
-Mockup: `mockup/empty-state.html`.
+Mockup: `mockup/feedback-actions.html#empty-state`.
 
 ### Rating / Stars
 
@@ -795,7 +795,7 @@ grupo. A marcação usa os pares input+label em ordem decrescente de valor
 destacar "a estrela clicada e todas à esquerda dela" usando só o combinador
 de irmãos gerais (`~`). Tamanhos `.cl-rating-sm`/`-lg`.
 
-Mockup: `mockup/rating.html`.
+Mockup: `mockup/forms.html#rating`.
 
 ### Badge Dismissível / Tag
 
@@ -808,7 +808,7 @@ Antes de remover o elemento do DOM, dispara o evento **cancelável**
 `cl:tag:dismissed` (mesmo espírito de `cl:stepper:beforechange`) —
 `preventDefault()` bloqueia a remoção.
 
-Mockup: `mockup/tag.html`.
+Mockup: `mockup/feedback-actions.html#tag`.
 
 ### File Input Drag-and-Drop
 
@@ -823,7 +823,7 @@ nativo (mesmo padrão do Select customizado). Variante visual
 `.cl-file-label-dropzone` para quando o alvo de soltar precisa ser maior que
 o botão padrão.
 
-Mockup: `mockup/file-drop.html`.
+Mockup: `mockup/forms.html#file-upload`.
 
 ### Hover Card
 
@@ -833,7 +833,7 @@ conteúdo mais rico (ex. avatar + bio). O único ajuste é visual: o
 modificador `.cl-popover-hover-card` alarga o popover (320px) e alinha um
 layout de linha (avatar ao lado do texto) no `.cl-popover-body`.
 
-Mockup: `mockup/hover-card.html`.
+Mockup: `mockup/overlays-commands.html#hover-card`.
 
 ## 22. Testes Automatizados
 
@@ -849,7 +849,9 @@ Mockup: `mockup/hover-card.html`.
   `-win32`/`-linux` no nome do arquivo), com as baselines Linux geradas em
   um container Docker (`mcr.microsoft.com/playwright`) para bater com o
   ambiente do CI (`ubuntu-latest`).
-- Os arquivos em `mockup/*.html` são as fixtures oficiais dos testes
+- Os laboratórios em `mockup/*.html` são as fixtures oficiais de regressão
+  visual; as fontes em `mockup/examples/*.html` preservam a cobertura de
+  acessibilidade e interações dos componentes
   visuais — cada componente/grupo implementado tem um mockup dedicado,
   mantido atualizado.
 - Testes (funcionais e visuais) rodam automaticamente no GitHub Actions a

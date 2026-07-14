@@ -36,6 +36,9 @@ jobs:
       - name: Types check
         run: npm run types:check
 
+      - name: Documentation consistency
+        run: npm run docs:check
+
       - name: Contrast check (WCAG AA)
         run: npm run contrast:check
 

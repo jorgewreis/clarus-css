@@ -104,4 +104,4 @@ stepperEl.addEventListener("cl:stepper:beforechange", (event) => {
 ## Exemplo
 
 Ver acima (Visão geral) — mockup completo com validação por passo em
-[`mockup/stepper.html`](../../mockup/stepper.html).
+[`mockup/navigation-disclosure.html#stepper`](../../mockup/navigation-disclosure.html#stepper).

@@ -70,4 +70,4 @@ Os mesmos de [Input](input.md) — `--cl-color-border`,
 </div>
 ```
 
-Mockup: [`mockup/input-group.html`](../../mockup/input-group.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#input-group).

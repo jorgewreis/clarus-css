@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Infraestrutura JS (Fase 7)</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/forms.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        body {
+            padding: 24px;
+        }
+
+        section {
+            margin-bottom: 320px;
+        }
+
+        /* Harness manual desta fase: ainda não existe .cl-dropdown-menu (Fase 8)
+           nem .cl-modal (Fase 9), então o painel flutuante e o painel com focus
+           trap usam estilo inline sobre os tokens já existentes. */
+        .floating-panel {
+            width: 220px;
+            padding: 12px 16px;
+            border: 1px solid var(--cl-color-border);
+            border-radius: var(--cl-radius-md);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+            box-shadow: var(--cl-shadow-md);
+        }
+
+        .trap-panel {
+            display: none;
+            position: fixed;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(0 0 0 / 45%);
+        }
+
+        .trap-panel.is-open {
+            display: flex;
+        }
+
+        .trap-panel-body {
+            width: 320px;
+            padding: 20px;
+            border-radius: var(--cl-radius-md);
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+            box-shadow: var(--cl-shadow-lg);
+        }
+
+        .collapse-panel {
+            padding: 12px 16px;
+            border: 1px solid var(--cl-color-border);
+            border-top: none;
+            border-radius: 0 0 var(--cl-radius-md) var(--cl-radius-md);
+            color: var(--cl-color-text);
+        }
+
+        .collapse-trigger {
+            border-radius: var(--cl-radius-md) var(--cl-radius-md) 0 0;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <h1 class="u-fs-lg u-fw-medium u-mb-3">Fase 7 — Infraestrutura JS compartilhada</h1>
+
+    <section>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">1. Posicionamento (Clarus.core.computePosition)</h2>
+        <p class="u-fs-sm u-mb-3">O painel reposiciona (com flip) relativo ao botão. Role a página para testar o flip perto das bordas.</p>
+        <button type="button" class="cl-btn cl-btn-primary" id="positioning-trigger">Alternar painel posicionado</button>
+        <div class="floating-panel" id="positioning-panel" style="display: none;">
+            Painel posicionado via <code class="u-font-mono">computePosition()</code>, com flip automático quando não cabe no viewport.
+        </div>
+    </section>
+
+    <section>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">2. Foco, teclado e overlay (Clarus.core.createFocusTrap / onEscapeKey / lockScroll / onClickOutside)</h2>
+        <p class="u-fs-sm u-mb-3">Abre um painel com scroll da página bloqueado, foco preso via Tab/Shift+Tab, fecha com Escape ou clique fora.</p>
+        <button type="button" class="cl-btn cl-btn-primary" id="trap-trigger">Abrir painel com focus trap</button>
+        <div class="trap-panel" id="trap-panel">
+            <div class="trap-panel-body" id="trap-panel-body">
+                <p class="u-fs-md u-fw-medium u-mb-2">Painel com focus trap</p>
+                <p class="u-fs-sm u-mb-3">Tab/Shift+Tab ciclam apenas entre estes três controles. Escape ou clique fora fecha.</p>
+                <input type="text" class="cl-form-control u-mb-2" placeholder="Campo de teste">
+                <button type="button" class="cl-btn u-mr-2">Ação secundária</button>
+                <button type="button" class="cl-btn cl-btn-primary" id="trap-close">Fechar</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="u-fs-md u-fw-medium u-mb-2">3. Transição / collapse (Clarus.core.collapse / expand)</h2>
+        <p class="u-fs-sm u-mb-3">Expande/recolhe com transição de altura (respeita <code class="u-font-mono">prefers-reduced-motion</code>).</p>
+        <button type="button" class="cl-btn cl-btn-primary collapse-trigger" id="collapse-trigger" aria-expanded="false">Alternar painel</button>
+        <div class="collapse-panel" id="collapse-panel" style="display: none;">
+            Conteúdo revelado via <code class="u-font-mono">expand()</code>/<code class="u-font-mono">collapse()</code>, animando a altura com <code class="u-font-mono">transitionend</code>.
+        </div>
+    </section>
+
+    <!-- SCRIPTS IMPORT -->
+    <script src="../../dist/js/clarus.js"></script>
+    <script>
+        const { core } = Clarus;
+
+        // 1. Posicionamento
+        const positioningTrigger = document.getElementById("positioning-trigger");
+        const positioningPanel = document.getElementById("positioning-panel");
+        let positioningOpen = false;
+
+        positioningTrigger.addEventListener("click", () => {
+            positioningOpen = !positioningOpen;
+
+            if (positioningOpen) {
+                positioningPanel.style.display = "block";
+                const position = core.computePosition(positioningTrigger, positioningPanel, { placement: "bottom", offset: 8 });
+                core.applyPosition(positioningPanel, position);
+            } else {
+                positioningPanel.style.display = "none";
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (!positioningOpen) return;
+            const position = core.computePosition(positioningTrigger, positioningPanel, { placement: "bottom", offset: 8 });
+            core.applyPosition(positioningPanel, position);
+        });
+
+        // 2. Foco, teclado e overlay
+        const trapTrigger = document.getElementById("trap-trigger");
+        const trapPanel = document.getElementById("trap-panel");
+        const trapPanelBody = document.getElementById("trap-panel-body");
+        const trapClose = document.getElementById("trap-close");
+
+        let focusTrap = null;
+        let removeEscapeListener = null;
+        let removeClickOutsideListener = null;
+
+        function openTrapPanel() {
+            trapPanel.classList.add("is-open");
+            core.lockScroll();
+
+            focusTrap = core.createFocusTrap(trapPanelBody);
+            focusTrap.activate();
+
+            removeEscapeListener = core.onEscapeKey(closeTrapPanel);
+            removeClickOutsideListener = core.onClickOutside(trapPanelBody, closeTrapPanel);
+        }
+
+        function closeTrapPanel() {
+            trapPanel.classList.remove("is-open");
+            core.unlockScroll();
+
+            focusTrap?.deactivate();
+            removeEscapeListener?.();
+            removeClickOutsideListener?.();
+
+            trapTrigger.focus();
+        }
+
+        trapTrigger.addEventListener("click", openTrapPanel);
+        trapClose.addEventListener("click", closeTrapPanel);
+
+        // 3. Transição / collapse
+        const collapseTrigger = document.getElementById("collapse-trigger");
+        const collapsePanel = document.getElementById("collapse-panel");
+        let collapseOpen = false;
+
+        collapseTrigger.addEventListener("click", () => {
+            collapseOpen = !collapseOpen;
+            collapseTrigger.setAttribute("aria-expanded", String(collapseOpen));
+
+            if (collapseOpen) {
+                core.expand(collapsePanel);
+            } else {
+                core.collapse(collapsePanel);
+            }
+        });
+    </script>
+
+</body>
+</html>

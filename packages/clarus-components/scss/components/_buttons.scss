@@ -15,10 +15,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    min-height: 38px;
-    padding: 0 12px;
-    border: 1px solid var(--cl-btn-border-color);
+    gap: var(--cl-space-1);
+    min-height: var(--cl-control-height);
+    padding: 0 var(--cl-control-padding-x);
+    border: var(--cl-border-width) solid var(--cl-btn-border-color);
     border-radius: var(--cl-radius-sm);
     color: var(--cl-btn-color);
     background-color: var(--cl-btn-bg);
@@ -26,8 +26,10 @@
     font-weight: $font-weight-medium;
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color var(--cl-transition-fast) var(--cl-ease-standard),
+      background-color var(--cl-transition-fast) var(--cl-ease-standard),
+      border-color var(--cl-transition-fast) var(--cl-ease-standard),
+      box-shadow var(--cl-transition-fast) var(--cl-ease-standard);
   }
 
   .cl-btn:hover {
@@ -44,7 +46,7 @@
 
   .cl-btn:disabled,
   .cl-btn.is-disabled {
-    opacity: 0.4;
+    opacity: var(--cl-disabled-opacity);
     pointer-events: none;
   }
 
@@ -71,14 +73,14 @@
   }
 
   .cl-btn-sm {
-    min-height: 30px;
-    padding: 0 8px;
+    min-height: var(--cl-control-height-sm);
+    padding: 0 var(--cl-control-padding-x-sm);
     font-size: $font-size-sm;
   }
 
   .cl-btn-lg {
-    min-height: 46px;
-    padding: 0 16px;
+    min-height: var(--cl-control-height-lg);
+    padding: 0 var(--cl-control-padding-x-lg);
     font-size: $font-size-lg;
   }
 
@@ -90,7 +92,7 @@
     border: none;
     border-radius: var(--cl-radius-sm);
     color: var(--cl-color-muted);
-    background-color: transparent;
+    background-color: var(--cl-color-surface-raised);
     cursor: pointer;
   }
 

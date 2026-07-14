@@ -98,4 +98,4 @@ fundo variadas.
 </div>
 ```
 
-Mockup: [`mockup/carousel.html`](../../mockup/carousel.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#carousel).

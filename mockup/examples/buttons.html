@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Buttons</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <div class="theme-panel">
+<p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Neutro</p>
+        <button type="button" class="cl-btn">Botão</button>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Sólidos</p>
+        <button type="button" class="cl-btn cl-btn-primary u-mr-2">Primary</button>
+        <button type="button" class="cl-btn cl-btn-success u-mr-2">Success</button>
+        <button type="button" class="cl-btn cl-btn-warning u-mr-2">Warning</button>
+        <button type="button" class="cl-btn cl-btn-danger u-mr-2">Danger</button>
+        <button type="button" class="cl-btn cl-btn-info">Info</button>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Outline</p>
+        <button type="button" class="cl-btn cl-btn-outline-primary u-mr-2">Primary</button>
+        <button type="button" class="cl-btn cl-btn-outline-success u-mr-2">Success</button>
+        <button type="button" class="cl-btn cl-btn-outline-warning u-mr-2">Warning</button>
+        <button type="button" class="cl-btn cl-btn-outline-danger u-mr-2">Danger</button>
+        <button type="button" class="cl-btn cl-btn-outline-info">Info</button>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Tamanhos</p>
+        <button type="button" class="cl-btn cl-btn-primary cl-btn-sm u-mr-2">Small</button>
+        <button type="button" class="cl-btn cl-btn-primary u-mr-2">Default</button>
+        <button type="button" class="cl-btn cl-btn-primary cl-btn-lg">Large</button>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Desabilitado</p>
+        <button type="button" class="cl-btn cl-btn-primary u-mr-2" disabled>Button disabled</button>
+        <a href="#" class="cl-btn cl-btn-primary is-disabled" aria-disabled="true">Link disabled</a>
+    </div>
+
+    
+
+</body>
+</html>

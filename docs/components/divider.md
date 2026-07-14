@@ -54,4 +54,4 @@ Nenhuma — 100% CSS.
 <div class="cl-divider"><span class="cl-divider-label">ou entre com</span></div>
 ```
 
-Mockup: [`mockup/divider.html`](../../mockup/divider.html).
+Mockup: [laboratório do componente](../../mockup/foundations.html#divider).

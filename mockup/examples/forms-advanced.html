@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Formulários Avançados</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/forms.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <div class="theme-panel">
+<p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Validação - .is-valid / .is-invalid</p>
+        <div class="cl-form-row u-gap-x-2">
+            <div class="cl-form-col">
+                <label for="input-valid" class="cl-form-label cl-form-size-md">E-mail</label>
+                <input type="email" class="cl-form-control cl-form-size-xxl is-valid" id="input-valid" value="jorge@clarus.dev">
+                <span class="cl-valid-feedback cl-form-size-xxl">E-mail válido.</span>
+            </div>
+            <div class="cl-form-col">
+                <label for="input-invalid" class="cl-form-label cl-form-size-md">E-mail</label>
+                <input type="email" class="cl-form-control cl-form-size-xxl is-invalid" id="input-invalid" value="jorge@clarus">
+                <span class="cl-invalid-feedback cl-form-size-xxl">Informe um e-mail válido.</span>
+            </div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Upload de arquivo estilizado</p>
+        <div class="cl-form-row u-gap-x-2">
+            <div class="cl-form-col">
+                <span class="cl-form-label cl-form-size-md">Padrão</span>
+                <div class="cl-file-upload">
+                    <input type="file" class="cl-file-input" id="file-default">
+                    <label for="file-default" class="cl-file-label">Escolher arquivo</label>
+                </div>
+            </div>
+            <div class="cl-form-col">
+                <span class="cl-form-label cl-form-size-md">Tamanhos</span>
+                <div class="cl-form-row u-gap-x-2">
+                    <div class="cl-file-upload">
+                        <input type="file" class="cl-file-input" id="file-sm">
+                        <label for="file-sm" class="cl-file-label cl-file-label-sm">Small</label>
+                    </div>
+                    <div class="cl-file-upload">
+                        <input type="file" class="cl-file-input" id="file-lg">
+                        <label for="file-lg" class="cl-file-label cl-file-label-lg">Large</label>
+                    </div>
+                </div>
+            </div>
+            <div class="cl-form-col">
+                <span class="cl-form-label cl-form-size-md">Desabilitado</span>
+                <div class="cl-file-upload">
+                    <input type="file" class="cl-file-input" id="file-disabled" disabled>
+                    <label for="file-disabled" class="cl-file-label">Escolher arquivo</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

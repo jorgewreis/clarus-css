@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Badges & Alerts</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <div class="theme-panel">
+        <h2 class="u-fs-lg u-fw-medium">Badges e alertas</h2>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Badges — neutro e sólidos</p>
+        <span class="cl-badge u-mr-2">Badge</span>
+        <span class="cl-badge cl-badge-primary u-mr-2">Primary</span>
+        <span class="cl-badge cl-badge-success u-mr-2">Success</span>
+        <span class="cl-badge cl-badge-warning u-mr-2">Warning</span>
+        <span class="cl-badge cl-badge-danger u-mr-2">Danger</span>
+        <span class="cl-badge cl-badge-info">Info</span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Badges — soft e outline</p>
+        <span class="cl-badge cl-badge-soft-primary u-mr-2">Em revisão</span>
+        <span class="cl-badge cl-badge-soft-success cl-badge-dot u-mr-2">Disponível</span>
+        <span class="cl-badge cl-badge-outline-warning u-mr-2">Beta</span>
+        <span class="cl-badge cl-badge-outline-danger">Restrito</span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Badges — status e contagem</p>
+        <span class="cl-badge cl-badge-soft-info cl-badge-dot u-mr-2">Sincronizando</span>
+        <span class="cl-badge cl-badge-count cl-badge-danger u-mr-2" aria-label="12 notificações não lidas">12</span>
+        <span class="cl-badge cl-badge-count cl-badge-primary">99+</span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Badges — rótulo e valor</p>
+        <span class="cl-badge-split cl-badge-split-primary u-mr-2">
+            <span class="cl-badge-split-label">New</span>
+            <span class="cl-badge-split-value">0.7.1</span>
+        </span>
+        <span class="cl-badge-split cl-badge-split-success u-mr-2">
+            <span class="cl-badge-split-label">Deploy</span>
+            <span class="cl-badge-split-value">Pronto</span>
+        </span>
+        <span class="cl-badge-split cl-badge-split-warning cl-badge-sm">
+            <span class="cl-badge-split-label">API</span>
+            <span class="cl-badge-split-value">Beta</span>
+        </span>
+
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-1">Badges - tamanhos</p>
+        <span class="cl-badge cl-badge-primary cl-badge-sm u-mr-2">Small</span>
+        <span class="cl-badge cl-badge-primary u-mr-2">Default</span>
+        <span class="cl-badge cl-badge-primary cl-badge-lg">Large</span>
+
+    </div>
+
+    <script>
+        if (new URLSearchParams(window.location.search).get("theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    </script>
+</body>
+</html>

@@ -92,4 +92,4 @@ automaticamente). `Toast.getInstance(el)`.
 </div>
 ```
 
-Mockup: [`mockup/accordion-tabs-toast.html`](../../mockup/accordion-tabs-toast.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#toast).

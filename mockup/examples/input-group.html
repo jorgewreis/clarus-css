@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Input Group</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/forms.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 24px;
+            background-color: var(--cl-color-subtle);
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        .theme-panel > div {
+            max-width: 360px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+<div class="theme-panel">
+        <p class="u-fs-sm u-fw-medium u-mb-0">Sufixo</p>
+        <div class="cl-input-group">
+            <input type="text" class="cl-form-control" placeholder="usuario">
+            <span class="cl-input-group-text">@clarus.dev</span>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mb-0">Prefixo</p>
+        <div class="cl-input-group">
+            <span class="cl-input-group-text">R$</span>
+            <input type="text" class="cl-form-control" placeholder="0,00">
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mb-0">Prefixo + sufixo, com botão</p>
+        <div class="cl-input-group">
+            <span class="cl-input-group-text">https://</span>
+            <input type="text" class="cl-form-control" placeholder="seusite.com">
+            <button type="button" class="cl-btn">Verificar</button>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mb-0">Tamanhos (sm / padrão / lg)</p>
+        <div class="cl-input-group cl-input-group-sm">
+            <span class="cl-input-group-text">R$</span>
+            <input type="text" class="cl-form-control" placeholder="0,00">
+        </div>
+        <div class="cl-input-group cl-input-group-lg">
+            <span class="cl-input-group-text">R$</span>
+            <input type="text" class="cl-form-control" placeholder="0,00">
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mb-0">Desabilitado</p>
+        <div class="cl-input-group">
+            <span class="cl-input-group-text">R$</span>
+            <input type="text" class="cl-form-control" placeholder="0,00" disabled>
+        </div>
+    </div>
+
+
+</body>
+</html>

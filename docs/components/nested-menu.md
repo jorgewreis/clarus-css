@@ -87,4 +87,4 @@ Mesmos do [Dropdown](dropdown.md) — sem tokens próprios.
 ## Exemplo
 
 Ver acima (Visão geral) — mockup com múltiplos níveis em
-[`mockup/nested-menu.html`](../../mockup/nested-menu.html).
+[laboratório do componente](../../mockup/navigation-disclosure.html#nested-menu).

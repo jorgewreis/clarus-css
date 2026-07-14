@@ -98,4 +98,4 @@ botão de cada item (ou disparando o evento de clique programaticamente).
 </div>
 ```
 
-Mockup: [`mockup/accordion-tabs-toast.html`](../../mockup/accordion-tabs-toast.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#accordion).

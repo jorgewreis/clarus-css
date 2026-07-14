@@ -97,4 +97,4 @@ projeto Feather (MIT). Ambos os avisos de copyright são distribuídos junto
 do pacote (`LICENSE`/`LICENSE-LUCIDE.txt` em `node_modules/clarus-icons/`
 depois de instalado).
 
-Mockup: [`mockup/icons.html`](../../mockup/icons.html).
+Mockup: [`mockup/foundations.html#icons`](../../mockup/foundations.html#icons).

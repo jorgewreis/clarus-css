@@ -79,7 +79,7 @@
     min-width: 0;
     height: var(--cl-control-height);
     padding: 0 7px;
-    border: 1px solid var(--cl-color-border);
+    border: var(--cl-border-width) solid var(--cl-color-border-default);
     border-radius: var(--cl-radius-sm);
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
@@ -98,7 +98,7 @@
   .cl-form-control:disabled {
     color: var(--cl-color-muted);
     background-color: var(--cl-color-subtle);
-    opacity: 0.4;
+    opacity: var(--cl-disabled-opacity);
     pointer-events: none;
   }
 
@@ -159,9 +159,9 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 38px;
+    height: var(--cl-control-height);
     padding: 0 7px;
-    border: 1px solid var(--cl-color-border);
+    border: var(--cl-border-width) solid var(--cl-color-border-default);
     border-radius: var(--cl-radius-sm);
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
@@ -195,12 +195,12 @@
   }
 
   .cl-form-select-sm {
-    height: 30px;
+    height: var(--cl-control-height-sm);
     font-size: $font-size-xs;
   }
 
   .cl-form-select-lg {
-    height: 46px;
+    height: var(--cl-control-height-lg);
     font-size: $font-size-md;
   }
 
@@ -234,7 +234,7 @@
     font-weight: $font-weight-medium;
     cursor: pointer;
     user-select: none;
-    transition: filter 0.15s ease-in-out;
+    transition: filter var(--cl-transition-fast) var(--cl-ease-standard);
   }
 
   .cl-file-label:hover {
@@ -247,7 +247,7 @@
 
   .cl-file-input:disabled + .cl-file-label {
     color: var(--cl-color-muted);
-    opacity: 0.4;
+    opacity: var(--cl-disabled-opacity);
     pointer-events: none;
     cursor: default;
   }

@@ -101,4 +101,4 @@ Usa `--cl-color-border`, `--cl-color-primary` (linha/pill ativos),
 </div>
 ```
 
-Mockup: [`mockup/accordion-tabs-toast.html`](../../mockup/accordion-tabs-toast.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#tabs).

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- consolida tokens públicos de foco, transição, densidade, alturas e padding dos controles;
+- adiciona suporte CSS global a `prefers-reduced-motion`;
+- reorganiza o índice da documentação e adiciona `npm run docs:check` ao fluxo local e ao CI;
+- atualiza a baseline de tamanho e os snapshots visuais afetados pelo refinamento dos componentes.
+- define fundos semânticos explícitos para superfícies, controles, navegação,
+  accordions, calendários, dropdowns e ordenação de tabelas.
+- consolida os mockups em seis laboratórios documentados, com âncoras estáveis,
+  preview funcional, código sincronizado, temas e cobertura de regressão visual;
+  preserva as fontes executáveis em `mockup/examples/` para testes de interação
+  e acessibilidade.
+
 - atualiza as baselines visuais Linux dos mockups após o refinamento dos componentes;\n- consolidates visual tokens for spacing, control heights, overlay layers and
   contrast-aware content colors;
 - refines focus-visible states, responsive form controls and overlay widths;

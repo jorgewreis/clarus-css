@@ -101,5 +101,5 @@ Auto-init via `data-cl="popover"`. `Popover.getInstance(el)` (`el` é o
 </div>
 ```
 
-Mockup: [`mockup/offcanvas-popover.html`](../../mockup/offcanvas-popover.html),
-[`mockup/hover-card.html`](../../mockup/hover-card.html).
+Mockup: [laboratório do componente](../../mockup/overlays-commands.html#popover),
+[`mockup/overlays-commands.html#hover-card`](../../mockup/overlays-commands.html#popover).

@@ -5,6 +5,7 @@ export class Tag {
 
   static getInstance(el: Element): Tag | undefined;
 
-  dismiss(): void;
+  dismiss(): boolean;
+  setLoading(loading: boolean): this;
   dispose(): void;
 }

@@ -75,4 +75,4 @@ aplicação.
 ## Exemplo
 
 Ver acima (Visão geral) — mockup completo com as duas orientações em
-[`mockup/timeline.html`](../../mockup/timeline.html).
+[`mockup/content-data.html#timeline`](../../mockup/content-data.html#timeline).

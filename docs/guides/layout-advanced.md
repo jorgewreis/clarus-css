@@ -4,7 +4,7 @@ Três primitivas de layout CSS-only (Stack, Cluster, Sidebar), utilitários de
 posição sticky e utilitários de container query (`@container`) — para
 composições que os utilitários de grid/flex existentes (`.cl-row`/`.cl-col-*`,
 `.u-d-flex`) não cobrem bem sozinhos. Exemplo funcional completo em
-[`mockup/layout.html`](../../mockup/layout.html).
+[`mockup/foundations.html#layout`](../../mockup/foundations.html#layout).
 
 ## Stack
 

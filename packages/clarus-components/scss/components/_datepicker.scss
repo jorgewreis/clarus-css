@@ -50,7 +50,7 @@
     border: none;
     border-radius: var(--cl-radius-sm);
     color: var(--cl-color-text);
-    background-color: transparent;
+    background-color: var(--cl-color-surface-raised);
     font-size: $font-size-md;
     cursor: pointer;
   }
@@ -102,7 +102,7 @@
     border: none;
     border-radius: var(--cl-radius-sm);
     color: var(--cl-color-text);
-    background-color: transparent;
+    background-color: var(--cl-color-surface-raised);
     font-size: $font-size-sm;
     cursor: pointer;
   }

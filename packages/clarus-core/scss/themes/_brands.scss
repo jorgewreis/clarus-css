@@ -30,7 +30,8 @@
     --cl-feedback-primary-bg: #{rgb-fallback(tint-color($brand-violet-primary))};
   }
 
-  [data-brand="violet"][data-theme="dark"] {
+  [data-brand="violet"][data-theme="dark"],
+  [data-theme="dark"] [data-brand="violet"] {
     --cl-color-primary: #{rgb-fallback(color.mix($brand-violet-primary, $color-white, 95%, $method: oklch))};
     --cl-alert-primary-bg: #{rgb-fallback(color.mix($brand-violet-primary, $color-gray-900, 15%, $method: oklch))};
     --cl-alert-primary-text: #{rgb-fallback(color.mix($brand-violet-primary, $color-white, 55%, $method: oklch))};
@@ -45,7 +46,8 @@
       --cl-feedback-primary-bg: #{tint-color($brand-violet-primary)};
     }
 
-    [data-brand="violet"][data-theme="dark"] {
+    [data-brand="violet"][data-theme="dark"],
+    [data-theme="dark"] [data-brand="violet"] {
       --cl-color-primary: #{color.mix($brand-violet-primary, $color-white, 95%, $method: oklch)};
       --cl-alert-primary-bg: #{color.mix($brand-violet-primary, $color-gray-900, 15%, $method: oklch)};
       --cl-alert-primary-text: #{color.mix($brand-violet-primary, $color-white, 55%, $method: oklch)};
@@ -64,7 +66,8 @@
     --cl-feedback-primary-bg: #{rgb-fallback(tint-color($brand-corporate-primary))};
   }
 
-  [data-brand="corporate"][data-theme="dark"] {
+  [data-brand="corporate"][data-theme="dark"],
+  [data-theme="dark"] [data-brand="corporate"] {
     --cl-color-primary: #{rgb-fallback(color.mix($brand-corporate-primary, $color-white, 95%, $method: oklch))};
     --cl-alert-primary-bg: #{rgb-fallback(color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch))};
     --cl-alert-primary-text: #{rgb-fallback(color.mix($brand-corporate-primary, $color-white, 55%, $method: oklch))};
@@ -82,7 +85,8 @@
     --cl-feedback-primary-bg: #{rgb-fallback(tint-color($brand-vibrant-primary))};
   }
 
-  [data-brand="vibrant"][data-theme="dark"] {
+  [data-brand="vibrant"][data-theme="dark"],
+  [data-theme="dark"] [data-brand="vibrant"] {
     --cl-color-primary: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-white, 95%, $method: oklch))};
     --cl-alert-primary-bg: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch))};
     --cl-alert-primary-text: #{rgb-fallback(color.mix($brand-vibrant-primary, $color-white, 55%, $method: oklch))};
@@ -97,7 +101,8 @@
       --cl-feedback-primary-bg: #{tint-color($brand-corporate-primary)};
     }
 
-    [data-brand="corporate"][data-theme="dark"] {
+    [data-brand="corporate"][data-theme="dark"],
+    [data-theme="dark"] [data-brand="corporate"] {
       --cl-color-primary: #{color.mix($brand-corporate-primary, $color-white, 95%, $method: oklch)};
       --cl-alert-primary-bg: #{color.mix($brand-corporate-primary, $color-gray-900, 15%, $method: oklch)};
       --cl-alert-primary-text: #{color.mix($brand-corporate-primary, $color-white, 55%, $method: oklch)};
@@ -111,7 +116,8 @@
       --cl-feedback-primary-bg: #{tint-color($brand-vibrant-primary)};
     }
 
-    [data-brand="vibrant"][data-theme="dark"] {
+    [data-brand="vibrant"][data-theme="dark"],
+    [data-theme="dark"] [data-brand="vibrant"] {
       --cl-color-primary: #{color.mix($brand-vibrant-primary, $color-white, 95%, $method: oklch)};
       --cl-alert-primary-bg: #{color.mix($brand-vibrant-primary, $color-gray-900, 15%, $method: oklch)};
       --cl-alert-primary-text: #{color.mix($brand-vibrant-primary, $color-white, 55%, $method: oklch)};
@@ -136,5 +142,9 @@
   [data-brand="vibrant"] .cl-badge-primary {
     --cl-btn-color: #{$color-black};
     --cl-badge-color: #{$color-black};
+  }
+
+  [data-brand="vibrant"] .cl-check {
+    --cl-check-mark: #{$color-black};
   }
 }

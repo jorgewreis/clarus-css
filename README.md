@@ -154,6 +154,11 @@ O dark mode é ativado por um único atributo (`<html data-theme="dark">`), sem
 JavaScript obrigatório. Detalhes em [Theming](docs/guides/theming.md)
 e [Dark mode](docs/guides/dark-mode.md).
 
+Os tokens de interação também são públicos: foco, duração, curva de transição,
+altura e densidade dos controles podem ser ajustados sem alterar classes ou
+recompilar o framework. A referência completa está em
+[Design tokens](docs/reference/design-tokens.md).
+
 ## Ecossistema
 
 Pacotes opcionais, publicados separadamente do core. Eles não são necessários

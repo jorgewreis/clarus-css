@@ -67,4 +67,4 @@ Mesmos do [Checkbox](checkbox.md) — sem tokens próprios.
 </div>
 ```
 
-Mockup: [`mockup/check-radio-switch.html`](../../mockup/check-radio-switch.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#check-radio-switch).

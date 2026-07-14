@@ -90,4 +90,4 @@ Sem eventos customizados.
 </nav>
 ```
 
-Mockup: [`mockup/pagination-breadcrumbs.html`](../../mockup/pagination-breadcrumbs.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#breadcrumb).

@@ -113,4 +113,4 @@ Reaproveita os tokens do File Upload simples (`--cl-color-border`,
 ## Exemplo
 
 Mockup completo em
-[`mockup/file-upload-advanced.html`](../../mockup/file-upload-advanced.html).
+[laboratório do componente](../../mockup/forms.html#file-upload).

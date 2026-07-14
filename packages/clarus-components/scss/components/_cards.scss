@@ -5,7 +5,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--cl-color-border);
+    border: var(--cl-border-width) solid var(--cl-color-border-default);
     border-radius: var(--cl-radius-lg);
     background-color: var(--cl-color-surface);
   }
@@ -27,13 +27,16 @@
   }
 
   .cl-card-clickable {
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color var(--cl-transition-fast) var(--cl-ease-standard),
+      box-shadow var(--cl-transition-fast) var(--cl-ease-standard),
+      transform var(--cl-transition-fast) var(--cl-ease-standard);
   }
 
   .cl-card-clickable:hover,
   .cl-card-clickable:focus-within {
     border-color: var(--cl-color-primary);
     box-shadow: var(--cl-shadow-sm);
+    transform: translateY(-1px);
   }
 
   .cl-stretched-link {

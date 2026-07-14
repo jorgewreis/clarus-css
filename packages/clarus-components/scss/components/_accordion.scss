@@ -10,6 +10,7 @@
   .cl-accordion-item {
     overflow: hidden;
     border: 1px solid var(--cl-color-border);
+    background-color: var(--cl-color-surface-raised);
   }
 
   .cl-accordion-item + .cl-accordion-item {
@@ -76,5 +77,6 @@
   .cl-accordion-body {
     padding: 16px;
     border-top: 1px solid var(--cl-color-border);
+    background-color: var(--cl-color-surface-raised);
   }
 }

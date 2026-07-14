@@ -27,6 +27,10 @@ checkbox, e leitores de tela não anunciam o rótulo.
 ## Variações
 
 Tamanho: `.cl-check-sm`, `.cl-check-lg` no wrapper (sem sufixo = padrão).
+O checkbox é quadrado (`border-radius: 0`): desmarcado tem borda `primary`,
+marcado usa preenchimento `primary` e check branco.
+No hover desmarcado, o fundo recebe um tom sutil de `primary`; em `:active`,
+o preenchimento fica mais intenso para confirmar o clique.
 
 ```html
 <div class="cl-check cl-check-sm">...</div>
@@ -38,10 +42,13 @@ Tamanho: `.cl-check-sm`, `.cl-check-lg` no wrapper (sem sufixo = padrão).
 - **checked**: atributo `checked` no `<input>`.
 - **indeterminate**: só via JavaScript (`input.indeterminate = true` — não
   existe atributo HTML equivalente; o framework estiliza `:indeterminate`,
-  você decide quando aplicar).
+  com borda tracejada `primary` e traço horizontal).
 - **disabled**: atributo `disabled` no `<input>`.
-- **Validação**: classes `.is-valid`/`.is-invalid` no `<input>` (mesma
-  convenção de [`.cl-form-control`](input.md)) — muda a cor da borda.
+- **Validação**: use `.is-invalid` no `<input>` quando houver erro. O
+  inválido usa preenchimento `danger` com um X branco, inclusive quando não
+  está marcado; não há estado visual separado para “válido”.
+- **Disabled**: desmarcado usa trilho e borda neutros; marcado mantém uma
+  versão atenuada de `primary`, em vez de reduzir a opacidade do controle todo.
 - **Foco**: `:focus-visible` no input desenha o anel sobre a caixa
   (`::before` da label), não sobre o texto.
 
@@ -87,4 +94,4 @@ marcada), `--cl-color-border`/`--cl-color-surface` (caixa vazia),
 </div>
 ```
 
-Mockup: [`mockup/check-radio-switch.html`](../../mockup/check-radio-switch.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#check-radio-switch).

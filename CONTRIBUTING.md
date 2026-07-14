@@ -33,6 +33,8 @@ npm install
   `:check` falha o build se algum budget (definido em `scripts/size.mjs`)
   for ultrapassado (gate do CI). Inclua o relatório de tamanho no
   `CHANGELOG.md` de toda release que altere `dist/`.
+- `npm run docs:check` — valida o catálogo de componentes, as seções mínimas
+  das páginas e os links relativos da documentação.
 
 ## Convenções de SCSS
 
@@ -45,6 +47,8 @@ para novos componentes:
 2. Adicionar o arquivo em `packages/clarus-components/scss/components/_index.scss`.
 3. Documentar a API de classes em Markdown.
 4. Adicionar exemplo em `mockup/` quando fizer sentido.
+5. Adicionar ou atualizar teste unitário, regressão visual e cenário de
+   acessibilidade sempre que o comportamento for interativo.
 
 ## Decisões do projeto
 

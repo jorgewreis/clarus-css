@@ -84,7 +84,7 @@ document.getElementById("arquivo2").addEventListener("change", (event) => {
 ## Exemplo
 
 Ver acima (Visão geral e Variações) — mockup completo em
-[`mockup/file-drop.html`](../../mockup/file-drop.html).
+[`mockup/forms.html#file-upload`](../../mockup/forms.html#file-upload).
 
 ## Variante avançada (múltiplos arquivos)
 

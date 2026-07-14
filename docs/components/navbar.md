@@ -68,4 +68,4 @@ Nenhuma — 100% CSS.
 </nav>
 ```
 
-Mockup: [`mockup/tables-navbar.html`](../../mockup/tables-navbar.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#navbar).

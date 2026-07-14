@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - Tree View</title>
+
+    <!-- STYLES IMPORT -->
+    <link rel="stylesheet" href="../../dist/css/fonts.css">
+    <link rel="stylesheet" href="../../dist/css/components.css">
+    <link rel="stylesheet" href="../../dist/css/forms.css">
+    <link rel="stylesheet" href="../../dist/css/helpers.css">
+    <style>
+        .theme-panel {
+            padding: 24px;
+        }
+
+        html[data-theme="dark"] .theme-panel {
+            color: var(--cl-color-text);
+            background-color: var(--cl-color-surface);
+        }
+
+        section {
+            max-width: 320px;
+            margin-bottom: 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/example-theme.css">
+    <script src="../assets/example-theme.js"></script>
+</head>
+<body>
+
+    <div class="theme-panel">
+<section>
+            <p class="u-fs-sm u-fw-medium u-mb-1">Tree View — navegue com as setas, Home/End, Enter/Espaço</p>
+            <ul class="cl-tree" data-cl="tree-view" aria-label="Arquivos do projeto">
+                <li aria-expanded="true">
+                    <span class="cl-tree-label">src</span>
+                    <ul>
+                        <li><span class="cl-tree-label">index.js</span></li>
+                        <li>
+                            <span class="cl-tree-label">components</span>
+                            <ul>
+                                <li><span class="cl-tree-label">Button.js</span></li>
+                                <li><span class="cl-tree-label">Modal.js</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="cl-tree-label">docs</span>
+                    <ul>
+                        <li><span class="cl-tree-label">guia.md</span></li>
+                    </ul>
+                </li>
+                <li><span class="cl-tree-label">README.md</span></li>
+                <li><span class="cl-tree-label">package.json</span></li>
+            </ul>
+        </section>
+    </div>
+
+    
+
+    <!-- SCRIPTS IMPORT -->
+    <script src="../../dist/js/clarus.js"></script>
+
+</body>
+</html>

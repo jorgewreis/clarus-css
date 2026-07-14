@@ -9,7 +9,7 @@
 @layer components {
   .cl-tabs {
     display: flex;
-    border-bottom: 1px solid var(--cl-color-border);
+    border-bottom: var(--cl-border-width) solid var(--cl-color-border-default);
   }
 
   .cl-tabs .cl-nav-link {

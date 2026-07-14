@@ -1,32 +1,36 @@
 @use "settings" as *;
 @use "tools" as *;
 
-// Spinner giratório: um anel com um lado transparente que roda continuamente.
-// A cor herda de `currentColor` (via `border-*-color`), permitindo colorir com
-// utilitários de texto ou com as variantes de estado abaixo.
+// Spinner giratório: trilho discreto + segmento ativo. A cor herda de
+// `currentColor`, permitindo usar as variantes semânticas ou utilitários de
+// cor de texto.
 
 @layer components {
   .cl-spinner {
+    --cl-spinner-size: 20px;
+    --cl-spinner-stroke: 2px;
+    --cl-spinner-duration: 0.8s;
+
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    vertical-align: -0.125em;
-    border: 3px solid currentcolor;
-    border-right-color: transparent;
+    box-sizing: border-box;
+    width: var(--cl-spinner-size);
+    height: var(--cl-spinner-size);
+    vertical-align: middle;
+    border: var(--cl-spinner-stroke) solid color-mix(in srgb, currentcolor 20%, transparent);
+    border-top-color: currentcolor;
     border-radius: 50%;
-    animation: clarus-spin 0.7s linear infinite;
+    animation: clarus-spin var(--cl-spinner-duration) linear infinite;
+    will-change: transform;
   }
 
   .cl-spinner-sm {
-    width: 16px;
-    height: 16px;
-    border-width: 2px;
+    --cl-spinner-size: 14px;
+    --cl-spinner-stroke: 2px;
   }
 
   .cl-spinner-lg {
-    width: 40px;
-    height: 40px;
-    border-width: 4px;
+    --cl-spinner-size: 32px;
+    --cl-spinner-stroke: 3px;
   }
 
   @each $name, $color in $theme-colors {
@@ -44,49 +48,165 @@
   // Barra de progresso linear. A largura do `.cl-progress-bar` é controlada por
   // `--cl-progress-value` (0–100) ou diretamente por `style="width"`.
   .cl-progress {
+    --cl-progress-height: 8px;
+    --cl-progress-track: var(--cl-color-subtle);
+    --cl-progress-radius: 0;
+
+    position: relative;
     display: flex;
-    height: 8px;
+    height: var(--cl-progress-height);
     overflow: hidden;
-    background-color: var(--cl-color-subtle);
-    border-radius: var(--cl-radius-sm);
+    background-color: var(--cl-progress-track);
+    border-radius: var(--cl-progress-radius);
   }
 
   .cl-progress-bar {
+    --cl-progress-bar-bg: var(--cl-color-primary);
+    --cl-progress-color: var(--cl-color-on-primary);
+
     display: flex;
     align-items: center;
     justify-content: center;
     width: calc(var(--cl-progress-value, 0) * 1%);
     height: 100%;
-    color: var(--cl-color-on-primary);
-    background-color: var(--cl-color-primary);
-    font-size: $font-size-xs;
-    transition: width 0.3s ease;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--cl-progress-color);
+    background-color: var(--cl-progress-bar-bg);
+    font-size: 0;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: width 0.25s ease-out;
   }
 
   @each $name, $color in $theme-colors {
     .cl-progress-bar-#{$name} {
-      color: color-contrast($color);
-      background-color: var(--cl-color-#{$name});
+      --cl-progress-bar-bg: var(--cl-color-#{$name});
+      --cl-progress-color: #{color-contrast($color)};
     }
   }
 
   .cl-progress-sm {
-    height: 4px;
+    --cl-progress-height: 4px;
   }
 
   .cl-progress-lg {
-    height: 16px;
+    --cl-progress-height: 16px;
+  }
+
+  .cl-progress-lg .cl-progress-bar {
+    padding-inline: 6px;
+    font-size: $font-size-xs;
+  }
+
+  // Cabeçalho externo: preserva o valor legível sem comprimir texto dentro de
+  // barras compactas.
+  .cl-progress-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 480px;
+    margin-bottom: 6px;
+    color: var(--cl-color-text);
+    font-size: $font-size-sm;
+  }
+
+  .cl-progress-value {
+    color: var(--cl-color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  // Processo sem percentual conhecido: um preenchimento curto atravessa o
+  // trilho. Não combine com aria-valuenow, pois o valor é indeterminado.
+  .cl-progress-indeterminate .cl-progress-bar {
+    width: 36%;
+    animation: clarus-progress-indeterminate 1.25s ease-in-out infinite;
+  }
+
+  .cl-progress-indeterminate {
+    --cl-progress-track: color-mix(in srgb, var(--cl-color-primary) 18%, transparent);
+  }
+
+  @keyframes clarus-progress-indeterminate {
+    from {
+      transform: translateX(-110%);
+    }
+
+    to {
+      transform: translateX(290%);
+    }
+  }
+
+  // Estados semânticos para operações finalizadas ou interrompidas.
+  .cl-progress-complete .cl-progress-bar {
+    --cl-progress-bar-bg: var(--cl-color-success);
+    --cl-progress-color: #{color-contrast($clarus-color-success)};
+  }
+
+  .cl-progress-error .cl-progress-bar {
+    --cl-progress-bar-bg: var(--cl-color-danger);
+    --cl-progress-color: #{color-contrast($clarus-color-danger)};
+  }
+
+  .cl-progress-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    color: var(--cl-color-muted);
+    font-size: $font-size-sm;
+  }
+
+  .cl-progress-status-icon {
+    display: inline-grid;
+    width: 14px;
+    height: 14px;
+    place-items: center;
+    color: var(--cl-color-success);
+  }
+
+  .cl-progress-status-icon .cl-icon {
+    width: 14px;
+    height: 14px;
+    stroke: currentcolor;
+  }
+
+  .cl-progress-status-danger,
+  .cl-progress-error + .cl-progress-status {
+    color: var(--cl-color-danger);
+  }
+
+  // Marca uma meta/SLA no trilho. O valor usa a mesma escala percentual da
+  // barra e deve ser acompanhado por texto fora do componente.
+  .cl-progress-marker {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--cl-progress-marker-value) * 1%);
+    width: 2px;
+    background-color: var(--cl-color-text);
+    pointer-events: none;
+    transform: translateX(-1px);
+  }
+
+  // Mantém progresso inicial perceptível sem alterar aria-valuenow. Use
+  // apenas quando o valor real já for maior que zero.
+  .cl-progress-minimum .cl-progress-bar {
+    width: max(calc(var(--cl-progress-value, 0) * 1%), 4px);
   }
 
   // Faixas diagonais opcionais, animáveis com `.cl-progress-bar-animated`.
   .cl-progress-bar-striped {
     background-image: linear-gradient(
       45deg,
-      rgb(255 255 255 / 15%) 25%,
+      color-mix(in srgb, currentcolor 16%, transparent) 25%,
       transparent 25%,
       transparent 50%,
-      rgb(255 255 255 / 15%) 50%,
-      rgb(255 255 255 / 15%) 75%,
+      color-mix(in srgb, currentcolor 16%, transparent) 50%,
+      color-mix(in srgb, currentcolor 16%, transparent) 75%,
       transparent 75%,
       transparent
     );
@@ -109,11 +229,15 @@
 
   @media (prefers-reduced-motion: reduce) {
     .cl-spinner {
-      animation-duration: 1.5s;
+      --cl-spinner-duration: 1.5s;
     }
 
     .cl-progress-bar-animated {
-      animation: none;
+      animation-duration: 1.5s;
+    }
+
+    .cl-progress-indeterminate .cl-progress-bar {
+      animation-duration: 1.8s;
     }
   }
 }

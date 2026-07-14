@@ -95,4 +95,4 @@ para o padrão. Raio: `--cl-radius-sm`.
 <button type="button" class="cl-btn meu-botao">Cor custom por instância</button>
 ```
 
-Mockup: [`mockup/buttons.html`](../../mockup/buttons.html).
+Mockup: [laboratório do componente](../../mockup/feedback-actions.html#button).

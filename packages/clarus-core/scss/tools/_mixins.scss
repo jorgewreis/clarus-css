@@ -28,8 +28,8 @@
 }
 
 @mixin focus-ring($color: var(--cl-color-primary)) {
-  outline: 2px solid $color;
-  outline-offset: 2px;
+  outline: var(--cl-focus-width) solid $color;
+  outline-offset: var(--cl-focus-offset);
   border-color: $color;
   box-shadow: 0 0 0 3px color-mix(in srgb, #{$color} 22%, transparent);
 }

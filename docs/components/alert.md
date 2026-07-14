@@ -47,7 +47,7 @@ Nenhuma — 100% CSS.
 `--cl-alert-{nome}-bg`/`-text` (fundo tintado e texto, calculados por
 `tint-color()`/`shade-color()` a partir do primitivo — ver
 [`docs/reference/design-tokens.md`](../reference/design-tokens.md)),
-`--cl-color-border`, `--cl-radius-md`.
+`--cl-color-border`. Alerts usam `border-radius: 0`.
 
 ## Exemplo
 
@@ -56,4 +56,4 @@ Nenhuma — 100% CSS.
 <div class="cl-alert cl-alert-danger" role="alert">Erro ao salvar as alterações.</div>
 ```
 
-Mockup: [`mockup/badges-alerts.html`](../../mockup/badges-alerts.html).
+Mockup: [laboratório do componente](../../mockup/feedback-actions.html#alert).

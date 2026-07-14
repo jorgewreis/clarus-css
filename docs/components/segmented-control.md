@@ -79,4 +79,4 @@ Nenhuma — 100% CSS.
 </div>
 ```
 
-Mockup: [`mockup/segmented-control.html`](../../mockup/segmented-control.html).
+Mockup: [laboratório do componente](../../mockup/forms.html#segmented-control).

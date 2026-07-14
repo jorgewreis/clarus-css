@@ -170,4 +170,4 @@ tokens próprios de cor. `.cl-datatable-sort-btn` usa
 </script>
 ```
 
-Mockup: [`mockup/datatable.html`](../../mockup/datatable.html).
+Mockup: [laboratório do componente](../../mockup/content-data.html#datatable).

@@ -115,4 +115,4 @@ Auto-init via `data-cl="tree-view"` na raiz (`<ul>`/`<ol>`).
 </script>
 ```
 
-Mockup: [`mockup/tree-view.html`](../../mockup/tree-view.html).
+Mockup: [laboratório do componente](../../mockup/navigation-disclosure.html#tree-view).
