@@ -65,13 +65,43 @@ export function computePosition(referenceEl, floatingEl, options = {}) {
     top = alignCrossAxis(align, referenceRect.top, referenceRect.height, floatingRect.height);
   }
 
-  left = Math.min(Math.max(left, padding), viewportWidth - floatingRect.width - padding);
-  top = Math.min(Math.max(top, padding), viewportHeight - floatingRect.height - padding);
+  const maxLeft = Math.max(padding, viewportWidth - floatingRect.width - padding);
+  const maxTop = Math.max(padding, viewportHeight - floatingRect.height - padding);
+  left = Math.min(Math.max(left, padding), maxLeft);
+  top = Math.min(Math.max(top, padding), maxTop);
 
   return {
     top: top + window.scrollY,
     left: left + window.scrollX,
     placement: finalPlacement,
+  };
+}
+
+// Mantém overlays alinhados quando o viewport ou o próprio conteúdo muda.
+// O ResizeObserver é opcional para preservar compatibilidade com navegadores
+// que não o implementam; scroll/resize continuam cobrindo o caso básico.
+export function watchPosition(referenceEl, floatingEl, options = {}) {
+  const update = () => applyPosition(floatingEl, computePosition(referenceEl, floatingEl, options));
+  let frame = null;
+  const schedule = () => {
+    if (frame !== null) return;
+    frame = requestAnimationFrame(() => {
+      frame = null;
+      update();
+    });
+  };
+
+  window.addEventListener("resize", schedule, { passive: true });
+  window.addEventListener("scroll", schedule, { passive: true, capture: true });
+  const observer = typeof ResizeObserver === "function" ? new ResizeObserver(schedule) : null;
+  observer?.observe(referenceEl);
+  observer?.observe(floatingEl);
+
+  return () => {
+    window.removeEventListener("resize", schedule);
+    window.removeEventListener("scroll", schedule, true);
+    if (frame !== null) cancelAnimationFrame(frame);
+    observer?.disconnect();
   };
 }
 

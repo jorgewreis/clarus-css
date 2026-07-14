@@ -7,6 +7,17 @@ $spacers: (
   5: 3rem
 ) !default;
 
+$z-indexes: (
+  base: 0,
+  dropdown: 1000,
+  sticky: 1020,
+  modal: 1050,
+  offcanvas: 1060,
+  notification: 1080,
+  toast: 1090,
+  tooltip: 1100
+) !default;
+
 $radius-sm: 4px !default;
 $radius-md: 6px !default;
 $radius-lg: 8px !default;

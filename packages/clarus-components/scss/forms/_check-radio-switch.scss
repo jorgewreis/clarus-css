@@ -85,8 +85,8 @@
     height: 5px;
     content: "";
     opacity: 0;
-    border-bottom: 2px solid #{color-contrast($clarus-color-primary)};
-    border-left: 2px solid #{color-contrast($clarus-color-primary)};
+    border-bottom: 2px solid var(--cl-color-on-primary);
+    border-left: 2px solid var(--cl-color-on-primary);
     transform: translateY(-1px) rotate(-45deg);
     transition: opacity 0.1s ease-in-out;
   }
@@ -95,7 +95,7 @@
     left: 4px;
     width: 10px;
     height: 0;
-    border-bottom: 2px solid #{color-contrast($clarus-color-primary)};
+    border-bottom: 2px solid var(--cl-color-on-primary);
     border-left: 0;
     transform: translateY(3px) rotate(0deg);
   }
@@ -108,7 +108,7 @@
     border-radius: 50%;
     content: "";
     opacity: 0;
-    background-color: #{color-contrast($clarus-color-primary)};
+    background-color: var(--cl-color-on-primary);
     transition: opacity 0.1s ease-in-out;
   }
 
@@ -156,7 +156,7 @@
 
   .cl-switch-input:checked + .cl-switch-label::after {
     left: 18px;
-    background-color: #{color-contrast($clarus-color-primary)};
+    background-color: var(--cl-color-on-primary);
   }
 
   // Foco: anel sobre a caixa/trilho (`::before`), não sobre o texto.

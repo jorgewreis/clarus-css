@@ -52,6 +52,10 @@ semântica do Modal.
 
 ## A11y
 
+Ao inicializar, o componente controla `aria-hidden` e, quando encontra
+`.cl-offcanvas-title`, cria automaticamente o vínculo `aria-labelledby`. Um
+`id` existente no título é preservado.
+
 `role="dialog"` + `aria-modal="true"` aplicados automaticamente. Foco
 preso dentro do painel enquanto aberto, movido pro primeiro elemento
 focável (com um pequeno atraso técnico pra garantir que a transição de

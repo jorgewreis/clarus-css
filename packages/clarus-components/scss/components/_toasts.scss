@@ -5,11 +5,12 @@
     position: fixed;
     right: 16px;
     bottom: 16px;
-    z-index: 1090;
+    z-index: var(--cl-z-toast);
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 300px;
+    width: min(360px, 100%);
+    max-width: calc(100vw - 2 * var(--cl-space-3));
   }
 
   .cl-toast {

@@ -24,6 +24,17 @@ function compareValues(a, b) {
   return a.localeCompare(b, "pt-BR", { sensitivity: "base" });
 }
 
+function compareTypedValues(a, b, type) {
+  if (type === "date") {
+    return new Date(a).getTime() - new Date(b).getTime();
+  }
+  if (type === "number" || type === "currency") {
+    const normalize = (value) => Number(String(value).replace(/[^\d,-]/g, "").replace(/\./g, "").replace(",", "."));
+    return normalize(a) - normalize(b);
+  }
+  return compareValues(a, b);
+}
+
 export class DataTable {
   constructor(rootEl, options = {}) {
     const tableEl = rootEl.querySelector(".cl-table");
@@ -80,6 +91,7 @@ export class DataTable {
     this.tbodyEl.addEventListener("focusin", this._handleCellFocusIn);
 
     this._render();
+    this.tableEl.setAttribute("aria-busy", "false");
 
     instances.set(rootEl, this);
   }
@@ -137,10 +149,11 @@ export class DataTable {
     if (this.sortKey && this.sortDirection !== "none") {
       const th = this._sortButtons.find((entry) => entry.key === this.sortKey)?.th;
       const columnIndex = th ? Array.from(this.theadEl.querySelectorAll("th")).indexOf(th) : -1;
+      const type = th?.getAttribute("data-cl-sort-type") ?? "text";
 
       if (columnIndex >= 0) {
         const direction = this.sortDirection === "asc" ? 1 : -1;
-        rows = [...rows].sort((a, b) => direction * compareValues(a.cells[columnIndex] ?? "", b.cells[columnIndex] ?? ""));
+        rows = [...rows].sort((a, b) => direction * compareTypedValues(a.cells[columnIndex] ?? "", b.cells[columnIndex] ?? "", type));
       }
     } else {
       rows = [...rows].sort((a, b) => a.order - b.order);
@@ -188,6 +201,7 @@ export class DataTable {
 
   setLoading(isLoading) {
     this._loading = Boolean(isLoading);
+    this.tableEl.setAttribute("aria-busy", String(this._loading));
     if (this._loading) this._error = null;
     this._syncVisibility();
   }
@@ -195,6 +209,7 @@ export class DataTable {
   setError(message) {
     this._error = message || null;
     if (this._error) this._loading = false;
+    this.tableEl.setAttribute("aria-busy", String(this._loading));
     if (this.errorEl) {
       const messageEl = this.errorEl.querySelector("[data-cl-datatable-error-message]");
       if (messageEl) messageEl.textContent = this._error ?? "";

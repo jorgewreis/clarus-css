@@ -19,14 +19,14 @@
 
   .cl-datepicker-panel {
     display: none;
-    width: 280px;
+    width: min(280px, calc(100vw - 2 * var(--cl-space-3)));
     padding: 12px;
     border: 1px solid var(--cl-color-border);
     border-radius: var(--cl-radius-md);
     color: var(--cl-color-text);
     background-color: var(--cl-color-surface);
     box-shadow: var(--cl-shadow-md);
-    z-index: 1000;
+    z-index: var(--cl-z-dropdown);
   }
 
   .cl-datepicker-panel.is-open {
@@ -125,7 +125,7 @@
   }
 
   .cl-datepicker-day.is-selected {
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
   }
 

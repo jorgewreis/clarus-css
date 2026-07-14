@@ -50,6 +50,9 @@ toolbar/tabela/estados — não no `<table>` diretamente. O JS lê as linhas de
 - `data-cl-sort="chave"` num `<th>` o torna ordenável — o JS envolve o
   conteúdo existente num `<button class="cl-datatable-sort-btn">`
   automaticamente (não escreva o botão você mesmo).
+- `data-cl-sort-type="number"`, `"currency"` ou `"date"` no `<th>` ativa
+  comparação tipada; sem o atributo, a ordenação usa texto. Combine com
+  `data-cl-sort-value` quando o valor exibido for formatado.
 - `data-cl-sort-value` numa `<td>` define o valor usado pra ordenar aquela
   célula, se for diferente do texto exibido (ex.: data ISO por trás de um
   texto formatado, número por trás de um texto com símbolo).

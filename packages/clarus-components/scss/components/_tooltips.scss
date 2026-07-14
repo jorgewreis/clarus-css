@@ -3,7 +3,7 @@
 @layer components {
   .cl-tooltip {
     position: absolute;
-    z-index: 1080;
+    z-index: var(--cl-z-tooltip);
     display: none;
     max-width: 220px;
   }

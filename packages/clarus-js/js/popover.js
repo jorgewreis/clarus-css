@@ -1,4 +1,4 @@
-import { computePosition, applyPosition } from "./core/positioning.js";
+import { computePosition, applyPosition, watchPosition } from "./core/positioning.js";
 import { onClickOutside } from "./core/overlay.js";
 import { onEscapeKey } from "./core/focus.js";
 import { autoInit, createInstanceRegistry } from "./core/register.js";
@@ -25,6 +25,9 @@ export class Popover {
     this._outsideClickCleanup = null;
     this._removeEscapeListener = null;
     this._hideTimer = null;
+    this._positionCleanup = null;
+    this._originalParent = popoverEl.parentNode;
+    this._originalNextSibling = popoverEl.nextSibling;
 
     document.body.appendChild(popoverEl);
 
@@ -125,6 +128,11 @@ export class Popover {
       offset: 10,
     });
     applyPosition(this.popoverEl, position);
+    this._positionCleanup = watchPosition(this.triggerEl, this.popoverEl, {
+      placement: this.placement,
+      align: this.align,
+      offset: 10,
+    });
     this.popoverEl.setAttribute("data-placement", position.placement);
 
     this.triggerEl.setAttribute("aria-expanded", "true");
@@ -144,6 +152,8 @@ export class Popover {
     this.isOpen = false;
 
     this.popoverEl.classList.remove("is-open");
+    this._positionCleanup?.();
+    this._positionCleanup = null;
     this.triggerEl.setAttribute("aria-expanded", "false");
 
     this._outsideClickCleanup?.();
@@ -173,7 +183,9 @@ export class Popover {
     this.triggerEl.removeEventListener("focus", this._handleTriggerFocus);
     this.triggerEl.removeEventListener("focusout", this._handleTriggerFocusOut);
     this.popoverEl.removeEventListener("focusout", this._handlePopoverFocusOut);
-    this.popoverEl.remove();
+    if (this._originalParent) {
+      this._originalParent.insertBefore(this.popoverEl, this._originalNextSibling);
+    }
     instances.delete(this.triggerEl);
   }
 }

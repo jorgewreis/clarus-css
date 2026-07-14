@@ -23,6 +23,12 @@ export class Modal {
 
     modalEl.setAttribute("role", "dialog");
     modalEl.setAttribute("aria-modal", "true");
+    modalEl.setAttribute("aria-hidden", "true");
+    const titleEl = modalEl.querySelector(".cl-modal-title");
+    if (titleEl) {
+      if (!titleEl.id) titleEl.id = `cl-modal-title-${Math.random().toString(36).slice(2)}`;
+      modalEl.setAttribute("aria-labelledby", titleEl.id);
+    }
 
     this._handleTriggerClick = this._handleTriggerClick.bind(this);
     this._handleDismissClick = this._handleDismissClick.bind(this);
@@ -57,6 +63,7 @@ export class Modal {
     this.isOpen = true;
 
     this.modalEl.classList.add("is-open");
+    this.modalEl.setAttribute("aria-hidden", "false");
     lockScroll();
 
     this._focusTrap = createFocusTrap(this.dialogEl);
@@ -74,6 +81,7 @@ export class Modal {
     this.isOpen = false;
 
     this.modalEl.classList.remove("is-open");
+    this.modalEl.setAttribute("aria-hidden", "true");
     unlockScroll();
 
     this._focusTrap?.deactivate();

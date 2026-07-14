@@ -61,6 +61,10 @@ explícito fecha. Use para fluxos que exigem uma decisão explícita.
 
 ## A11y
 
+Ao inicializar, o componente controla `aria-hidden` e, quando encontra
+`.cl-modal-title`, cria automaticamente o vínculo `aria-labelledby`. Um
+`id` existente no título é preservado.
+
 `role="dialog"` + `aria-modal="true"` aplicados automaticamente. Ao abrir:
 foco preso dentro do `.cl-modal-dialog` (`Tab`/`Shift+Tab` ciclam só entre
 os elementos focáveis internos), primeiro elemento focável recebe foco,

@@ -1,11 +1,15 @@
 let lockCount = 0;
 let paddingCompensated = false;
+let previousOverflow = "";
+let previousPaddingRight = "";
 
 export function lockScroll() {
   lockCount += 1;
   if (lockCount > 1) return;
 
   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  previousOverflow = document.body.style.overflow;
+  previousPaddingRight = document.body.style.paddingRight;
   document.body.style.overflow = "hidden";
 
   if (scrollbarWidth > 0) {
@@ -18,10 +22,10 @@ export function unlockScroll() {
   lockCount = Math.max(0, lockCount - 1);
   if (lockCount > 0) return;
 
-  document.body.style.overflow = "";
+  document.body.style.overflow = previousOverflow;
 
   if (paddingCompensated) {
-    document.body.style.paddingRight = "";
+    document.body.style.paddingRight = previousPaddingRight;
     paddingCompensated = false;
   }
 }

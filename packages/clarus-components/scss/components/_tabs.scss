@@ -36,7 +36,7 @@
   }
 
   .cl-tabs-pill .cl-nav-link.is-active {
-    color: color-contrast($clarus-color-primary);
+    color: var(--cl-color-on-primary);
     background-color: var(--cl-color-primary);
   }
 

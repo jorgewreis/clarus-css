@@ -1,4 +1,4 @@
-import { computePosition, applyPosition } from "./core/positioning.js";
+import { computePosition, applyPosition, watchPosition } from "./core/positioning.js";
 import { onClickOutside } from "./core/overlay.js";
 import { onEscapeKey } from "./core/focus.js";
 import { autoInit, createInstanceRegistry } from "./core/register.js";
@@ -33,7 +33,10 @@ function parseDisplay(value) {
 
   const [, day, month, year] = match;
   const date = new Date(Number(year), Number(month) - 1, Number(day));
-  return Number.isNaN(date.getTime()) ? null : date;
+  if (Number.isNaN(date.getTime())) return null;
+  return date.getFullYear() === Number(year) && date.getMonth() === Number(month) - 1 && date.getDate() === Number(day)
+    ? date
+    : null;
 }
 
 function isSameDay(a, b) {
@@ -89,6 +92,9 @@ export class Datepicker {
     this.viewDate = initial ? new Date(initial) : new Date();
     this.value = initial ? toISO(initial) : null;
     this._outsideClickCleanup = null;
+    this._positionCleanup = null;
+    this._originalParent = panelEl.parentNode;
+    this._originalNextSibling = panelEl.nextSibling;
 
     if (!this.panelEl.id) this.panelEl.id = uniqueId("cl-datepicker-panel");
 
@@ -353,6 +359,11 @@ export class Datepicker {
       offset: 4,
     });
     applyPosition(this.panelEl, position);
+    this._positionCleanup = watchPosition(this.inputEl, this.panelEl, {
+      placement: this.placement,
+      align: "start",
+      offset: 4,
+    });
 
     this.inputEl.setAttribute("aria-expanded", "true");
 
@@ -374,6 +385,8 @@ export class Datepicker {
     this.panelEl.style.removeProperty("position");
     this.panelEl.style.removeProperty("top");
     this.panelEl.style.removeProperty("left");
+    this._positionCleanup?.();
+    this._positionCleanup = null;
     this.inputEl.setAttribute("aria-expanded", "false");
 
     this._outsideClickCleanup?.();
@@ -400,6 +413,9 @@ export class Datepicker {
     this.nextBtn.removeEventListener("click", this._handleNext);
     this.gridEl.removeEventListener("click", this._handleGridClick);
     this.gridEl.removeEventListener("keydown", this._handleGridKeydown);
+    if (this._originalParent) {
+      this._originalParent.insertBefore(this.panelEl, this._originalNextSibling);
+    }
     instances.delete(this.inputEl);
   }
 }

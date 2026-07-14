@@ -44,7 +44,7 @@
     background-color: var(--cl-color-subtle);
   }
 
-  .cl-nav-link:focus {
+  .cl-nav-link:focus-visible {
     @include focus-ring;
   }
 

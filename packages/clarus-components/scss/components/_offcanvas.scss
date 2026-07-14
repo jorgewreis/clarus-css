@@ -9,7 +9,7 @@
 @layer components {
   .cl-offcanvas {
     position: fixed;
-    z-index: 1050;
+    z-index: var(--cl-z-offcanvas);
     display: flex;
     flex-direction: column;
     color: var(--cl-color-text);
@@ -51,7 +51,7 @@
   .cl-offcanvas-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1040;
+    z-index: calc(var(--cl-z-offcanvas) - 1);
     background-color: rgb(0 0 0 / 50%);
     opacity: 0;
     visibility: hidden;
