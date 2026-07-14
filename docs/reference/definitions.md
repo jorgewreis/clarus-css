@@ -1,8 +1,8 @@
-# Clarus CSS — Definições Iniciais do Projeto
+# Clarus CSS — Definições do Projeto
 
-> Este documento registra a especificação e as decisões de arquitetura
-> firmadas na concepção do projeto — filosofia, stack, convenções de
-> nomenclatura e API (seções 1–20) permanecem a referência vigente. A
+> Este documento registra as decisões de arquitetura e produto. Para o nível
+> de estabilidade de cada grupo de componentes e o plano de consolidação,
+> consulte [`stability.md`](stability.md). A
 > seção 21 (catálogo por componente) reflete o estado em que cada trecho
 > foi escrito e não é atualizada retroativamente a cada componente novo;
 > para o catálogo completo e sempre atual, use
@@ -19,21 +19,27 @@ O projeto será publicado no GitHub sob o repositório `clarus-css` e terá dist
 
 O objetivo do Clarus CSS é oferecer uma base visual moderna, minimalista e produtiva para criação de páginas, sistemas e componentes de interface sem exigir dependências externas ou integração obrigatória com frameworks JavaScript.
 
-O projeto deve equilibrar três finalidades:
+O projeto deve priorizar três finalidades, nesta ordem:
 
-- Servir como biblioteca padrão para projetos recorrentes do autor.
-- Funcionar como produto público open source, consultável e reutilizável por terceiros.
-- Demonstrar maturidade técnica, organização de engenharia e clareza de documentação.
+1. Servir como biblioteca CSS confiável para projetos recorrentes.
+2. Consolidar uma API pequena, coerente e sustentável para terceiros.
+3. Ampliar o ecossistema somente quando houver necessidade real e documentação suficiente.
 
 ## 3. Público-Alvo
 
-O público-alvo principal inclui o próprio autor e qualquer tipo de desenvolvedor que queira usar classes prontas, componentes visuais consistentes e padrões de layout convencionais e familiares.
+O público-alvo principal é o desenvolvedor que constrói páginas, sistemas
+administrativos e aplicações web com HTML, CSS e JavaScript nativo, sem querer
+adotar um framework de componentes obrigatório.
 
-O framework deve ser acessível para desenvolvedores iniciantes, mas suficientemente organizado para ser adotado por profissionais experientes em projetos reais.
+React, Vue e outras stacks são integrações secundárias. O núcleo deve continuar
+completo e útil sem qualquer uma delas.
 
 ## 4. Posicionamento do Produto
 
-O Clarus CSS pende mais para o lado dos componentes prontos do que para o de frameworks puramente utilitários. A proposta é entregar componentes prontos, classes auxiliares e uma estrutura previsível para acelerar a construção de interfaces.
+O Clarus CSS é um framework CSS híbrido, com prioridade deliberada para um
+núcleo pequeno de componentes prontos e utilitários previsíveis. Componentes
+avançados devem ser tratados como extensões até que tenham uso, testes e
+documentação suficientes para integrar o núcleo.
 
 A identidade visual deve seguir uma linha minimalista e moderna, com foco em clareza, legibilidade, baixo ruído visual e adaptação a diferentes tipos de aplicação.
 
@@ -91,32 +97,29 @@ mais comuns do mercado atual, não por números arbitrários:
 
 O objetivo é reduzir a curva de aprendizado para quem já usou um framework CSS de componentes, mantendo liberdade para adaptar detalhes internos à identidade do Clarus CSS.
 
-## 9. Escopo Inicial de Componentes
+## 9. Escopo do Núcleo Essencial
 
-A primeira versão publicável deve mirar um escopo completo, com componentes suficientes para permitir o uso real do framework em projetos práticos.
+A versão estável deve priorizar os recursos usados na maioria das interfaces
+administrativas e institucionais:
 
 O escopo inicial inclui:
 
 - Layout e containers.
 - Grid baseado em Flexbox.
 - Utilitários de espaçamento, display, alinhamento, visibilidade e tipografia.
-- Formulários e campos de entrada (incluindo validação visual, select customizado e upload de arquivo estilizado).
+- Formulários e validação visual.
 - Botões.
 - Cards.
 - Alertas.
 - Badges.
 - Tabelas.
 - Navbar.
-- Dropdown.
-- Modal.
-- Accordion.
-- Tabs.
-- Tooltips.
-- Toasts.
-- Paginação.
-- Breadcrumbs.
+- Dropdown, modal, accordion, tabs e toast.
+- Paginação e breadcrumbs.
 
-Todos os grupos acima estão implementados e compõem a versão inicial do produto — detalhes de cada um na seção 21.
+Combobox, Datepicker, DataTable, Tree View, Command Palette, Carousel e
+Upload avançado permanecem disponíveis como componentes avançados, mas não
+devem expandir o núcleo sem uma decisão explícita.
 
 ## 10. Temas e Customização
 
@@ -143,7 +146,10 @@ serviços externos como fonts.googleapis.com em tempo de execução), alinhado
 
 A documentação inicial será mantida em Markdown no GitHub.
 
-Não haverá, no primeiro momento, um site separado de documentação. A prioridade é manter a documentação simples, versionada junto ao código e acessível diretamente pelo repositório.
+O repositório continua sendo a fonte versionada da documentação. A próxima
+etapa de produto é disponibilizar uma documentação visual pesquisável, com
+exemplos executáveis e caminho de início rápido. Markdown continua sendo a
+fonte normativa até que esse site exista.
 
 Os documentos devem explicar:
 
@@ -351,7 +357,7 @@ uso quanto como fixture dos testes visuais (seção 22).
 ### Botões
 
 Variantes sólidas e outline por cor de estado
-(`.btn-primary/success/warning/danger/info`, `.cl-btn-outline-*`), tamanhos
+(`.cl-btn-primary/success/warning/danger/info`, `.cl-btn-outline-*`), tamanhos
 (`.cl-btn-sm`/`.cl-btn-lg`) e estados de hover/active/focus/disabled. A função
 `color-contrast()` (`packages/clarus-core/scss/tools/_mixins.scss`) garante contraste WCAG AA em
 cada variante — reaproveitada por cards, alertas, modal e navbar.
@@ -407,7 +413,7 @@ Mockup: `mockup/pagination-breadcrumbs.html`.
 
 ### Formulários Avançados
 
-Estados de validação: `.form-control.is-valid`/`.is-invalid` (borda e anel
+Estados de validação: `.cl-form-control.is-valid`/`.is-invalid` (borda e anel
 de foco em `--cl-color-success`/`-danger`, reaproveitando as cores de
 estado de alertas/badges), com `.cl-valid-feedback`/`.cl-invalid-feedback`
 exibidos via seletor de irmão adjacente, sem JavaScript.
@@ -521,7 +527,7 @@ abas habilitadas (`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`,
 `tabindex` roving), disparando `cl:tab:changed`.
 
 **Toast** (`.cl-toast-container`/`.cl-toast`/`.cl-toast-header`/`.cl-toast-body`,
-variantes de cor de estado via `.toast-#{nome}`,
+variantes de cor de estado via `.cl-toast-#{nome}`,
 `packages/clarus-components/scss/components/_toasts.scss`): `packages/clarus-js/js/toast.js` usa `expand()`/`collapse()`
 para mostrar/esconder, com timer de auto-dismiss configurável (`data-delay`,
 `data-autohide="false"` para desativar) e dismiss via
@@ -543,7 +549,7 @@ Barra de progresso `.cl-progress`/`.cl-progress-bar`
 (`packages/clarus-components/scss/components/_spinner.scss`): a largura do preenchimento é controlada por
 `--cl-progress-value` (0–100) ou por `style="width"`, com transição suave.
 Tamanhos (`.cl-progress-sm`/`.cl-progress-lg`), variantes de cor de estado
-(`.progress-bar-#{nome}`, reaproveitando `color-contrast()` como botões/badges)
+(`.cl-progress-bar-#{nome}`, reaproveitando `color-contrast()` como botões/badges)
 e faixas diagonais opcionais (`.cl-progress-bar-striped`, animáveis com
 `.cl-progress-bar-animated`). Toda animação respeita `prefers-reduced-motion`
 (spinner desacelera, listras param). ARIA fica a cargo do consumidor

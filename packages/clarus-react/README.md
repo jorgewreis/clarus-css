@@ -1,5 +1,7 @@
 # clarus-react
 
+**Pacote opcional — não faz parte do núcleo recomendado.**
+
 Wrapper React fino para o [Clarus CSS](https://github.com/jorgewreis/clarus-css)
 — cada componente aplica `data-cl`/classes e delega comportamento (foco,
 teclado, posicionamento, overlay) inteiramente pro JS vanilla já existente

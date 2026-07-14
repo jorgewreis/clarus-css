@@ -1,5 +1,7 @@
 # clarus-cli
 
+**Pacote opcional — não é necessário para usar o núcleo CSS.**
+
 CLI oficial do [Clarus CSS](https://github.com/jorgewreis/clarus-css) — três
 comandos que empacotam ferramentas já usadas internamente pelo framework,
 pra qualquer projeto consumidor.

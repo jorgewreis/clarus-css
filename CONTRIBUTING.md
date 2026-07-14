@@ -52,6 +52,19 @@ As decisões de arquitetura e escopo já firmadas estão em
 [`docs/reference/definitions.md`](docs/reference/definitions.md). Mudanças que contradigam uma
 decisão firme devem ser discutidas antes de implementadas.
 
+## Direção de consolidação
+
+O projeto prioriza a estabilidade do núcleo CSS e dos componentes essenciais.
+Antes de propor um componente novo, consulte
+[`docs/reference/stability.md`](docs/reference/stability.md) e avalie se o
+caso pode ser resolvido compondo recursos existentes.
+
+Uma nova funcionalidade deve demonstrar necessidade recorrente, API coerente
+com `cl-`, `u-`, `is-*`, `data-cl` e eventos `cl:*`, documentação de uso,
+testes funcionais, regressão visual, acessibilidade e impacto de bundle
+conhecido. Componentes avançados podem permanecer como extensões sem serem
+promovidos ao núcleo.
+
 ## Semver e depreciação
 
 O projeto segue [Semantic Versioning](https://semver.org/lang/pt-BR/)

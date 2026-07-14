@@ -24,18 +24,11 @@ profissionais, e é distribuído publicamente como produto para qualquer
 desenvolvedor que precise construir interfaces consistentes sem carregar
 React, Vue, Angular, jQuery ou qualquer outra dependência de runtime.
 
-> **Status:** `1.0.0`, primeira versão estável. Base completa (monorepo,
-> `@layer`, tokens OKLCH, layout, grid, utilitários, formulários com validação
-> visual) mais um catálogo de mais de 45 componentes — dos elementos de
-> conteúdo e navegação aos interativos avançados (Combobox, Datepicker,
-> DataTable, Command Palette, Tree View e mais), todos com dark mode nativo,
-> suporte a múltiplas marcas (`data-brand`) e uma API JavaScript consistente
-> com tipos TypeScript (`.d.ts`) inclusos. Qualidade é gate de CI, não
-> promessa: todo componente passa por regressão visual (Playwright),
-> auditoria de acessibilidade automatizada (axe-core, WCAG 2.1 A/AA),
-> checagem de contraste e budget de tamanho a cada PR. O catálogo atual está
-> em [Componentes](#componentes); o histórico por versão, no
-> [`CHANGELOG.md`](CHANGELOG.md).
+> **Status:** `1.0.0`. O foco atual é consolidar o núcleo CSS e os componentes
+> essenciais antes de ampliar o catálogo. O framework já possui componentes
+> avançados, mas eles são tratados como extensões e não definem o caminho
+> recomendado para quem está começando. Veja a [política de estabilidade e
+> roadmap](docs/reference/stability.md).
 
 Este README é a **visão geral** do projeto. Para aprender a usar cada recurso em
 detalhe, com exemplos completos, consulte a **[documentação completa](docs/README.md)**.
@@ -122,19 +115,19 @@ conceitos gerais estão em
 
 ## Componentes
 
-- **Layout:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`), Stack/Cluster/
-  Sidebar, sticky e utilitários de `@container`.
-- **Formulários:** controles, select customizado, Combobox, Datepicker/
-  Timepicker, checkbox/radio/switch, Range/Slider, upload de arquivo (com
-  drag-and-drop e versão avançada com progresso), input group.
-- **Conteúdo:** botões, cards, alertas, badges/tags, tabelas, DataTable
-  (sort/filtro/paginação/estados), tiles, divider, empty state, skeleton.
-- **Navegação:** navbar, dropdown, nested menu, tabs, Tree View, paginação,
-  breadcrumbs, accordion, collapse, stepper.
-- **Overlay:** modal, alert dialog, offcanvas, tooltip, popover, Command
-  Palette.
-- **Feedback:** toast, notification center, spinner, progress bar.
-- **Interação avançada:** carousel, rating, segmented control, timeline.
+O caminho recomendado começa pelo núcleo: layout, tokens, formulários,
+conteúdo, navegação básica e overlays essenciais. Componentes avançados ficam
+disponíveis quando o projeto realmente precisa deles.
+
+- **Núcleo essencial:** containers, grid Flexbox (`.cl-row`/`.cl-col-*`),
+  espaçamento, display, tipografia, botões, cards, alertas, badges, tabelas,
+  formulários, navbar, dropdown, tabs, accordion, modal, toast, paginação e
+  breadcrumbs.
+- **Extensões de interface:** Stack, Cluster, Sidebar, Collapse, Offcanvas,
+  Tooltip, Popover, Stepper, Input Group, Empty State, Skeleton, Spinner,
+  Progress, Tag, Rating e Segmented Control.
+- **Componentes avançados:** Combobox, Datepicker, DataTable, Tree View,
+  Command Palette, Carousel e Upload avançado.
 
 Cada componente tem um exemplo funcional dedicado (claro + escuro) em
 [`mockup/`](mockup) — a forma mais rápida de ver o framework em ação sem
@@ -163,7 +156,8 @@ e [Dark mode](docs/guides/dark-mode.md).
 
 ## Ecossistema
 
-Pacotes opcionais, publicados separadamente do core:
+Pacotes opcionais, publicados separadamente do core. Eles não são necessários
+para usar o núcleo CSS:
 
 - [`clarus-icons`](packages/clarus-icons/README.md) — ícones SVG (Lucide),
   tree-shakeable, zero dependências em runtime.
@@ -185,6 +179,8 @@ mode nativo, com dados públicos e reproduzíveis.
   tokens, exemplo) e referência técnica.
 - [`docs/reference/definitions.md`](docs/reference/definitions.md) — decisões de arquitetura e o
   catálogo técnico de cada componente (classes, tokens, módulos JS).
+- [`docs/reference/stability.md`](docs/reference/stability.md) — níveis de
+  estabilidade, escopo do núcleo e roadmap de consolidação.
 - [`docs/reference/scss-architecture.md`](docs/reference/scss-architecture.md) — arquitetura dos
   módulos SCSS e do pipeline de build.
 - [`docs/reference/browser-support.md`](docs/reference/browser-support.md) — alvo de

@@ -10,6 +10,10 @@ Referência completa de uso do framework — para a visão geral do projeto
 - [Formas de uso](getting-started/usage.md) — convenção de nomenclatura,
   auto-init, API JS comum, eventos.
 
+Antes de escolher um componente, consulte a [política de estabilidade e
+roadmap](reference/stability.md). O núcleo essencial é o caminho recomendado;
+os componentes avançados permanecem disponíveis, mas não são pré-requisito.
+
 ## Guias
 
 - [Theming](guides/theming.md) — as 3 camadas de tokens, customização
@@ -32,7 +36,19 @@ Referência completa de uso do framework — para a visão geral do projeto
 
 ## Componentes
 
-### Formulários
+### Núcleo essencial
+
+Layout · [Button](components/button.md) · [Card](components/card.md) ·
+[Alert](components/alert.md) · [Badge](components/badge.md) ·
+[Table](components/table.md) · [Input](components/input.md) ·
+[Select customizado](components/select.md) · [Checkbox](components/checkbox.md) ·
+[Radio](components/radio.md) · [Switch](components/switch.md) ·
+[Navbar](components/navbar.md) · [Dropdown](components/dropdown.md) ·
+[Tabs](components/tabs.md) · [Accordion](components/accordion.md) ·
+[Modal](components/modal.md) · [Toast](components/toast.md) ·
+[Pagination](components/pagination.md) · [Breadcrumb](components/breadcrumb.md)
+
+### Formulários e extensões
 
 [Input](components/input.md) · [Input Group](components/input-group.md) ·
 [Select customizado](components/select.md) · [Combobox](components/combobox.md) ·
@@ -43,7 +59,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 [File Upload](components/file-upload.md) ·
 [Upload avançado](components/file-upload-advanced.md)
 
-### Conteúdo
+### Conteúdo e feedback
 
 [Button](components/button.md) · [Card](components/card.md) ·
 [Badge](components/badge.md) · [Tag](components/tag.md) ·
@@ -52,7 +68,7 @@ Referência completa de uso do framework — para a visão geral do projeto
 [Divider](components/divider.md) · [Empty State](components/empty-state.md) ·
 [Tile](components/tile.md) · [Skeleton](components/skeleton.md)
 
-### Navegação
+### Navegação e overlays
 
 [Navbar](components/navbar.md) · [Tabs](components/tabs.md) ·
 [Dropdown](components/dropdown.md) · [Nested Menu](components/nested-menu.md) ·
@@ -61,21 +77,15 @@ Referência completa de uso do framework — para a visão geral do projeto
 [Accordion](components/accordion.md) · [Collapse](components/collapse.md) ·
 [Stepper](components/stepper.md)
 
-### Overlay
+Alert Dialog · Offcanvas · Tooltip · Popover · Collapse · Stepper · Nested Menu ·
+Tree View · Notification Center · Spinner & Progress
 
-[Modal](components/modal.md) · [Alert Dialog](components/alert-dialog.md) ·
-[Offcanvas](components/offcanvas.md) · [Tooltip](components/tooltip.md) ·
-[Popover](components/popover.md) · [Command Palette](components/command-palette.md)
+### Componentes avançados
 
-### Feedback
-
-[Toast](components/toast.md) · [Notification Center](components/notification-center.md) ·
-[Spinner & Progress](components/progress.md)
-
-### Interação avançada
-
-[Carousel](components/carousel.md) · [Rating](components/rating.md) ·
-[Segmented Control](components/segmented-control.md) ·
+[Combobox](components/combobox.md) · [Datepicker / Timepicker](components/datepicker.md) ·
+[DataTable](components/datatable.md) · [Command Palette](components/command-palette.md) ·
+[Carousel](components/carousel.md) · [Upload avançado](components/file-upload-advanced.md) ·
+[Rating](components/rating.md) · [Segmented Control](components/segmented-control.md) ·
 [Timeline](components/timeline.md)
 
 Cada componente tem um exemplo funcional dedicado (claro + escuro) em
@@ -132,6 +142,8 @@ pendente de metodologia).
   distribuições, com budgets no CI.
 - [Definições do projeto](reference/definitions.md) — decisões de
   arquitetura e escopo.
+- [Estabilidade e roadmap](reference/stability.md) — o que é essencial,
+  estendido ou avançado.
 
 ## Contribuindo
 
