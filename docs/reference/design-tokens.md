@@ -81,6 +81,13 @@ Consulte a página do componente para a lista completa. Por exemplo,
 `--cl-btn-border-color`. Prefira nomes de intenção, como
 `--cl-color-action-primary`, em vez de nomes baseados no valor da cor.
 
+O Carousel expõe tokens locais para que controles, indicadores, transições e
+legendas possam ser ajustados por instância: `--cl-carousel-radius`,
+`--cl-carousel-transition-duration`, `--cl-carousel-transition-easing`,
+`--cl-carousel-control-*`, `--cl-carousel-indicator-*` e
+`--cl-carousel-caption-scrim`. Consulte a [página do Carousel](../components/carousel.md)
+para os nomes completos e seus fallbacks.
+
 ## Tipografia
 
 | Token | Valor | Uso |

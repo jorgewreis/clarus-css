@@ -126,7 +126,7 @@ test.describe("Toast", () => {
 });
 
 test.describe("Carousel", () => {
-  test("avança com o controle next e com o teclado, e salta pelo indicador", async ({ page }) => {
+  test("navega por controle, teclado, indicador e arraste", async ({ page }) => {
     await page.goto(mockupUrl("examples/carousel.html"));
 
     const carousel = page.locator("#carousel-slide");
@@ -143,6 +143,44 @@ test.describe("Carousel", () => {
 
     await carousel.locator(".cl-carousel-indicators button").nth(0).click();
     await expect(items.nth(0)).toHaveClass(/is-active/);
+
+    const box = await carousel.boundingBox();
+    await page.mouse.move(box.x + box.width * 0.7, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.3, box.y + box.height / 2);
+    await page.mouse.up();
+    await expect(items.nth(1)).toHaveClass(/is-active/);
+  });
+
+  test("toggle pausa e retoma autoplay, inclusive após a página voltar a ficar visível", async ({ page }) => {
+    await page.goto(mockupUrl("examples/carousel.html"));
+
+    const carousel = page.locator("#carousel-slide-autoplay");
+    const items = carousel.locator(".cl-carousel-item");
+    const toggle = carousel.locator("[data-cl-carousel-toggle]");
+
+    await expect(toggle).toHaveAttribute("aria-pressed", "true");
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+    await page.waitForTimeout(3200);
+    await expect(items.nth(0)).toHaveClass(/is-active/);
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-pressed", "true");
+    await page.evaluate(() => document.activeElement.blur());
+    await page.mouse.move(5, 5);
+    await page.evaluate(() => {
+      Object.defineProperty(document, "visibilityState", { configurable: true, value: "hidden" });
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await page.waitForTimeout(3200);
+    await expect(items.nth(0)).toHaveClass(/is-active/);
+    await page.evaluate(() => {
+      Object.defineProperty(document, "visibilityState", { configurable: true, value: "visible" });
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await page.waitForTimeout(3200);
+    await expect(items.nth(1)).toHaveClass(/is-active/);
   });
 });
 

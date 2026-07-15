@@ -565,21 +565,27 @@ Carrossel de slides (`.cl-carousel`/`.cl-carousel-inner`/`.cl-carousel-item`,
 o recorte (`overflow: hidden`) fica no `.cl-carousel` (elemento parado), não na
 trilha, senão a área de recorte se moveria junto e cortaria os slides
 seguintes. A variante `.cl-carousel-fade` empilha os slides e anima a opacidade.
-Controles `.cl-carousel-control-prev`/`-next` (setas) e `.cl-carousel-indicators`
-(dots) são opcionais — o JS liga cada um ao slide correspondente; o
-modificador opcional `.cl-carousel-hover-controls` esconde as setas até o
+Controles `.cl-carousel-control-prev`/`-next` (setas),
+`.cl-carousel-indicators` (dots em pill quando ativos) e
+`.cl-carousel-control-toggle[data-cl-carousel-toggle]` (pausa/reprodução)
+são opcionais — o JS liga cada um ao slide correspondente. A legenda opt-in
+`.cl-carousel-caption` usa scrim para conteúdo de produto sobre imagens. O
+modificador `.cl-carousel-hover-controls` esconde os controles até o
 hover/foco (`:focus-within`) do carrossel.
 
 `packages/clarus-js/js/carousel.js` (`Clarus.Carousel`) segue a API da seção 20: auto-init via
 `data-cl="carousel"`, `Clarus.Carousel.getInstance()`, métodos
-`.next()`/`.prev()`/`.goTo(i)`/`.pause()`/`.dispose()`, evento
+`.next()`/`.prev()`/`.goTo(i)`/`.pause()`/`.play()`/`.dispose()`, evento
 `cl:carousel:slid` (`detail: { from, to }`). Navegação por teclado
 (ArrowLeft/Right, Home/End quando o carrossel tem foco), swipe por
-pointer events (limiar de 40px) e autoplay opcional (`data-autoplay="true"`,
-intervalo por `data-interval`, em ms) que pausa no hover/foco. `role="group"`
+pointer events (com pointer capture, feedback durante o arraste e preservação
+da rolagem vertical) e autoplay opcional (`data-autoplay="true"`, intervalo
+por `data-interval`, em ms). Autoplay pausa temporariamente no hover, foco,
+arraste e aba oculta; `pause()` exige `play()` para retomá-lo. `role="group"`
 + `aria-roledescription="carousel"`, `aria-hidden` por slide, `aria-current`
-nos indicadores; `aria-live` fica `off` no autoplay e `polite` sem ele. As
-transições respeitam `prefers-reduced-motion`.
+nos indicadores e `aria-pressed` no toggle; `aria-live` fica `off` apenas
+enquanto o autoplay roda e `polite` quando manual ou pausado. As transições
+respeitam `prefers-reduced-motion`.
 
 Mockup: `mockup/content-data.html#carousel`.
 

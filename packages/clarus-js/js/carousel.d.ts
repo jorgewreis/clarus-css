@@ -9,5 +9,6 @@ export class Carousel {
   prev(): void;
   goTo(index: number): void;
   pause(): void;
+  play(): void;
   dispose(): void;
 }

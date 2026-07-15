@@ -24,7 +24,7 @@ renderizado de fato nos mockups (via o gate axe).
 | [Breadcrumb](../components/breadcrumb.md) | Nativo (links) | Manual (`<nav aria-label>`) | — | ✓ | Sim |
 | [Button](../components/button.md) | Nativo | Manual (`aria-label` em só-ícone) | Foco visível padrão | ✓ | Sim |
 | [Card](../components/card.md) | Nativo (stretched-link) | — | Foco no link real | ✓ | Sim |
-| [Carousel](../components/carousel.md) | Automático (setas/Home/End) | Automático | Recebe foco no contêiner | ✓ | Sim |
+| [Carousel](../components/carousel.md) | Automático (setas/Home/End e arraste) | Automático (`aria-hidden`, `aria-current`, toggle) | Recebe foco no contêiner; autoplay pausável | ✓ | Sim |
 | [Checkbox](../components/checkbox.md) | Nativo | Nativo | — | ✓ | Sim |
 | [Collapse](../components/collapse.md) | Nativo (gatilho) | Automático | — | ✓ | Sim |
 | [Divider](../components/divider.md) | N/A | Implícito (`<hr>`) | — | ✓ | Sim |

@@ -8,9 +8,15 @@ const mockupDir = path.join(rootDir, "mockup");
 const mockups = readdirSync(mockupDir).filter((file) => file.endsWith(".html"));
 
 async function waitForShowcaseFrames(page) {
-  await page.waitForFunction(() => [...document.querySelectorAll("iframe")]
-    .every((frame) => frame.contentDocument?.readyState === "complete"
-      && frame.contentDocument.body?.childElementCount > 0));
+  await expect.poll(async () => {
+    const expectedCount = await page.locator("iframe").count();
+    const frames = page.frames().filter((frame) => frame !== page.mainFrame());
+    if (frames.length !== expectedCount) return false;
+
+    return (await Promise.all(frames.map((frame) => frame.evaluate(() =>
+      document.readyState === "complete" && document.body.childElementCount > 0,
+    )))).every(Boolean);
+  }).toBe(true);
 }
 
 for (const file of mockups) {

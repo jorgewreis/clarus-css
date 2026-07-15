@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- refina o Carousel com tokens locais, controles compactos, indicadores em
+  pill, legendas opt-in, arraste aprimorado e autoplay pausável/retomável;
 - consolida tokens públicos de foco, transição, densidade, alturas e padding dos controles;
 - adiciona suporte CSS global a `prefers-reduced-motion`;
 - reorganiza o índice da documentação e adiciona `npm run docs:check` ao fluxo local e ao CI;

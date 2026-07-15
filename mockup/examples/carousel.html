@@ -33,9 +33,9 @@
             font-weight: 600;
         }
 
-        .slide-1 { background: #4f46e5; }
-        .slide-2 { background: #1bc559; }
-        .slide-3 { background: #dc263e; }
+        .slide-1 { background: linear-gradient(135deg, #312e81, #4f46e5 54%, #818cf8); }
+        .slide-2 { background: linear-gradient(135deg, #047857, #1bc559 54%, #6ee7b7); }
+        .slide-3 { background: linear-gradient(135deg, #991b1b, #dc263e 54%, #fda4af); }
     </style>
     <link rel="stylesheet" href="../assets/example-theme.css">
     <script src="../assets/example-theme.js"></script>
@@ -45,12 +45,21 @@
     <div class="theme-panel">
         <h2 class="u-fs-lg u-fw-medium">Claro — slide (padrão)</h2>
 
-        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Setas, indicadores, teclado (setas/Home/End) e swipe</p>
-        <div class="cl-carousel" data-cl="carousel" id="carousel-slide">
+        <p class="u-fs-sm u-fw-medium u-mt-3 u-mb-2">Conteúdo de produto com áreas seguras para controles e indicadores</p>
+        <div class="cl-carousel" data-cl="carousel" id="carousel-slide" aria-label="Destaques de produto">
             <div class="cl-carousel-inner">
-                <div class="cl-carousel-item is-active"><div class="slide slide-1">Slide 1</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-2">Slide 2</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-3">Slide 3</div></div>
+                <div class="cl-carousel-item is-active">
+                    <div class="slide slide-1"></div>
+                    <div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Fluxos mais claros</h3><p>Centralize tarefas recorrentes em uma experiência previsível.</p><a class="cl-btn" href="#">Conhecer recursos</a></div>
+                </div>
+                <div class="cl-carousel-item">
+                    <div class="slide slide-2"></div>
+                    <div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Decisões compartilhadas</h3><p>Organize atualizações, responsáveis e próximos passos.</p><a class="cl-btn" href="#">Convidar equipe</a></div>
+                </div>
+                <div class="cl-carousel-item">
+                    <div class="slide slide-3"></div>
+                    <div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Visibilidade para o time</h3><p>Transforme acompanhamento em ação com contexto suficiente.</p><a class="cl-btn" href="#">Abrir indicadores</a></div>
+                </div>
             </div>
             <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
             <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
@@ -61,15 +70,29 @@
             </ol>
         </div>
 
-        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Slide com autoplay + setas só no hover (.carousel-hover-controls) — pausa no hover/foco</p>
-        <div class="cl-carousel cl-carousel-hover-controls" data-cl="carousel" data-autoplay="true" data-interval="3000" id="carousel-slide-autoplay">
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Autoplay sem mídia, com contador, progresso e arraste desativado</p>
+        <div class="cl-carousel cl-carousel-no-media cl-carousel-hide-indicators-two" data-cl="carousel" data-autoplay="true" data-interval="3000" data-drag="false" id="carousel-slide-autoplay" aria-label="Atualizações automáticas">
             <div class="cl-carousel-inner">
-                <div class="cl-carousel-item is-active"><div class="slide slide-1">Auto 1</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-2">Auto 2</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-3">Auto 3</div></div>
+                <div class="cl-carousel-item is-active"><div class="cl-carousel-media-placeholder"><h3 class="u-fs-lg u-fw-semibold">Resumo semanal</h3><p>Atualizações importantes podem aparecer como painel de conteúdo, sem exigir imagem de fundo.</p><a class="cl-btn cl-btn-primary" href="#">Ver relatório</a></div></div>
+                <div class="cl-carousel-item"><div class="cl-carousel-media-placeholder"><h3 class="u-fs-lg u-fw-semibold">Próximo passo</h3><p>Use este formato quando o slide tiver ações interativas e não fizer sentido arrastá-lo.</p><a class="cl-btn cl-btn-primary" href="#">Revisar pendências</a></div></div>
             </div>
             <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
             <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <button class="cl-carousel-control-toggle" type="button" data-cl-carousel-toggle></button>
+            <span class="cl-carousel-counter" data-cl-carousel-counter aria-hidden="true"></span>
+            <div class="cl-carousel-progress" data-cl-carousel-progress aria-hidden="true"><span></span></div>
+        </div>
+
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Variante fade com legenda empilhada abaixo da mídia</p>
+        <div class="cl-carousel cl-carousel-fade cl-carousel-caption-stacked" data-cl="carousel" data-autoplay="true" data-interval="3000" id="carousel-fade" aria-label="Destaques em transição suave">
+            <div class="cl-carousel-inner">
+                <div class="cl-carousel-item is-active"><div class="slide slide-1">Fade 1</div><div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Transição sem distração</h3><p>A legenda abaixo da mídia mantém textos longos completamente fora da área visual do slide.</p></div></div>
+                <div class="cl-carousel-item"><div class="slide slide-2">Fade 2</div><div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Contexto sempre legível</h3><p>Esta variação é adequada quando a mídia não pode receber sobreposição.</p></div></div>
+                <div class="cl-carousel-item"><div class="slide slide-3">Fade 3</div><div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Mesmo comportamento</h3><p>Teclado, autoplay e controles continuam disponíveis sem mudança de API.</p></div></div>
+            </div>
+            <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
+            <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
+            <button class="cl-carousel-control-toggle" type="button" data-cl-carousel-toggle></button>
             <ol class="cl-carousel-indicators">
                 <li><button type="button" aria-label="Ir para o slide 1"></button></li>
                 <li><button type="button" aria-label="Ir para o slide 2"></button></li>
@@ -77,20 +100,22 @@
             </ol>
         </div>
 
-        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Variante fade com autoplay (data-autoplay, data-interval)</p>
-        <div class="cl-carousel cl-carousel-fade" data-cl="carousel" data-autoplay="true" data-interval="3000" id="carousel-fade">
+        <p class="u-fs-sm u-fw-medium u-mt-4 u-mb-2">Imagem de fundo com legenda lateral responsiva</p>
+        <div class="cl-carousel cl-carousel-caption-side" data-cl="carousel" data-autoplay="true" data-interval="5000" id="carousel-image" aria-label="Histórias da equipe">
             <div class="cl-carousel-inner">
-                <div class="cl-carousel-item is-active"><div class="slide slide-1">Fade 1</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-2">Fade 2</div></div>
-                <div class="cl-carousel-item"><div class="slide slide-3">Fade 3</div></div>
+                <div class="cl-carousel-item is-active">
+                    <div class="cl-carousel-media" aria-hidden="true" style="background-image: url('../assets/carousel-workspace.png'); background-position: center;"></div>
+                    <div class="cl-carousel-caption cl-carousel-caption-start"><h3 class="u-fs-lg u-fw-semibold">Legenda à esquerda</h3><p>Quando o assunto da foto estiver à direita, a legenda pode ocupar o lado oposto sem competir com a narrativa visual.</p><a class="cl-btn" href="#">Ler história</a></div>
+                </div>
+                <div class="cl-carousel-item">
+                    <div class="cl-carousel-media" aria-hidden="true" style="background-image: url('../assets/carousel-planning.png'); background-position: center;"></div>
+                    <div class="cl-carousel-caption"><h3 class="u-fs-lg u-fw-semibold">Legenda à direita</h3><p>Em outra composição, o conteúdo visual fica à esquerda e a mesma legenda lateral equilibra leitura e imagem.</p><a class="cl-btn" href="#">Ver iniciativas</a></div>
+                </div>
             </div>
             <button class="cl-carousel-control-prev" type="button" aria-label="Anterior"></button>
             <button class="cl-carousel-control-next" type="button" aria-label="Próximo"></button>
-            <ol class="cl-carousel-indicators">
-                <li><button type="button" aria-label="Ir para o slide 1"></button></li>
-                <li><button type="button" aria-label="Ir para o slide 2"></button></li>
-                <li><button type="button" aria-label="Ir para o slide 3"></button></li>
-            </ol>
+            <button class="cl-carousel-control-toggle" type="button" data-cl-carousel-toggle></button>
+            <span class="cl-carousel-counter" data-cl-carousel-counter aria-hidden="true"></span>
         </div>
     </div>
 
